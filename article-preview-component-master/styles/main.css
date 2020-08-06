@@ -9,11 +9,18 @@
 
   --mobile-breakpoint: 375px;
   --desktop-breakpoint: 1440px;
+
+  font-size: 13px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Manrope", sans-serif;
-  font-size: 13px;
   font-weight: var(--font-medium);
   background-color: var(--light-gray-blue);
 }
@@ -33,6 +40,7 @@ body {
 }
 
 .article-card__image {
+  display: block;
 }
 
 .article-card__body {
@@ -41,10 +49,11 @@ body {
 
 .article-card__title {
   font-weight: var(--font-bold);
+  font-size: 1.25rem;
   color: var(--very-dark-gray-blue);
   line-height: 1.5;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
 .article-card__excerpt {
@@ -52,6 +61,82 @@ body {
   line-height: 1.6;
   letter-spacing: 0.025rem;
   margin-bottom: 0;
+}
+
+.article-card__footer {
+  padding: 16px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article-card__footer--active {
+  background-color: var(--very-dark-gray-blue);
+}
+
+.article-card__footer--active-label {
+  display: inline-block;
+  color: var(--gray-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  margin-right: 16px;
+}
+
+.article-card__footer--hidden {
+  display: none;
+}
+
+.article-card__footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.article-card__avatar {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.article-card__author {
+  font-weight: var(--font-bold);
+  color: var(--very-dark-gray-blue);
+  margin-bottom: 6px;
+}
+
+.article-card__date {
+  color: var(--gray-blue);
+}
+
+.article-card__share-btn {
+  height: 32px;
+  width: 32px;
+  border: 0px;
+  border-radius: 50%;
+  background-color: var(--light-gray-blue);
+  color: var(--desaturated-dark-blue);
+}
+
+.article-card__share-btn--active {
+  background-color: var(--desaturated-dark-blue);
+  color: white;
+}
+
+.article-card__share-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gray-blue);
+}
+
+.article-card__social-link {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.article-card__social-link + .article-card__social-link:last-child {
+  margin-right: 0;
 }
 
 /* Feel free to remove these styles or customise in your own stylesheet 👍 */
