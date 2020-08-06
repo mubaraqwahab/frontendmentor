@@ -4,6 +4,8 @@
   --gray-blue: hsl(212, 23%, 69%);
   --light-gray-blue: hsl(210, 46%, 95%);
 
+  --shadow-color: hsla(212, 23%, 69%, 0.2);
+
   --font-medium: 500;
   --font-bold: 700;
 
@@ -27,7 +29,6 @@ body {
 
 .container {
   padding: 50px 24px;
-  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,6 +38,7 @@ body {
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0px 8px 16px var(--shadow-color);
 }
 
 .article-card__image {
@@ -48,7 +50,7 @@ body {
 }
 
 .article-card__body {
-  
+
 }
 
 .article-card__text-body {
@@ -166,16 +168,13 @@ body {
   margin-right: 0;
 }
 
-/* Feel free to remove these styles or customise in your own stylesheet 👍 */
-
 .attribution {
-  font-size: 11px;
   text-align: center;
-  margin-top: 20px;
+  letter-spacing: 0.025rem;
+  color: var(--very-dark-gray-blue);
+  font-family: monospace;
 }
 
 .attribution a {
   color: hsl(228, 45%, 44%);
 }
-
-/* End */
