@@ -48,6 +48,10 @@ body {
 }
 
 .article-card__body {
+  
+}
+
+.article-card__text-body {
   padding: 36px 30px 24px;
 }
 
@@ -147,7 +151,7 @@ body {
   display: inline-block;
   color: var(--gray-blue);
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.4rem;
   margin-right: 16px;
 }
 
