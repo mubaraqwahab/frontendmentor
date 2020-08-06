@@ -7,8 +7,6 @@
   --font-medium: 500;
   --font-bold: 700;
 
-
-
   --mobile-breakpoint: 375px;
   --desktop-breakpoint: 1440px;
 
@@ -46,7 +44,7 @@ body {
 }
 
 .article-card__body {
-  padding: 40px 30px 20px;
+  padding: 40px 30px 24px;
 }
 
 .article-card__title {
@@ -65,15 +63,19 @@ body {
   margin-bottom: 0;
 }
 
+.article-card__footer-container {
+  position: relative;
+}
+
 .article-card__footer {
+  margin-top: -10px;
   padding: 16px 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
-.article-card__footer--hidden {
-  display: none;
+.hidden {
+  display: none !important;
 }
 
 .article-card__footer-left {
@@ -99,6 +101,19 @@ body {
   color: var(--gray-blue);
 }
 
+.article-card__share-btn-container {
+  /* Raise high */
+  z-index: 1;
+  position: absolute;
+  /* Vertically center the button within */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* 30px is the padding-right value of .article-card__footer */
+  right: 30px;
+  top: 0;
+}
+
 .article-card__share-btn {
   height: 32px;
   width: 32px;
@@ -121,15 +136,8 @@ body {
 .article-card__share-box {
   padding: 16px 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: var(--very-dark-gray-blue);
-}
-
-.article-card__share-box-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .article-card__share-box-label {
