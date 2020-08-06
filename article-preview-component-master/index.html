@@ -97,7 +97,7 @@
         shareBtn.classList.toggle("article-card__share-btn--active");
         shareBox.classList.toggle("article-card__share-box--hidden");
 
-        if (window.matchMedia("not (min-width: 1280px)").matches) {
+        if (!window.matchMedia("(min-width: 1280px)").matches) {
           footer.classList.toggle("article-card__footer--hidden");
         }
 
