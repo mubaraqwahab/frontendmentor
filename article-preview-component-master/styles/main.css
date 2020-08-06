@@ -41,10 +41,14 @@ body {
 
 .article-card__image {
   display: block;
+  object-position: 50% 30%;
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
 }
 
 .article-card__body {
-  padding: 40px 30px 24px;
+  padding: 36px 30px 24px;
 }
 
 .article-card__title {
@@ -53,7 +57,7 @@ body {
   color: var(--very-dark-gray-blue);
   line-height: 1.5;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .article-card__excerpt {
