@@ -1,3 +1,59 @@
+:root {
+  --very-dark-gray-blue: hsl(217, 19%, 35%);
+  --desaturated-dark-blue: hsl(214, 17%, 51%);
+  --gray-blue: hsl(212, 23%, 69%);
+  --light-gray-blue: hsl(210, 46%, 95%);
+
+  --font-medium: 500;
+  --font-bold: 700;
+
+  --mobile-breakpoint: 375px;
+  --desktop-breakpoint: 1440px;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: var(--font-medium);
+  background-color: var(--light-gray-blue);
+}
+
+.container {
+  padding: 50px 24px;
+  /* height: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.article-card__image {
+}
+
+.article-card__body {
+  padding: 40px 30px 20px;
+}
+
+.article-card__title {
+  font-weight: var(--font-bold);
+  color: var(--very-dark-gray-blue);
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.article-card__excerpt {
+  color: var(--desaturated-dark-blue);
+  line-height: 1.6;
+  letter-spacing: 0.025rem;
+  margin-bottom: 0;
+}
+
 /* Feel free to remove these styles or customise in your own stylesheet 👍 */
 
 .attribution {
