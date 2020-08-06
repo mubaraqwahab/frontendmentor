@@ -74,13 +74,8 @@ body {
   align-items: center;
 }
 
-.hidden {
-  display: none !important;
-}
-
-.article-card__footer-left {
-  display: flex;
-  align-items: center;
+.article-card__footer--hidden {
+  display: none;
 }
 
 .article-card__avatar {
@@ -138,6 +133,10 @@ body {
   display: flex;
   align-items: center;
   background-color: var(--very-dark-gray-blue);
+}
+
+.article-card__share-box--hidden {
+  display: none;
 }
 
 .article-card__share-box-label {

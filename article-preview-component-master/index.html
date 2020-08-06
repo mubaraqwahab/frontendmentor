@@ -29,7 +29,7 @@
         <!-- This div is a position reference for its content -->
         <div class="article-card__footer-container">
           <!-- Share box -->
-          <div class="article-card__share-box hidden">
+          <div class="article-card__share-box article-card__share-box--hidden">
             <span class="article-card__share-box-label">Share</span>
             <a href="" aria-label="Post on Facebook" class="article-card__social-link">
               <svg focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor">
@@ -74,11 +74,22 @@
     </div>
 
     <script>
+      // On click of the share btn on a mobile,
+      // If the footer is visible, hide it. Otherwise, unhide it
+      // Same goes for the .share-box.
+      // Note that the footer and .share-box can't be both hidden or visible.
+      // Also, change the button style to active
+
       document.querySelector(".article-card__share-btn").addEventListener("click", function(e) {
         // .currentTarget not .target, we want the button not its descendant.
-        const btn = e.currentTarget;
-        console.log(btn.classList)
-        btn.classList.toggle("article-card__share-btn--active")
+        const shareBtn = e.currentTarget;
+
+        const footer = document.querySelector(".article-card__footer");
+        const shareBox = document.querySelector(".article-card__share-box");
+
+        shareBtn.classList.toggle("article-card__share-btn--active");
+        footer.classList.toggle("article-card__footer--hidden");
+        shareBox.classList.toggle("article-card__share-box--hidden");
       })
     </script>
   </body>
