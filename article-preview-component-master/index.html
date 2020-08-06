@@ -63,8 +63,9 @@
               </div>
             </footer>
 
+            <!-- TODO: accessibility-ish -->
             <div class="article-card__share-btn-container">
-              <button aria-label="Share" class="article-card__share-btn">
+              <button aria-label="Share" aria-expanded="false" class="article-card__share-btn">
                 <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="13" fill="currentColor">
                   <path d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"/>
                 </svg>
@@ -96,12 +97,14 @@
         const footer = document.querySelector(".article-card__footer");
         const shareBox = document.querySelector(".article-card__share-box");
 
-        shareBtn.classList.toggle("article-card__share-btn--active");
         shareBox.classList.toggle("article-card__share-box--hidden");
 
         if (!window.matchMedia("(min-width: 1280px)").matches) {
           footer.classList.toggle("article-card__footer--hidden");
         }
+
+        const isShareBoxOpen = shareBtn.classList.toggle("article-card__share-btn--active");
+        shareBtn.setAttribute("aria-expanded", isShareBoxOpen)
 
       })
     </script>
