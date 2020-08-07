@@ -36,6 +36,7 @@ body {
 
 .article-card__body {
   padding: 30px 30px 20px;
+  position: relative;
 }
 
 .article-card__title {
@@ -57,14 +58,12 @@ body {
 
 .article-card__footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 }
 
-.article-card__author-date-container {
-  display: flex;
-  justify-content: start;
-  align-items: center;
+.article-card__footer--hidden {
+  display: none;
 }
 
 .article-card__author-avatar {
@@ -91,11 +90,25 @@ body {
   border-radius: 50%;
   border-width: 0px;
   background-color: var(--light-gray-blue);
-  z-index: 1;
+
+  position: absolute;
+  /*
+  Use padding values of .article-card__body and
+  height of .article-card__footer to vertically center the btn
+  */
+  bottom: calc(20px + 6px);
+  right: 30px;
 }
 
 .article-card__share-btn:focus {
   /* TODO ? */
+}
+
+.article-card__share-tooltip {
+}
+
+.article-card__share-tooltip--hidden {
+  display: none;
 }
 
 /* Adapted from Bootstrap .sr-only */
