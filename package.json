@@ -1,0 +1,23 @@
+{
+  "name": "frontendmentor",
+  "version": "1.0.0",
+  "description": "Playground for Frontend Mentor challenges.",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,json,html,md}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mubaraqwahab/frontendmentor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mubaraqwahab/frontendmentor/issues"
+  },
+  "homepage": "https://github.com/mubaraqwahab/frontendmentor#readme",
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
+}
