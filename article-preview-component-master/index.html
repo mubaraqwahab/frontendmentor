@@ -24,8 +24,11 @@
           Ever been in a room and felt like something was missing? Perhaps it felt slightly bare and uninviting. I’ve
           got some simple tips to help you make any room feel complete.
         </p>
-        <!-- MDN says <footer> in <article> has no implicit ARIA role.  -->
-        <footer class="article-card__footer article-card__footer--hidden">
+      </div>
+      <!-- Note: <footer> in <article> has no implicit ARIA role.
+        (See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) -->
+      <footer class="article-card__footer">
+        <div class="article-card__author-date-container article-card__author-date-container--hidden">
           <img class="article-card__author-avatar" src="images/avatar-michelle.jpg" alt="Author's avatar" />
           <div>
             <span class="article-card__author-name">
@@ -34,23 +37,25 @@
             </span>
             <time class="article-card__date">28 Jun 2020</time>
           </div>
-        </footer>
+        </div>
 
-        <button aria-expanded="false" class="article-card__share-btn article-card__share-btn--active">
-          <span class="visually-hidden">Toggle share tooltip</span>
-          <svg
-            focusable="false"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="13"
-            fill="currentColor"
-          >
-            <path
-              d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"
-            />
-          </svg>
-        </button>
+        <div class="article-card__share-btn-container">
+          <button aria-expanded="false" class="article-card__share-btn article-card__share-btn--active">
+            <span class="visually-hidden">Toggle share tooltip</span>
+            <svg
+              focusable="false"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="13"
+              fill="currentColor"
+            >
+              <path
+                d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"
+              />
+            </svg>
+          </button>
+        </div>
 
         <!-- Share tooltip -->
         <div class="article-card__share-tooltip" aria-labelledby="shareTooltipLabel">
@@ -86,12 +91,39 @@
             </svg>
           </a>
         </div>
-      </div>
+      </footer>
     </article>
 
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
       <span>Coded</span> by <a href="https://github.com/mubaraqwahab">Mubaraq</a>.
     </div>
+
+    <script>
+      // On click of the share btn on a mobile,
+      // If the footer is visible, hide it. Otherwise, unhide it
+      // Same goes for the .share-box.
+      // Note that the footer and .share-box can't be both hidden or visible.
+      // Also, change the button style to active
+
+      // On a desktop, only difference is you never hide the footer.
+
+      document.querySelector(".article-card__share-btn").addEventListener("click", function (e) {
+        // .currentTarget not .target, we want the button not its descendant.
+        const shareBtn = e.currentTarget;
+
+        const authorDateContainer = document.querySelector(".article-card__author-date-container");
+        const shareTooltip = document.querySelector(".article-card__share-tooltip");
+
+        shareTooltip.classList.toggle("article-card__share-tooltip--hidden");
+
+        if (!window.matchMedia("(min-width: 1280px)").matches) {
+          authorDateContainer.classList.toggle("article-card__author-date-container--hidden");
+        }
+
+        const isShareBoxOpen = shareBtn.classList.toggle("article-card__share-btn--active");
+        shareBtn.setAttribute("aria-expanded", isShareBoxOpen);
+      });
+    </script>
   </body>
 </html>
