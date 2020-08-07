@@ -25,7 +25,7 @@
           got some simple tips to help you make any room feel complete.
         </p>
         <!-- MDN says <footer> in <article> has no implicit ARIA role.  -->
-        <footer class="article-card__footer">
+        <footer class="article-card__footer article-card__footer--hidden">
           <img class="article-card__author-avatar" src="images/avatar-michelle.jpg" alt="Author's avatar" />
           <div>
             <span class="article-card__author-name">
@@ -36,21 +36,24 @@
           </div>
         </footer>
 
-        <button aria-expanded="false" class="article-card__share-btn">
+        <button aria-expanded="false" class="article-card__share-btn article-card__share-btn--active">
           <span class="visually-hidden">Toggle share tooltip</span>
-          <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+          <svg
+            focusable="false"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="13"
+            fill="currentColor"
+          >
             <path
-              fill="#6E8098"
               d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"
             />
           </svg>
         </button>
 
         <!-- Share tooltip -->
-        <div
-          class="article-card__share-tooltip article-card__share-tooltip--hidden"
-          aria-labelledby="shareTooltipLabel"
-        >
+        <div class="article-card__share-tooltip" aria-labelledby="shareTooltipLabel">
           <span class="article-card__share-tooltip-label" id="shareTooltipLabel">Share</span>
           <!-- Facebook -->
           <a class="article-card__social-icon-link" href="">
