@@ -18,6 +18,11 @@
 
 body {
   background-color: var(--light-gray-blue);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .article-card {
@@ -25,10 +30,17 @@ body {
   font-weight: var(--font-medium);
   font-size: 13px;
   background-color: white;
-  margin: 60px 22px;
+  margin: 22px;
   border-radius: 8px;
   box-shadow: 0px 20px 30px hsla(212, 23%, 69%, 0.2);
   overflow: hidden;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card {
+    display: flex;
+    width: 50%;
+  }
 }
 
 .article-card__image-box {
@@ -39,8 +51,24 @@ body {
   background-repeat: no-repeat;
 }
 
+@media screen and (min-width: 1280px) {
+  .article-card__image-box {
+    /* TODO: Fix this */
+    /* height: 100%; */
+    height: 282px;
+    width: 500px;
+    background-color: var(--very-dark-gray-blue);
+  }
+}
+
 .article-card__body {
   padding: 30px 30px 12px;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__body {
+    padding: 30px 40px 12px;
+  }
 }
 
 .article-card__title {
@@ -50,6 +78,12 @@ body {
   font-size: 1.3em;
   font-weight: var(--font-bold);
   line-height: 1.4;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__title {
+    font-size: 1.5em;
+  }
 }
 
 .article-card__excerpt {
@@ -68,6 +102,15 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__author-date-container {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
 }
 
 .article-card__author-date-container--hidden {
@@ -101,6 +144,13 @@ body {
   /* padding-right value of .article-card__body */
   right: 30px;
   bottom: 0px;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__share-btn-container {
+    right: 40px;
+    bottom: 10px;
+  }
 }
 
 .article-card__share-btn {
@@ -165,6 +215,7 @@ body {
 }
 
 .attribution {
+  font-size: 11px;
   text-align: center;
   letter-spacing: 0.025em;
   color: var(--very-dark-gray-blue);
