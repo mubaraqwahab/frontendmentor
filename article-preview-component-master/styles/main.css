@@ -41,6 +41,7 @@ body {
     display: flex;
     width: 50%;
     overflow: visible;
+    /* TODO: Increase shadow */
   }
 }
 
