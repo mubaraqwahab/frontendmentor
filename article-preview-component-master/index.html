@@ -15,7 +15,9 @@
   </head>
   <body>
     <article class="article-card" aria-labelledby="articleTitle">
-      <!-- <div class="article-card__image">Image here</div> -->
+      <div class="article-card__image-box">
+        <!-- Image here -->
+      </div>
       <div class="article-card__body">
         <h3 id="articleTitle" class="article-card__title">
           Shift the overall look and feel by adding these wonderful touches to furniture in your home
@@ -25,22 +27,24 @@
           got some simple tips to help you make any room feel complete.
         </p>
       </div>
-      <!-- Note: <footer> in <article> has no implicit ARIA role.
-        (See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) -->
+      <!-- Note: <footer> in <article> has no implicit ARIA role. (See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) -->
       <footer class="article-card__footer">
-        <div class="article-card__author-date-container article-card__author-date-container--hidden">
+        <div class="article-card__author-date-container">
           <img class="article-card__author-avatar" src="images/avatar-michelle.jpg" alt="Author's avatar" />
           <div>
-            <span class="article-card__author-name">
+            <div class="article-card__author-name">
               <span class="visually-hidden">Author: </span>
               Michelle Appleton
-            </span>
-            <time class="article-card__date">28 Jun 2020</time>
+            </div>
+            <div class="article-card__date">
+              <span class="visually-hidden">Published on</span>
+              <time datetime="2020-06-28">28 Jun 2020</time>
+            </div>
           </div>
         </div>
 
         <div class="article-card__share-btn-container">
-          <button aria-expanded="false" class="article-card__share-btn article-card__share-btn--active">
+          <button aria-expanded="false" class="article-card__share-btn">
             <span class="visually-hidden">Toggle share tooltip</span>
             <svg
               focusable="false"
@@ -58,10 +62,10 @@
         </div>
 
         <!-- Share tooltip -->
-        <div class="article-card__share-tooltip" aria-labelledby="shareTooltipLabel">
-          <span class="article-card__share-tooltip-label" id="shareTooltipLabel">Share</span>
+        <div class="article-card__share-tooltip article-card__share-tooltip--hidden">
+          <span class="article-card__share-tooltip-label">Share</span>
           <!-- Facebook -->
-          <a class="article-card__social-icon-link" href="">
+          <a class="article-card__social-icon-link" href="#">
             <span class="visually-hidden">Post on Facebook</span>
             <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
               <path
@@ -71,7 +75,7 @@
             </svg>
           </a>
           <!-- Twitter -->
-          <a class="article-card__social-icon-link" href="">
+          <a class="article-card__social-icon-link" href="#">
             <span class="visually-hidden">Tweet</span>
             <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="17">
               <path
@@ -81,7 +85,7 @@
             </svg>
           </a>
           <!-- Pinterest -->
-          <a class="article-card__social-icon-link" href="">
+          <a class="article-card__social-icon-link" href="#">
             <span class="visually-hidden">Share on Pinterest</span>
             <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
               <path
@@ -121,8 +125,8 @@
           authorDateContainer.classList.toggle("article-card__author-date-container--hidden");
         }
 
-        const isShareBoxOpen = shareBtn.classList.toggle("article-card__share-btn--active");
-        shareBtn.setAttribute("aria-expanded", isShareBoxOpen);
+        const isShareTooltipVisible = shareBtn.classList.toggle("article-card__share-btn--active");
+        shareBtn.setAttribute("aria-expanded", isShareTooltipVisible);
       });
     </script>
   </body>

@@ -31,7 +31,7 @@ body {
   overflow: hidden;
 }
 
-.article-card__image {
+.article-card__image-box {
 }
 
 .article-card__body {
@@ -79,6 +79,7 @@ body {
 .article-card__author-name {
   color: var(--very-dark-gray-blue);
   font-weight: var(--font-bold);
+  font-style: normal;
   display: block;
   margin-bottom: 6px;
 }
@@ -113,7 +114,8 @@ body {
 }
 
 .article-card__share-btn:focus {
-  /* TODO ? */
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gray-blue);
 }
 
 .article-card__share-tooltip {
@@ -138,6 +140,11 @@ body {
 
 .article-card__social-icon-link {
   margin-right: 16px;
+}
+
+.article-card__social-icon-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gray-blue);
 }
 
 /* Adapted from Bootstrap .sr-only */
