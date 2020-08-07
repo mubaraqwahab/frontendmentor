@@ -40,6 +40,7 @@ body {
   .article-card {
     display: flex;
     width: 50%;
+    overflow: visible;
   }
 }
 
@@ -57,6 +58,8 @@ body {
     /* height: 100%; */
     height: 282px;
     width: 500px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     background-color: var(--very-dark-gray-blue);
   }
 }
@@ -173,21 +176,45 @@ body {
 }
 
 .article-card__share-tooltip {
-  background-color: var(--very-dark-gray-blue);
   margin-top: 8px;
-  padding: 20px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__share-tooltip {
+    margin-top: 0px;
+    position: absolute;
+    bottom: 80px;
+    right: -62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0px 8px 3px hsla(212, 23%, 69%, 0.2));
+  }
 }
 
 .article-card__share-tooltip--hidden {
   display: none;
 }
 
+.article-card__share-tooltip-body {
+  background-color: var(--very-dark-gray-blue);
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__share-tooltip-body {
+    border-radius: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+
 .article-card__share-tooltip-label {
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.4em;
   color: var(--gray-blue);
   margin-right: 16px;
 }
@@ -196,9 +223,24 @@ body {
   margin-right: 16px;
 }
 
+.article-card__social-icon-link + .article-card__social-icon-link:last-child {
+  margin-right: 0px;
+}
+
 .article-card__social-icon-link:focus {
   outline: none;
   box-shadow: 0 0 0 3px var(--gray-blue);
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__share-tooltip-tip {
+    height: 0px;
+    width: 0px;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 14px solid var(--very-dark-gray-blue);
+    margin-top: -1px;
+  }
 }
 
 /* Adapted from Bootstrap .sr-only */
