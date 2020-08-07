@@ -32,6 +32,11 @@ body {
 }
 
 .article-card__image-box {
+  height: 200px;
+  background-image: url(../images/drawers.jpg);
+  background-position: 50% 30%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .article-card__body {
@@ -39,7 +44,7 @@ body {
 }
 
 .article-card__title {
-  margin-top: 13px;
+  margin-top: 6px;
   margin-bottom: 13px;
   color: var(--very-dark-gray-blue);
   font-size: 1.3em;
@@ -80,7 +85,6 @@ body {
   color: var(--very-dark-gray-blue);
   font-weight: var(--font-bold);
   font-style: normal;
-  display: block;
   margin-bottom: 6px;
 }
 
@@ -133,7 +137,7 @@ body {
 
 .article-card__share-tooltip-label {
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.3em;
   color: var(--gray-blue);
   margin-right: 16px;
 }
@@ -162,7 +166,7 @@ body {
 
 .attribution {
   text-align: center;
-  letter-spacing: 0.025rem;
+  letter-spacing: 0.025em;
   color: var(--very-dark-gray-blue);
   font-family: monospace;
 }
