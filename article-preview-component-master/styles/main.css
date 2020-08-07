@@ -184,6 +184,7 @@ body {
   .article-card__share-tooltip {
     margin-top: 0px;
     position: absolute;
+    /* TODO: Consider using transform instead. See https://codepen.io/okawa-h/pen/OJLOarZ */
     bottom: 80px;
     right: -62px;
     display: flex;
