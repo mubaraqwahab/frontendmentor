@@ -6,12 +6,8 @@
   --gray-blue: hsl(212, 23%, 69%);
   --light-gray-blue: hsl(210, 46%, 95%);
 
-  --shadow-color: hsla(212, 23%, 69%, 0.2);
-
   --font-medium: 500;
   --font-bold: 700;
-
-  font-size: 13px;
 }
 
 *,
@@ -21,9 +17,98 @@
 }
 
 body {
+  background-color: var(--light-gray-blue);
+}
+
+.article-card {
   font-family: "Manrope", sans-serif;
   font-weight: var(--font-medium);
+  font-size: 13px;
+  background-color: white;
+  margin: 60px 22px;
+  border-radius: 8px;
+  box-shadow: 0px 20px 30px hsla(212, 23%, 69%, 0.2);
+  overflow: hidden;
+}
+
+.article-card__image {
+}
+
+.article-card__body {
+  padding: 30px 30px 20px;
+}
+
+.article-card__title {
+  margin-top: 13px;
+  margin-bottom: 13px;
+  color: var(--very-dark-gray-blue);
+  font-size: 1.3em;
+  font-weight: var(--font-bold);
+  line-height: 1.4;
+}
+
+.article-card__excerpt {
+  color: var(--desaturated-dark-blue);
+  line-height: 1.6;
+  letter-spacing: 0.025em;
+  margin-top: 13px;
+  margin-bottom: 32px;
+}
+
+.article-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article-card__author-date-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.article-card__author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.article-card__author-name {
+  color: var(--very-dark-gray-blue);
+  font-weight: var(--font-bold);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.article-card__date {
+  color: var(--gray-blue);
+}
+
+.article-card__share-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border-width: 0px;
   background-color: var(--light-gray-blue);
+  z-index: 1;
+}
+
+.article-card__share-btn:focus {
+  /* TODO ? */
+}
+
+/* Adapted from Bootstrap .sr-only */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .attribution {
