@@ -41,7 +41,7 @@ body {
     display: flex;
     width: 50%;
     overflow: visible;
-    /* TODO: Increase shadow */
+    box-shadow: 0px 30px 40px hsla(212, 23%, 69%, 0.3);
   }
 }
 
@@ -117,8 +117,15 @@ body {
   }
 }
 
-.article-card__author-date-container--hidden {
+.article-card__author-date-container--hidden-mobile {
   display: none;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-card__author-date-container--hidden-mobile {
+    /* Return back to flex box */
+    display: flex;
+  }
 }
 
 .article-card__author-avatar {
@@ -184,7 +191,6 @@ body {
   .article-card__share-tooltip {
     margin-top: 0px;
     position: absolute;
-    /* TODO: Consider using transform instead. See https://codepen.io/okawa-h/pen/OJLOarZ */
     bottom: 80px;
     right: -62px;
     display: flex;
@@ -264,6 +270,7 @@ body {
   letter-spacing: 0.025em;
   color: var(--very-dark-gray-blue);
   font-family: monospace;
+  margin-top: 100px;
 }
 
 .attribution a {

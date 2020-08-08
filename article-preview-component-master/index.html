@@ -115,7 +115,7 @@
       // If the footer is visible, hide it. Otherwise, unhide it
       // Same goes for the .share-box.
       // Note that the footer and .share-box can't be both hidden or visible.
-      // Also, change the button style to active
+      // Also, change the button style to active and update aria-expanded.
 
       // On a desktop, only difference is you never hide the footer.
 
@@ -127,10 +127,7 @@
         const shareTooltip = document.querySelector(".article-card__share-tooltip");
 
         shareTooltip.classList.toggle("article-card__share-tooltip--hidden");
-
-        if (!window.matchMedia("(min-width: 1280px)").matches) {
-          authorDateContainer.classList.toggle("article-card__author-date-container--hidden");
-        }
+        authorDateContainer.classList.toggle("article-card__author-date-container--hidden-mobile");
 
         const isShareTooltipVisible = shareBtn.classList.toggle("article-card__share-btn--active");
         shareBtn.setAttribute("aria-expanded", isShareTooltipVisible);
