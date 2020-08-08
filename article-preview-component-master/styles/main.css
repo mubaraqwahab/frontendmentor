@@ -275,6 +275,7 @@ body {
   color: var(--very-dark-gray-blue);
   font-family: monospace;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .attribution a {
