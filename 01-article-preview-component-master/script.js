@@ -38,12 +38,19 @@ document.addEventListener("click", function (e) {
   }
 });
 
+/**
+ * The keydown and blur events below would conflict without this.
+ * With this, we can ignore the blur event if the blur was caused by pressing the esc key.
+ */
+let ignoreBlur = false;
+
 // When share tooltip is open (this condition is important!) and
 // user presses the esc key, close share tooltip.
 document.addEventListener("keydown", function (e) {
   const isTooltipOpen = shareBtn.classList.contains(`${shareBtnClass}--active`);
 
   if (isTooltipOpen && e.key === "Escape") {
+    ignoreBlur = true;
     toggleShareTooltip();
   }
 });
@@ -57,8 +64,10 @@ shareTooltip
       // (See https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
       const tooltip = e.relatedTarget?.closest("." + shareTooltipClass);
 
-      if (!tooltip) {
+      if (!ignoreBlur && !tooltip) {
         toggleShareTooltip();
       }
+
+      ignoreBlur = false;
     });
   });
