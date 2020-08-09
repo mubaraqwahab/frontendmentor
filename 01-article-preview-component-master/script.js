@@ -7,42 +7,52 @@ const shareTooltip = document.querySelector("." + shareTooltipClass);
 const authorDate = document.querySelector("." + authorDateClass);
 
 /**
- * Toggles the visibility of the share tooltip,
- * toggles the *--active class and aria-expanded attribute on the share btn,
- * toggles the visibilty of the author-date container on a mobile only.
+ * If `force` isn't given, do the following:
+ * - toggle the visibility of the share tooltip,
+ * - toggle the *--active class and aria-expanded attribute on the share btn,
+ * - toggle the visibilty of the author-date container on a mobile only.
  *
  * Note that on a mobile, the share tooltip and author-date container
  * can't be both hidden or visible.
+ *
+ * @param {boolean} force - If true, shows the tooltip. If false, hides the tooltip.
+ * In either case, it toggles necessary properties of the share btn and author-date container.
  */
-function toggleShareTooltip() {
-  shareTooltip.classList.toggle(`${shareTooltipClass}--hidden`);
-  authorDate.classList.toggle(`${authorDateClass}--hidden-mobile`);
+function toggleShareTooltip(force) {
+  shareTooltip.classList.toggle(`${shareTooltipClass}--hidden`, boolNot(force));
+  authorDate.classList.toggle(`${authorDateClass}--hidden-mobile`, force);
 
-  const isTooltipOpen = shareBtn.classList.toggle(`${shareBtnClass}--active`);
+  const isTooltipOpen = shareBtn.classList.toggle(
+    `${shareBtnClass}--active`,
+    force
+  );
 
   shareBtn.setAttribute("aria-expanded", isTooltipOpen);
 }
 
-shareBtn.addEventListener("click", toggleShareTooltip);
+/**
+ * Same as logical NOT operator (!), but only on a boolean.
+ * If value is not a boolean, return value.
+ *
+ * @param value
+ */
+function boolNot(value) {
+  if (value === true) return false;
+  else if (value === false) return true;
+  else return value;
+}
 
-// When share tooltip is open (this condition is important!) and
-// user clicks outside it (but not on share btn),
-// close share tooltip.
+shareBtn.addEventListener("click", () => toggleShareTooltip());
+
+// When user clicks outside share tooltip (but not on share btn), close share tooltip.
 document.addEventListener("click", function (e) {
-  const isShareButtonClicked = e.target.closest("." + shareBtnClass) !== null;
   const isTooltipClicked = e.target.closest("." + shareTooltipClass) !== null;
-  const isTooltipOpen = shareBtn.classList.contains(`${shareBtnClass}--active`);
+  const isShareButtonClicked = e.target.closest("." + shareBtnClass) !== null;
 
-  if (isTooltipOpen && !isTooltipClicked && !isShareButtonClicked) {
-    toggleShareTooltip();
+  if (!isTooltipClicked && !isShareButtonClicked) {
+    toggleShareTooltip(false);
   }
 });
-
-/**
- * The keydown and blur events below would conflict without this.
- * With this, we can ignore the blur event if the blur was caused by pressing the esc key.
- */
-let ignoreBlur = false;
 
 // When share tooltip is open (this condition is important!) and
 // user presses the esc key, close share tooltip.
@@ -50,8 +60,8 @@ document.addEventListener("keydown", function (e) {
   const isTooltipOpen = shareBtn.classList.contains(`${shareBtnClass}--active`);
 
   if (isTooltipOpen && e.key === "Escape") {
-    ignoreBlur = true;
-    toggleShareTooltip();
+    toggleShareTooltip(false);
+    shareBtn.focus();
   }
 });
 
@@ -64,10 +74,8 @@ shareTooltip
       // (See https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
       const tooltip = e.relatedTarget?.closest("." + shareTooltipClass);
 
-      if (!ignoreBlur && !tooltip) {
-        toggleShareTooltip();
+      if (!tooltip) {
+        toggleShareTooltip(false);
       }
-
-      ignoreBlur = false;
     });
   });
