@@ -112,28 +112,6 @@
       <a href="../index.html">Go back home</a>
     </div>
 
-    <script>
-      // On click of the share btn on a mobile,
-      // If the footer is visible, hide it. Otherwise, unhide it
-      // Same goes for the .share-box.
-      // Note that the footer and .share-box can't be both hidden or visible.
-      // Also, change the button style to active and update aria-expanded.
-
-      // On a desktop, only difference is you never hide the footer (CSS handles this).
-
-      document.querySelector(".article-card__share-btn").addEventListener("click", function (e) {
-        // .currentTarget not .target, we want the button not its descendant.
-        const shareBtn = e.currentTarget;
-
-        const authorDateContainer = document.querySelector(".article-card__author-date-container");
-        const shareTooltip = document.querySelector(".article-card__share-tooltip");
-
-        shareTooltip.classList.toggle("article-card__share-tooltip--hidden");
-        authorDateContainer.classList.toggle("article-card__author-date-container--hidden-mobile");
-
-        const isShareTooltipVisible = shareBtn.classList.toggle("article-card__share-btn--active");
-        shareBtn.setAttribute("aria-expanded", isShareTooltipVisible);
-      });
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
