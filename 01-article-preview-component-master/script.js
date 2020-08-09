@@ -42,9 +42,23 @@ document.addEventListener("click", function (e) {
 // user presses the esc key, close share tooltip.
 document.addEventListener("keydown", function (e) {
   const isTooltipOpen = shareBtn.classList.contains(`${shareBtnClass}--active`);
-  const isEscKeyPressed = e.key === "Escape";
 
-  if (isTooltipOpen && isEscKeyPressed) {
+  if (isTooltipOpen && e.key === "Escape") {
     toggleShareTooltip();
   }
 });
+
+// Hide the share tooltip when focus leaves the links within it.
+shareTooltip
+  .querySelectorAll(".article-card__social-icon-link")
+  .forEach((socialLink) => {
+    socialLink.addEventListener("blur", function (e) {
+      // Get the "share tooltip" ancestor of the next focused element, if any.
+      // (See https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
+      const tooltip = e.relatedTarget?.closest("." + shareTooltipClass);
+
+      if (!tooltip) {
+        toggleShareTooltip();
+      }
+    });
+  });
