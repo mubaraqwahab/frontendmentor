@@ -1,3 +1,19 @@
+:root {
+  --primary: linear-gradient(hsl(6, 100%, 80%), hsl(335, 100%, 65%));
+  --pale-blue: hsl(243, 100%, 93%);
+  --grayish-blue: hsl(229, 7%, 55%);
+  --dark-blue: hsl(228, 56%, 26%);
+  --very-dark-blue: hsl(229, 57%, 11%);
+
+  font-size: 14px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+
+  /* Delete these */
+  --mobile-breakpoint: 375px;
+  --desktop-breakpoint: 1440px;
+}
+
 .attribution {
   font-size: 11px;
   text-align: center;
