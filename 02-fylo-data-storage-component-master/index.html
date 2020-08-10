@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
-    <div>
-      <img src="images/logo.svg" alt="Fylo logo" />
+    <div class="storage-menu">
+      <img class="storage-menu__logo" src="images/logo.svg" alt="Fylo logo" />
       <div>
-        <button>
+        <button class="storage-menu__option">
           <span class="visually-hidden">Create a new document</span>
           <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="24">
             <path
@@ -27,7 +27,7 @@
           </svg>
         </button>
 
-        <button>
+        <button class="storage-menu__option">
           <span class="visually-hidden">Create a new folder</span>
           <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="20">
             <path
@@ -37,7 +37,7 @@
           </svg>
         </button>
 
-        <button>
+        <button class="storage-menu__option">
           <span class="visually-hidden">Upload a document</span>
           <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="16">
             <path
@@ -49,22 +49,22 @@
       </div>
     </div>
 
-    <div>
-      <label for="storageMeter">You’ve used <b>815 GB</b> of your storage</label>
-      <meter id="storageMeter" min="0" max="1000" value="815"></meter>
-      <div>
-        <span>0 GB</span>
-        <span>1000 GB</span>
+    <div class="storage-status">
+      <label class="storage-status__label" for="storageMeter">You’ve used <b>815 GB</b> of your storage</label>
+      <meter class="storage-status__meter" id="storageMeter" min="0" max="1000" value="815"></meter>
+      <div class="storage-status__meter-bounds">
+        <span class="storage-status__meter-bound">0 GB</span>
+        <span class="storage-status__meter-bound">1000 GB</span>
       </div>
-      <div>
-        <b>185</b>
+      <div class="storage-status__tooltip">
+        <b class="storage-status__amount-left">185</b>
         <span>GB Left</span>
       </div>
     </div>
 
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by
-      <a href="#">Your Name Here</a>.
+      <a href="https://github.com/mubaraqwahab">Mubaraq</a>.
     </div>
   </body>
 </html>
