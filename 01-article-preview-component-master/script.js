@@ -15,7 +15,7 @@ const authorDate = document.querySelector("." + authorDateClass);
  * Note that on a mobile, the share tooltip and author-date container
  * can't be both hidden or visible.
  *
- * @param {boolean} force - If true, shows the tooltip. If false, hides the tooltip.
+ * @param {boolean} [force] - If true, shows the tooltip. If false, hides the tooltip.
  * In either case, it toggles necessary properties of the share btn and author-date container.
  */
 function toggleShareTooltip(force) {
