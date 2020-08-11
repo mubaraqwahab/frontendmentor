@@ -13,69 +13,71 @@
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/main.css" />
   </head>
-  <body style="background-color: darkgray;">
-    <div class="storage">
-      <div class="storage-menu">
-        <h1 class="storage-menu__logo">
-          <img src="images/logo.svg" alt="Fylo logo" />
-        </h1>
-        <div>
-          <button class="storage-menu__option">
-            <span class="visually-hidden">Create a new document</span>
-            <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="24">
-              <path
-                fill="#697ED4"
-                d="M12.028 0H2.436A2.387 2.387 0 00.049 2.398L.037 21.583a2.387 2.387 0 002.387 2.398h14.4a2.397 2.397 0 002.398-2.398V7.194L12.028 0zM10.83 8.393V1.8l6.595 6.594h-6.595z"
-              />
-            </svg>
-          </button>
+  <body>
+    <div class="container">
+      <div class="storage">
+        <div class="storage-menu">
+          <h1 class="storage-menu__logo">
+            <img src="images/logo.svg" alt="Fylo logo" />
+          </h1>
+          <div>
+            <button class="storage-menu__option">
+              <span class="visually-hidden">Create a new document</span>
+              <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="24">
+                <path
+                  fill="#697ED4"
+                  d="M12.028 0H2.436A2.387 2.387 0 00.049 2.398L.037 21.583a2.387 2.387 0 002.387 2.398h14.4a2.397 2.397 0 002.398-2.398V7.194L12.028 0zM10.83 8.393V1.8l6.595 6.594h-6.595z"
+                />
+              </svg>
+            </button>
 
-          <button class="storage-menu__option">
-            <span class="visually-hidden">Create a new folder</span>
-            <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="20">
-              <path
-                fill="#697ED4"
-                d="M21.6 2.4H12L9.6 0H2.4A2.39 2.39 0 00.012 2.4L0 16.8a2.4 2.4 0 002.4 2.4h19.2a2.4 2.4 0 002.4-2.4v-12a2.4 2.4 0 00-2.4-2.4z"
-              />
-            </svg>
-          </button>
+            <button class="storage-menu__option">
+              <span class="visually-hidden">Create a new folder</span>
+              <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="20">
+                <path
+                  fill="#697ED4"
+                  d="M21.6 2.4H12L9.6 0H2.4A2.39 2.39 0 00.012 2.4L0 16.8a2.4 2.4 0 002.4 2.4h19.2a2.4 2.4 0 002.4-2.4v-12a2.4 2.4 0 00-2.4-2.4z"
+                />
+              </svg>
+            </button>
 
-          <button class="storage-menu__option">
-            <span class="visually-hidden">Upload a document</span>
-            <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="16">
-              <path
-                fill="#697ED4"
-                d="M19.4 6c-.7-3.4-3.7-6-7.4-6-2.9 0-5.4 1.6-6.6 4C2.3 4.4 0 6.9 0 10c0 3.3 2.7 6 6 6h13c2.8 0 5-2.2 5-5 0-2.6-2.1-4.8-4.6-5zM14 9v4h-4V9H7l5-5 5 5h-3z"
-              />
-            </svg>
-          </button>
+            <button class="storage-menu__option">
+              <span class="visually-hidden">Upload a document</span>
+              <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="16">
+                <path
+                  fill="#697ED4"
+                  d="M19.4 6c-.7-3.4-3.7-6-7.4-6-2.9 0-5.4 1.6-6.6 4C2.3 4.4 0 6.9 0 10c0 3.3 2.7 6 6 6h13c2.8 0 5-2.2 5-5 0-2.6-2.1-4.8-4.6-5zM14 9v4h-4V9H7l5-5 5 5h-3z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="storage-status">
+          <label class="storage-status__label" for="storageMeter">You’ve used <b>815 GB</b> of your storage</label>
+          <!-- There's a <meter> element, but I use a div below for two reasons:
+            * it's supposed to be decorative (thus aria-hidden="true"), and
+            * it's easier to style consistently. -->
+          <div aria-hidden="true">
+            <div class="storage-meter__bar">
+              <div class="storage-meter__value"></div>
+            </div>
+            <div class="storage-meter__bounds">
+              <small>0 GB</small>
+              <small>1000 GB</small>
+            </div>
+          </div>
+          <div class="storage-status__tooltip">
+            <span class="storage-status__amount-left">185</span>
+            <span class="storage-status__amount-left-unit">GB Left</span>
+          </div>
         </div>
       </div>
 
-      <div class="storage-status">
-        <label class="storage-status__label" for="storageMeter">You’ve used <b>815 GB</b> of your storage</label>
-        <!-- There's a <meter> element, but I use a div below for two reasons:
-          * it's supposed to be decorative (thus aria-hidden="true"), and
-          * it's easier to style consistently. -->
-        <div aria-hidden="true">
-          <div class="storage-meter__bar">
-            <div class="storage-meter__value"></div>
-          </div>
-          <div class="storage-meter__bounds">
-            <small>0 GB</small>
-            <small>1000 GB</small>
-          </div>
-        </div>
-        <div class="storage-status__tooltip">
-          <span class="storage-status__amount-left">185</span>
-          <span class="storage-status__amount-left-unit">GB Left</span>
-        </div>
+      <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by
+        <a href="https://github.com/mubaraqwahab">Mubaraq</a>.
       </div>
     </div>
-
-    <!-- <div class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by
-      <a href="https://github.com/mubaraqwahab">Mubaraq</a>.
-    </div> -->
   </body>
 </html>
