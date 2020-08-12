@@ -191,16 +191,18 @@ b {
     bottom: unset;
     top: calc(-32px - 8px);
     right: 36px;
+    border-bottom-right-radius: 0px;
   }
 
   .storage-status__tooltip::after {
     content: "";
-    background-color: green;
     height: 0px;
     width: 0px;
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -20px;
+    border-right: 20px solid white;
+    border-bottom: 20px solid transparent;
   }
 }
 
