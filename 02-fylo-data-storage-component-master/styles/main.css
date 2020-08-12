@@ -260,12 +260,6 @@ b {
   color: var(--pale-blue);
 }
 
-.attribution div {
-  margin-bottom: 8px;
-}
-
-@media screen and (min-width: 1280px) {
-  .attribution div {
-    display: inline;
-  }
+.attribution p {
+  line-height: 1.6;
 }
