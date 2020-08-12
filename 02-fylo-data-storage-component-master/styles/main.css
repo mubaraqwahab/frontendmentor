@@ -12,7 +12,8 @@
 
   --radius: 10px;
 
-  --shadow: 0 10px 40px 20px hsla(229, 57%, 11%, 0.5);
+  --shadow-mobile: 0 5px 40px hsla(229, 57%, 11%, 0.5);
+  --shadow-desktop: 0 10px 40px 20px hsla(229, 57%, 11%, 0.5);
 }
 
 *,
@@ -75,7 +76,7 @@ b {
   border-top-right-radius: 92px;
   padding: 40px;
   margin-bottom: 16px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-mobile);
 }
 
 @media screen and (min-width: 1280px) {
@@ -83,6 +84,7 @@ b {
     width: 40%;
     margin-bottom: 0px;
     margin-right: 24px;
+    box-shadow: var(--shadow-desktop);
   }
 }
 
@@ -112,13 +114,14 @@ b {
   padding: 32px 36px 52px;
   position: relative;
   overflow: visible;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-mobile);
 }
 
 @media screen and (min-width: 1280px) {
   .storage-status {
     width: 60%;
     padding: 32px 36px 40px;
+    box-shadow: var(--shadow-desktop);
   }
 }
 
