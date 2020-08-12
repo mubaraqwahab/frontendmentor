@@ -259,3 +259,13 @@ b {
 .attribution a {
   color: var(--pale-blue);
 }
+
+.attribution div {
+  margin-bottom: 8px;
+}
+
+@media screen and (min-width: 1280px) {
+  .attribution div {
+    display: inline;
+  }
+}
