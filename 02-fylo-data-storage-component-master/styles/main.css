@@ -13,7 +13,7 @@
   --radius: 10px;
 
   --shadow-mobile: 0 5px 40px hsla(229, 57%, 11%, 0.5);
-  --shadow-desktop: 0 10px 40px 20px hsla(229, 57%, 11%, 0.5);
+  --shadow-desktop: 0 10px 60px 5px hsla(229, 57%, 11%, 0.5);
 }
 
 *,
