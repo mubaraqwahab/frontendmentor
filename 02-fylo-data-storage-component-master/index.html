@@ -55,7 +55,9 @@
 
         <div class="storage-status">
           <p class="storage-status__label">
-            You’ve used <b>815 GB</b> of your <span class="visually-hidden">1000 GB</span> storage
+            <!-- Using the <abbr> seems to inform a screen reader to consistently pronounce the word as expected -->
+            You’ve used <b>815 <abbr>GB</abbr></b> of your
+            <span class="visually-hidden">1000 <abbr>GB</abbr></span> storage
           </p>
           <!-- There's a <meter> element, but I use a div below for two reasons:
             * it's supposed to be decorative (thus aria-hidden="true"), and
@@ -72,7 +74,7 @@
           <div class="storage-status__tooltip">
             <span class="visually-hidden">You have</span>
             <span class="storage-status__amount-left">185</span>
-            <span class="storage-status__amount-left-unit">GB Left</span>
+            <span class="storage-status__amount-left-unit"><abbr>GB</abbr> Left</span>
           </div>
         </div>
       </div>
