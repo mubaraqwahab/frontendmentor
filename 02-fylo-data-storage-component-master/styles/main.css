@@ -11,6 +11,8 @@
   --very-dark-blue: hsl(229, 57%, 11%);
 
   --radius: 10px;
+
+  --shadow: 0 10px 40px 20px hsla(229, 57%, 11%, 0.5);
 }
 
 *,
@@ -73,6 +75,7 @@ b {
   border-top-right-radius: 92px;
   padding: 40px;
   margin-bottom: 16px;
+  box-shadow: var(--shadow);
 }
 
 @media screen and (min-width: 1280px) {
@@ -109,6 +112,7 @@ b {
   padding: 32px 36px 52px;
   position: relative;
   overflow: visible;
+  box-shadow: var(--shadow);
 }
 
 @media screen and (min-width: 1280px) {
