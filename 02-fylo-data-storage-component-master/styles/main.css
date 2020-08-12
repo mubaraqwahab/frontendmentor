@@ -127,6 +127,8 @@ b {
   position: relative;
   overflow: visible;
   box-shadow: var(--shadow-mobile);
+
+  --value-load-duration: 1s;
 }
 
 @media screen and (min-width: 1280px) {
@@ -158,6 +160,12 @@ b {
   overflow: hidden;
 }
 
+@keyframes value-load {
+  0% {
+    width: 0;
+  }
+}
+
 .storage-meter__value {
   display: flex;
   align-items: center;
@@ -168,6 +176,7 @@ b {
   border-radius: 10px;
   padding: 2px;
   background-image: var(--primary-gradient);
+  animation: value-load var(--value-load-duration);
 }
 
 .storage-meter__value::after {
@@ -184,6 +193,17 @@ b {
   width: 100%;
   margin-top: 8px;
   font-weight: 700;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .storage-status__tooltip {
@@ -203,6 +223,10 @@ b {
   height: 64px;
   /* Half the height */
   bottom: -32px;
+  visibility: hidden;
+  animation: fade-in 0.25s;
+  animation-delay: var(--value-load-duration);
+  animation-fill-mode: forwards;
 }
 
 @media screen and (min-width: 1280px) {
