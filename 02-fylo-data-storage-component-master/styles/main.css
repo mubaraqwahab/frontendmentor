@@ -9,6 +9,7 @@
   --dark-blue: hsl(228, 56%, 26%);
   --darker-blue: hsl(228, 55%, 18%);
   --very-dark-blue: hsl(229, 57%, 11%);
+  --very-darker-blue: hsl(229, 57%, 5%);
 
   --radius: 10px;
 
@@ -104,6 +105,17 @@ b {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.storage-menu__option:hover {
+  background-color: var(--very-darker-blue);
+  border: 1px solid var(--very-darker-blue);
+}
+
+.storage-menu__option:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--grayish-blue);
 }
 
 .storage-status {
