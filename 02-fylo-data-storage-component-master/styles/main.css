@@ -226,6 +226,7 @@ b {
   visibility: hidden;
   animation: fade-in 0.25s;
   animation-delay: var(--value-load-duration);
+  /* Keep the final state of the animation */
   animation-fill-mode: forwards;
 }
 
