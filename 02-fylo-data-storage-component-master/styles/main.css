@@ -34,7 +34,7 @@ body {
   font-weight: 400;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   body {
     background-image: url(../images/bg-desktop.png);
     background-size: contain;
@@ -52,14 +52,14 @@ b {
   margin-top: -32px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .container {
     width: 64%;
     padding: 0;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .storage {
     display: flex;
     align-items: flex-end;
@@ -75,7 +75,7 @@ b {
   margin-bottom: 16px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .storage-menu {
     width: 40%;
     margin-bottom: 0px;
@@ -111,7 +111,7 @@ b {
   overflow: visible;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .storage-status {
     width: 60%;
     padding: 32px 36px 40px;
@@ -124,7 +124,7 @@ b {
   margin-bottom: 16px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .storage-status__label {
     text-align: left;
   }
@@ -181,15 +181,18 @@ b {
   right: 0;
   margin: auto;
   width: fit-content;
+  height: 64px;
+  /* Half the height */
   bottom: -32px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .storage-status__tooltip {
-    /* display: none; */
     left: unset;
     bottom: unset;
+    /* 32px is half the tooltip height */
     top: calc(-32px - 8px);
+    /* 36px is padding-right of .storage-status */
     right: 36px;
     border-bottom-right-radius: 0px;
   }
@@ -200,7 +203,8 @@ b {
     width: 0px;
     position: absolute;
     right: 0;
-    bottom: -20px;
+    /* +1px so that the tip blends with the body */
+    bottom: calc(-20px + 1px);
     border-right: 20px solid white;
     border-bottom: 20px solid transparent;
   }
@@ -235,11 +239,11 @@ b {
   font-family: sans-serif;
   font-size: 12px;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 52px;
   color: var(--grayish-blue);
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .attribution {
     margin-top: 20px;
   }
