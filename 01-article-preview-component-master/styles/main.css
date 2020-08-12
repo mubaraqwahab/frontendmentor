@@ -188,7 +188,17 @@ body {
   box-shadow: 0 0 0 3px var(--gray-blue);
 }
 
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .article-card__share-tooltip {
+  animation: fade-in 0.25s;
   margin-top: 8px;
 }
 
