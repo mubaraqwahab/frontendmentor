@@ -15,12 +15,22 @@
 
   --shadow-mobile: 0 5px 40px hsla(229, 57%, 11%, 0.5);
   --shadow-desktop: 0 10px 60px 5px hsla(229, 57%, 11%, 0.5);
+
+  --value-load-duration: 1.5s;
+  --reduced-motion-duration: 0.001ms;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  * {
+    animation-duration: var(--reduced-motion-duration) !important;
+  }
 }
 
 body {
@@ -127,8 +137,6 @@ b {
   position: relative;
   overflow: visible;
   box-shadow: var(--shadow-mobile);
-
-  --value-load-duration: 1.5s;
 }
 
 @media screen and (min-width: 1280px) {
@@ -229,6 +237,12 @@ b {
   animation-delay: var(--value-load-duration);
   /* Keep the final state of the animation */
   animation-fill-mode: forwards;
+}
+
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  .storage-status__tooltip {
+    animation-delay: var(--reduced-motion-duration);
+  }
 }
 
 @media screen and (min-width: 1280px) {

@@ -202,6 +202,13 @@ body {
   margin-top: 8px;
 }
 
+/* See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  .article-card__share-tooltip {
+    animation-duration: 0.001ms;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .article-card__share-tooltip {
     margin-top: 0px;
