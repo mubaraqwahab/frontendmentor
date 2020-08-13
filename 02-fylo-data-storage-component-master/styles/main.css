@@ -128,7 +128,7 @@ b {
   overflow: visible;
   box-shadow: var(--shadow-mobile);
 
-  --value-load-duration: 1s;
+  --value-load-duration: 1.5s;
 }
 
 @media screen and (min-width: 1280px) {
@@ -195,10 +195,10 @@ b {
   font-weight: 700;
 }
 
+/* Visibility doesn't "fade" so opacity is needed. See https://stackoverflow.com/a/30856455/12695621 */
 @keyframes fade-in {
   0% {
     opacity: 0;
-    visibility: hidden;
   }
   100% {
     opacity: 1;
@@ -223,8 +223,9 @@ b {
   height: 64px;
   /* Half the height */
   bottom: -32px;
+  /* "Disable" the element on page load */
   visibility: hidden;
-  animation: fade-in 0.25s;
+  animation: fade-in 0.1s;
   animation-delay: var(--value-load-duration);
   /* Keep the final state of the animation */
   animation-fill-mode: forwards;
