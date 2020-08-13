@@ -198,8 +198,12 @@ body {
 }
 
 .article-card__share-tooltip {
+  display: flex;
+  align-items: center;
   animation: fade-in 0.25s;
   margin-top: 8px;
+  padding: 20px 30px;
+  background-color: var(--very-dark-gray-blue);
 }
 
 /* See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
@@ -212,44 +216,36 @@ body {
 @media screen and (min-width: 1280px) {
   .article-card__share-tooltip {
     margin-top: 0px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 8px;
     position: absolute;
-    bottom: 80px;
+    /* 14px is thickness of tip */
+    bottom: calc(80px + 14px);
     right: -62px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: transparent;
     filter: drop-shadow(0px 8px 3px hsla(212, 23%, 69%, 0.2));
   }
 
   .article-card__share-tooltip::after {
     content: "";
+    /* Create a triangle. See https://css-tricks.com/snippets/css/css-triangle/ */
     height: 0px;
     width: 0px;
     border-left: 14px solid transparent;
     border-right: 14px solid transparent;
     border-top: 14px solid var(--very-dark-gray-blue);
-    margin-top: -1px;
+    /* Horizontally center the triangle. Credit https://css-tricks.com/forums/topic/horizontal-centering-of-an-absolute-element/#post-197427 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* +2px to blend into the tooltip body */
+    bottom: calc(-14px + 2px);
   }
 }
 
 .article-card__share-tooltip--hidden {
   display: none;
-}
-
-.article-card__share-tooltip-body {
-  background-color: var(--very-dark-gray-blue);
-  padding: 20px 30px;
-  display: flex;
-  align-items: center;
-}
-
-@media screen and (min-width: 1280px) {
-  .article-card__share-tooltip-body {
-    border-radius: 8px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
 }
 
 .article-card__share-tooltip-label {
