@@ -259,12 +259,25 @@ body {
   margin-right: 16px;
 }
 
-.article-card__social-icon-link {
+.article-card__social-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.article-card__social-list-item {
+  display: inline-block;
   margin-right: 16px;
 }
 
-.article-card__social-icon-link + .article-card__social-icon-link:last-child {
+.article-card__social-list-item + .article-card__social-list-item:last-child {
   margin-right: 0px;
+}
+
+.article-card__social-icon-link {
+  display: inline-block;
 }
 
 .article-card__social-icon-link:focus {
