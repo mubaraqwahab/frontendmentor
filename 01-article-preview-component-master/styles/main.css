@@ -261,7 +261,7 @@ body {
 
 .article-card__social-list {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -277,7 +277,10 @@ body {
 }
 
 .article-card__social-icon-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .article-card__social-icon-link:focus {
