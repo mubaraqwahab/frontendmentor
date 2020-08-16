@@ -8,6 +8,7 @@
   /* Neutral */
   --very-dark-blue: hsl(234, 12%, 34%);
   --gray-blue: hsl(229, 6%, 66%);
+  --gray-blue-trans: hsla(229, 6%, 66%, 0.2);
   --very-light-gray: hsl(0, 0%, 98%);
 
   --font-light: 200;
@@ -18,9 +19,92 @@
   font-size: 15px;
 }
 
-.attribution {
-  font-size: 11px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--very-light-gray);
+  padding: 72px 28px;
+  color: var(--gray-blue);
+}
+
+.h1 {
   text-align: center;
+  font-size: 1.7rem;
+  font-weight: var(--font-light);
+  line-height: 1.5;
+  color: var(--very-dark-blue);
+  margin: 1rem 0 1.2rem;
+}
+
+.h1__strong {
+  font-weight: var(--font-bold);
+  display: block;
+}
+
+.lead {
+  text-align: center;
+  line-height: 1.7;
+  margin-bottom: 68px;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.feature-card {
+  background-color: white;
+  padding: 28px;
+  box-shadow: 0 10px 20px 4px var(--gray-blue-trans);
+
+  --r-top: 0.3rem;
+  border-radius: var(--r-top) var(--r-top) 0.5rem 0.5rem;
+  border-top: var(--r-top) solid var(--feature-color);
+}
+
+.feature-card--supervisor {
+  --feature-color: var(--cyan);
+}
+
+.feature-card--team-builder {
+  --feature-color: var(--red);
+}
+
+.feature-card--karma {
+  --feature-color: var(--orange);
+}
+
+.feature-card--calculator {
+  --feature-color: var(--blue);
+}
+
+.feature-card__title {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+  color: var(--very-dark-blue);
+}
+
+.feature-card__desc {
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+  margin: 0 0 2rem;
+}
+
+.feature-card__graphic {
+  display: block;
+  margin-left: auto;
+}
+
+.attribution {
+  font-size: 12px;
+  text-align: center;
+  color: var(--very-dark-blue);
+  line-height: 1.6;
+  margin-top: 68px;
 }
 
 .attribution a {
