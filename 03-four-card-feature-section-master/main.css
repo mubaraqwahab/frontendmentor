@@ -8,7 +8,6 @@
   /* Neutral */
   --very-dark-blue: hsl(234, 12%, 34%);
   --gray-blue: hsl(229, 6%, 66%);
-  --gray-blue-trans: hsla(229, 6%, 66%, 0.2);
   --very-light-gray: hsl(0, 0%, 98%);
 
   --font-light: 200;
@@ -81,9 +80,10 @@ body {
 }
 
 .feature-card {
-  background-color: white;
   padding: 28px;
-  box-shadow: 0 10px 20px 4px var(--gray-blue-trans);
+  box-shadow: 0 10px 20px hsla(212, 86%, 30%, 0.15);
+  background-color: white;
+  border: 1px solid white;
 
   --r-top: 0.3rem;
   border-radius: var(--r-top) var(--r-top) 0.5rem 0.5rem;
