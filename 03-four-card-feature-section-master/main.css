@@ -142,7 +142,7 @@ body {
 
 .feature-card__desc {
   font-size: 0.9rem;
-  line-height: 1.6rem;
+  line-height: 1.8;
   margin: 0 0 2rem;
 }
 
@@ -155,7 +155,7 @@ body {
   font-size: 12px;
   text-align: center;
   color: var(--very-dark-blue);
-  line-height: 1.6;
+  line-height: 1.8;
   margin-top: 68px;
 }
 
