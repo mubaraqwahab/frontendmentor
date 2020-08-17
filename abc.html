@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>States</h1>
+    <ol id="list"></ol>
+
+    <script>
+      // Testing the visibilitychange event
+
+      var list = document.getElementById("list");
+
+      list.append(newLi());
+
+      document.addEventListener("visibilitychange", function () {
+        list.append(newLi());
+      });
+
+      function newLi() {
+        var listItem = document.createElement("li");
+        listItem.textContent = document.visibilityState;
+        return listItem;
+      }
+    </script>
+  </body>
+</html>
