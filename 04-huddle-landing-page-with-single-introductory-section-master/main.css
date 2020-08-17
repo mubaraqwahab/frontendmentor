@@ -1,0 +1,59 @@
+:root {
+  --violet: hsl(257, 40%, 49%);
+
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+
+  --text-normal: 400;
+  --text-bold: 700;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--violet);
+  color: white;
+}
+
+.main-grid {
+}
+
+.main {
+  text-align: center;
+}
+
+.h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--text-bold);
+}
+
+.lead {
+  font-family: var(--font-body);
+  font-weight: var(--text-normal);
+}
+
+.cta {
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: var(--text-normal);
+  background-color: white;
+  color: var(--violet);
+  display: inline-block;
+}
+
+.social-links {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto;
+}
+
+.social-link {
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
