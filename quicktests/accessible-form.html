@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessible Form</title>
+
+    <style>
+      #form > div {
+        padding: 10px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+      <div>
+        <label for="nameInput">Name</label>
+        <input id="nameInput" type="text" pattern="[a-zA-Z]+" aria-describedby="nameHelper" required />
+        <span class="hidden" id="nameHelper">Name cannot contain numbers</span>
+      </div>
+      <div>
+        <label for="emailInput">Email Address</label>
+        <input id="emailInput" type="email" />
+      </div>
+      <div>
+        <input type="submit" value="Send" />
+      </div>
+    </form>
+
+    <script>
+      /** @type {HTMLFormElement} */
+      var form = document.getElementById("form");
+
+      form.addEventListener("submit", function (e) {
+        console.log(",,,");
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+          form.querySelector("nameHelper").classList.remove("hidden");
+        }
+      });
+    </script>
+  </body>
+</html>
