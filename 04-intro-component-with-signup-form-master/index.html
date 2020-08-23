@@ -22,30 +22,28 @@
     </div>
     <div class="form-container">
       <p class="promotion-banner"><b>Try it free 7 days</b> then $20/mo. thereafter</p>
-      <form class="form">
-        <div class="form__input-container">
+      <form class="form" novalidate>
+        <div class="form-group">
           <label for="firstname">First Name</label>
           <input id="firstname" class="input" type="text" placeholder="First Name" required />
           <p class="error-text error-text--hidden">First Name cannot be empty</p>
         </div>
-        <div class="form__input-container">
+        <div class="form-group">
           <label for="lastname">Last Name</label>
           <input id="lastname" class="input" type="text" placeholder="Last Name" required />
           <p class="error-text error-text--hidden">Last Name cannot be empty</p>
         </div>
-        <div class="form__input-container">
+        <div class="form-group">
           <label for="email">Email</label>
           <input id="email" class="input" type="email" placeholder="Email Address" required />
           <p class="error-text error-text--hidden">Looks like this is not an email</p>
         </div>
-        <div class="form__input-container">
+        <div class="form-group">
           <label for="password">Password</label>
           <input id="password" class="input" type="password" placeholder="Password" required />
           <p class="error-text error-text--hidden">Password cannot be empty</p>
         </div>
-        <!-- <div class="form__input-container"> -->
         <button class="submit-btn" type="submit">Claim your free trial</button>
-        <!-- </div> -->
 
         <p class="ts">
           By clicking the button, you are agreeing to our <a href="" class="ts__link">Terms and Services</a>

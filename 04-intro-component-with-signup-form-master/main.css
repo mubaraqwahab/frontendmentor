@@ -34,7 +34,7 @@ body {
     grid-template-columns: 1fr 1fr;
     padding-left: 160px;
     padding-right: 160px;
-    gap: 60px;
+    gap: 12px;
   }
 }
 
@@ -108,12 +108,12 @@ body {
   }
 }
 
-.form__input-container {
+.form-group {
   margin-bottom: 16px;
   position: relative;
 }
 
-.form__input-container::after {
+.form-group::after {
   content: url(images/icon-error.svg);
   position: absolute;
   right: var(--input-px);
