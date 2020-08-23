@@ -26,11 +26,30 @@ body {
   padding: 24px;
   background-color: var(--red);
   background-image: url(images/bg-intro-mobile.png);
+  min-height: 100vh;
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    grid-template-columns: 1fr 1fr;
+    padding-left: 160px;
+    padding-right: 160px;
+    gap: 60px;
+  }
 }
 
 .main-text {
   color: white;
   text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .main-text {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .main-text__title {
@@ -40,14 +59,32 @@ body {
   margin: 0 30px;
 }
 
+@media screen and (min-width: 1200px) {
+  .main-text__title {
+    margin: 0;
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+}
+
 .main-text__desc {
   line-height: 1.7;
+}
+
+@media screen and (min-width: 1200px) {
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .promotion-banner {
   background-color: var(--blue);
   color: white;
   padding: 24px 60px;
+  /* 8px for the border-radius */
+  margin-bottom: calc(16px + 8px);
   text-align: center;
   line-height: 1.7;
   border-radius: 8px;
@@ -59,26 +96,66 @@ body {
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 8px rgba(0, 0, 0, 0.2);
+
+  --input-px: 20px;
+  --input-py: 20px;
+}
+
+@media screen and (min-width: 1200px) {
+  .form {
+    padding: 36px;
+    --input-px: 24px;
+  }
 }
 
 .form__input-container {
   margin-bottom: 16px;
+  position: relative;
+}
+
+.form__input-container::after {
+  content: url(images/icon-error.svg);
+  position: absolute;
+  right: var(--input-px);
+  top: 18px;
+  height: 24px;
+  width: 24px;
 }
 
 .input {
   display: block;
   width: 100%;
   border-radius: 4px;
-  padding: 24px;
+  padding: var(--input-py) var(--input-px);
   border: 1px solid var(--grayish-blue);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-bold);
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--dark-blue);
+}
+
+.input:invalid {
+  border: 1px solid var(--red);
+  color: var(--red);
 }
 
 .input::placeholder {
   font-weight: var(--font-bold);
 }
 
-.helper-text {
+.error-text {
+  /* display: none; */
+  margin: 8px 0 0;
+  color: var(--red);
+  text-align: right;
+  font-style: italic;
+  font-size: 78%;
+  font-weight: var(--font-medium);
+}
+
+.error-text--hidden {
   display: none;
 }
 
@@ -90,7 +167,8 @@ body {
   display: block;
   width: 100%;
   border: none;
-  padding: 24px;
+  padding: var(--input-py) var(--input-px);
+  margin-bottom: 16px;
   text-align: center;
   border-radius: 4px;
   /* box-shadow: 0 4px hsl(154, 59%, 45%); */
@@ -102,7 +180,7 @@ body {
   font-size: 78%;
   font-weight: var(--font-medium);
   padding: 0px 12px;
-  margin: 0;
+  margin: 0 0 8px;
   line-height: 1.7;
 }
 
@@ -110,4 +188,10 @@ body {
   color: var(--red);
   font-weight: var(--font-bold);
   text-decoration: none;
+}
+
+/* Return to this */
+
+label {
+  display: none;
 }

@@ -17,31 +17,35 @@
       <h1 class="main-text__title">Learn to code by watching others</h1>
       <p class="main-text__desc">
         See how experienced developers solve problems in real-time. Watching scripted tutorials is great, but
-        understanding how developers think is invaluableh.
+        understanding how developers think is invaluable.
       </p>
     </div>
-    <div>
-      <p href="" class="promotion-banner"><b>Try it free 7 days</b> then $20/mo. thereafter</p>
+    <div class="form-container">
+      <p class="promotion-banner"><b>Try it free 7 days</b> then $20/mo. thereafter</p>
       <form class="form">
         <div class="form__input-container">
-          <input class="input" type="text" placeholder="First Name" required />
-          <span class="helper-text">First Name cannot be empty</span>
+          <label for="firstname">First Name</label>
+          <input id="firstname" class="input" type="text" placeholder="First Name" required />
+          <p class="error-text error-text--hidden">First Name cannot be empty</p>
         </div>
         <div class="form__input-container">
-          <input class="input" type="text" placeholder="Last Name" required />
-          <span class="helper-text">Last Name cannot be empty</span>
+          <label for="lastname">Last Name</label>
+          <input id="lastname" class="input" type="text" placeholder="Last Name" required />
+          <p class="error-text error-text--hidden">Last Name cannot be empty</p>
         </div>
         <div class="form__input-container">
-          <input class="input" type="email" placeholder="Email Address" required />
-          <span class="helper-text">Looks like this is not an email</span>
+          <label for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="Email Address" required />
+          <p class="error-text error-text--hidden">Looks like this is not an email</p>
         </div>
         <div class="form__input-container">
-          <input class="input" type="password" placeholder="Password" required />
-          <span class="helper-text">Password cannot be empty</span>
+          <label for="password">Password</label>
+          <input id="password" class="input" type="password" placeholder="Password" required />
+          <p class="error-text error-text--hidden">Password cannot be empty</p>
         </div>
-        <div class="form__input-container">
-          <button class="submit-btn" type="submit">Claim your free trial</button>
-        </div>
+        <!-- <div class="form__input-container"> -->
+        <button class="submit-btn" type="submit">Claim your free trial</button>
+        <!-- </div> -->
 
         <p class="ts">
           By clicking the button, you are agreeing to our <a href="" class="ts__link">Terms and Services</a>
