@@ -6,8 +6,25 @@
     <title>Accessible Form</title>
 
     <style>
-      #form > div {
+      form {
+        padding: 20px;
+      }
+
+      form > div {
         padding: 10px;
+      }
+
+      [aria-invalid="true"] {
+        border: 1px solid red;
+      }
+
+      [aria-invalid="true"]:focus {
+        outline: none;
+        border: 3px solid red;
+      }
+
+      .helper {
+        color: red;
       }
 
       .hidden {
@@ -16,32 +33,68 @@
     </style>
   </head>
   <body>
-    <form id="form">
+    <!-- Form only validates on submit! -->
+    <form aria-label="Test">
       <div>
-        <label for="nameInput">Name</label>
-        <input id="nameInput" type="text" pattern="[a-zA-Z]+" aria-describedby="nameHelper" required />
-        <span class="hidden" id="nameHelper">Name cannot contain numbers</span>
+        <label for="nameInput">Name (required)</label>
+        <input
+          id="nameInput"
+          type="text"
+          pattern="[a-zA-Z]+"
+          aria-describedby="nameHelper"
+          aria-invalid="false"
+          required
+        />
+        <span class="helper hidden" id="nameHelper">That doesn't look like a name.</span>
       </div>
       <div>
         <label for="emailInput">Email Address</label>
-        <input id="emailInput" type="email" />
+        <input id="emailInput" type="email" aria-invalid="false" required />
+        <span class="helper hidden" id="emailHelper">That doesn't look like an email.</span>
       </div>
-      <div>
-        <input type="submit" value="Send" />
-      </div>
+      <button type="submit">Send</button>
     </form>
 
     <script>
       /** @type {HTMLFormElement} */
-      var form = document.getElementById("form");
+      var form = document.querySelector("form");
+
+      // Subtle tip 💡
+      // If you want to perform client-side validation with JS,
+      // it seems you can *programmatically* add the novalidate attribute to the form
+      // as a progressive enhancment. E.g.:
+      form.setAttribute("novalidate", "");
 
       form.addEventListener("submit", function (e) {
-        console.log(",,,");
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-          form.querySelector("nameHelper").classList.remove("hidden");
+        console.log("You tried to submit the form");
+
+        /**
+         * The first invalid input, if any.
+         * @type {HTMLInputElement}
+         */
+        var firstInvalidInput = form.querySelector(":invalid");
+
+        form.querySelectorAll("input").forEach(function (input) {
+          input.setAttribute("aria-invalid", !input.validity.valid);
+          input.nextElementSibling.classList.toggle("hidden", input.validity.valid);
+
+          console.log(input.id + " is valid? " + input.validity.valid);
+
+          // Focus on the input, if it's the first invalid one
+          if (input === firstInvalidInput) {
+            input.focus();
+          }
+        });
+
+        if (!form.checkValidity()) {
+          e.preventDefault();
         }
+      });
+
+      form.querySelectorAll("input").forEach(function (input) {
+        // It's interesting to note that this listener interrupts the submit one above when form.checkValidity is called.
+        // (See https://developer.mozilla.org/en-US/docs/Web/Events/invalid)
+        input.addEventListener("invalid", function () {});
       });
     </script>
   </body>
