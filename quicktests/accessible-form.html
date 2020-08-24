@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accessible form that validates (only) on submit</title>
+    <title>Accessible form that validates on submit</title>
 
     <style>
       form {
@@ -12,7 +12,7 @@
       }
 
       form > div {
-        padding: 10px;
+        margin-bottom: 20px;
       }
 
       [aria-invalid="true"] {
@@ -34,21 +34,14 @@
     </style>
   </head>
   <body>
-    <form aria-label="Test">
+    <form>
       <div>
-        <label for="nameInput">Name (required)</label>
-        <input
-          id="nameInput"
-          type="text"
-          pattern="[a-zA-Z]+"
-          aria-describedby="nameHelper"
-          aria-invalid="false"
-          required
-        />
+        <label for="nameInput">Name<span aria-hidden="true">*</span></label>
+        <input id="nameInput" type="text" pattern="[a-zA-Z]+" aria-invalid="false" required />
         <span class="helper hidden" id="nameHelper">That doesn't look like a name.</span>
       </div>
       <div>
-        <label for="emailInput">Email Address</label>
+        <label for="emailInput">Email Address<span aria-hidden="true">*</span></label>
         <input id="emailInput" type="email" aria-invalid="false" required />
         <span class="helper hidden" id="emailHelper">That doesn't look like an email.</span>
       </div>
@@ -68,15 +61,16 @@
       form.addEventListener("submit", function (e) {
         console.log("You tried to submit the form");
 
-        /**
-         * The first invalid input, if any.
-         * @type {HTMLInputElement}
-         */
+        /** The first invalid input, if any. */
         var firstInvalidInput = form.querySelector(":invalid");
 
         form.querySelectorAll("input").forEach(function (input) {
           input.setAttribute("aria-invalid", !input.validity.valid);
-          input.nextElementSibling.classList.toggle("hidden", input.validity.valid);
+
+          // Hide/Unhide the helper and associate it with/dissociate from the input as necessary
+          var helper = input.nextElementSibling;
+          var helperShown = !helper.classList.toggle("hidden", input.validity.valid);
+          helperShown ? input.setAttribute("aria-describedby", helper.id) : input.removeAttribute("aria-describedby");
 
           console.log(input.id + " is valid? " + input.validity.valid);
 
