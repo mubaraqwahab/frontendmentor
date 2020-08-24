@@ -68,6 +68,8 @@
           input.setAttribute("aria-invalid", !input.validity.valid);
 
           // Hide/Unhide the helper and associate it with/dissociate from the input as necessary
+          // Note: Adding aria-describedby on the HTML directly would announce the helper even when it's hidden.
+          // See https://www.w3.org/TR/using-aria/#label-support
           var helper = input.nextElementSibling;
           var helperShown = !helper.classList.toggle("hidden", input.validity.valid);
           helperShown ? input.setAttribute("aria-describedby", helper.id) : input.removeAttribute("aria-describedby");
