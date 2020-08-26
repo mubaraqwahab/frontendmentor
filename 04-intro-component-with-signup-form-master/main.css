@@ -111,6 +111,12 @@ body {
 .form-group {
   margin-bottom: 16px;
   position: relative;
+
+  --input-border-color: var(--grayish-blue);
+  /* Use the default color, basically */
+  --input-color: unset;
+
+  --error-text-display: none;
 }
 
 @media screen and (min-width: 1200px) {
@@ -119,7 +125,13 @@ body {
   }
 }
 
-.form-group::after {
+.form-group--invalid {
+  --input-border-color: var(--red);
+  --input-color: var(--red);
+  --error-text-display: block;
+}
+
+.form-group--invalid::after {
   content: url(images/icon-error.svg);
   position: absolute;
   right: var(--input-px);
@@ -128,41 +140,34 @@ body {
   width: 24px;
 }
 
-.input {
+.form-group__input {
   display: block;
   width: 100%;
   border-radius: 4px;
   padding: var(--input-py) var(--input-px);
-  border: 1px solid var(--grayish-blue);
+  border: 1px solid var(--input-border-color);
+  /* color: var(--input-color); */
   font-weight: var(--font-bold);
 }
 
-.input:focus {
+.form-group__input:focus {
   outline: none;
-  border: 1px solid var(--dark-blue);
+  --input-border-color: var(--dark-blue);
 }
 
-.input:invalid {
-  border: 1px solid var(--red);
-  color: var(--red);
-}
-
-.input::placeholder {
+.form-group__input::placeholder {
+  content: "";
   font-weight: var(--font-bold);
 }
 
-.error-text {
-  /* display: none; */
+.form-group__error-text {
+  display: var(--error-text-display);
   margin: 8px 0 0;
   color: var(--red);
   text-align: right;
   font-style: italic;
   font-size: 78%;
   font-weight: var(--font-medium);
-}
-
-.error-text--hidden {
-  display: none;
 }
 
 .submit-btn {
@@ -177,7 +182,7 @@ body {
   margin-bottom: 16px;
   text-align: center;
   border-radius: 4px;
-  /* box-shadow: 0 4px hsl(154, 59%, 45%); */
+  box-shadow: 0 4px hsl(154, 59%, 45%);
 }
 
 .ts {
@@ -196,8 +201,15 @@ body {
   text-decoration: none;
 }
 
-/* Return to this */
-
-label {
-  display: none;
+/* From Bootstrap .sr-only (https://github.com/twbs/bootstrap/blob/7a6da5e3e7ad7c749dde806546a35d4d4259d965/dist/css/bootstrap.css#L8045) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
