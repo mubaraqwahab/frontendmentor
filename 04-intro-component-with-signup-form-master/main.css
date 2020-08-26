@@ -155,10 +155,9 @@ body {
   --input-border-color: var(--dark-blue);
 }
 
-.form-group__input::placeholder {
-  content: "";
+/* .form-group__input::placeholder {
   font-weight: var(--font-bold);
-}
+} */
 
 .form-group__error-text {
   display: var(--error-text-display);
@@ -178,11 +177,11 @@ body {
   display: block;
   width: 100%;
   border: none;
+  border-bottom: 4px solid hsl(154, 59%, 45%);
   padding: var(--input-py) var(--input-px);
   margin-bottom: 16px;
   text-align: center;
   border-radius: 4px;
-  box-shadow: 0 4px hsl(154, 59%, 45%);
 }
 
 .ts {
