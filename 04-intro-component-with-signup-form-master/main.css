@@ -143,7 +143,7 @@ body {
   border: 1px solid var(--input-border-color);
   color: var(--input-color);
   font-weight: var(--font-bold);
-  /* Stuff for the error icon */
+  /* Stuff for the error icon. (Bootstrap does something similar) */
   background-image: var(--input-bg-image);
   background-repeat: no-repeat;
   background-size: 24px;
