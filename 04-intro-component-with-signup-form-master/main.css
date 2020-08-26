@@ -22,6 +22,7 @@
 
 body {
   display: grid;
+  gap: 20px;
   font-weight: var(--font-regular);
   padding: 24px;
   background-color: var(--red);
@@ -34,7 +35,6 @@ body {
     grid-template-columns: 1fr 1fr;
     padding-left: 160px;
     padding-right: 160px;
-    gap: 12px;
   }
 }
 
@@ -111,6 +111,12 @@ body {
 .form-group {
   margin-bottom: 16px;
   position: relative;
+}
+
+@media screen and (min-width: 1200px) {
+  .form-group {
+    margin-bottom: 20px;
+  }
 }
 
 .form-group::after {
