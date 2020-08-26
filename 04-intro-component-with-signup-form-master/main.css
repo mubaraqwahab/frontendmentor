@@ -113,9 +113,7 @@ body {
   position: relative;
 
   --input-border-color: var(--grayish-blue);
-  /* Use the default color, basically */
-  --input-color: unset;
-
+  --input-color: var(--dark-blue);
   --error-text-display: none;
 }
 
@@ -146,18 +144,19 @@ body {
   border-radius: 4px;
   padding: var(--input-py) var(--input-px);
   border: 1px solid var(--input-border-color);
-  /* color: var(--input-color); */
+  color: var(--input-color);
   font-weight: var(--font-bold);
 }
 
 .form-group__input:focus {
   outline: none;
+  /* --input-color: var(--dark-blue); */
   --input-border-color: var(--dark-blue);
 }
 
-/* .form-group__input::placeholder {
+.form-group__input::placeholder {
   font-weight: var(--font-bold);
-} */
+}
 
 .form-group__error-text {
   display: var(--error-text-display);
