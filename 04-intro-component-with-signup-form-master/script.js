@@ -1,6 +1,10 @@
 /** @type {HTMLFormElement} */
 const form = document.querySelector(".form");
 
+// Disable the browser's validation.
+// (I'm doing this here just as a progressive enhancement)
+form.setAttribute("novalidate", "");
+
 form.addEventListener("submit", function (event) {
   if (form.checkValidity()) {
     return;

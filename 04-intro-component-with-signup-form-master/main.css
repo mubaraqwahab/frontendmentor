@@ -33,6 +33,7 @@ body {
 @media screen and (min-width: 1200px) {
   body {
     grid-template-columns: 1fr 1fr;
+    background-image: url(images/bg-intro-desktop.png);
     padding-left: 160px;
     padding-right: 160px;
   }
