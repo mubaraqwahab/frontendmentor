@@ -22,6 +22,7 @@ form.addEventListener("submit", function (event) {
     input.setAttribute("aria-invalid", !valid);
 
     // Associate the error text with the invalid input or dissociate it from it, as appropriate.
+    // See https://www.w3.org/TR/using-aria/#label-support
     if (valid) {
       input.removeAttribute("aria-describedby");
     } else {
