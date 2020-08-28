@@ -28,6 +28,10 @@
       <form class="form">
         <div class="form-group">
           <label class="visually-hidden" for="firstname">First Name</label>
+          <!--
+            Set aria-invalid initially to "false" on required inputs,
+            otherwise they would be announced as invalid to screen-reader users.
+          -->
           <input
             id="firstname"
             class="form-group__input"
@@ -74,9 +78,9 @@
           />
           <p id="passwordError" class="form-group__error-text">Password cannot be empty</p>
         </div>
-        <button class="submit-btn" type="submit">Claim your free trial</button>
+        <button class="submit-btn" type="submit" aria-describedby="ts">Claim your free trial</button>
 
-        <p class="ts">
+        <p class="ts" id="ts">
           By clicking the button, you are agreeing to our <a href="" class="ts__link">Terms and Services</a>
         </p>
       </form>
