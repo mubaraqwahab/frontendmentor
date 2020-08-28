@@ -61,6 +61,10 @@
       form.addEventListener("submit", function (e) {
         console.log("You tried to submit the form");
 
+        if (form.checkValidity()) {
+          return;
+        }
+
         /** The first invalid input, if any. */
         var firstInvalidInput = form.querySelector(":invalid");
 
@@ -82,9 +86,7 @@
           }
         });
 
-        if (!form.checkValidity()) {
-          e.preventDefault();
-        }
+        e.preventDefault();
       });
 
       form.querySelectorAll("input").forEach(function (input) {
