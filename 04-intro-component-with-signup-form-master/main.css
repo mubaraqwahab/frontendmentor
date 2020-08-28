@@ -87,12 +87,19 @@ body {
   margin-bottom: calc(16px + 8px);
   text-align: center;
   line-height: 1.7;
+  border: 1px solid transparent;
   border-radius: 8px;
   box-shadow: 0 8px rgba(0, 0, 0, 0.2);
 }
 
+.promotion-banner__strong {
+  font-weight: var(--font-bold);
+}
+
 .form {
   background-color: white;
+  /* Border helps in Windows high-contrast mode. */
+  border: 1px solid transparent;
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 8px rgba(0, 0, 0, 0.2);
@@ -185,6 +192,17 @@ body {
   margin-bottom: 16px;
   text-align: center;
   border-radius: 4px;
+}
+
+.submit-btn:hover {
+  background-color: hsl(154, 59%, 57%);
+  border: 1px solid hsl(154, 59%, 57%);
+  border-bottom: 4px solid var(--green);
+}
+
+.submit-btn:focus {
+  outline: 1px solid transparent;
+  box-shadow: 0 0 0 2px hsl(154, 59%, 33%);
 }
 
 .ts {
