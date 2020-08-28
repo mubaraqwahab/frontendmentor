@@ -154,7 +154,7 @@ body {
 }
 
 .form-group__input:focus {
-  outline: none;
+  outline: 1px solid transparent;
   box-shadow: 0 0 0 1px var(--input-focus-color);
 }
 
