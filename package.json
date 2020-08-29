@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/mubaraqwahab/frontendmentor#readme",
   "devDependencies": {
-    "prettier": "2.0.5",
-    "stylelint-config-recommended": "^3.0.0"
+    "prettier": "2.0.5"
   }
 }
