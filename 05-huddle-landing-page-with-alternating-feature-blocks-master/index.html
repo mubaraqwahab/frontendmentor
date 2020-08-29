@@ -13,103 +13,106 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <header>
-      <img src="images/logo.svg" alt="Huddle" />
-      <a href="">Try It Free</a>
+    <header class="header">
+      <img class="header__logo" src="images/logo.svg" alt="Huddle" />
+      <a class="btn btn--secondary" href="">Try It Free</a>
     </header>
     <main>
-      <section>
-        <h1>Build The Community Your Fans Will Love</h1>
-        <p>
+      <section class="hero">
+        <h1 class="hero__title">Build The Community Your Fans Will Love</h1>
+        <p class="hero__lead">
           Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create
           connections with your users as you engage in genuine discussion.
         </p>
-        <a href="">Get Started For Free</a>
-        <img src="images/illustration-mockups.svg" alt="" />
+        <a class="btn btn--primary" href="">Get Started For Free</a>
+        <img class="hero__graphic" src="images/illustration-mockups.svg" alt="" />
       </section>
-      <div>
-        <section>
-          <img src="images/illustration-grow-together.svg" alt="" />
-          <h2>Grow Together</h2>
-          <p>
+      <div class="cards">
+        <section class="card">
+          <img class="card__graphic" src="images/illustration-grow-together.svg" alt="" />
+          <h2 class="card__title">Grow Together</h2>
+          <p class="card__text">
             Generate meaningful discussions with your audience and build a strong, loyal community. Think of the
             insightful conversations you miss out on with a feedback form.
           </p>
         </section>
-        <section>
-          <img src="images/illustration-flowing-conversation.svg" alt="" />
-          <h2>Flowing Conversations</h2>
-          <p>
+        <section class="card">
+          <img class="card__graphic" src="images/illustration-flowing-conversation.svg" alt="" />
+          <h2 class="card__title">Flowing Conversations</h2>
+          <p class="card__text">
             You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time
             loading for a more natural flow.
           </p>
         </section>
-        <section>
-          <img src="images/illustration-your-users.svg" alt="" />
-          <h2>Your Users</h2>
-          <p>
+        <section class="card">
+          <img class="card__graphic" src="images/illustration-your-users.svg" alt="" />
+          <h2 class="card__title">Your Users</h2>
+          <p class="card__text">
             It takes no time at all to integrate Huddle with your app's authentication solution. This means, once signed
             in to your app, your users can start chatting immediately.
           </p>
         </section>
       </div>
-      <section>
-        <h2>Ready to Build Your Community?</h2>
-        <a href="">Get Started For Free</a>
+      <section class="card">
+        <h2 class="card__title">Ready to Build Your Community?</h2>
+        <a class="btn btn--primary" href="">Get Started For Free</a>
       </section>
     </main>
-    <footer>
-      <img src="images/logo-white.svg" alt="Huddle" />
+    <footer class="footer">
+      <img class="footer__logo" src="images/logo-white.svg" alt="Huddle" />
       <address>
         <ul aria-label="Contact information">
-          <li>
-            <span>
+          <li class="contact-item">
+            <span class="contact-item__name">
               <span>Location</span>
               <img src="images/icon-location.svg" alt="" />
             </span>
-            <span>
+            <span class="contact-item__content">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua
             </span>
           </li>
-          <li>
-            <span>
+          <li class="contact-item">
+            <span class="contact-item__name">
               <span>Phone</span>
               <img src="images/icon-phone.svg" alt="" />
             </span>
-            <span>+1-543-123-4567</span>
+            <span class="contact-item__content">+1-543-123-4567</span>
           </li>
-          <li>
-            <span>
+          <li class="contact-item">
+            <span class="contact-item__name">
               <span>Email</span>
-              <img src="images/icon-email.svg" alt="Email" />
+              <img src="images/icon-email.svg" alt="" />
             </span>
-            <span>example@huddle.com</span>
+            <span class="contact-item__content">example@huddle.com</span>
           </li>
         </ul>
       </address>
       <nav>
         <ul>
-          <li><a href="">About Us</a></li>
-          <li><a href="">What We Do</a></li>
-          <li><a href="">FAQ</a></li>
-          <li><a href="">Career</a></li>
-          <li><a href="">Blog</a></li>
-          <li><a href="">Contact Us</a></li>
+          <li class="footer__nav-item"><a class="footer__link" href="">About Us</a></li>
+          <li class="footer__nav-item"><a class="footer__link" href="">What We Do</a></li>
+          <li class="footer__nav-item"><a class="footer__link" href="">FAQ</a></li>
+          <li class="footer__nav-item"><a class="footer__link" href="">Career</a></li>
+          <li class="footer__nav-item"><a class="footer__link" href="">Blog</a></li>
+          <li class="footer__nav-item"><a class="footer__link" href="">Contact Us</a></li>
         </ul>
       </nav>
-      <ul aria-label="Social media">
-        <li>
-          <a href="" aria-label="Facebook"></a>
+      <ul aria-label="Social media" class="social">
+        <li class="social__item">
+          <a class="footer__link" href="" aria-label="Facebook"></a>
         </li>
         <li>
-          <a href="" aria-label="Twitter"></a>
+          <a class="footer__link" href="" aria-label="Twitter"></a>
         </li>
         <li>
-          <a href="" aria-label="Instagram"></a>
+          <a class="footer__link" href="" aria-label="Instagram"></a>
         </li>
       </ul>
-      <small><span aria-hidden="true">&copy;</span> Copyright 2018 Huddle. All rights reserved.</small>
+      <small class="footer__copyright">
+        <span aria-hidden="true">&copy;</span>
+        Copyright 2018 Huddle. All rights reserved.
+      </small>
     </footer>
   </body>
 </html>
