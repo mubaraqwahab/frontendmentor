@@ -6,4 +6,30 @@
 
 @tailwind components;
 
+.btn {
+  @apply inline-block text-xs border-transparent rounded-full py-1 px-5;
+}
+
+.btn:focus {
+  @apply outline-none shadow-outline;
+}
+
+.btn--lg {
+  @apply py-2 px-12;
+}
+
+.btn--primary {
+  @apply bg-pink text-white;
+  box-shadow: 0 4px 6px -1px hsla(322, 100%, 66%, 0.32),
+    0 2px 4px -1px hsla(322, 100%, 66%, 0.16);
+}
+
+.btn--secondary {
+  @apply bg-white text-cyan-dark shadow-md;
+}
+
+.btn--secondary:hover {
+  @apply bg-gray-100;
+}
+
 @tailwind utilities;

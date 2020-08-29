@@ -9,9 +9,14 @@ module.exports = {
     content: ["./index.html"],
   },
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: () => ({
+        "hero-mobile": "url(images/bg-hero-mobile.svg)",
+        "hero-desktop": "url(images/bg-hero-desktop.svg)",
+      }),
+    },
     fontFamily: {
-      display: ["Poppins", ...fontFamily.sans],
+      heading: ["Poppins", ...fontFamily.sans],
       body: ["Open Sans", ...fontFamily.sans],
     },
     fontWeight: {

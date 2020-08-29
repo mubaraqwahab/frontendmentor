@@ -1,3 +1,10 @@
 {
-  "css.validate": false
+  "css.validate": false,
+  "liveServer.settings.ignoreFiles": [
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts"
+  ],
+  "liveServer.settings.wait": 2200
 }
