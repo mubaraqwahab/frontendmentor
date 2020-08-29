@@ -1,12 +1,4 @@
 :root {
-  --pink: hsl(322, 100%, 66%);
-  --very-pale-cyan: hsl(193, 100%, 96%);
-  --very-dark-cyan: hsl(192, 100%, 9%);
-  --grayish-blue: hsl(208, 11%, 55%);
-
-  --body-font: "Open Sans", sans-serif;
-  --heading-font: "Poppins", sans-serif;
-
   font-size: 18px;
 }
 

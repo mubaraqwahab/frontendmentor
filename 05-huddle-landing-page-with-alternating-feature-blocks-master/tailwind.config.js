@@ -1,3 +1,5 @@
+const { fontFamily, colors } = require("tailwindcss/defaultTheme");
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -8,6 +10,29 @@ module.exports = {
   },
   theme: {
     extend: {},
+    fontFamily: {
+      display: ["Poppins", ...fontFamily.sans],
+      body: ["Open Sans", ...fontFamily.sans],
+    },
+    fontWeight: {
+      normal: "400",
+      semibold: "600",
+      bold: "700",
+    },
+    colors: {
+      transparent: colors.transparent,
+      white: colors.white,
+      black: colors.black,
+      gray: {
+        ...colors.gray,
+        blue: "hsl(208, 11%, 55%)",
+      },
+      pink: "hsl(322, 100%, 66%)",
+      cyan: {
+        pale: "hsl(193, 100%, 96%)",
+        dark: "hsl(192, 100%, 9%)",
+      },
+    },
   },
   variants: {},
   plugins: [],
