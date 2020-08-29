@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "tailwindcss": "^1.7.6"
+  },
+  "devDependencies": {
+    "stylelint-config-recommended": "^3.0.0"
   }
 }
