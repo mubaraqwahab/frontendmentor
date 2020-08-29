@@ -4,6 +4,7 @@
   "description": "![Design preview for the Huddle landing page with alternating feature blocks coding challenge](./design/desktop-preview.jpg)",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --exec \"npx tailwindcss build main.css -o output.css\" -w main.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
