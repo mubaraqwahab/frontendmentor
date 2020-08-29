@@ -16,4 +16,58 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin-top: 0px !important;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  font-family: var(--body-font);
+}
+
+img {
+  width: 100%;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--very-pale-cyan);
+  padding: 24px 16px;
+}
+
+.header__logo {
+  height: 1rem;
+  width: auto;
+  /* object-fit: cover; */
+  /* height: auto; */
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 50rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.4rem 1.6rem;
+}
+
+.btn--secondary {
+  background-color: white;
+  color: var(--very-dark-cyan);
+  box-shadow: 0 0.5px 6px var(--grayish-blue);
+}
+
+.btn--sm {
+  font-size: 0.7rem;
+  padding: 0.4rem 1.4rem;
+}
+
+.hero {
 }
