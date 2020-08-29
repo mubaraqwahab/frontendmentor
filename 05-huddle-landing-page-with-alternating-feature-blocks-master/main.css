@@ -10,4 +10,12 @@
   --heading-font: "Poppins", var(--base-font);
 
   font-size: 18px;
+
+  @apply border;
 }
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
