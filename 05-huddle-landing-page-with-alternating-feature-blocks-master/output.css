@@ -622,6 +622,28 @@ video {
   }
 }
 
+.bg-cyan-pale {
+  --bg-opacity: 1;
+  background-color: hsl(193, 100%, 96%);
+  background-color: rgba(234.6, 250.58, 255, var(--bg-opacity));
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
 @-webkit-keyframes spin {
   to {
     transform: rotate(360deg);
