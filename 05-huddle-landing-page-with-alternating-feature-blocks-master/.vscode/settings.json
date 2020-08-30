@@ -1,10 +1,12 @@
 {
   "css.validate": false,
   "liveServer.settings.ignoreFiles": [
+    "**/main.css",
+    "pacakge.json",
+    "package-lock.json",
+    "**/*.md",
+    "stylelint.config.js",
+    ".prettierrc",
     ".vscode/**",
-    "**/*.scss",
-    "**/*.sass",
-    "**/*.ts"
-  ],
-  "liveServer.settings.wait": 2200
+  ]
 }

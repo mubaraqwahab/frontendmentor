@@ -2,6 +2,10 @@
   font-size: 18px;
 }
 
+.outline-transparent {
+  outline: 1px solid transparent;
+}
+
 @tailwind base;
 
 @tailwind components;
@@ -11,7 +15,7 @@
 }
 
 .btn:focus {
-  @apply outline-none shadow-outline;
+  @apply outline-transparent shadow-outline;
 }
 
 .btn--lg {
@@ -47,6 +51,14 @@
 
 .card__text {
   @apply text-sm text-gray-600 leading-relaxed;
+}
+
+.footer-link:hover {
+  @apply text-gray-400 bg-gray-400;
+}
+
+.footer-link:focus {
+  @apply outline-transparent shadow-outline;
 }
 
 @tailwind utilities;
