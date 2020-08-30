@@ -54,11 +54,15 @@
 }
 
 .footer-link:hover {
-  @apply text-gray-400 bg-gray-400;
+  @apply text-gray-400 border-gray-400;
 }
 
 .footer-link:focus {
   @apply outline-transparent shadow-outline;
+}
+
+.footer-link--social {
+  @apply inline-flex items-center justify-center w-8 h-8 p-2 border-white border rounded-full;
 }
 
 @tailwind utilities;

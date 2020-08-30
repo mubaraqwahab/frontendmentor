@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/8d40ea811a.js" crossorigin="anonymous"></script>
   </head>
   <body class="font-body bg-white">
-    <header class="absolute top-0 left-0 right-0 flex items-center justify-between px-3 py-5">
+    <header class="absolute top-0 inset-x-0 flex items-center justify-between px-3 py-5">
       <img class="w-24" src="images/logo.svg" alt="Huddle" />
       <a class="btn btn--secondary font-bold" href="">Try It Free</a>
     </header>
@@ -57,17 +57,17 @@
           </p>
         </section>
       </div>
-      <section class="card pb-12 mx-3 mb-0 px-4 relative">
+      <section class="card px-4 py-10 mx-3 mt-16 -mb-16 relative">
         <h2 class="card__title mb-5 text-lg">Ready to Build Your Community?</h2>
         <a class="btn btn--primary btn--lg" href="">Get Started For Free</a>
       </section>
     </main>
-    <footer class="bg-cyan-dark text-white px-3 py-10">
+    <footer class="bg-cyan-dark text-white px-3 pt-32 pb-12">
       <img class="w-1/2 mb-6" src="images/logo-white.svg" alt="Huddle" />
       <address class="not-italic text-sm mb-12">
         <ul aria-label="Contact information">
           <li class="flex mb-5">
-            <div class="w-5 flex-shrink-0 mr-3">
+            <div class="w-5 flex-shrink-0 mr-3 pt-1">
               <span class="sr-only">Location</span>
               <img src="images/icon-location.svg" alt="" />
             </div>
@@ -75,14 +75,14 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
             </p>
           </li>
-          <li class="flex mb-5">
+          <li class="flex mb-5 items-center">
             <div class="w-5 flex-shrink-0 mr-3">
               <span class="sr-only">Phone</span>
               <img src="images/icon-phone.svg" alt="" />
             </div>
             <a class="footer-link" href="tel:+1-543-123-4567">+1-543-123-4567</a>
           </li>
-          <li class="flex mb-0">
+          <li class="flex mb-0 items-center">
             <div class="w-5 flex-shrink-0 mr-3">
               <span class="sr-only">Email</span>
               <img src="images/icon-email.svg" alt="" />
@@ -101,24 +101,24 @@
           <li class="mb-4"><a class="footer-link" href="">Contact Us</a></li>
         </ul>
       </nav>
-      <ul aria-label="Social media" class="flex justify-center items-center">
-        <li class="w-6 h-6 rounded-full">
-          <a class="footer-link" href="" aria-label="Facebook">
+      <ul aria-label="Social media" class="flex justify-center items-center text-sm mb-5">
+        <li class="mr-3">
+          <a class="footer-link footer-link--social" href="" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
           </a>
         </li>
-        <li>
-          <a class="footer-link" href="" aria-label="Twitter">
+        <li class="mr-3">
+          <a class="footer-link footer-link--social" href="" aria-label="Twitter">
             <i class="fab fa-twitter"></i>
           </a>
         </li>
-        <li>
-          <a class="footer-link" href="" aria-label="Instagram">
+        <li class="">
+          <a class="footer-link footer-link--social" href="" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
         </li>
       </ul>
-      <small class="footer-link">
+      <small class="block text-center text-xs">
         <span aria-hidden="true">&copy;</span>
         Copyright 2018 Huddle. All rights reserved.
       </small>
