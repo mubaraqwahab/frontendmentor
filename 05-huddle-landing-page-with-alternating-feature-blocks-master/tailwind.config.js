@@ -1,4 +1,8 @@
-const { fontFamily, colors } = require("tailwindcss/defaultTheme");
+const {
+  fontFamily,
+  colors,
+  borderRadius,
+} = require("tailwindcss/defaultTheme");
 
 module.exports = {
   future: {
@@ -37,6 +41,10 @@ module.exports = {
         pale: "hsl(193, 100%, 96%)",
         dark: "hsl(192, 100%, 9%)",
       },
+    },
+    borderRadius: {
+      ...borderRadius,
+      xl: "1rem",
     },
   },
   variants: {},
