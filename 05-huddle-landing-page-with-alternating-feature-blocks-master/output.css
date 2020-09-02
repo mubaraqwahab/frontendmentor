@@ -701,7 +701,6 @@ video {
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
   border-radius: 1rem;
-  text-align: center;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
 }
 
@@ -710,54 +709,6 @@ video {
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
   }
 }
-
-/* .card--feature {
-  @apply pt-12 pb-8 px-6 mb-10;
-}
-
-@screen xl {
-  .card--feature {
-    @apply flex items-center justify-between pl-24 py-16;
-  }
-} */
-
-/*
-.card__graphic {
-  @apply mb-12 w-11/12 mx-auto;
-}
-
-@screen xl {
-  .card__graphic {
-    @apply w-2/6 m-0;
-  }
-} */
-
-/*
-@screen xl {
-  .card__body {
-    @apply text-left w-3/6 pr-8;
-  }
-} */
-
-/* .card__title {
-  @apply text-xl font-semibold font-heading text-cyan-dark mb-3;
-}
-
-@screen xl {
-  .card__title {
-    @apply text-2xl;
-  }
-} */
-
-/* .card__text {
-  @apply text-sm text-gray-600 leading-relaxed;
-}
-
-@screen xl {
-  .card__text {
-    @apply text-base;
-  }
-} */
 
 .footer-link:hover {
   --text-opacity: 1;
@@ -939,12 +890,12 @@ video {
   margin-bottom: 3rem;
 }
 
-.mt-16 {
-  margin-top: 4rem;
+.mt-24 {
+  margin-top: 6rem;
 }
 
-.-mb-16 {
-  margin-bottom: -4rem;
+.-mb-20 {
+  margin-bottom: -5rem;
 }
 
 .px-4 {
@@ -1301,6 +1252,11 @@ video {
     margin: 0;
   }
 
+  .xl\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .xl\:mb-0 {
     margin-bottom: 0;
   }
@@ -1328,9 +1284,24 @@ video {
     padding-right: 2rem;
   }
 
+  .xl\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
   .xl\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .xl\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .xl\:px-24 {
+    padding-left: 6rem;
+    padding-right: 6rem;
   }
 
   .xl\:pr-8 {
@@ -1357,6 +1328,10 @@ video {
     padding-top: 9rem;
   }
 
+  .xl\:shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
   .xl\:text-left {
     text-align: left;
   }
@@ -1379,5 +1354,11 @@ video {
 
   .xl\:w-11\/20 {
     width: 55%;
+  }
+
+  .xl\:w-fit {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }

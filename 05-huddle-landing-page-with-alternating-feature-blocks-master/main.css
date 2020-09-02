@@ -45,7 +45,7 @@
 }
 
 .card {
-  @apply border-transparent bg-white rounded-xl text-center;
+  @apply border-transparent bg-white rounded-xl;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
 }
 

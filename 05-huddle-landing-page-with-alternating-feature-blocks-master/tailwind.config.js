@@ -21,6 +21,7 @@ module.exports = {
         "44": "11rem",
         "9/20": "45%",
         "11/20": "55%",
+        fit: "fit-content",
       },
       padding: {
         "36": "9rem",
