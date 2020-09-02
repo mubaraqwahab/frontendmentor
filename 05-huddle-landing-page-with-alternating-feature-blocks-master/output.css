@@ -629,12 +629,22 @@ video {
 .btn {
   display: inline-block;
   font-size: 0.75rem;
+  text-align: center;
   border-color: transparent;
   border-radius: 9999px;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+@media (min-width: 1280px) {
+  .btn {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }
 
 .btn:focus {
@@ -647,6 +657,15 @@ video {
   padding-bottom: 0.5rem;
   padding-left: 3rem;
   padding-right: 3rem;
+}
+
+@media (min-width: 1280px) {
+  .btn--lg {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 }
 
 .btn--primary {
@@ -1203,9 +1222,30 @@ video {
     font-size: 2.25rem;
   }
 
+  .xl\:leading-snug {
+    line-height: 1.375;
+  }
+
+  .xl\:mb-0 {
+    margin-bottom: 0;
+  }
+
+  .xl\:mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .xl\:mb-8 {
+    margin-bottom: 2rem;
+  }
+
   .xl\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+  }
+
+  .xl\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .xl\:pr-10 {
@@ -1216,8 +1256,16 @@ video {
     padding-bottom: 4rem;
   }
 
+  .xl\:pt-36 {
+    padding-top: 9rem;
+  }
+
   .xl\:text-left {
     text-align: left;
+  }
+
+  .xl\:w-44 {
+    width: 11rem;
   }
 
   .xl\:w-9\/20 {

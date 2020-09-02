@@ -7,7 +7,13 @@
 @tailwind components;
 
 .btn {
-  @apply inline-block text-xs border-transparent rounded-full py-1 px-5;
+  @apply inline-block text-xs text-center border-transparent rounded-full py-1 px-5;
+}
+
+@screen xl {
+  .btn {
+    @apply py-3 px-12;
+  }
 }
 
 .btn:focus {
@@ -16,6 +22,12 @@
 
 .btn--lg {
   @apply py-2 px-12;
+}
+
+@screen xl {
+  .btn--lg {
+    @apply py-4 px-16;
+  }
 }
 
 .btn--primary {

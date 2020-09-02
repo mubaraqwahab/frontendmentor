@@ -18,8 +18,12 @@ module.exports = {
         xl: "1rem",
       },
       width: {
+        "44": "11rem",
         "9/20": "45%",
         "11/20": "55%",
+      },
+      padding: {
+        "36": "9rem",
       },
     },
     container: {
