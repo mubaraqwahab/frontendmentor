@@ -1,4 +1,4 @@
-const { fontFamily, colors } = require("tailwindcss/defaultTheme");
+const { fontFamily, colors, spacing } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   future: {
@@ -17,10 +17,14 @@ module.exports = {
       borderRadius: {
         xl: "1rem",
       },
+      width: {
+        "9/20": "45%",
+        "11/20": "55%",
+      },
     },
     container: {
       center: true,
-      padding: "0.75rem",
+      padding: spacing["3"],
     },
     fontFamily: {
       heading: ["Poppins", ...fontFamily.sans],

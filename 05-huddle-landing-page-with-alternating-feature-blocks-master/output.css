@@ -1186,4 +1186,45 @@ video {
       max-width: 1280px;
     }
   }
+
+  .xl\:bg-hero-desktop {
+    background-image: url(images/bg-hero-desktop.svg);
+  }
+
+  .xl\:flex {
+    display: flex;
+  }
+
+  .xl\:items-center {
+    align-items: center;
+  }
+
+  .xl\:text-4xl {
+    font-size: 2.25rem;
+  }
+
+  .xl\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .xl\:pr-10 {
+    padding-right: 2.5rem;
+  }
+
+  .xl\:pb-16 {
+    padding-bottom: 4rem;
+  }
+
+  .xl\:text-left {
+    text-align: left;
+  }
+
+  .xl\:w-9\/20 {
+    width: 45%;
+  }
+
+  .xl\:w-11\/20 {
+    width: 55%;
+  }
 }
