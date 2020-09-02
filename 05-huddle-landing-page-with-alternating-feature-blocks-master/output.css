@@ -710,11 +710,38 @@ video {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
 }
 
+@media (min-width: 1280px) {
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 6rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
 .card__graphic {
   margin-bottom: 3rem;
   width: 91.666667%;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (min-width: 1280px) {
+  .card__graphic {
+    width: 33.333333%;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card__body {
+    text-align: left;
+    width: 50%;
+    padding-right: 2rem;
+  }
 }
 
 .card__title {
@@ -727,12 +754,24 @@ video {
   margin-bottom: 0.75rem;
 }
 
+@media (min-width: 1280px) {
+  .card__title {
+    font-size: 1.5rem;
+  }
+}
+
 .card__text {
   font-size: 0.875rem;
   --text-opacity: 1;
   color: #718096;
   color: rgba(113, 128, 150, var(--text-opacity));
   line-height: 1.625;
+}
+
+@media (min-width: 1280px) {
+  .card__text {
+    font-size: 1rem;
+  }
 }
 
 .footer-link:hover {
@@ -1218,6 +1257,10 @@ video {
     align-items: center;
   }
 
+  .xl\:order-1 {
+    order: 1;
+  }
+
   .xl\:text-4xl {
     font-size: 2.25rem;
   }
@@ -1248,12 +1291,21 @@ video {
     padding-bottom: 2rem;
   }
 
+  .xl\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .xl\:pr-10 {
     padding-right: 2.5rem;
   }
 
   .xl\:pb-16 {
     padding-bottom: 4rem;
+  }
+
+  .xl\:pt-32 {
+    padding-top: 8rem;
   }
 
   .xl\:pt-36 {

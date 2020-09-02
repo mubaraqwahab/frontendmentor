@@ -49,16 +49,47 @@
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
 }
 
+@screen xl {
+  .card {
+    @apply flex items-center justify-between pl-24 py-16;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
 .card__graphic {
   @apply mb-12 w-11/12 mx-auto;
+}
+
+@screen xl {
+  .card__graphic {
+    @apply w-2/6 m-0;
+  }
+}
+
+@screen xl {
+  .card__body {
+    @apply text-left w-3/6 pr-8;
+  }
 }
 
 .card__title {
   @apply text-xl font-semibold font-heading text-cyan-dark mb-3;
 }
 
+@screen xl {
+  .card__title {
+    @apply text-2xl;
+  }
+}
+
 .card__text {
   @apply text-sm text-gray-600 leading-relaxed;
+}
+
+@screen xl {
+  .card__text {
+    @apply text-base;
+  }
 }
 
 .footer-link:hover {
