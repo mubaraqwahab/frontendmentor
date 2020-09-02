@@ -1,8 +1,4 @@
-const {
-  fontFamily,
-  colors,
-  borderRadius,
-} = require("tailwindcss/defaultTheme");
+const { fontFamily, colors } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   future: {
@@ -14,10 +10,13 @@ module.exports = {
   },
   theme: {
     extend: {
-      backgroundImage: () => ({
+      backgroundImage: {
         "hero-mobile": "url(images/bg-hero-mobile.svg)",
         "hero-desktop": "url(images/bg-hero-desktop.svg)",
-      }),
+      },
+      borderRadius: {
+        xl: "1rem",
+      },
     },
     fontFamily: {
       heading: ["Poppins", ...fontFamily.sans],
@@ -41,10 +40,6 @@ module.exports = {
         pale: "hsl(193, 100%, 96%)",
         dark: "hsl(192, 100%, 9%)",
       },
-    },
-    borderRadius: {
-      ...borderRadius,
-      xl: "1rem",
     },
   },
   variants: {},
