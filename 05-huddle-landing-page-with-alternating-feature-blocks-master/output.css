@@ -2,10 +2,6 @@
   font-size: 18px;
 }
 
-.outline-transparent {
-  outline: 1px solid transparent;
-}
-
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -1051,6 +1047,10 @@ video {
     -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
             animation-timing-function: cubic-bezier(0,0,0.2,1);
   }
+}
+
+.outline-transparent {
+  outline: 1px solid transparent;
 }
 
 @media (min-width: 640px) {

@@ -2,10 +2,6 @@
   font-size: 18px;
 }
 
-.outline-transparent {
-  outline: 1px solid transparent;
-}
-
 @tailwind base;
 
 @tailwind components;
@@ -66,3 +62,7 @@
 }
 
 @tailwind utilities;
+
+.outline-transparent {
+  outline: 1px solid transparent;
+}
