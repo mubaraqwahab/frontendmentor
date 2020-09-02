@@ -3,36 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-
     <title>Frontend Mentor | Huddle landing page with alternating feature blocks</title>
-
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet" />
-
     <link rel="stylesheet" href="output.css" />
-
     <script src="https://kit.fontawesome.com/8d40ea811a.js" crossorigin="anonymous"></script>
   </head>
   <body class="font-body bg-white">
-    <header class="absolute top-0 inset-x-0 flex items-center justify-between px-3 py-5">
-      <img class="w-24" src="images/logo.svg" alt="Huddle" />
-      <a class="btn btn--secondary font-bold" href="">Try It Free</a>
+    <header class="absolute top-0 inset-x-0">
+      <div class="container flex items-center justify-between py-5">
+        <img class="w-24" src="images/logo.svg" alt="Huddle" />
+        <a class="btn btn--secondary font-bold" href="">Try It Free</a>
+      </div>
     </header>
-    <main class="">
+    <main>
       <!-- Hero -->
-      <section class="bg-hero-mobile bg-no-repeat bg-cover bg-cyan-pale pt-32 pb-8 px-8 text-center text-cyan-dark">
-        <h1 class="font-semibold text-2xl font-heading mb-4">Build The Community Your Fans Will Love</h1>
-        <p class="text-base mb-6">
-          Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create connections with your users as you
-          engage in genuine discussion.
-        </p>
-        <a class="btn btn--primary btn--lg mb-10" href="">Get Started For Free</a>
-        <img class="mx-auto" src="images/illustration-mockups.svg" alt="" />
+      <section class="bg-hero-mobile bg-no-repeat bg-cover bg-cyan-pale text-center text-cyan-dark">
+        <div class="container pt-32 pb-8 px-8">
+          <h1 class="font-semibold text-2xl font-heading mb-4">Build The Community Your Fans Will Love</h1>
+          <p class="text-base mb-6">
+            Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create connections with your users as you
+            engage in genuine discussion.
+          </p>
+          <a class="btn btn--primary btn--lg mb-10" href="">Get Started For Free</a>
+          <img class="mx-auto" src="images/illustration-mockups.svg" alt="" />
+        </div>
       </section>
 
-      <div class="px-4 py-12">
+      <div class="container px-4 py-12">
         <section class="card">
           <img class="card__graphic" src="images/illustration-grow-together.svg" alt="" />
           <h2 class="card__title">Grow Together</h2>
@@ -62,66 +60,68 @@
         <a class="btn btn--primary btn--lg" href="">Get Started For Free</a>
       </section>
     </main>
-    <footer class="bg-cyan-dark text-white px-3 pt-32 pb-12">
-      <img class="w-1/2 mb-6" src="images/logo-white.svg" alt="Huddle" />
-      <address class="not-italic text-sm mb-12">
-        <ul aria-label="Contact information">
-          <li class="flex mb-5">
-            <div class="w-5 flex-shrink-0 mr-3 pt-1">
-              <span class="sr-only">Location</span>
-              <img src="images/icon-location.svg" alt="" />
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-            </p>
+    <footer class="bg-cyan-dark text-white">
+      <div class="container pt-32 pb-12">
+        <img class="w-1/2 mb-6" src="images/logo-white.svg" alt="Huddle" />
+        <address class="not-italic text-sm mb-12">
+          <ul aria-label="Contact information">
+            <li class="flex mb-5">
+              <div class="w-5 flex-shrink-0 mr-3 pt-1">
+                <span class="sr-only">Location</span>
+                <img src="images/icon-location.svg" alt="" />
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+              </p>
+            </li>
+            <li class="flex mb-5 items-center">
+              <div class="w-5 flex-shrink-0 mr-3">
+                <span class="sr-only">Phone</span>
+                <img src="images/icon-phone.svg" alt="" />
+              </div>
+              <a class="footer-link" href="tel:+1-543-123-4567">+1-543-123-4567</a>
+            </li>
+            <li class="flex mb-0 items-center">
+              <div class="w-5 flex-shrink-0 mr-3">
+                <span class="sr-only">Email</span>
+                <img src="images/icon-email.svg" alt="" />
+              </div>
+              <a class="footer-link" href="mailto:example@huddle.com">example@huddle.com</a>
+            </li>
+          </ul>
+        </address>
+        <nav class="mb-12">
+          <ul>
+            <li class="mb-4"><a class="footer-link" href="">About Us</a></li>
+            <li class="mb-4"><a class="footer-link" href="">What We Do</a></li>
+            <li class="mb-4"><a class="footer-link" href="">FAQ</a></li>
+            <li class="mb-4"><a class="footer-link" href="">Career</a></li>
+            <li class="mb-4"><a class="footer-link" href="">Blog</a></li>
+            <li class="mb-4"><a class="footer-link" href="">Contact Us</a></li>
+          </ul>
+        </nav>
+        <ul aria-label="Social media" class="flex justify-center items-center text-sm mb-5">
+          <li class="mr-3">
+            <a class="footer-link footer-link--social" href="" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
           </li>
-          <li class="flex mb-5 items-center">
-            <div class="w-5 flex-shrink-0 mr-3">
-              <span class="sr-only">Phone</span>
-              <img src="images/icon-phone.svg" alt="" />
-            </div>
-            <a class="footer-link" href="tel:+1-543-123-4567">+1-543-123-4567</a>
+          <li class="mr-3">
+            <a class="footer-link footer-link--social" href="" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
           </li>
-          <li class="flex mb-0 items-center">
-            <div class="w-5 flex-shrink-0 mr-3">
-              <span class="sr-only">Email</span>
-              <img src="images/icon-email.svg" alt="" />
-            </div>
-            <a class="footer-link" href="mailto:example@huddle.com">example@huddle.com</a>
+          <li class="">
+            <a class="footer-link footer-link--social" href="" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
           </li>
         </ul>
-      </address>
-      <nav class="mb-12">
-        <ul>
-          <li class="mb-4"><a class="footer-link" href="">About Us</a></li>
-          <li class="mb-4"><a class="footer-link" href="">What We Do</a></li>
-          <li class="mb-4"><a class="footer-link" href="">FAQ</a></li>
-          <li class="mb-4"><a class="footer-link" href="">Career</a></li>
-          <li class="mb-4"><a class="footer-link" href="">Blog</a></li>
-          <li class="mb-4"><a class="footer-link" href="">Contact Us</a></li>
-        </ul>
-      </nav>
-      <ul aria-label="Social media" class="flex justify-center items-center text-sm mb-5">
-        <li class="mr-3">
-          <a class="footer-link footer-link--social" href="" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </li>
-        <li class="mr-3">
-          <a class="footer-link footer-link--social" href="" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li class="">
-          <a class="footer-link footer-link--social" href="" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </li>
-      </ul>
-      <small class="block text-center text-xs">
-        <span aria-hidden="true">&copy;</span>
-        Copyright 2018 Huddle. All rights reserved.
-      </small>
+        <small class="block text-center text-xs">
+          <span aria-hidden="true">&copy;</span>
+          Copyright 2018 Huddle. All rights reserved.
+        </small>
+      </div>
     </footer>
   </body>
 </html>

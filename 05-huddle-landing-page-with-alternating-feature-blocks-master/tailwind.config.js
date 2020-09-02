@@ -18,6 +18,10 @@ module.exports = {
         xl: "1rem",
       },
     },
+    container: {
+      center: true,
+      padding: "0.75rem",
+    },
     fontFamily: {
       heading: ["Poppins", ...fontFamily.sans],
       body: ["Open Sans", ...fontFamily.sans],
