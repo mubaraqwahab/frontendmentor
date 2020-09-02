@@ -702,77 +702,62 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
   border-radius: 1rem;
   text-align: center;
-  padding-top: 3rem;
-  padding-bottom: 2rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  margin-bottom: 2.5rem;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
 }
 
 @media (min-width: 1280px) {
   .card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 6rem;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
   }
 }
 
+/* .card--feature {
+  @apply pt-12 pb-8 px-6 mb-10;
+}
+
+@screen xl {
+  .card--feature {
+    @apply flex items-center justify-between pl-24 py-16;
+  }
+} */
+
+/*
 .card__graphic {
-  margin-bottom: 3rem;
-  width: 91.666667%;
-  margin-left: auto;
-  margin-right: auto;
+  @apply mb-12 w-11/12 mx-auto;
 }
 
-@media (min-width: 1280px) {
+@screen xl {
   .card__graphic {
-    width: 33.333333%;
-    margin: 0;
+    @apply w-2/6 m-0;
   }
-}
+} */
 
-@media (min-width: 1280px) {
+/*
+@screen xl {
   .card__body {
-    text-align: left;
-    width: 50%;
-    padding-right: 2rem;
+    @apply text-left w-3/6 pr-8;
   }
+} */
+
+/* .card__title {
+  @apply text-xl font-semibold font-heading text-cyan-dark mb-3;
 }
 
-.card__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  font-family: Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --text-opacity: 1;
-  color: hsl(192, 100%, 9%);
-  color: rgba(0, 36.71999999999999, 45.9, var(--text-opacity));
-  margin-bottom: 0.75rem;
-}
-
-@media (min-width: 1280px) {
+@screen xl {
   .card__title {
-    font-size: 1.5rem;
+    @apply text-2xl;
   }
+} */
+
+/* .card__text {
+  @apply text-sm text-gray-600 leading-relaxed;
 }
 
-.card__text {
-  font-size: 0.875rem;
-  --text-opacity: 1;
-  color: #718096;
-  color: rgba(113, 128, 150, var(--text-opacity));
-  line-height: 1.625;
-}
-
-@media (min-width: 1280px) {
+@screen xl {
   .card__text {
-    font-size: 1rem;
+    @apply text-base;
   }
-}
+} */
 
 .footer-link:hover {
   --text-opacity: 1;
@@ -900,8 +885,16 @@ video {
   font-size: 1.125rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+}
+
 .text-2xl {
   font-size: 1.5rem;
+}
+
+.leading-relaxed {
+  line-height: 1.625;
 }
 
 .mx-3 {
@@ -920,6 +913,10 @@ video {
 
 .mr-3 {
   margin-right: 0.75rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .mb-4 {
@@ -960,6 +957,11 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -981,6 +983,10 @@ video {
 
 .pb-8 {
   padding-bottom: 2rem;
+}
+
+.pt-12 {
+  padding-top: 3rem;
 }
 
 .pb-12 {
@@ -1018,6 +1024,12 @@ video {
   color: rgba(255, 255, 255, var(--text-opacity));
 }
 
+.text-gray-600 {
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+}
+
 .text-cyan-dark {
   --text-opacity: 1;
   color: hsl(192, 100%, 9%);
@@ -1038,6 +1050,10 @@ video {
 
 .w-1\/2 {
   width: 50%;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
 }
 
 @-webkit-keyframes spin {
@@ -1257,8 +1273,20 @@ video {
     align-items: center;
   }
 
+  .xl\:justify-between {
+    justify-content: space-between;
+  }
+
   .xl\:order-1 {
     order: 1;
+  }
+
+  .xl\:text-base {
+    font-size: 1rem;
+  }
+
+  .xl\:text-2xl {
+    font-size: 1.5rem;
   }
 
   .xl\:text-4xl {
@@ -1267,6 +1295,10 @@ video {
 
   .xl\:leading-snug {
     line-height: 1.375;
+  }
+
+  .xl\:m-0 {
+    margin: 0;
   }
 
   .xl\:mb-0 {
@@ -1296,12 +1328,25 @@ video {
     padding-right: 2rem;
   }
 
+  .xl\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .xl\:pr-8 {
+    padding-right: 2rem;
+  }
+
   .xl\:pr-10 {
     padding-right: 2.5rem;
   }
 
   .xl\:pb-16 {
     padding-bottom: 4rem;
+  }
+
+  .xl\:pl-24 {
+    padding-left: 6rem;
   }
 
   .xl\:pt-32 {
@@ -1318,6 +1363,14 @@ video {
 
   .xl\:w-44 {
     width: 11rem;
+  }
+
+  .xl\:w-2\/6 {
+    width: 33.333333%;
+  }
+
+  .xl\:w-3\/6 {
+    width: 50%;
   }
 
   .xl\:w-9\/20 {
