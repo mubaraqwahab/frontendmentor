@@ -701,6 +701,7 @@ video {
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
   border-radius: 1rem;
+  padding: 1rem;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
 }
 
@@ -1269,6 +1270,10 @@ video {
     margin-bottom: 2rem;
   }
 
+  .xl\:p-12 {
+    padding: 3rem;
+  }
+
   .xl\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -1284,11 +1289,6 @@ video {
     padding-right: 2rem;
   }
 
-  .xl\:py-12 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
   .xl\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -1297,11 +1297,6 @@ video {
   .xl\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
-  }
-
-  .xl\:px-24 {
-    padding-left: 6rem;
-    padding-right: 6rem;
   }
 
   .xl\:pr-8 {
