@@ -19,9 +19,9 @@ module.exports = {
       },
       width: {
         "44": "11rem",
+        "160": "40rem",
         "9/20": "45%",
         "11/20": "55%",
-        fit: "fit-content",
       },
       padding: {
         "36": "9rem",
