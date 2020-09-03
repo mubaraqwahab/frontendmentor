@@ -652,6 +652,12 @@ video {
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
+.btn:active {
+  /* Removes the overlaying (blue) highlight box on mobile
+  See https://stackoverflow.com/a/45050338/12695621 */
+  -webkit-tap-highlight-color: transparent;
+}
+
 .btn--lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -679,6 +685,13 @@ video {
     0 2px 4px -1px hsla(322, 100%, 66%, 0.16);
 }
 
+.btn--primary:hover,
+.btn--primary:active {
+  --bg-opacity: 1;
+  background-color: hsl(322, 100%, 50%);
+  background-color: rgba(255, 0, 161.49999999999994, var(--bg-opacity));
+}
+
 .btn--secondary {
   --bg-opacity: 1;
   background-color: #fff;
@@ -689,7 +702,8 @@ video {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.btn--secondary:hover {
+.btn--secondary:hover,
+.btn--secondary:active {
   --bg-opacity: 1;
   background-color: #f7fafc;
   background-color: rgba(247, 250, 252, var(--bg-opacity));

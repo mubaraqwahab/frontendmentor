@@ -41,7 +41,6 @@ module.exports = {
       bold: "700",
     },
     colors: {
-      ...colors,
       transparent: colors.transparent,
       white: colors.white,
       black: colors.black,
@@ -49,7 +48,10 @@ module.exports = {
         ...colors.gray,
         blue: "hsl(208, 11%, 55%)",
       },
-      pink: "hsl(322, 100%, 66%)",
+      pink: {
+        default: "hsl(322, 100%, 66%)",
+        dark: "hsl(322, 100%, 50%)",
+      },
       cyan: {
         pale: "hsl(193, 100%, 96%)",
         dark: "hsl(192, 100%, 9%)",
