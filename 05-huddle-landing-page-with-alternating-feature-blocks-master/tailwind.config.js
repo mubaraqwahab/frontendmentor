@@ -41,6 +41,7 @@ module.exports = {
       bold: "700",
     },
     colors: {
+      ...colors,
       transparent: colors.transparent,
       white: colors.white,
       black: colors.black,
