@@ -1,0 +1,19 @@
+{
+  "name": "06-fylo-landing-page-with-two-column-layout-master",
+  "version": "1.0.0",
+  "description": "![Design preview for the Fylo landing page with two column layout challenge](./design/desktop-preview.jpg)",
+  "main": "stylelint.config.js",
+  "scripts": {
+    "start": "nodemon --exec \"npx tailwindcss build main.css -o output.css\" -w main.css -w index.html -w tailwind.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^1.7.6"
+  },
+  "devDependencies": {
+    "stylelint-config-recommended": "^3.0.0"
+  }
+}
