@@ -550,7 +550,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /**
@@ -588,6 +588,10 @@ video {
 
 .container {
   width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
 }
 
 @media (min-width: 640px) {
@@ -612,6 +616,191 @@ video {
   .container {
     max-width: 1280px;
   }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.bg-white {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+
+.bg-blue-bright {
+  --bg-opacity: 1;
+  background-color: hsl(224, 93%, 58%);
+  background-color: rgba(48.296999999999976, 101.41859999999991, 247.50300000000001, var(--bg-opacity));
+}
+
+.bg-curve-mobile {
+  background-image: url(images/bg-curve-mobile.svg);
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.border-blue-very-dark {
+  --border-opacity: 1;
+  border-color: hsl(243, 87%, 12%);
+  border-color: rgba(6.640199999999984, 3.9779999999999935, 57.222, var(--border-opacity));
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.font-accent {
+  font-family: Raleway, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.font-body {
+  font-family: Open Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.leading-snug {
+  line-height: 1.375;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.shadow-md {
+  box-shadow: 0 5px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+}
+
+.text-blue-very-dark {
+  --text-opacity: 1;
+  color: hsl(243, 87%, 12%);
+  color: rgba(6.640199999999984, 3.9779999999999935, 57.222, var(--text-opacity));
+}
+
+.w-1\/4 {
+  width: 25%;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
+}
+
+.w-full {
+  width: 100%;
 }
 
 @-webkit-keyframes spin {
@@ -683,6 +872,10 @@ video {
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
   }
 
   @media (min-width: 640px) {
@@ -713,6 +906,10 @@ video {
 @media (min-width: 768px) {
   .md\:container {
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
   }
 
   @media (min-width: 640px) {
@@ -743,6 +940,10 @@ video {
 @media (min-width: 1024px) {
   .lg\:container {
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
   }
 
   @media (min-width: 640px) {
@@ -773,6 +974,10 @@ video {
 @media (min-width: 1280px) {
   .xl\:container {
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
   }
 
   @media (min-width: 640px) {
