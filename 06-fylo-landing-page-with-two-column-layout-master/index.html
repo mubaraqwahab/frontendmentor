@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Frontend Mentor | Fylo landing page with two column layout</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="output.css" />
   </head>
   <body class="bg-white font-body text-blue-very-dark">
@@ -24,7 +24,7 @@
 
     <main>
       <!-- Hero -->
-      <div class="container py-20 text-center">
+      <div class="container pt-20 pb-24 text-center">
         <img src="images/illustration-1.svg" alt="" class="mb-10 mx-auto w-11/12" />
         <div>
           <h1 class="font-accent font-bold text-2xl leading-snug mb-5">All your files in one secure location, accessible anywhere.</h1>
@@ -46,22 +46,28 @@
       </div>
 
       <section class="bg-curve-mobile bg-no-repeat bg-cover bg-center">
-        <div class="container py-20 text-center">
-          <img src="images/illustration-2.svg" alt="" />
+        <div class="container py-24">
+          <img class="pb-20" src="images/illustration-2.svg" alt="" />
           <div>
-            <h2>Stay productive, wherever you are</h2>
-            <p>Never let location be an issue when accessing your files. Fylo has you covered for all of your file storage needs.</p>
-            <p>Securely share files and folders with friends, family and colleagues for live collaboration. No email attachments required!</p>
-            <a href="#0">See how Fylo works</a>
-            <blockquote>
-              <p>
+            <h2 class="font-accent font-bold text-center text-lg mb-8">Stay productive, wherever you are</h2>
+            <p class="text-left text-gray-700 mb-6">
+              Never let location be an issue when accessing your files. Fylo has you covered for all of your file storage needs.
+            </p>
+            <p class="text-left text-gray-700 mb-10">
+              Securely share files and folders with friends, family and colleagues for live collaboration. No email attachments required!
+            </p>
+            <div class="mb-12 text-center">
+              <a href="#0" class="inline-block py-1 text-cyan border-b border-cyan">See how Fylo works</a>
+            </div>
+            <blockquote class="bg-white w-11/12 mx-auto p-6 rounded text-sm shadow-box before:icon-quotes">
+              <p class="mb-4 leading-relaxed">
                 Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has become a well-oiled
                 collaboration machine.
               </p>
-              <footer>
-                <img src="images/avatar-testimonial.jpg" alt="..." />
-                <div>
-                  <b>Kyle Burton</b>
+              <footer class="flex items-center">
+                <img src="images/avatar-testimonial.jpg" alt="..." class="rounded-full h-10 w-10 mr-2" />
+                <div class="leading-tight">
+                  <b class="block font-bold">Kyle Burton</b>
                   <small>Founder & CEO, Huddle</small>
                 </div>
               </footer>

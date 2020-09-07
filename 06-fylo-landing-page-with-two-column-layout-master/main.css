@@ -3,3 +3,9 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.before\:icon-quotes::before {
+  content: "";
+  background-image: url(images/icon-quotes.svg);
+  @apply inline-block mb-1 w-4 h-4 bg-contain bg-no-repeat;
+}

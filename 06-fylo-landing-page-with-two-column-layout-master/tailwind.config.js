@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       boxShadow: {
         md: "0 5px 3px 0 rgba(0, 0, 0, 0.05)",
+        box: "0 0px 10px 5px rgba(0, 0, 0, 0.05)",
       },
     },
     container: {
