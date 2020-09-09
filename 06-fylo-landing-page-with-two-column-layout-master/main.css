@@ -2,6 +2,34 @@
 
 @tailwind components;
 
+.cta {
+  @apply block w-full rounded py-3 px-5 border border-transparent shadow-md text-base;
+}
+
+.cta:focus {
+  @apply outline-none shadow-outline;
+}
+
+.cta--sm {
+  @apply rounded-sm py-2 px-3 shadow text-sm;
+}
+
+.cta--input {
+  @apply bg-white text-blue-very-dark;
+}
+
+.cta--btn {
+  @apply bg-blue-bright text-white;
+}
+
+.cta--btn:hover {
+  @apply bg-blue-bright-dark;
+}
+
+.cta--btn:active {
+  @apply bg-blue-bright-dark;
+}
+
 @tailwind utilities;
 
 .bg-curve {

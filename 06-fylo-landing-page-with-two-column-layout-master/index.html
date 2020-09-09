@@ -34,13 +34,8 @@
           </p>
           <form class="font-accent">
             <label for="heroEmail" class="sr-only">Email</label>
-            <input
-              class="block w-full border border-blue-very-dark shadow-md rounded py-3 px-5 mb-4"
-              id="heroEmail"
-              type="email"
-              placeholder="Enter your email.."
-            />
-            <button class="block w-full bg-blue-bright text-white shadow-md rounded py-3 px-5" type="submit">Get Started</button>
+            <input class="cta cta--input border-blue-very-dark mb-4" id="heroEmail" type="email" placeholder="Enter your email.." />
+            <button class="cta cta--btn" type="submit">Get Started</button>
           </form>
         </div>
       </div>
@@ -75,17 +70,19 @@
           </div>
         </div>
       </section>
-      <section>
-        <h2>Get early access today</h2>
-        <p>
-          It only takes a minute to sign up and our free starter tier is extremely generous. If you have any questions, our support team would be
-          happy to help you.
-        </p>
-        <form>
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="email@example.com" />
-          <button type="submit">Get Started For Free</button>
-        </form>
+      <section class="bg-blue-desaturated text-white">
+        <div class="container px-6 pt-16 pb-20 text-center">
+          <h2 class="font-accent font-bold text-lg mb-6">Get early access today</h2>
+          <p class="mb-8">
+            It only takes a minute to sign up and our free starter tier is extremely generous. If you have any questions, our support team would be
+            happy to help you.
+          </p>
+          <form class="font-accent w-5/6 mx-auto">
+            <label for="email" class="sr-only">Email</label>
+            <input class="cta cta--sm cta--input mb-2" id="email" type="email" placeholder="email@example.com" />
+            <button class="cta cta--sm cta--btn" type="submit">Get Started For Free</button>
+          </form>
+        </div>
       </section>
     </main>
     <footer>

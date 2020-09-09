@@ -17,6 +17,7 @@ module.exports = {
       padding: spacing["5"],
     },
     colors: {
+      transparent: colors.transparent,
       white: colors.white,
       gray: {
         ...colors.gray,
@@ -27,6 +28,7 @@ module.exports = {
         "very-dark": "hsl(243, 87%, 12%)",
         desaturated: "hsl(238, 22%, 44%)",
         bright: "hsl(224, 93%, 58%)",
+        "bright-dark": "hsl(224, 93%, 48%)",
       },
       cyan: "hsl(170, 45%, 43%)",
     },
@@ -39,7 +41,9 @@ module.exports = {
       bold: "700",
     },
   },
-  variants: {},
+  variants: {
+    backgroundColor: ["hover", "active", "focus"],
+  },
   future: {
     removeDeprecatedGapUtilities: true,
   },
