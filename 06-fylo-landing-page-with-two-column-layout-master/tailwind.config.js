@@ -41,9 +41,7 @@ module.exports = {
       bold: "700",
     },
   },
-  variants: {
-    backgroundColor: ["hover", "active", "focus"],
-  },
+  variants: {},
   future: {
     removeDeprecatedGapUtilities: true,
   },

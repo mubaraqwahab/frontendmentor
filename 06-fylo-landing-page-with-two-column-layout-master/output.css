@@ -695,6 +695,12 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
 }
 
+.bg-blue-very-dark {
+  --bg-opacity: 1;
+  background-color: hsl(243, 87%, 12%);
+  background-color: rgba(6.640199999999984, 3.9779999999999935, 57.222, var(--bg-opacity));
+}
+
 .bg-blue-desaturated {
   --bg-opacity: 1;
   background-color: hsl(238, 22%, 44%);
