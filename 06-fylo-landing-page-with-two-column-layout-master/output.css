@@ -941,9 +941,9 @@ video {
 
 .bg-curve {
   background-image: url(images/bg-curve-mobile.svg),
-      url(images/bg-curve-mobile.svg);
+    linear-gradient(#f8f8fe, #f8f8fe);
   background-size: contain, cover;
-  background-position: top left, top 40px center;
+  background-position: top left, top 50px center;
   background-repeat: no-repeat;
 }
 
