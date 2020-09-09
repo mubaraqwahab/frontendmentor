@@ -4,6 +4,22 @@
 
 @tailwind utilities;
 
+@variants responsive {
+  .bg-curve {
+    background-image: url(images/bg-curve-mobile.svg),
+      url(images/bg-curve-mobile.svg);
+    background-size: contain, cover;
+    background-position: top left, top 40px center;
+    @apply bg-no-repeat;
+  }
+}
+
+.after\:icon-arrow::after {
+  content: "";
+  background-image: url(images/icon-arrow.svg);
+  @apply inline-block ml-2 w-6 h-6 bg-contain bg-no-repeat;
+}
+
 .before\:icon-quotes::before {
   content: "";
   background-image: url(images/icon-quotes.svg);

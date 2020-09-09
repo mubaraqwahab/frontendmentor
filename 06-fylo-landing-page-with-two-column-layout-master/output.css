@@ -642,22 +642,6 @@ video {
   background-color: rgba(48.296999999999976, 101.41859999999991, 247.50300000000001, var(--bg-opacity));
 }
 
-.bg-curve-mobile {
-  background-image: url(images/bg-curve-mobile.svg);
-}
-
-.bg-center {
-  background-position: center;
-}
-
-.bg-no-repeat {
-  background-repeat: no-repeat;
-}
-
-.bg-cover {
-  background-size: cover;
-}
-
 .border-blue-very-dark {
   --border-opacity: 1;
   border-color: hsl(243, 87%, 12%);
@@ -696,6 +680,10 @@ video {
 
 .flex {
   display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
 }
 
 .items-center {
@@ -949,6 +937,25 @@ video {
     -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
             animation-timing-function: cubic-bezier(0,0,0.2,1);
   }
+}
+
+.bg-curve {
+  background-image: url(images/bg-curve-mobile.svg),
+      url(images/bg-curve-mobile.svg);
+  background-size: contain, cover;
+  background-position: top left, top 40px center;
+  background-repeat: no-repeat;
+}
+
+.after\:icon-arrow::after {
+  content: "";
+  background-image: url(images/icon-arrow.svg);
+  display: inline-block;
+  margin-left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .before\:icon-quotes::before {

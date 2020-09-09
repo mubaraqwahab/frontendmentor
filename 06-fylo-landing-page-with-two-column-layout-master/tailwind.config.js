@@ -30,10 +30,6 @@ module.exports = {
       },
       cyan: "hsl(170, 45%, 43%)",
     },
-    backgroundImage: {
-      "curve-mobile": "url(images/bg-curve-mobile.svg)",
-      "curve-desktop": "url(images/bg-curve-desktop.svg)",
-    },
     fontFamily: {
       accent: ["Raleway", ...fontFamily.sans],
       body: ["Open Sans", ...fontFamily.sans],
