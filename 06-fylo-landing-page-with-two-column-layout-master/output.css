@@ -747,6 +747,14 @@ video {
   display: inline-flex;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .items-center {
   align-items: center;
 }
@@ -860,6 +868,11 @@ video {
   padding-right: 1.5rem;
 }
 
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
@@ -917,6 +930,10 @@ video {
   color: rgba(60.30750000000001, 158.99249999999998, 142.545, var(--text-opacity));
 }
 
+.not-italic {
+  font-style: normal;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -931,6 +948,10 @@ video {
 
 .w-11\/12 {
   width: 91.666667%;
+}
+
+.w-full {
+  width: 100%;
 }
 
 @-webkit-keyframes spin {
