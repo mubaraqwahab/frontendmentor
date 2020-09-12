@@ -30,6 +30,18 @@
   @apply bg-blue-bright-dark;
 }
 
+.footer-link:hover {
+  @apply text-gray-400 border-gray-400;
+}
+
+.footer-link:focus {
+  @apply outline-transparent shadow-outline;
+}
+
+.footer-link--social {
+  @apply inline-flex items-center justify-center w-8 h-8 p-2 border-white border rounded-full;
+}
+
 @tailwind utilities;
 
 .bg-curve {
@@ -50,4 +62,8 @@
   content: "";
   background-image: url(images/icon-quotes.svg);
   @apply inline-block mb-1 w-4 h-4 bg-contain bg-no-repeat;
+}
+
+.outline-transparent {
+  outline: 1px solid transparent;
 }

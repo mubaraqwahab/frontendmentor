@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="output.css" />
+    <script src="https://kit.fontawesome.com/8d40ea811a.js" crossorigin="anonymous"></script>
   </head>
   <body class="bg-white font-body text-blue-very-dark">
     <header>
@@ -87,38 +88,44 @@
     </main>
     <footer class="bg-blue-very-dark text-white">
       <div class="container px-6 py-16 flex flex-col flex-wrap">
-        <div class="w-full mb-6">
-          <img src="images/logo-white.svg" alt="Fylo" />
+        <div class="w-full mb-10">
+          <img class="w-1/2" src="images/logo-white.svg" alt="Fylo" />
         </div>
-        <address class="not-italic mb-8">
-          <div>
-            <span>Phone</span>
-            <img src="images/icon-phone.svg" alt="" />
-            <a href="tel:+1-543-123-4567">+1-543-123-4567</a>
+        <address class="not-italic mb-12">
+          <div class="flex items-center mb-4">
+            <span class="sr-only">Phone</span>
+            <img class="mr-5" src="images/icon-phone.svg" alt="" />
+            <a class="footer-link" href="tel:+1-543-123-4567">+1-543-123-4567</a>
           </div>
-          <div>
-            <span>Email</span>
-            <img src="images/icon-email.svg" alt="" />
-            <a href="mailto:example@fylo.com">example@fylo.com</a>
+          <div class="flex items-center">
+            <span class="sr-only">Email</span>
+            <img class="mr-5" src="images/icon-email.svg" alt="" />
+            <a class="footer-link" href="mailto:example@fylo.com">example@fylo.com</a>
           </div>
         </address>
         <nav aria-label="Company">
-          <ul class="mb-8">
-            <li><a href="#0">About Us</a></li>
-            <li><a href="#0">Jobs</a></li>
-            <li><a href="#0">Press</a></li>
-            <li><a href="#0">Blog</a></li>
+          <ul class="mb-12">
+            <li class="mb-4"><a class="footer-link" href="#0">About Us</a></li>
+            <li class="mb-4"><a class="footer-link" href="#0">Jobs</a></li>
+            <li class="mb-4"><a class="footer-link" href="#0">Press</a></li>
+            <li class=""><a class="footer-link" href="#0">Blog</a></li>
           </ul>
-          <ul class="mb-8">
-            <li><a href="#0">Contact Us</a></li>
-            <li><a href="#0">Terms</a></li>
-            <li><a href="#0">Privacy</a></li>
+          <ul class="mb-12">
+            <li class="mb-4"><a class="footer-link" href="#0">Contact Us</a></li>
+            <li class="mb-4"><a class="footer-link" href="#0">Terms</a></li>
+            <li class=""><a class="footer-link" href="#0">Privacy</a></li>
           </ul>
         </nav>
-        <ul>
-          <li><a href="#0" aria-label="Facebook"></a></li>
-          <li><a href="#0" aria-label="Twitter"></a></li>
-          <li><a href="#0" aria-label="Instagram"></a></li>
+        <ul class="flex items-center justify-center">
+          <li class="mr-3">
+            <a class="footer-link footer-link--social" href="#0" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </li>
+          <li class="mr-3">
+            <a class="footer-link footer-link--social" href="#0" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li>
+            <a class="footer-link footer-link--social" href="#0" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </li>
         </ul>
       </div>
     </footer>
