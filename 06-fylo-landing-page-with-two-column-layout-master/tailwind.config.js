@@ -11,6 +11,9 @@ module.exports = {
         md: "0 5px 3px 0 rgba(0, 0, 0, 0.05)",
         box: "0 0px 10px 5px rgba(0, 0, 0, 0.05)",
       },
+      width: {
+        "1/8": "calc(100% / 8)",
+      },
     },
     container: {
       center: true,
