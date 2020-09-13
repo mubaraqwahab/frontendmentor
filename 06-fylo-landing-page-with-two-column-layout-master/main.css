@@ -1,5 +1,14 @@
 @tailwind base;
 
+/* Reduce animations for those who want it. See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+  }
+}
+
 @tailwind components;
 
 .cta {
@@ -54,9 +63,7 @@
 .bg-curve {
   background-color: #f8f8fe;
   background-image: url(images/bg-curve-mobile.svg);
-  background-size: contain;
-  /* background-position: top left, top 50px center; */
-  @apply bg-no-repeat;
+  @apply bg-contain bg-no-repeat;
 }
 
 @screen lg {
@@ -68,7 +75,8 @@
 .after\:icon-arrow::after {
   content: "";
   background-image: url(images/icon-arrow.svg);
-  @apply inline-block ml-2 w-6 h-6 bg-contain bg-no-repeat;
+  transition-property: margin-left;
+  @apply inline-block ml-2 w-6 h-6 bg-contain bg-no-repeat duration-200;
 }
 
 .after\:icon-arrow:hover::after {

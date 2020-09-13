@@ -586,6 +586,16 @@ video {
   height: auto;
 }
 
+/* Reduce animations for those who want it. See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
+
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+  }
+}
+
 .container {
   width: 100%;
   margin-right: auto;
@@ -1021,6 +1031,14 @@ video {
   width: 100%;
 }
 
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
 @-webkit-keyframes spin {
   to {
     transform: rotate(360deg);
@@ -1091,7 +1109,6 @@ video {
   background-color: #f8f8fe;
   background-image: url(images/bg-curve-mobile.svg);
   background-size: contain;
-  /* background-position: top left, top 50px center; */
   background-repeat: no-repeat;
 }
 
@@ -1104,12 +1121,14 @@ video {
 .after\:icon-arrow::after {
   content: "";
   background-image: url(images/icon-arrow.svg);
+  transition-property: margin-left;
   display: inline-block;
   margin-left: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
   background-size: contain;
   background-repeat: no-repeat;
+  transition-duration: 200ms;
 }
 
 .after\:icon-arrow:hover::after {
