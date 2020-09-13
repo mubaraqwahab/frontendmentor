@@ -626,10 +626,10 @@ video {
   padding-bottom: 0.75rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  border-width: 1px;
-  border-color: transparent;
   box-shadow: 0 5px 3px 0 rgba(0, 0, 0, 0.05);
   font-size: 1rem;
+  border-width: 1px;
+  border-color: transparent;
 }
 
 .cta:focus {
@@ -646,6 +646,8 @@ video {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   font-size: 0.875rem;
 }
+
+/* Use this to undo the .cta--sm variant */
 
 .cta--input {
   --bg-opacity: 1;
@@ -1155,6 +1157,8 @@ video {
       max-width: 1280px;
     }
   }
+
+  /* Use this to undo the .cta--sm variant */
 }
 
 @media (min-width: 768px) {
@@ -1189,6 +1193,8 @@ video {
       max-width: 1280px;
     }
   }
+
+  /* Use this to undo the .cta--sm variant */
 }
 
 @media (min-width: 1024px) {
@@ -1222,6 +1228,18 @@ video {
     .lg\:container {
       max-width: 1280px;
     }
+  }
+
+  /* Use this to undo the .cta--sm variant */
+
+  .lg\:cta--md {
+    border-radius: 0.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    box-shadow: 0 5px 3px 0 rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
   }
 
   .lg\:rounded-md {
@@ -1293,6 +1311,10 @@ video {
     margin-right: 1rem;
   }
 
+  .lg\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
   .lg\:mr-6 {
     margin-right: 1.5rem;
   }
@@ -1301,9 +1323,18 @@ video {
     margin-bottom: 1.5rem;
   }
 
+  .lg\:mr-8 {
+    margin-right: 2rem;
+  }
+
   .lg\:py-12 {
     padding-top: 3rem;
     padding-bottom: 3rem;
+  }
+
+  .lg\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .lg\:pb-0 {
@@ -1391,4 +1422,6 @@ video {
       max-width: 1280px;
     }
   }
+
+  /* Use this to undo the .cta--sm variant */
 }

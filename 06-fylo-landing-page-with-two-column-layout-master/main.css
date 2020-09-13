@@ -3,7 +3,7 @@
 @tailwind components;
 
 .cta {
-  @apply block w-full rounded py-3 px-5 border border-transparent shadow-md text-base;
+  @apply block w-full rounded py-3 px-5 shadow-md text-base border border-transparent;
 }
 
 .cta:focus {
@@ -12,6 +12,13 @@
 
 .cta--sm {
   @apply rounded-sm py-2 px-3 shadow text-sm;
+}
+
+@responsive {
+  /* Use this to undo the .cta--sm variant */
+  .cta--md {
+    @apply rounded py-3 px-5 shadow-md text-base;
+  }
 }
 
 .cta--input {
