@@ -747,6 +747,12 @@ video {
   border-color: rgba(60.30750000000001, 158.99249999999998, 142.545, var(--border-opacity));
 }
 
+.hover\:border-cyan-dark:hover {
+  --border-opacity: 1;
+  border-color: hsl(170, 45%, 33%);
+  border-color: rgba(46.28250000000001, 122.0175, 109.395, var(--border-opacity));
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -842,10 +848,6 @@ video {
 
 .mr-1 {
   margin-right: 0.25rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .mb-2 {
@@ -970,6 +972,12 @@ video {
   color: rgba(60.30750000000001, 158.99249999999998, 142.545, var(--text-opacity));
 }
 
+.hover\:text-cyan-dark:hover {
+  --text-opacity: 1;
+  color: hsl(170, 45%, 33%);
+  color: rgba(46.28250000000001, 122.0175, 109.395, var(--text-opacity));
+}
+
 .not-italic {
   font-style: normal;
 }
@@ -1072,11 +1080,17 @@ video {
 }
 
 .bg-curve {
-  background-image: url(images/bg-curve-mobile.svg),
-    linear-gradient(#f8f8fe, #f8f8fe);
-  background-size: contain, cover;
-  background-position: top left, top 50px center;
+  background-color: #f8f8fe;
+  background-image: url(images/bg-curve-mobile.svg);
+  background-size: contain;
+  /* background-position: top left, top 50px center; */
   background-repeat: no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .bg-curve {
+    background-image: url(images/bg-curve-desktop.svg);
+  }
 }
 
 .after\:icon-arrow::after {
@@ -1088,6 +1102,10 @@ video {
   height: 1.5rem;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.after\:icon-arrow:hover::after {
+  margin-left: 0.75rem;
 }
 
 .before\:icon-quotes::before {
@@ -1206,6 +1224,10 @@ video {
     }
   }
 
+  .lg\:rounded-md {
+    border-radius: 0.375rem;
+  }
+
   .lg\:flex {
     display: flex;
   }
@@ -1246,12 +1268,21 @@ video {
     font-size: 1.125rem;
   }
 
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+  }
+
   .lg\:text-4xl {
     font-size: 2.25rem;
   }
 
   .lg\:m-0 {
     margin: 0;
+  }
+
+  .lg\:mx-0 {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .lg\:mb-0 {
@@ -1266,17 +1297,33 @@ video {
     margin-right: 1.5rem;
   }
 
+  .lg\:mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
   .lg\:py-12 {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
 
-  .lg\:pt-12 {
-    padding-top: 3rem;
+  .lg\:pb-0 {
+    padding-bottom: 0;
+  }
+
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .lg\:pr-12 {
     padding-right: 3rem;
+  }
+
+  .lg\:pl-12 {
+    padding-left: 3rem;
+  }
+
+  .lg\:pb-36 {
+    padding-bottom: 9rem;
   }
 
   .lg\:text-left {

@@ -15,6 +15,9 @@ module.exports = {
         "1/8": "12.5%",
         "1/10": "10%",
       },
+      padding: {
+        "36": "9rem",
+      },
     },
     container: {
       center: true,
@@ -34,7 +37,10 @@ module.exports = {
         bright: "hsl(224, 93%, 58%)",
         "bright-dark": "hsl(224, 93%, 48%)",
       },
-      cyan: "hsl(170, 45%, 43%)",
+      cyan: {
+        default: "hsl(170, 45%, 43%)",
+        dark: "hsl(170, 45%, 33%)",
+      },
     },
     fontFamily: {
       accent: ["Raleway", ...fontFamily.sans],

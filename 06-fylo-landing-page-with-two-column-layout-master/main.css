@@ -45,17 +45,27 @@
 @tailwind utilities;
 
 .bg-curve {
-  background-image: url(images/bg-curve-mobile.svg),
-    linear-gradient(#f8f8fe, #f8f8fe);
-  background-size: contain, cover;
-  background-position: top left, top 50px center;
+  background-color: #f8f8fe;
+  background-image: url(images/bg-curve-mobile.svg);
+  background-size: contain;
+  /* background-position: top left, top 50px center; */
   @apply bg-no-repeat;
+}
+
+@screen lg {
+  .bg-curve {
+    background-image: url(images/bg-curve-desktop.svg);
+  }
 }
 
 .after\:icon-arrow::after {
   content: "";
   background-image: url(images/icon-arrow.svg);
   @apply inline-block ml-2 w-6 h-6 bg-contain bg-no-repeat;
+}
+
+.after\:icon-arrow:hover::after {
+  @apply ml-3;
 }
 
 .before\:icon-quotes::before {
