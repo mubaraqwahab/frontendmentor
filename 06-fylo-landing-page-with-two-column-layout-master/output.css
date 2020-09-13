@@ -737,6 +737,12 @@ video {
   background-color: rgba(87.51600000000002, 89.1616, 136.884, var(--bg-opacity));
 }
 
+.hover\:bg-gray-200:hover {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+}
+
 .border-blue-very-dark {
   --border-opacity: 1;
   border-color: hsl(243, 87%, 12%);
