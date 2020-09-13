@@ -1031,6 +1031,12 @@ video {
   width: 100%;
 }
 
+.w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .transition-colors {
   transition-property: background-color, border-color, color, fill, stroke;
 }

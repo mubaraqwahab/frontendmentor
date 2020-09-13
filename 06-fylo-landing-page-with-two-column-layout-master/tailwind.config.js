@@ -14,6 +14,7 @@ module.exports = {
       width: {
         "1/8": "12.5%",
         "1/10": "10%",
+        fit: "fit-content",
       },
       minWidth: {
         "3/7": ((3 * 100) / 7).toFixed(6) + "%",
