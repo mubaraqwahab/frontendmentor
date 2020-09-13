@@ -737,12 +737,6 @@ video {
   background-color: rgba(87.51600000000002, 89.1616, 136.884, var(--bg-opacity));
 }
 
-.border-white {
-  --border-opacity: 1;
-  border-color: #fff;
-  border-color: rgba(255, 255, 255, var(--border-opacity));
-}
-
 .border-blue-very-dark {
   --border-opacity: 1;
   border-color: hsl(243, 87%, 12%);
@@ -769,16 +763,8 @@ video {
   border-radius: 9999px;
 }
 
-.border-r {
-  border-right-width: 1px;
-}
-
 .border-b {
   border-bottom-width: 1px;
-}
-
-.border-l {
-  border-left-width: 1px;
 }
 
 .block {
