@@ -1327,6 +1327,10 @@ video {
     margin-right: 2rem;
   }
 
+  .lg\:min-w-3\/7 {
+    min-width: 42.857143%;
+  }
+
   .lg\:py-12 {
     padding-top: 3rem;
     padding-bottom: 3rem;
@@ -1357,8 +1361,16 @@ video {
     padding-bottom: 9rem;
   }
 
+  .lg\:pt-40 {
+    padding-top: 10rem;
+  }
+
   .lg\:text-left {
     text-align: left;
+  }
+
+  .lg\:w-auto {
+    width: auto;
   }
 
   .lg\:w-1\/2 {
