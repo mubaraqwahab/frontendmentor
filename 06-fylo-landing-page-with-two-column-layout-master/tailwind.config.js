@@ -12,7 +12,8 @@ module.exports = {
         box: "0 0px 10px 5px rgba(0, 0, 0, 0.05)",
       },
       width: {
-        "1/8": "calc(100% / 8)",
+        "1/8": "12.5%",
+        "1/10": "10%",
       },
     },
     container: {
