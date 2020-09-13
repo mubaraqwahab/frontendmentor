@@ -21,6 +21,9 @@ module.exports = {
       padding: {
         "36": "9rem",
       },
+      flexGrow: {
+        "2": "2",
+      },
     },
     container: {
       center: true,
