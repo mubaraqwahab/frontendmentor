@@ -1,0 +1,21 @@
+{
+  "name": "07-clipboard-landing-page-master",
+  "version": "1.0.0",
+  "description": "![Design preview for the Clipboard landing page coding challenge](./design/desktop-preview.jpg)",
+  "main": "postcss.config.js",
+  "scripts": {
+    "start": "postcss main.css --output output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "cssnano": "^4.1.10",
+    "tailwindcss": "^1.8.10"
+  },
+  "devDependencies": {
+    "stylelint-config-recommended": "^3.0.0"
+  }
+}
