@@ -8,18 +8,16 @@
 # See https://stackoverflow.com/a/23930212/12695621
 read -r -d '' USAGE << EOM
 Usage:
-  tailwind-starter [directory]
+  tailwind-starter <directory>
   tailwind-starter [-h|--help]
 EOM
 
 
-# Show usage message if help flag -h is given
-if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+# Show usage message if no arg is given or help flag -h (or --help) is given
+if [ -z "$@" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]
 then
   echo "$USAGE" && exit 0
-# The first arg should be a path to a directory
-elif [ ! -z "$@" ]
-then
+else
   # Create the directory if it doesn't exist
   mkdir -p $1
   cd $1
