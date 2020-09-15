@@ -64,10 +64,17 @@ echo "module.exports = {
 
 # Create Tailwind .css source file
 echo "@tailwind base;
-
 @tailwind components;
+@tailwind utilities;
 
-@tailwind utilities;" > main.css
+@layer base {
+}
+
+@layer components {
+}
+
+@layer utilities {
+}" > main.css
 
 
 # Disable VSCode's CSS lint
@@ -88,6 +95,7 @@ module.exports = {
         ignoreAtRules: [
           \"tailwind\",
           \"apply\",
+          \"layer\",
           \"variants\",
           \"responsive\",
           \"screen\",
@@ -96,6 +104,7 @@ module.exports = {
     ],
     \"declaration-block-trailing-semicolon\": null,
     \"no-descending-specificity\": null,
+    \"no-duplicate-selectors\": null,
   },
 };" > stylelint.config.js
 
