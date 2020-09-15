@@ -3,7 +3,7 @@ const { colors, fontFamily, fontWeight } = require("tailwindcss/defaultTheme");
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
+    // purgeLayersByDefault: true,
   },
   purge: {
     enabled: true,
@@ -22,6 +22,10 @@ module.exports = {
       },
       "cyan-strong": "hsl(171, 66%, 44%)",
       "blue-light": "hsl(233, 100%, 69%)",
+    },
+    container: {
+      center: true,
+      padding: "1rem",
     },
     fontFamily: {
       sans: ["Bai Jamjuree", ...fontFamily.sans],
