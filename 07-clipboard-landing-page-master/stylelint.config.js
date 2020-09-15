@@ -8,6 +8,7 @@ module.exports = {
         ignoreAtRules: [
           "tailwind",
           "apply",
+          "layer",
           "variants",
           "responsive",
           "screen",
@@ -16,5 +17,7 @@ module.exports = {
     ],
     "declaration-block-trailing-semicolon": null,
     "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
+    "block-no-empty": null,
   },
 };
