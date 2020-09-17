@@ -3,10 +3,10 @@ const { colors, fontFamily, fontWeight } = require("tailwindcss/defaultTheme");
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
+    // purgeLayersByDefault: true,
   },
   purge: {
-    enabled: true,
+    enabled: false,
     content: ["./*.html"],
   },
   theme: {
@@ -31,7 +31,10 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: "1.5rem",
+      padding: {
+        default: "1.5rem",
+        lg: "4rem",
+      },
     },
     fontFamily: {
       sans: ["Bai Jamjuree", ...fontFamily.sans],

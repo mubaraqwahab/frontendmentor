@@ -25,9 +25,29 @@
     @apply text-xl mb-3;
   }
 
+  @screen lg {
+    .heading--1 {
+      @apply text-4xl;
+    }
+
+    .heading--2 {
+      @apply text-3xl;
+    }
+
+    .heading--3 {
+      @apply text-2xl;
+    }
+  }
+
   .cta {
-    @apply block text-white text-lg p-3 shadow-lg rounded-full select-none;
+    @apply block text-white text-lg px-8 py-3 shadow-lg rounded-full select-none;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  @screen lg {
+    .cta {
+      @apply inline-block;
+    }
   }
 
   .cta:focus {
@@ -57,6 +77,12 @@
   .bg-header {
     background-image: url(images/bg-header-mobile.png);
     @apply bg-no-repeat;
+  }
+
+  @screen lg {
+    .bg-header {
+      background-image: url(images/bg-header-desktop.png);
+    }
   }
 
   .outline-transparent {
