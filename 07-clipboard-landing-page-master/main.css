@@ -9,7 +9,57 @@
 }
 
 @layer components {
+  .heading {
+    @apply font-semibold leading-tight text-gray-blue-dark;
+  }
+
+  .heading--1 {
+    @apply text-3xl mb-4;
+  }
+
+  .heading--2 {
+    @apply text-2xl mb-4;
+  }
+
+  .heading--3 {
+    @apply text-xl mb-3;
+  }
+
+  .cta {
+    @apply block text-white text-lg p-3 shadow-lg rounded-full select-none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cta:focus {
+    @apply outline-transparent shadow-outline;
+  }
+
+  .cta--cyan {
+    @apply bg-cyan-strong;
+  }
+
+  .cta--cyan:hover,
+  .cta--cyan:active {
+    @apply bg-cyan-stronger;
+  }
+
+  .cta--blue {
+    @apply bg-blue-light;
+  }
+
+  .cta--blue:hover,
+  .cta--blue:active {
+    @apply bg-blue-dark;
+  }
 }
 
 @layer utilities {
+  .bg-header {
+    background-image: url(images/bg-header-mobile.png);
+    @apply bg-no-repeat;
+  }
+
+  .outline-transparent {
+    outline: 1px solid transparent;
+  }
 }
