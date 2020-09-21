@@ -1,6 +1,5 @@
-#!/usr/bin/env node
-
 /**
+ * Tidy README
  * This script updates a Frontend Mentor challenge's README.
  * It moves most of the content into a <details> element
  */
