@@ -79,7 +79,7 @@
     @apply bg-no-repeat;
   }
 
-  @screen lg {
+  @screen md {
     .bg-header {
       background-image: url(images/bg-header-desktop.png);
     }
@@ -87,5 +87,15 @@
 
   .outline-transparent {
     outline: 1px solid transparent;
+  }
+
+  @responsive {
+    .col-count-3 {
+      column-count: 3;
+    }
+
+    .col-gap-2 {
+      column-gap: 2rem;
+    }
   }
 }

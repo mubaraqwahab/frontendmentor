@@ -14,6 +14,9 @@ module.exports = {
       padding: {
         "28": "7rem",
       },
+      flexGrow: {
+        "3": "3",
+      },
     },
     colors: {
       transparent: colors.transparent,
