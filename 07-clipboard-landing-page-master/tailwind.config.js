@@ -18,6 +18,9 @@ module.exports = {
         "2": "2",
         "3": "3",
       },
+      width: {
+        "3/10": "30%",
+      },
     },
     colors: {
       transparent: colors.transparent,
