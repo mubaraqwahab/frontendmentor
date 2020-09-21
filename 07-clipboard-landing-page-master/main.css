@@ -76,10 +76,11 @@
 @layer utilities {
   .bg-header {
     background-image: url(images/bg-header-mobile.png);
-    @apply bg-no-repeat;
+    background-position: top center;
+    @apply bg-no-repeat bg-contain;
   }
 
-  @screen md {
+  @screen lg {
     .bg-header {
       background-image: url(images/bg-header-desktop.png);
     }

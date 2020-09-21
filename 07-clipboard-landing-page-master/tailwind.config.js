@@ -3,10 +3,10 @@ const { colors, fontFamily, fontWeight } = require("tailwindcss/defaultTheme");
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
+    purgeLayersByDefault: true,
   },
   purge: {
-    enabled: false,
+    enabled: true,
     content: ["./*.html"],
   },
   theme: {
