@@ -15,6 +15,7 @@ module.exports = {
         "28": "7rem",
       },
       flexGrow: {
+        "2": "2",
         "3": "3",
       },
     },
