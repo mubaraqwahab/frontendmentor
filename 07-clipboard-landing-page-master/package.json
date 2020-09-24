@@ -5,6 +5,7 @@
   "main": "postcss.config.js",
   "scripts": {
     "start": "postcss main.css --output output.css --watch",
+    "build": "NODE_ENV=production postcss main.css --output output.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
