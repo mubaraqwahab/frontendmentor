@@ -71,6 +71,19 @@
   .cta--blue:active {
     @apply bg-blue-dark;
   }
+
+  @screen lg {
+    .img-stretched-half-screen-lg {
+      position: relative;
+      left: 50%;
+      /* The +2vw here just makes it a little bigger than 50vw. */
+      width: 52vw;
+      /* The -1.5rem shifts a small part of the image offscreen.
+       * !important otherwise it would be overridden by an utility class.
+       */
+      margin-left: calc(-50vw - 1.5rem) !important;
+    }
+  }
 }
 
 @layer utilities {
