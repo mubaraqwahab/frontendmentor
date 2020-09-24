@@ -6,7 +6,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: {
-    enabled: true,
+    // enabled: true,
     content: ["./*.html"],
   },
   theme: {
