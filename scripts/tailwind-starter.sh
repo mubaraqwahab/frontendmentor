@@ -29,7 +29,9 @@ npm init -y
 
 
 # Add npm start script to package.json
-sed -i -r 's/("scripts": \{)/\1\n    "start": "postcss main.css --output output.css --watch",/' package.json
+# NOTE: The spacing here actually doesn't matter.
+# NPM would reformat the file after installing stuff
+sed -i -r 's/("scripts": \{)/\1"start": "postcss main.css --output output.css --watch","build": "postcss main.css --output output.css",/' package.json
 
 
 # Global dependencies (you can install locally if you want) (TODO: prompt)
@@ -47,7 +49,7 @@ npx tailwind init
 
 
 # Add HTML purge rule to Tailwind config
-sed -i 's|purge: \[\],|purge: {\n    enabled: true,\n    content: \["./*.html"\],\n  },|' tailwind.config.js
+sed -i 's|purge: \[\],|purge: \["./*.html"\],|' tailwind.config.js
 
 
 # PostCSS config
