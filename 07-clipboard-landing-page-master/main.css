@@ -73,6 +73,7 @@
   }
 
   @screen lg {
+    /* Credit: https://css-tricks.com/full-width-containers-limited-width-parents/#no-calc-needed */
     .img-stretched-half-screen {
       position: relative;
       left: 50%;
