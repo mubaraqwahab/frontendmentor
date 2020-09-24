@@ -18,6 +18,9 @@ module.exports = {
       width: {
         "3/10": "30%",
       },
+      screens: {
+        xxl: "1600px",
+      },
     },
     colors: {
       transparent: colors.transparent,

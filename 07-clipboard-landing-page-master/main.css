@@ -73,7 +73,7 @@
   }
 
   @screen lg {
-    .img-stretched-half-screen-lg {
+    .img-stretched-half-screen {
       position: relative;
       left: 50%;
       /* The +2vw here just makes it a little bigger than 50vw. */
@@ -82,6 +82,14 @@
        * !important otherwise it would be overridden by an utility class.
        */
       margin-left: calc(-50vw - 1.5rem) !important;
+    }
+  }
+
+  @screen xxl {
+    .img-stretched-half-screen {
+      /* Undo the styles of the lg screen */
+      @apply left-0 w-1/2;
+      @apply ml-0 !important;
     }
   }
 }
