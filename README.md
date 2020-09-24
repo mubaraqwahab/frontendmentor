@@ -7,6 +7,5 @@ Playground for [Frontend Mentor](https://www.frontendmentor.io/) challenges.
 I'm using this to practice things frontend-related:
 
 * Semantic markup + accessibility
-* CSS
+* Responsive, mobile-first design
 * Web technologies, frameworks etc.
-
