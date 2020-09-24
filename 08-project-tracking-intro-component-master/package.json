@@ -1,0 +1,21 @@
+{
+  "name": "08-project-tracking-intro-component-master",
+  "version": "1.0.0",
+  "description": "![Design preview for the Project tracking intro component coding challenge](./design/desktop-preview.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "start": "postcss main.css --output output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.0.0",
+    "cssnano": "^4.1.10",
+    "tailwindcss": "^1.8.10"
+  },
+  "devDependencies": {
+    "stylelint-config-recommended": "^3.0.0"
+  }
+}
