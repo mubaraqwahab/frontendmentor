@@ -2,6 +2,17 @@
 
 ![Design preview for the Intro component with sign up form coding challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/04-intro-component-with-signup-form-master/).
+
+From this challenge, I learnt quite a lot about building accessible forms, styling form elements and validating form submissions using JavaScript.
+
+One particularly interesting thing I learnt was [not to use the `placeholder` attribute](https://css-tricks.com/dont-use-the-placeholder-attribute/).
+
+---
+
+<details>
+<summary>See the default README for this challenge.</summary>
+
 ## Welcome! 👋
 
 Thanks for checking out this front-end coding challenge.
@@ -28,7 +39,7 @@ Want some support on the challenge? [Join our Slack community](https://www.front
 
 ## Where to find everything
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to. 
+Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to.
 
 The designs are in JPG static format. This will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. This should help train your eye to perceive differences in spacings and sizes.
 
@@ -81,3 +92,5 @@ A massive thank you to our community sponsors!
 - [Sizzy](https://bit.ly/fm-sizzy) is an extremely useful browser designed specifically to improve a developer's workflow when building websites. You can fire up multiple device emulators and run them all in sync while building out your web pages. Perfect for helping build fully responsive websites!
 - [Diversify Tech](https://bit.ly/fem-diversify-tech) is an amazing resource for underrepresented people in tech. The site features job listings for anyone seeking new opportunities. The resource section is also full of useful links to dive into!
 - [Dracula PRO](https://bit.ly/fem-dracula) is a beautiful dark theme to help keep you focused and productive while you code. The theme isn't just for your editor either. You can also apply it to your most-used apps like your terminal and even Slack!
+
+</details>
