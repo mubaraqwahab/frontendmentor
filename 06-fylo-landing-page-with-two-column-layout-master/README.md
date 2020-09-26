@@ -2,6 +2,15 @@
 
 ![Design preview for the Fylo landing page with two column layout challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/06-fylo-landing-page-with-two-column-layout-master/).
+
+I learnt a little about [SVGs](https://css-tricks.com/using-svg/) ([SVG masks](http://tutorials.jenkov.com/svg/mask.html) in particular) as I had to edit the SVG image given in the challenge to get the background curve correctly.
+
+---
+
+<details>
+<summary>See the default README for this challenge.</summary>
+
 ## Welcome! 👋
 
 Thanks for checking out this front-end coding challenge.
@@ -12,7 +21,7 @@ Thanks for checking out this front-end coding challenge.
 
 ## Where to find everything
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to. 
+Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to.
 
 The designs are in JPG static format. This will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. This should help train your eye to perceive differences in spacings and sizes.
 
@@ -65,3 +74,5 @@ A massive thank you to our community sponsors!
 - [Contrast](https://bit.ly/fem-contrast) reimagines how developers inspect, collaborate, and build components off Figma designs.
 - [Diversify Tech](https://bit.ly/fem-diversify-tech) is an amazing resource for underrepresented people in tech. The site features job listings for anyone seeking new opportunities. The resource section is also full of useful links to dive into!
 - [Triplebyte](http://bit.ly/fem-triplebyte) can save a lot of time and stress during the job hunting process. Their free, confidential quiz makes it so that companies end up pitching you for their vacant job roles.
+
+</details>
