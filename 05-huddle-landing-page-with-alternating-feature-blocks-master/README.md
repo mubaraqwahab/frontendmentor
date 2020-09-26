@@ -4,7 +4,12 @@
 
 [View my solution](https://mubaraqwahab.github.io/frontendmentor/05-huddle-landing-page-with-alternating-feature-blocks-master/).
 
-My main takeway here is laying out pages.
+I switched from BEM class names to using Tailwind CSS for this challenge. [Tailwind CSS](https://tailwindcss.com/) is a low-level utility CSS framework. I made the switch for two main reasons:
+
+* Naming classes is hard!
+* I used CSS variables quite a lot in the previous challenges, but I discovered [the browser support for it in Nigeria](https://caniuse.com/css-variables) isn't so good. Tailwind helps me depend less on CSS variables.
+
+I chose Tailwind also because it isn't opinionated.
 
 ---
 
