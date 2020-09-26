@@ -2,6 +2,17 @@
 
 ![Design preview for the Clipboard landing page coding challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/07-clipboard-landing-page-master/).
+
+The main thing here is the layout. [I got some help stretching the Mac image](https://www.frontendmentor.io/solutions/clipboard-landing-page-with-tailwindcss-Jx-tRisBT/#:~:text=For%20the%20mac%20image%2C,it%20can%20be%20set%20to%20auto) all the way to the left end of the screen.
+
+Also, I learnt that the [CSS `gap` property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap) can be used in a flexbox. But... [the browser support for it](https://caniuse.com/flexbox-gap) (as of this writing) is bad!
+
+---
+
+<details>
+<summary>See the default README for this challenge.</summary>
+
 ## Welcome! 👋
 
 Thanks for checking out this front-end coding challenge.
@@ -78,3 +89,5 @@ A massive thank you to our community sponsors!
 - [Contrast](https://bit.ly/fem-contrast) reimagines how developers inspect, collaborate, and build components off Figma designs.
 - [Diversify Tech](https://bit.ly/fem-diversify-tech) is an amazing resource for underrepresented people in tech. The site features job listings for anyone seeking new opportunities. The resource section is also full of useful links to dive into!
 - [Triplebyte](http://bit.ly/fem-triplebyte) can save a lot of time and stress during the job hunting process. Their free, confidential quiz makes it so that companies end up pitching you for their vacant job roles.
+
+</details>
