@@ -2,7 +2,11 @@
 
 ![Design preview for the Article preview component coding challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/01-article-preview-component-master/).
+
 I wrote this in pure HTML, CSS and JavaScript. In particular, I tried the [Block, Element, Modifier (BEM)](https://en.bem.info/) CSS methodology for the first time and practised creating [an accessible toggle button](https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure).
+
+---
 
 <details>
 <summary>See the default README for this challenge.</summary>
