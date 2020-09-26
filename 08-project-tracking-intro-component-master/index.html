@@ -11,24 +11,24 @@
   <body>
     <div></div>
     <div>
-      <header>
+      <header class="container flex flex-wrap items-center justify-between py-6">
         <a href=""><img src="images/logo.svg" alt="" /></a>
-        <button aria-label="Toggle navigation">
+        <button id="toggleNavBtn" aria-label="Toggle navigation" aria-expanded="false">
           <!-- Hamburger icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
             <path fill="#242942" fill-rule="evenodd" d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z" />
           </svg>
 
           <!-- Close icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
             <path
               fill="#242942"
               fill-rule="evenodd"
               d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z"
             />
-          </svg>
+          </svg> -->
         </button>
-        <nav>
+        <nav class="w-full">
           <ul>
             <li><a href="#0">Product</a></li>
             <li><a href="#0">Features</a></li>
@@ -38,19 +38,19 @@
           <a href="#0">Login</a>
         </nav>
       </header>
-      <main>
+      <main class="container">
         <img src="images/illustration-devices.svg" alt="" />
 
-        <div>
-          <strong>New</strong>
+        <div class="font-display uppercase">
+          <strong class="font-bold">New</strong>
           <span>Monograph Dashboard</span>
         </div>
 
-        <h1>Powerful insights into your team</h1>
-        <p>Project planning and time tracking for agile teams</p>
+        <h1 class="font-display font-bold uppercase text-4xl">Powerful insights into your team</h1>
+        <p class="font-body">Project planning and time tracking for agile teams</p>
 
-        <a href="#0" aria-describedby="scheduleLinkDesc">Schedule a demo</a>
-        <span id="scheduleLinkDesc">to see a live preview</span>
+        <a class="font-display font-bold uppercase" href="#0" aria-describedby="scheduleLinkDesc">Schedule a demo</a>
+        <span class="font-display uppercase" id="scheduleLinkDesc">to see a live preview</span>
       </main>
     </div>
   </body>
