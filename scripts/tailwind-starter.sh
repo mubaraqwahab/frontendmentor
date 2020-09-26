@@ -34,13 +34,12 @@ npm init -y
 sed -i -r 's/("scripts": \{)/\1"start": "postcss main.css --output output.css --watch","build": "postcss main.css --output output.css",/' package.json
 
 
-# Global dependencies (you can install locally if you want) (TODO: prompt)
-# npm install -g postcss-cli
-# npm install -g prettier
+# Install prettier for formatting
+# npm install prettier
 
 
 # Install dependencies
-npm install tailwindcss autoprefixer cssnano
+npm install postcss-cli postcss tailwindcss autoprefixer cssnano
 npm install --save-dev stylelint-config-recommended
 
 
