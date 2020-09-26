@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Mentor | Project tracking intro component</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body>
+    <div></div>
+    <div>
+      <header>
+        <a href=""><img src="images/logo.svg" alt="" /></a>
+        <button aria-label="Toggle navigation">
+          <!-- Hamburger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
+            <path fill="#242942" fill-rule="evenodd" d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z" />
+          </svg>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Project tracking intro component</title>
+          <!-- Close icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path
+              fill="#242942"
+              fill-rule="evenodd"
+              d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z"
+            />
+          </svg>
+        </button>
+        <nav>
+          <ul>
+            <li><a href="#0">Product</a></li>
+            <li><a href="#0">Features</a></li>
+            <li><a href="#0">Pricing</a></li>
+          </ul>
+          <hr />
+          <a href="#0">Login</a>
+        </nav>
+      </header>
+      <main>
+        <img src="images/illustration-devices.svg" alt="" />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-  Product
-  Features
-  Pricing
-  Login
+        <div>
+          <strong>New</strong>
+          <span>Monograph Dashboard</span>
+        </div>
 
-  New
-  Monograph Dashboard
+        <h1>Powerful insights into your team</h1>
+        <p>Project planning and time tracking for agile teams</p>
 
-  Powerful insights into your team
-  Project planning and time tracking for agile teams
-
-  Schedule a demo
-  to see a live preview
-  
-  <footer>
-    <p class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-      Coded by <a href="#">Your Name Here</a>.
-    </p>
-  </footer>
-</body>
+        <a href="#0" aria-describedby="scheduleLinkDesc">Schedule a demo</a>
+        <span id="scheduleLinkDesc">to see a live preview</span>
+      </main>
+    </div>
+  </body>
 </html>
