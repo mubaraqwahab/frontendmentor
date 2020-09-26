@@ -19,8 +19,10 @@ if (!firstArg || firstArg === "-h" || firstArg === "--help") {
   for (const readme of process.argv.slice(2)) {
     // Read the lines of the README into an array
     // Credit: https://stackoverflow.com/a/6832105/12695621
+    // Use process.cwd() so you can call this script from any directory
+    // and it would work as expected!
     const readmeLines = fs
-      .readFileSync(path.resolve(__dirname, readme))
+      .readFileSync(path.resolve(process.cwd(), readme))
       .toString()
       .split("\n");
 
@@ -28,7 +30,7 @@ if (!firstArg || firstArg === "-h" || firstArg === "--help") {
     if (readmeLines[0].startsWith("# Frontend Mentor - ")) {
       const detailsOpenTag = "<details>";
       const summary =
-        "<summary>The default README for this challenge.</summary>";
+        "<summary>See the default README for this challenge.</summary>";
       const detailsCloseTag = "</details>";
 
       // Insert the opening <details> tag and

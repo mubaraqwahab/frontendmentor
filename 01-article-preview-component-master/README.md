@@ -2,6 +2,11 @@
 
 ![Design preview for the Article preview component coding challenge](./design/desktop-preview.jpg)
 
+I wrote this in pure HTML, CSS and JavaScript. In particular, I tried the [Block, Element, Modifier (BEM)](https://en.bem.info/) CSS methodology for the first time and practised creating [an accessible toggle button](https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure).
+
+<details>
+<summary>See the default README for this challenge.</summary>
+
 ## Welcome! 👋
 
 Thanks for checking out this front-end coding challenge.
@@ -18,7 +23,7 @@ You can use any tools you like to help you complete the challenge. So if you've 
 
 The only JavaScript you'll need for this challenge is to initiate the share options when someone clicks the share icon.
 
-Your users should be able to: 
+Your users should be able to:
 
 - View the optimal layout for the component depending on their device's screen size
 - See the social media share links when they click the share icon
@@ -27,7 +32,7 @@ Want some support on the challenge? [Join our Slack community](https://www.front
 
 ## Where to find everything
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to. 
+Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to.
 
 The designs are in JPG static format. This will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. This should help train your eye to perceive differences in spacings and sizes.
 
@@ -80,3 +85,6 @@ A massive thank you to our community sponsors!
 - [Sizzy](https://bit.ly/fm-sizzy) is an extremely useful browser designed specifically to improve a developer's workflow when building websites. You can fire up multiple device emulators and run them all in sync while building out your web pages. Perfect for helping build fully responsive websites!
 - [Diversify Tech](https://bit.ly/fem-diversify-tech) is an amazing resource for underrepresented people in tech. The site features job listings for anyone seeking new opportunities. The resource section is also full of useful links for you to dive into.
 - [Dracula PRO](https://bit.ly/fem-dracula) is a beautiful dark theme to help keep you focused and productive while you code. The theme isn't just for your editor either. You can also apply it to your most-used apps like your terminal and even Slack!
+
+</details>
+
