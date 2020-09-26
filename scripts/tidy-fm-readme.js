@@ -33,14 +33,13 @@ if (!firstArg || firstArg === "-h" || firstArg === "--help") {
         "<summary>See the default README for this challenge.</summary>";
       const detailsCloseTag = "</details>";
 
-      // Insert the opening <details> tag and
-      // the summary element into the 5th and 6th lines
-      // The empty string is for an empty line. (This is required so the markdown is rendered correctly)
-      readmeLines.splice(4, 0, detailsOpenTag, summary, "");
+      // Insert an <hr>, an opening <details> tag and
+      // a summary element into the 5th and 6th lines
+      // The empty strings are for empty lines. (This second one in particular is required so the markdown is rendered correctly)
+      readmeLines.splice(4, 0, "---", "", detailsOpenTag, summary, "");
 
       // Append the closing <details> tag
-      // Empty line here isn't necessary, but ...
-      readmeLines.push(detailsCloseTag, "");
+      readmeLines.push(detailsCloseTag);
 
       // Concat the lines into a string:
       const modifiedReadmeContent = readmeLines.reduce(
