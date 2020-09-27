@@ -1,4 +1,4 @@
-const { fontFamily, spacing } = require("tailwindcss/defaultTheme");
+const { fontFamily, spacing, colors } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   future: {
@@ -7,12 +7,36 @@ module.exports = {
   },
   purge: ["./*.html"],
   theme: {
-    extend: {},
+    extend: {
+      padding: {
+        "0.25": "0.0625rem",
+      },
+      letterSpacing: {
+        "1": "0.15em",
+        "2": "0.3em",
+      },
+      boxShadow: {
+        outline: "0 0 0 3px hsla(0, 100%, 68%, 0.5)",
+      },
+      inset: {
+        "6": spacing["6"],
+        full: "100%",
+      },
+      width: {
+        "screen-half": "50vw",
+      },
+      height: {
+        "screen-half": "50vw",
+      },
+    },
     container: {
       center: true,
-      padding: spacing["8"],
+      padding: spacing["6"],
     },
     colors: {
+      transparent: colors.transparent,
+      white: colors.white,
+      black: colors.black,
       red: "hsl(0, 100%, 68%)",
       blue: {
         "very-dark": "hsl(230, 29%, 20%)",

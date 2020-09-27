@@ -12,4 +12,9 @@
 }
 
 @layer utilities {
+  @variants focus {
+    .outline-transparent {
+      outline: 1px solid transparent;
+    }
+  }
 }
