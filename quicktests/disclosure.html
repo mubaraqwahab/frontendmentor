@@ -67,20 +67,24 @@
 
     <h2>Using <code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code></h2>
     <details>
-      <summary class="btn">View options</summary>
+      <summary class="btn">Why use these elements?</summary>
       <ul>
-        <li>Do this</li>
-        <li>Do that</li>
-        <li>Do both!</li>
+        <li><a href="">First rule of ARIA:</a> Use a semantic HTML element instead where possible.</li>
+        <li>
+          <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#no_aria_better_bad_aria">
+            No ARIA is better than bad ARIA
+          </a>
+        </li>
+        <li>Aesthetics (perhaps?)</li>
       </ul>
     </details>
 
     <h2>Using <abbr title="Accessible Rich Internet Applications">ARIA</abbr></h2>
-    <button id="optionsBtn" class="btn" aria-expanded="false" aria-controls="options">View options</button>
+    <button id="optionsBtn" class="btn" aria-expanded="false" aria-controls="options">Why use ARIA?</button>
     <ul class="hidden" id="options">
-      <li>Do this</li>
-      <li>Do that</li>
-      <li>Do both!</li>
+      <li>Better support on older browsers, no need for polyfilling</li>
+      <li>Less code (perhaps?)</li>
+      <li>Idk, what else?</li>
     </ul>
 
     <h2>Notes and References</h2>
@@ -95,6 +99,10 @@
         <a href="https://caniuse.com/details"><code>&lt;details&gt;</code> is not supported in Opera Mini and IE</a>
       </li>
       <li>See <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure">WAI ARIA disclosure widget</a></li>
+      <li>
+        It seems the <code>&lt;summary&gt;</code> is always placed above other content in <code>&lt;details&gt;</code>,
+        at least in Chrome
+      </li>
     </ul>
 
     <script>
@@ -106,11 +114,13 @@
         optionsBtn.setAttribute("aria-expanded", !isOptionsHidden);
       });
 
-      // <details> polyfill (just for testing on IE 11)
+      // <details> polyfill (just for fun + testing on IE 11)
       if (!window.HTMLDetailsElement) {
         Array.prototype.forEach.call(document.querySelectorAll("details"), function (details) {
-          var summary = /** @type {HTMLElement} */ (details.querySelector("summary"));
-          var content = /** @type {HTMLElement} */ (summary.nextElementSibling);
+          var summary = details.querySelector("summary");
+          // This requires <details> to have <summary> as its first child element,
+          // and a second container element for its content.
+          var content = summary.nextElementSibling;
 
           var isOpen = details.getAttribute("open") !== null;
 
@@ -136,9 +146,23 @@
               content.setAttribute("hidden", "");
               summary.setAttribute("aria-expanded", "false");
             }
+
+            // What follows is stuff to make the <details> "toggle" event work.
+
+            // The native "toggle" event implements the "Event" interface.
+            // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/toggle_event
+            const event = document.createEvent("Event");
+            // The native "toggle" event doesn't bubble and is not cancellable.
+            event.initEvent("toggle", false, false);
+            details.dispatchEvent(event);
           });
         });
       }
+
+      // This is just to test that the polyfilled "toggle" works fine
+      document.querySelector("details").addEventListener("toggle", function (e) {
+        console.log(e);
+      });
     </script>
   </body>
 </html>
