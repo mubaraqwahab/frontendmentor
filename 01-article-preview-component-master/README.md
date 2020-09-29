@@ -4,7 +4,7 @@
 
 [View my solution](https://mubaraqwahab.github.io/frontendmentor/01-article-preview-component-master/).
 
-I wrote this in pure HTML, CSS and JavaScript. In particular, I tried the [Block, Element, Modifier (BEM)](https://en.bem.info/) CSS methodology for the first time and practised creating [an accessible toggle button](https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure).
+I wrote this in pure HTML, CSS and JavaScript. In particular, I tried the [Block, Element, Modifier (BEM)](https://en.bem.info/) CSS methodology for the first time and practised creating [an accessible disclosure button](https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure). I also learnt a bit about managing focus in JavaScript.
 
 ---
 
