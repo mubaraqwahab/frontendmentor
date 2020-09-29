@@ -125,11 +125,12 @@
           // and a second container element for its content.
           var content = summary.nextElementSibling;
 
-          var isOpen = details.getAttribute("open") !== null;
+          var isOpen = details.hasAttribute("open");
 
           // Hide content by default if details isn't open
           if (!isOpen) {
-            content.setAttribute("hidden", "");
+            // Don't set to empty string or it might not work on IE!
+            content.setAttribute("hidden", "hidden");
           }
 
           // Give the summary appropriate aria stuff
@@ -140,14 +141,14 @@
           summary.tabIndex = 0;
 
           summary.addEventListener("click", function () {
-            if (details.getAttribute("open") === null) {
-              details.setAttribute("open", "");
+            if (details.hasAttribute("open")) {
+              details.removeAttribute("open");
+              content.setAttribute("hidden", "hidden");
+              summary.setAttribute("aria-expanded", "false");
+            } else {
+              details.setAttribute("open", "open");
               content.removeAttribute("hidden");
               summary.setAttribute("aria-expanded", "true");
-            } else {
-              details.removeAttribute("open");
-              content.setAttribute("hidden", "");
-              summary.setAttribute("aria-expanded", "false");
             }
 
             // What follows is stuff to make the <details> "toggle" event work.
