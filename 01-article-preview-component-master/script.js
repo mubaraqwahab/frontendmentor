@@ -37,9 +37,8 @@ function toggleShareTooltip(force) {
  * @param value
  */
 function boolNot(value) {
-  if (value === true) return false;
-  else if (value === false) return true;
-  else return value;
+  if (typeof value === "boolean") return !value;
+  return value;
 }
 
 shareBtn.addEventListener("click", () => toggleShareTooltip());
@@ -70,11 +69,15 @@ shareTooltip
   .querySelectorAll(".article-card__social-icon-link")
   .forEach((socialLink) => {
     socialLink.addEventListener("blur", function (e) {
-      // Get the "share tooltip" ancestor of the next focused element, if any.
+      // Related target refers to the next element on the page to receive focus.
+      // If there's no such element, its value is null
       // (See https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
-      const tooltip = e.relatedTarget?.closest("." + shareTooltipClass);
+      const nextFocused = e.relatedTarget;
 
-      if (!tooltip) {
+      // Hide the tooltip if the next focused isn't in the tooltip
+      // Note here: the tooltip isn't hidden when next focused === null
+      // i.e. when the next focused is outside the current document
+      if (nextFocused && !nextFocused.closest("." + shareTooltipClass)) {
         toggleShareTooltip(false);
       }
     });
