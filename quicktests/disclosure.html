@@ -121,9 +121,8 @@
       if (!window.HTMLDetailsElement) {
         Array.prototype.forEach.call(document.querySelectorAll("details"), function (details) {
           var summary = details.querySelector("summary");
-          // This requires <details> to have <summary> as its first child element,
-          // and a second container element for its content.
-          var content = summary.nextElementSibling;
+          // This requires <details> to have a container element for its content.
+          var content = details.querySelector(":not(summary");
 
           var isOpen = details.hasAttribute("open");
 
@@ -138,7 +137,7 @@
           summary.setAttribute("aria-expanded", isOpen);
 
           // Make summary focusable
-          summary.tabIndex = 0;
+          summary.setAttribute("tabindex", "0");
 
           summary.addEventListener("click", function () {
             if (details.hasAttribute("open")) {
@@ -155,7 +154,7 @@
 
             // The native "toggle" event implements the "Event" interface.
             // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/toggle_event
-            const event = document.createEvent("Event");
+            var event = document.createEvent("Event");
             // The native "toggle" event doesn't bubble and is not cancellable.
             event.initEvent("toggle", false, false);
             details.dispatchEvent(event);
