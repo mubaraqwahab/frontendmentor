@@ -1,0 +1,144 @@
+<!-- Should I use <details> and <summary> for a disclosure widget? (like a dropdown) or should I use ARIA? -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disclosure widget</title>
+    <style>
+      :root {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        padding: 0 2rem;
+        margin: 0;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: rgb(72, 72, 72);
+        color: #fff;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+        /* See https://css-tricks.com/quick-reminder-that-details-summary-is-the-easiest-way-ever-to-make-an-accordion/ */
+        list-style: none;
+      }
+
+      /* See https://stackoverflow.com/q/6195329/12695621 */
+      .btn::-webkit-details-marker {
+        display: none;
+      }
+
+      .btn:hover {
+        background-color: rgb(50, 50, 50);
+      }
+
+      .btn:active {
+        background-color: #000;
+      }
+
+      .btn:focus {
+        outline: 1px solid transparent;
+        box-shadow: 0 0 0 3px rgba(72, 72, 72, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Disclosure widget</h1>
+
+    <h2>Using <code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code></h2>
+    <details>
+      <summary class="btn">View options</summary>
+      <ul>
+        <li>Do this</li>
+        <li>Do that</li>
+        <li>Do both!</li>
+      </ul>
+    </details>
+
+    <h2>Using <abbr title="Accessible Rich Internet Applications">ARIA</abbr></h2>
+    <button id="optionsBtn" class="btn" aria-expanded="false" aria-controls="options">View options</button>
+    <ul class="hidden" id="options">
+      <li>Do this</li>
+      <li>Do that</li>
+      <li>Do both!</li>
+    </ul>
+
+    <h2>Notes and References</h2>
+    <ul>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary#:~:text=Implicit%20Aria%20role">
+          <code>&lt;summary&gt;</code> has an implicit aria role of "button"
+        </a>
+      </li>
+      <li>NVDA (on Chrome and Chromium Edge) announces both implementations above in the same manner</li>
+      <li>
+        <a href="https://caniuse.com/details"><code>&lt;details&gt;</code> is not supported in Opera Mini and IE</a>
+      </li>
+      <li>See <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure">WAI ARIA disclosure widget</a></li>
+    </ul>
+
+    <script>
+      var optionsBtn = document.querySelector("#optionsBtn");
+      var options = document.querySelector("#options");
+
+      optionsBtn.addEventListener("click", function () {
+        var isOptionsHidden = options.classList.toggle("hidden");
+        optionsBtn.setAttribute("aria-expanded", !isOptionsHidden);
+      });
+
+      // <details> polyfill (just for testing on IE 11)
+      if (!window.HTMLDetailsElement) {
+        Array.prototype.forEach.call(document.querySelectorAll("details"), function (details) {
+          var summary = /** @type {HTMLElement} */ (details.querySelector("summary"));
+          var content = /** @type {HTMLElement} */ (summary.nextElementSibling);
+
+          var isOpen = details.getAttribute("open") !== null;
+
+          // Hide content by default if details isn't open
+          if (!isOpen) {
+            content.setAttribute("hidden", "");
+          }
+
+          // Give the summary appropriate aria stuff
+          summary.setAttribute("role", "button");
+          summary.setAttribute("aria-expanded", isOpen);
+
+          // Make summary focusable
+          summary.tabIndex = 0;
+
+          summary.addEventListener("click", function () {
+            if (details.getAttribute("open") === null) {
+              details.setAttribute("open", "");
+              content.removeAttribute("hidden");
+              summary.setAttribute("aria-expanded", "true");
+            } else {
+              details.removeAttribute("open");
+              content.setAttribute("hidden", "");
+              summary.setAttribute("aria-expanded", "false");
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
