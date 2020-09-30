@@ -93,6 +93,11 @@
     <h2>Notes and References</h2>
     <ul>
       <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#:~:text=Implicit%20Aria%20role">
+          <code>&lt;details&gt;</code> has an implicit aria role of "group"
+        </a>
+      </li>
+      <li>
         <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary#:~:text=Implicit%20Aria%20role">
           <code>&lt;summary&gt;</code> has an implicit aria role of "button"
         </a>
@@ -166,6 +171,16 @@
       document.querySelector("details").addEventListener("toggle", function (e) {
         console.log(e);
       });
+
+      // The polyfill is missing the following. See https://github.com/javan/details-element-polyfill for a more complete polyfill
+      // <details> has implicit ARIA role of "group"
+      // get open returns a boolean
+      // set open takes a value. A truthy value is like true. A falsy value is like false
+      // set open sets or removes open attribute
+      // If previous open state and next open state are different, set open triggers toggle event.
+      // setAttribute(open, value) sets as usual, and triggers toggle only if <details> is closed.
+      // removeAttribute(open) triggers toggle only if <details> is open.
+      // Space key should trigger toggle. Enter key should also trigger toggle.
     </script>
   </body>
 </html>
