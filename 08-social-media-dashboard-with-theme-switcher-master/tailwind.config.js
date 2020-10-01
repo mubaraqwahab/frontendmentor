@@ -1,4 +1,4 @@
-const { colors, fontFamily } = require("tailwindcss/defaultTheme");
+const { colors, fontFamily, spacing } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   future: {
@@ -7,10 +7,14 @@ module.exports = {
   },
   purge: ["./*.html"],
   theme: {
-    extend: {},
+    extend: {
+      borderWidth: {
+        "6": "6px",
+      },
+    },
     container: {
       center: true,
-      padding: "1rem",
+      padding: spacing["5"],
     },
     colors: {
       tranparent: colors.transparent,
