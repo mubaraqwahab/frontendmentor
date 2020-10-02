@@ -6,7 +6,24 @@
 }
 
 @layer components {
+  .switch {
+    @apply w-16 h-8 p-1 border rounded-full;
+  }
+
+  .switch:focus {
+    @apply shadow-outline outline-transparent;
+  }
+
+  .switch::before {
+    content: "";
+    @apply border h-6 w-6 rounded-full;
+    /* ::before is inline by default. Width won't work without changing the display. See https://stackoverflow.com/a/20858630/12695621 */
+    @apply inline-block;
+  }
 }
 
 @layer utilities {
+  .outline-transparent {
+    outline: 1px solid transparent;
+  }
 }

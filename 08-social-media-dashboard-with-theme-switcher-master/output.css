@@ -618,6 +618,29 @@ video {
   }
 }
 
+.switch {
+  width: 4rem;
+  height: 2rem;
+  padding: 0.25rem;
+  border-width: 1px;
+  border-radius: 9999px;
+}
+
+.switch:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  outline: 1px solid transparent;
+}
+
+.switch::before {
+  content: "";
+  border-width: 1px;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 9999px;
+  /* ::before is inline by default. Width won't work without changing the display. See https://stackoverflow.com/a/20858630/12695621 */
+  display: inline-block;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
@@ -12029,6 +12052,10 @@ video {
 .animate-bounce {
   -webkit-animation: bounce 1s infinite;
           animation: bounce 1s infinite;
+}
+
+.outline-transparent {
+  outline: 1px solid transparent;
 }
 
 @media (min-width: 640px) {
