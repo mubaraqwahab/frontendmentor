@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body>
-    <header class="font-bold pt-2 pb-16 border rounded-b-xl">
+    <header class="font-bold pt-2 pb-16 rounded-b-xl themed-header">
       <div class="container">
-        <div class="border-b py-5">
-          <h1 class="text-2xl leading-tight">Social Media Dashboard</h1>
+        <div class="border-b themed-border-separator py-5">
+          <h1 class="text-2xl leading-tight themed-display-text">Social Media Dashboard</h1>
           <p>Total Followers: 23,004</p>
         </div>
         <div class="flex items-center justify-between py-4">
@@ -25,7 +25,7 @@
     <main>
       <div class="container">
         <ul class="-mt-10 mb-12 text-center">
-          <li class="p-6 mb-8 border border-t-5 rounded-md border-facebook">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-facebook themed-card">
             <!-- Subtle point here: my choice of a span and not a div indicates its content is "inline" with the surrounding content. -->
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
@@ -38,7 +38,7 @@
               <span class="font-bold text-sm">@nathanf</span>
               <span class="sr-only">has</span>
             </span>
-            <strong class="block text-6xl font-bold leading-none mb-1">1987</strong>
+            <strong class="block text-6xl themed-display-text font-bold leading-none mb-1">1987</strong>
             <span class="block uppercase tracking-widest mb-6">followers</span>
             <div class="font-bold text-sm flex items-center justify-center text-lime-green">
               <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
@@ -48,7 +48,7 @@
               12 Today
             </div>
           </li>
-          <li class="p-6 mb-8 border border-t-5 rounded-md border-twitter">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-twitter themed-card">
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="17">
                 <path
@@ -60,7 +60,7 @@
               <span class="font-bold text-sm">@nathanf</span>
               <span class="sr-only">has</span>
             </span>
-            <strong class="block text-6xl font-bold leading-none mb-1">1044</strong>
+            <strong class="block text-6xl themed-display-text font-bold leading-none mb-1">1044</strong>
             <span class="block uppercase tracking-widest mb-6">followers</span>
             <div class="font-bold text-sm flex items-center justify-center text-lime-green">
               <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
@@ -70,7 +70,7 @@
               99 Today
             </div>
           </li>
-          <li class="p-6 mb-8 border border-t-5 rounded-md border-gradient-instagram">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-gradient-instagram themed-card">
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                 <defs>
@@ -89,7 +89,7 @@
               <span class="font-bold text-sm">@realnathanf</span>
               <span class="sr-only">has</span>
             </span>
-            <strong class="block text-6xl font-bold leading-none mb-1">11k</strong>
+            <strong class="block text-6xl themed-display-text font-bold leading-none mb-1">11k</strong>
             <span class="block uppercase tracking-widest mb-6">followers</span>
             <div class="font-bold text-sm flex items-center justify-center text-lime-green">
               <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
@@ -99,7 +99,7 @@
               1099 Today
             </div>
           </li>
-          <li class="p-6 mb-8 border border-t-5 rounded-md border-youtube">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-youtube themed-card">
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                 <path
@@ -111,7 +111,7 @@
               <span class="font-bold text-sm">Nathan F.</span>
               <span class="sr-only">has</span>
             </span>
-            <strong class="block text-6xl font-bold leading-none mb-1">8239</strong>
+            <strong class="block text-6xl themed-display-text font-bold leading-none mb-1">8239</strong>
             <span class="block uppercase tracking-widest mb-6">subscribers</span>
             <div class="font-bold text-sm flex items-center justify-center text-bright-red">
               <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
@@ -125,7 +125,7 @@
 
         <h2 class="font-bold text-xl leading-tight mb-6">Overview - Today</h2>
         <ul class="font-bold mb-12">
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Page Views</span>
               <span class="sr-only">on Facebook:</span>
@@ -137,7 +137,7 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">87</strong>
+              <strong class="themed-display-text text-3xl leading-none">87</strong>
               <div class="flex items-center justify-center text-sm text-lime-green">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
                   <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
@@ -146,7 +146,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on Facebook:</span>
@@ -158,7 +158,7 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">52</strong>
+              <strong class="themed-display-text text-3xl leading-none">52</strong>
               <div class="flex items-center justify-center text-sm text-bright-red">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
                   <path fill="currentColor" fill-rule="evenodd" d="M0 0l4 4 4-4z" />
@@ -167,7 +167,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on Instagram:</span>
@@ -186,7 +186,7 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">5462</strong>
+              <strong class="themed-display-text text-3xl leading-none">5462</strong>
               <div class="flex items-center justify-center text-sm text-lime-green">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
                   <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
@@ -195,7 +195,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Profile Views</span>
               <span class="sr-only">on Instagram:</span>
@@ -214,7 +214,7 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">52k</strong>
+              <strong class="themed-display-text text-3xl leading-none">52k</strong>
               <div class="flex items-center justify-center text-sm text-lime-green">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
                   <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
@@ -223,7 +223,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Retweets</span>
               <span class="sr-only">on Twitter:</span>
@@ -235,7 +235,7 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">117</strong>
+              <strong class="themed-display-text text-3xl leading-none">117</strong>
               <div class="flex items-center justify-center text-sm text-lime-green">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
                   <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
@@ -244,7 +244,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on Twitter:</span>
@@ -256,7 +256,7 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">507</strong>
+              <strong class="themed-display-text text-3xl leading-none">507</strong>
               <div class="flex items-center justify-center text-sm text-lime-green">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
                   <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
@@ -265,7 +265,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on YouTube:</span>
@@ -277,16 +277,16 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">107</strong>
+              <strong class="themed-display-text text-3xl leading-none">107</strong>
               <div class="flex items-center justify-center text-sm text-bright-red">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
-                  <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
+                  <path fill="currentColor" fill-rule="evenodd" d="M0 0l4 4 4-4z" />
                 </svg>
                 <span class="sr-only">Down</span> 19%
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border rounded-md">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
             <div class="flex items-center justify-between mb-6">
               <span>Total Views</span>
               <span class="sr-only">on YouTube:</span>
@@ -298,10 +298,10 @@
               </svg>
             </div>
             <div class="flex items-end justify-between">
-              <strong class="text-3xl leading-none">1407</strong>
+              <strong class="themed-display-text text-3xl leading-none">1407</strong>
               <div class="flex items-center justify-center text-sm text-bright-red">
                 <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
-                  <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
+                  <path fill="currentColor" fill-rule="evenodd" d="M0 0l4 4 4-4z" />
                 </svg>
                 <span class="sr-only">Down</span> 12%
               </div>

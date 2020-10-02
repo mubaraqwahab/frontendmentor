@@ -26,7 +26,7 @@ module.exports = {
       padding: spacing["5"],
     },
     colors: {
-      tranparent: colors.transparent,
+      transparent: colors.transparent,
       white: colors.white,
       black: colors.black,
       gray: colors.gray,

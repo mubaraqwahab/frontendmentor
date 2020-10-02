@@ -9,14 +9,34 @@
       transition-duration: 0.001ms !important;
     }
   }
+
+  body {
+    @apply bg-white text-blue-gray-dark;
+  }
 }
 
 @layer components {
+  .themed-header {
+    @apply bg-blue-very-pale;
+  }
+
+  .themed-display-text {
+    @apply text-blue-very-dark;
+  }
+
+  .themed-border-separator {
+    @apply border-blue-gray-dark;
+  }
+
+  .themed-card {
+    @apply bg-blue-gray-light;
+  }
+
   /* Credit for the switch: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
   @supports (appearance: none) or (-webkit-appearance: none) or
     (-moz-appearance: none) {
     .switch {
-      @apply appearance-none w-12 h-6 p-1 border rounded-full inline-flex items-center;
+      @apply appearance-none w-12 h-6 p-1 border border-transparent rounded-full inline-flex items-center bg-toggle;
     }
 
     /* Interesting notes:
@@ -25,11 +45,16 @@
      */
     .switch::after {
       content: "";
-      @apply inline-block h-4 w-4 rounded-full border transform translate-x-0 transition duration-200;
+      @apply inline-block h-4 w-4 rounded-full border border-transparent bg-blue-very-pale;
+      @apply transform translate-x-6-less-2px transition duration-200;
+    }
+
+    .switch:checked {
+      @apply bg-gradient-to-r from-toggle-1 to-toggle-2;
     }
 
     .switch:checked::after {
-      @apply translate-x-6-less-2px;
+      @apply translate-x-0 bg-blue-very-dark-2;
     }
 
     .switch:focus {
@@ -39,17 +64,29 @@
 }
 
 @layer utilities {
-  .border-gradient-instagram {
-    @apply relative;
-    /* Fallback color */
-    @apply border-instagram-2;
+  .border-t-facebook {
+    border-top-color: theme("colors.facebook");
   }
 
-  .border-gradient-instagram::before {
+  .border-t-twitter {
+    border-top-color: theme("colors.twitter");
+  }
+
+  .border-t-gradient-instagram {
+    @apply relative;
+    /* Fallback color */
+    border-top-color: theme("colors.instagram-2");
+  }
+
+  .border-t-gradient-instagram::before {
     content: "";
     height: theme("borderWidth.5");
     top: calc(-1 * theme("borderWidth.5"));
     @apply absolute block left-0 right-0 rounded-t-full bg-gradient-to-r from-instagram-1 to-instagram-2;
+  }
+
+  .border-t-youtube {
+    border-top-color: theme("colors.youtube");
   }
 
   .outline-transparent {
