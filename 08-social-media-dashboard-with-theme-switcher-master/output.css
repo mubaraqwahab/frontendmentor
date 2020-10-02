@@ -618,13 +618,54 @@ video {
   }
 }
 
-/* .switch {
-    @apply w-16 h-8 p-1 border rounded-full;
-  } */
+/* Credit for the switch: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
 
-.switch:focus {
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-  outline: 1px solid transparent;
+@supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) or (-moz-appearance: none) {
+  .switch {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 4rem;
+    height: 2rem;
+    padding: 0.25rem;
+    border-width: 1px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Interesting notes:
+     * Replaced elements don't support ::after and ::before. See https://developer.mozilla.org/en-US/docs/Web/CSS/::after and https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
+     * Your devtools might show the input element like <input>::after</input>
+     */
+
+  .switch::after {
+    content: "";
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 9999px;
+    border-width: 1px;
+    --transform-translate-x: 0;
+    --transform-translate-y: 0;
+    --transform-rotate: 0;
+    --transform-skew-x: 0;
+    --transform-skew-y: 0;
+    --transform-scale-x: 1;
+    --transform-scale-y: 1;
+    transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+    --transform-translate-x: 0;
+  }
+
+  .switch:checked::after {
+    /* TODO!! */
+    --transform-translate-x: 100%;
+  }
+
+  .switch:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    outline: 1px solid transparent;
+  }
 }
 
 .space-y-0 > :not(template) ~ :not(template) {

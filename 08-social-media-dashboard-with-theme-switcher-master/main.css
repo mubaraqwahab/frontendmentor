@@ -6,12 +6,30 @@
 }
 
 @layer components {
-  /* .switch {
-    @apply w-16 h-8 p-1 border rounded-full;
-  } */
+  /* Credit for the switch: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
+  @supports (appearance: none) or (-webkit-appearance: none) or
+    (-moz-appearance: none) {
+    .switch {
+      @apply appearance-none w-16 h-8 p-1 border rounded-full inline-flex items-center;
+    }
 
-  .switch:focus {
-    @apply shadow-outline outline-transparent;
+    /* Interesting notes:
+     * Replaced elements don't support ::after and ::before. See https://developer.mozilla.org/en-US/docs/Web/CSS/::after and https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
+     * Your devtools might show the input element like <input>::after</input>
+     */
+    .switch::after {
+      content: "";
+      @apply inline-block h-6 w-6 rounded-full border transform translate-x-0;
+    }
+
+    .switch:checked::after {
+      /* TODO!! */
+      @apply translate-x-full;
+    }
+
+    .switch:focus {
+      @apply shadow-outline outline-transparent;
+    }
   }
 }
 
