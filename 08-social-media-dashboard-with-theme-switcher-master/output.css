@@ -586,6 +586,14 @@ video {
   height: auto;
 }
 
+/* Reduce animations for those who don't want it. See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
+
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  * {
+    transition-duration: 0.001ms !important;
+  }
+}
+
 .container {
   width: 100%;
   margin-right: auto;
@@ -625,8 +633,8 @@ video {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
-    width: 4rem;
-    height: 2rem;
+    width: 3rem;
+    height: 1.5rem;
     padding: 0.25rem;
     border-width: 1px;
     border-radius: 9999px;
@@ -642,8 +650,8 @@ video {
   .switch::after {
     content: "";
     display: inline-block;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1rem;
+    width: 1rem;
     border-radius: 9999px;
     border-width: 1px;
     --transform-translate-x: 0;
@@ -655,11 +663,12 @@ video {
     --transform-scale-y: 1;
     transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
     --transform-translate-x: 0;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 200ms;
   }
 
   .switch:checked::after {
-    /* TODO!! */
-    --transform-translate-x: 100%;
+    --transform-translate-x: calc(1.5rem - 2px);
   }
 
   .switch:focus {
@@ -10934,6 +10943,10 @@ video {
   --transform-translate-x: 100%;
 }
 
+.translate-x-6-less-2px {
+  --transform-translate-x: calc(1.5rem - 2px);
+}
+
 .translate-y-0 {
   --transform-translate-y: 0;
 }
@@ -11096,6 +11109,10 @@ video {
 
 .translate-y-full {
   --transform-translate-y: 100%;
+}
+
+.translate-y-6-less-2px {
+  --transform-translate-y: calc(1.5rem - 2px);
 }
 
 .hover\:translate-x-0:hover {
@@ -11262,6 +11279,10 @@ video {
   --transform-translate-x: 100%;
 }
 
+.hover\:translate-x-6-less-2px:hover {
+  --transform-translate-x: calc(1.5rem - 2px);
+}
+
 .hover\:translate-y-0:hover {
   --transform-translate-y: 0;
 }
@@ -11424,6 +11445,10 @@ video {
 
 .hover\:translate-y-full:hover {
   --transform-translate-y: 100%;
+}
+
+.hover\:translate-y-6-less-2px:hover {
+  --transform-translate-y: calc(1.5rem - 2px);
 }
 
 .focus\:translate-x-0:focus {
@@ -11590,6 +11615,10 @@ video {
   --transform-translate-x: 100%;
 }
 
+.focus\:translate-x-6-less-2px:focus {
+  --transform-translate-x: calc(1.5rem - 2px);
+}
+
 .focus\:translate-y-0:focus {
   --transform-translate-y: 0;
 }
@@ -11752,6 +11781,10 @@ video {
 
 .focus\:translate-y-full:focus {
   --transform-translate-y: 100%;
+}
+
+.focus\:translate-y-6-less-2px:focus {
+  --transform-translate-y: calc(1.5rem - 2px);
 }
 
 .skew-x-0 {
@@ -22448,6 +22481,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .sm\:translate-x-6-less-2px {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .sm\:translate-y-0 {
     --transform-translate-y: 0;
   }
@@ -22610,6 +22647,10 @@ video {
 
   .sm\:translate-y-full {
     --transform-translate-y: 100%;
+  }
+
+  .sm\:translate-y-6-less-2px {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .sm\:hover\:translate-x-0:hover {
@@ -22776,6 +22817,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .sm\:hover\:translate-x-6-less-2px:hover {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .sm\:hover\:translate-y-0:hover {
     --transform-translate-y: 0;
   }
@@ -22938,6 +22983,10 @@ video {
 
   .sm\:hover\:translate-y-full:hover {
     --transform-translate-y: 100%;
+  }
+
+  .sm\:hover\:translate-y-6-less-2px:hover {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .sm\:focus\:translate-x-0:focus {
@@ -23104,6 +23153,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .sm\:focus\:translate-x-6-less-2px:focus {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .sm\:focus\:translate-y-0:focus {
     --transform-translate-y: 0;
   }
@@ -23266,6 +23319,10 @@ video {
 
   .sm\:focus\:translate-y-full:focus {
     --transform-translate-y: 100%;
+  }
+
+  .sm\:focus\:translate-y-6-less-2px:focus {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .sm\:skew-x-0 {
@@ -33869,6 +33926,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .md\:translate-x-6-less-2px {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .md\:translate-y-0 {
     --transform-translate-y: 0;
   }
@@ -34031,6 +34092,10 @@ video {
 
   .md\:translate-y-full {
     --transform-translate-y: 100%;
+  }
+
+  .md\:translate-y-6-less-2px {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .md\:hover\:translate-x-0:hover {
@@ -34197,6 +34262,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .md\:hover\:translate-x-6-less-2px:hover {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .md\:hover\:translate-y-0:hover {
     --transform-translate-y: 0;
   }
@@ -34359,6 +34428,10 @@ video {
 
   .md\:hover\:translate-y-full:hover {
     --transform-translate-y: 100%;
+  }
+
+  .md\:hover\:translate-y-6-less-2px:hover {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .md\:focus\:translate-x-0:focus {
@@ -34525,6 +34598,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .md\:focus\:translate-x-6-less-2px:focus {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .md\:focus\:translate-y-0:focus {
     --transform-translate-y: 0;
   }
@@ -34687,6 +34764,10 @@ video {
 
   .md\:focus\:translate-y-full:focus {
     --transform-translate-y: 100%;
+  }
+
+  .md\:focus\:translate-y-6-less-2px:focus {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .md\:skew-x-0 {
@@ -45290,6 +45371,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .lg\:translate-x-6-less-2px {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .lg\:translate-y-0 {
     --transform-translate-y: 0;
   }
@@ -45452,6 +45537,10 @@ video {
 
   .lg\:translate-y-full {
     --transform-translate-y: 100%;
+  }
+
+  .lg\:translate-y-6-less-2px {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .lg\:hover\:translate-x-0:hover {
@@ -45618,6 +45707,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .lg\:hover\:translate-x-6-less-2px:hover {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .lg\:hover\:translate-y-0:hover {
     --transform-translate-y: 0;
   }
@@ -45780,6 +45873,10 @@ video {
 
   .lg\:hover\:translate-y-full:hover {
     --transform-translate-y: 100%;
+  }
+
+  .lg\:hover\:translate-y-6-less-2px:hover {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .lg\:focus\:translate-x-0:focus {
@@ -45946,6 +46043,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .lg\:focus\:translate-x-6-less-2px:focus {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .lg\:focus\:translate-y-0:focus {
     --transform-translate-y: 0;
   }
@@ -46108,6 +46209,10 @@ video {
 
   .lg\:focus\:translate-y-full:focus {
     --transform-translate-y: 100%;
+  }
+
+  .lg\:focus\:translate-y-6-less-2px:focus {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .lg\:skew-x-0 {
@@ -56711,6 +56816,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .xl\:translate-x-6-less-2px {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .xl\:translate-y-0 {
     --transform-translate-y: 0;
   }
@@ -56873,6 +56982,10 @@ video {
 
   .xl\:translate-y-full {
     --transform-translate-y: 100%;
+  }
+
+  .xl\:translate-y-6-less-2px {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .xl\:hover\:translate-x-0:hover {
@@ -57039,6 +57152,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .xl\:hover\:translate-x-6-less-2px:hover {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .xl\:hover\:translate-y-0:hover {
     --transform-translate-y: 0;
   }
@@ -57201,6 +57318,10 @@ video {
 
   .xl\:hover\:translate-y-full:hover {
     --transform-translate-y: 100%;
+  }
+
+  .xl\:hover\:translate-y-6-less-2px:hover {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .xl\:focus\:translate-x-0:focus {
@@ -57367,6 +57488,10 @@ video {
     --transform-translate-x: 100%;
   }
 
+  .xl\:focus\:translate-x-6-less-2px:focus {
+    --transform-translate-x: calc(1.5rem - 2px);
+  }
+
   .xl\:focus\:translate-y-0:focus {
     --transform-translate-y: 0;
   }
@@ -57529,6 +57654,10 @@ video {
 
   .xl\:focus\:translate-y-full:focus {
     --transform-translate-y: 100%;
+  }
+
+  .xl\:focus\:translate-y-6-less-2px:focus {
+    --transform-translate-y: calc(1.5rem - 2px);
   }
 
   .xl\:skew-x-0 {

@@ -17,6 +17,9 @@ module.exports = {
       letterSpacing: {
         widest: "0.3em",
       },
+      translate: {
+        "6-less-2px": `calc(${spacing["6"]} - 2px)`,
+      },
     },
     container: {
       center: true,

@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  /* Reduce animations for those who don't want it. See https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/#taking-it-to-code */
+  @media screen and (prefers-reduced-motion: reduce), (update: slow) {
+    * {
+      transition-duration: 0.001ms !important;
+    }
+  }
 }
 
 @layer components {
@@ -10,7 +16,7 @@
   @supports (appearance: none) or (-webkit-appearance: none) or
     (-moz-appearance: none) {
     .switch {
-      @apply appearance-none w-16 h-8 p-1 border rounded-full inline-flex items-center;
+      @apply appearance-none w-12 h-6 p-1 border rounded-full inline-flex items-center;
     }
 
     /* Interesting notes:
@@ -19,12 +25,11 @@
      */
     .switch::after {
       content: "";
-      @apply inline-block h-6 w-6 rounded-full border transform translate-x-0;
+      @apply inline-block h-4 w-4 rounded-full border transform translate-x-0 transition duration-200;
     }
 
     .switch:checked::after {
-      /* TODO!! */
-      @apply translate-x-full;
+      @apply translate-x-6-less-2px;
     }
 
     .switch:focus {
