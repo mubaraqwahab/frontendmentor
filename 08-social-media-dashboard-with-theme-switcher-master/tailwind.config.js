@@ -11,6 +11,9 @@ module.exports = {
       borderWidth: {
         "6": "6px",
       },
+      letterSpacing: {
+        widest: "0.3em",
+      },
     },
     container: {
       center: true,

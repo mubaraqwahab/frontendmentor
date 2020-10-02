@@ -9177,7 +9177,7 @@ video {
 }
 
 .tracking-widest {
-  letter-spacing: 0.1em;
+  letter-spacing: 0.3em;
 }
 
 .select-none {
@@ -20623,7 +20623,7 @@ video {
   }
 
   .sm\:tracking-widest {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.3em;
   }
 
   .sm\:select-none {
@@ -32004,7 +32004,7 @@ video {
   }
 
   .md\:tracking-widest {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.3em;
   }
 
   .md\:select-none {
@@ -43385,7 +43385,7 @@ video {
   }
 
   .lg\:tracking-widest {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.3em;
   }
 
   .lg\:select-none {
@@ -54766,7 +54766,7 @@ video {
   }
 
   .xl\:tracking-widest {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.3em;
   }
 
   .xl\:select-none {
