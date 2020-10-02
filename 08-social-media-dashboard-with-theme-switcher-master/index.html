@@ -312,10 +312,29 @@
     </main>
 
     <script>
-      document.getElementById("themeSwitcher").addEventListener("click", function () {
+      const themeSwitcher = /** @type {HTMLInputElement} */ (document.getElementById("themeSwitcher"));
+
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      handleDarkThemeChange(prefersDark);
+
+      // Listen for changes to theme preference
+      prefersDark.addListener(handleDarkThemeChange);
+
+      function handleDarkThemeChange(e) {
+        // Put the switch in the right position
+        themeSwitcher.checked = e.matches;
+      }
+
+      themeSwitcher.addEventListener("click", function () {
         // Toggle the "dark" class on the root element.
-        document.documentElement.classList.toggle("dark");
+        if (prefersDark.matches) {
+          document.documentElement.classList.toggle("light");
+        } else {
+          document.documentElement.classList.toggle("dark");
+        }
       });
+
+      // TODO: Check local storage for theme
     </script>
   </body>
 </html>

@@ -612,6 +612,26 @@ video {
   color: rgba(138.82200000000003, 150.6132, 197.778, var(--text-opacity));
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-opacity: 1;
+    background-color: hsl(230, 17%, 14%);
+    background-color: rgba(29.631000000000007, 31.654000000000007, 41.769, var(--bg-opacity));
+    --text-opacity: 1;
+    color: hsl(228, 34%, 66%);
+    color: rgba(138.82200000000003, 150.6132, 197.778, var(--text-opacity));
+  }
+
+  :root.light {
+    --bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, var(--bg-opacity));
+    --text-opacity: 1;
+    color: hsl(228, 12%, 44%);
+    color: rgba(98.73599999999999, 104.12159999999999, 125.66400000000002, var(--text-opacity));
+  }
+}
+
 .container {
   width: 100%;
   margin-right: auto;
@@ -690,6 +710,56 @@ video {
   --bg-opacity: 1;
   background-color: hsl(228, 28%, 20%);
   background-color: rgba(36.720000000000006, 42.432, 65.28, var(--bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .themed-header {
+    --bg-opacity: 1;
+    background-color: hsl(232, 19%, 15%);
+    background-color: rgba(30.982499999999998, 32.92049999999999, 45.5175, var(--bg-opacity));
+  }
+
+  .themed-display-text {
+    --text-opacity: 1;
+    color: #fff;
+    color: rgba(255, 255, 255, var(--text-opacity));
+  }
+
+  .themed-border-separator {
+    --border-opacity: 1;
+    border-color: hsl(228, 34%, 66%);
+    border-color: rgba(138.82200000000003, 150.6132, 197.778, var(--border-opacity));
+  }
+
+  .themed-card {
+    --bg-opacity: 1;
+    background-color: hsl(228, 28%, 20%);
+    background-color: rgba(36.720000000000006, 42.432, 65.28, var(--bg-opacity));
+  }
+
+  .light .themed-header {
+    --bg-opacity: 1;
+    background-color: hsl(225, 100%, 98%);
+    background-color: rgba(244.79999999999998, 247.35, 255, var(--bg-opacity));
+  }
+
+  .light .themed-display-text {
+    --text-opacity: 1;
+    color: hsl(230, 17%, 14%);
+    color: rgba(29.631000000000007, 31.654000000000007, 41.769, var(--text-opacity));
+  }
+
+  .light .themed-border-separator {
+    --border-opacity: 1;
+    border-color: hsl(228, 12%, 44%);
+    border-color: rgba(98.73599999999999, 104.12159999999999, 125.66400000000002, var(--border-opacity));
+  }
+
+  .light .themed-card {
+    --bg-opacity: 1;
+    background-color: hsl(227, 47%, 96%);
+    background-color: rgba(240.00599999999997, 242.08339999999998, 249.594, var(--bg-opacity));
+  }
 }
 
 /* Credit for the switch: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
