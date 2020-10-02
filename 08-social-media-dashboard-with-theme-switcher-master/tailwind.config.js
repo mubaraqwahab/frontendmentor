@@ -11,6 +11,9 @@ module.exports = {
       borderWidth: {
         "5": "5px",
       },
+      borderRadius: {
+        xl: "1rem",
+      },
       letterSpacing: {
         widest: "0.3em",
       },
