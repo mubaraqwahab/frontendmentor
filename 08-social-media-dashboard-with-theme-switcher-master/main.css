@@ -10,8 +10,12 @@
     }
   }
 
-  body {
+  :root {
     @apply bg-white text-blue-gray-dark;
+  }
+
+  :root.dark {
+    @apply bg-blue-very-dark text-blue-desaturated;
   }
 }
 
@@ -30,6 +34,22 @@
 
   .themed-card {
     @apply bg-blue-gray-light;
+  }
+
+  .dark .themed-header {
+    @apply bg-blue-very-dark-2;
+  }
+
+  .dark .themed-display-text {
+    @apply text-white;
+  }
+
+  .dark .themed-border-separator {
+    @apply border-blue-desaturated;
+  }
+
+  .dark .themed-card {
+    @apply bg-blue-desaturated-dark;
   }
 
   /* Credit for the switch: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
