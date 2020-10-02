@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       borderWidth: {
-        "6": "6px",
+        "5": "5px",
       },
       letterSpacing: {
         widest: "0.3em",

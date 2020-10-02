@@ -16,6 +16,19 @@
 }
 
 @layer utilities {
+  .border-gradient-instagram {
+    @apply relative;
+    /* Fallback color */
+    @apply border-instagram-2;
+  }
+
+  .border-gradient-instagram::before {
+    content: "";
+    height: theme("borderWidth.5");
+    top: calc(-1 * theme("borderWidth.5"));
+    @apply absolute block left-0 right-0 rounded-t-full bg-gradient-to-r from-instagram-1 to-instagram-2;
+  }
+
   .outline-transparent {
     outline: 1px solid transparent;
   }
