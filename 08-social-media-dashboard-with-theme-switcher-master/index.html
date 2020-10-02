@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- See https://web.dev/color-scheme/ -->
+    <meta name="color-scheme" content="light dark" />
     <title>Frontend Mentor | Social Media Dashboard with Theme Switcher</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
@@ -313,28 +315,32 @@
 
     <script>
       const themeSwitcher = /** @type {HTMLInputElement} */ (document.getElementById("themeSwitcher"));
+      const html = document.documentElement;
 
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-      handleDarkThemeChange(prefersDark);
+      // If user already has a theme preference, use it.
+      // Note that there might be a "flash of incorrect theme"
+      syncThemeFromLocalStorage();
 
-      // Listen for changes to theme preference
-      prefersDark.addListener(handleDarkThemeChange);
+      // Re-sync again when local storage changes. See https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+      window.addEventListener("storage", syncThemeFromLocalStorage);
 
-      function handleDarkThemeChange(e) {
-        // Put the switch in the right position
-        themeSwitcher.checked = e.matches;
-      }
-
-      themeSwitcher.addEventListener("click", function () {
+      themeSwitcher.addEventListener("change", function () {
         // Toggle the "dark" class on the root element.
-        if (prefersDark.matches) {
-          document.documentElement.classList.toggle("light");
+        const prefersDark = html.classList.toggle("dark");
+
+        // Save preference to local storage
+        if (prefersDark) {
+          localStorage.setItem("prefers dark", prefersDark);
         } else {
-          document.documentElement.classList.toggle("dark");
+          localStorage.removeItem("prefers dark");
         }
       });
 
-      // TODO: Check local storage for theme
+      function syncThemeFromLocalStorage() {
+        const prefersDark = localStorage.getItem("prefers dark");
+        themeSwitcher.checked = !!prefersDark;
+        html.classList.toggle("dark", !!prefersDark);
+      }
     </script>
   </body>
 </html>

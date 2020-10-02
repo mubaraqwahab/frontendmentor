@@ -17,16 +17,6 @@
   :root.dark {
     @apply bg-blue-very-dark text-blue-desaturated;
   }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      @apply bg-blue-very-dark text-blue-desaturated;
-    }
-
-    :root.light {
-      @apply bg-white text-blue-gray-dark;
-    }
-  }
 }
 
 @layer components {
@@ -60,40 +50,6 @@
 
   .dark .themed-card {
     @apply bg-blue-desaturated-dark;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .themed-header {
-      @apply bg-blue-very-dark-2;
-    }
-
-    .themed-display-text {
-      @apply text-white;
-    }
-
-    .themed-border-separator {
-      @apply border-blue-desaturated;
-    }
-
-    .themed-card {
-      @apply bg-blue-desaturated-dark;
-    }
-
-    .light .themed-header {
-      @apply bg-blue-very-pale;
-    }
-
-    .light .themed-display-text {
-      @apply text-blue-very-dark;
-    }
-
-    .light .themed-border-separator {
-      @apply border-blue-gray-dark;
-    }
-
-    .light .themed-card {
-      @apply bg-blue-gray-light;
-    }
   }
 
   /* Credit for the switch: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
