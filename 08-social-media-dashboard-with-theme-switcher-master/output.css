@@ -744,6 +744,10 @@ video {
   }
 
   .switch:checked {
+    /* Fallback color */
+    --bg-opacity: 1;
+    background-color: hsl(210, 78%, 56%);
+    background-color: rgba(55.28400000000003, 142.79999999999993, 230.316, var(--bg-opacity));
     background-image: linear-gradient(to right, var(--gradient-color-stops));
     --gradient-from-color: hsl(210, 78%, 56%);
     --gradient-color-stops: var(--gradient-from-color), var(--gradient-to-color, rgba(55.28400000000003, 142.79999999999993, 230.316, 0));

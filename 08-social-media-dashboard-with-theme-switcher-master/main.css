@@ -71,6 +71,8 @@
     }
 
     .switch:checked {
+      /* Fallback color */
+      @apply bg-toggle-1;
       @apply bg-gradient-to-r from-toggle-1 to-toggle-2;
     }
 
