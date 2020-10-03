@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Switch</title>
+    <style>
+      :root {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      .vertically-centered-content {
+        display: flex;
+        align-items: center;
+      }
+
+      label {
+        display: inline-block;
+        margin-right: 0.75rem;
+      }
+
+      @supports (appearance: none) or (-webkit-appearance: none) or (-moz-appearance: none) {
+        input[type="checkbox"][role="switch"] {
+          appearance: none;
+          width: 3rem;
+          margin: 0;
+          padding: 0.2rem;
+          border: 1px solid black;
+          border-radius: 9999px;
+          display: inline-flex;
+          align-items: center;
+          background-color: white;
+          transition: all 0.2s;
+        }
+
+        input[type="checkbox"][role="switch"]::before {
+          content: "";
+          display: inline-block;
+          height: 1rem;
+          width: 1rem;
+          border-radius: 50%;
+          border: 1px solid black;
+          background-color: gray;
+        }
+
+        input[type="checkbox"][role="switch"]:checked {
+          background-color: gray;
+        }
+
+        input[type="checkbox"][role="switch"]:checked::before {
+          background-color: white;
+          transform: translateX(calc(1.6rem - 2px));
+        }
+
+        input[type="checkbox"][role="switch"]:focus {
+          outline: 1px solid transparent;
+          box-shadow: 0 0 0 2px rgba(0, 0, 256, 0.5);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Custom switch</h1>
+
+    <p class="vertically-centered-content">
+      <label for="switch">Dummy setting</label>
+      <input id="switch" type="checkbox" role="switch" />
+    </p>
+
+    <p>
+      See
+      <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">
+        Custom Styling Form Inputs With Modern CSS Features
+      </a>
+      to learn how to create this.
+    </p>
+  </body>
+</html>
