@@ -318,9 +318,21 @@
       const themeSwitcher = /** @type {HTMLInputElement} */ (document.getElementById("themeSwitcher"));
       const html = document.documentElement;
 
-      // If user already has a theme preference, use it.
-      // Note that there might be a "flash of incorrect theme"
+      // If the user already has a theme preference, use it.
+      // If there's no preference, the OS theme would be used (this is handled primarily in the CSS)
+      // (Note that there might be a "flash of incorrect theme")
+      const theme = localStorage.getItem("theme");
+      if (!theme) {
+        const osPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+        themeSwitcher.checked = osPrefersDark.matches;
+        osPrefersDark.addListener((e) => (themeSwitcher.checked = e.matches));
+      } else if (theme === "dark") {
+      } else {
+      }
+
       syncThemeFromLocalStorage();
+
+      // If user already has a theme preference, use it.
 
       // Re-sync again when local storage changes. See https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
       window.addEventListener("storage", syncThemeFromLocalStorage);
