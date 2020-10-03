@@ -58,7 +58,9 @@
 
         input[type="checkbox"][role="switch"]:checked::before {
           background-color: white;
-          transform: translateX(calc(1.6rem - 2px));
+          --space: 1.6rem;
+          /* transform: translateX(calc(1.6rem - 2px)); */
+          transform: translateX(calc(var(--space) - 2px));
         }
 
         input[type="checkbox"][role="switch"]:focus {
