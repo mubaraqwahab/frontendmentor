@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body>
-    <header class="font-bold pt-2 pb-16 rounded-b-xl themed-header">
+    <header class="font-bold pt-6 pb-16 rounded-b-xl themed-header">
       <div class="container">
         <div class="border-b themed-border-separator py-5">
           <h1 class="text-2xl leading-tight themed-display-text">Social Media Dashboard</h1>
@@ -318,41 +318,59 @@
       const themeSwitcher = /** @type {HTMLInputElement} */ (document.getElementById("themeSwitcher"));
       const html = document.documentElement;
 
+      const osPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
       // If the user already has a theme preference, use it.
       // If there's no preference, the OS theme would be used (this is handled primarily in the CSS)
       // (Note that there might be a "flash of incorrect theme")
-      const theme = localStorage.getItem("theme");
-      if (!theme) {
-        const osPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-        themeSwitcher.checked = osPrefersDark.matches;
-        osPrefersDark.addListener((e) => (themeSwitcher.checked = e.matches));
-      } else if (theme === "dark") {
-      } else {
-      }
-
       syncThemeFromLocalStorage();
 
-      // If user already has a theme preference, use it.
-
-      // Re-sync again when local storage changes. See https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
-      window.addEventListener("storage", syncThemeFromLocalStorage);
-
-      themeSwitcher.addEventListener("change", function () {
-        // Toggle the "dark" class on the root element.
-        const prefersDark = html.classList.toggle("dark");
-
-        // Save preference to local storage
-        if (prefersDark) {
-          localStorage.setItem("prefers dark", prefersDark);
-        } else {
-          localStorage.removeItem("prefers dark");
+      // Listen to changes to OS theme and update theme if user has no theme preference at the time of the change
+      osPrefersDark.addListener((e) => {
+        if (!localStorage.getItem("theme")) {
+          html.classList.remove("dark", "light"); // if any
+          themeSwitcher.checked = e.matches;
         }
       });
 
+      themeSwitcher.addEventListener("change", function () {
+        const theme = localStorage.getItem("theme");
+        let newTheme;
+
+        if (!theme) {
+          if (osPrefersDark.matches) {
+            newTheme = "light";
+          } else {
+            newTheme = "dark";
+          }
+        } else if (theme === "dark") {
+          newTheme = "light";
+        } else {
+          newTheme = "dark";
+        }
+
+        localStorage.setItem("theme", newTheme);
+        syncThemeFromLocalStorage();
+      });
+
+      // Re-sync again when local storage changes from another window/tab
+      // See https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+      window.addEventListener("storage", syncThemeFromLocalStorage);
+
       function syncThemeFromLocalStorage() {
-        const prefersDark = localStorage.getItem("prefers dark");
-        themeSwitcher.checked = !!prefersDark;
-        html.classList.toggle("dark", !!prefersDark);
+        const theme = localStorage.getItem("theme");
+        if (!theme) {
+          html.classList.remove("dark", "light"); // if any
+          themeSwitcher.checked = osPrefersDark.matches;
+        } else if (theme === "dark") {
+          html.classList.remove("light"); // if any
+          html.classList.add("dark");
+          themeSwitcher.checked = true;
+        } else {
+          html.classList.remove("dark"); // if any
+          html.classList.add("light");
+          themeSwitcher.checked = false;
+        }
       }
     </script>
   </body>
