@@ -56,9 +56,15 @@
           background-color: gray;
         }
 
+        /* The knob */
         input[type="checkbox"][role="switch"]:checked::before {
           background-color: white;
+          /* space left = content-width-of-checkbox - width-of-knob
+           * content-width-of-checkbox = width-of-checkbox - 2*padding-x */
+          --space-left-in-checkbox: calc((3rem - 2 * 0.2rem) - 1rem);
+          /* Fallback without css variables. For whatever reason, the -2px seems important to put the knob in place. */
           transform: translateX(calc(1.6rem - 2px));
+          transform: translateX(calc(var(--space-left-in-checkbox) - 2px));
         }
 
         input[type="checkbox"][role="switch"]:focus {
@@ -82,6 +88,14 @@
         Custom Styling Form Inputs With Modern CSS Features
       </a>
       to learn how to create this.
+    </p>
+
+    <p>
+      <small>
+        <strong>Interesting finding:</strong> It seems the browser support for <code>transform: translateX()</code> and
+        <code>calc()</code> and <code>@supports</code> media query is better than for custom properties (i.e. CSS
+        variables) (this was tested on the BlackBerry 10 browser).
+      </small>
     </p>
   </body>
 </html>
