@@ -116,7 +116,9 @@
     .switch::after {
       content: "";
       @apply inline-block h-4 w-4 rounded-full border border-transparent bg-blue-very-pale;
-      @apply transform translate-x-6-less-2px transition duration-200;
+      @apply transition duration-200;
+      /* Just to avoid CSS variables. Tailwind uses CSS variables for transform */
+      transform: translateX(calc(theme("spacing.6") - 2px));
     }
 
     .switch:checked {
@@ -126,7 +128,8 @@
     }
 
     .switch:checked::after {
-      @apply translate-x-0 bg-blue-very-dark-2;
+      @apply bg-blue-very-dark-2;
+      transform: translateX(0);
     }
 
     .switch:focus {

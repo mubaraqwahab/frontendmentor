@@ -805,17 +805,10 @@ video {
     --bg-opacity: 1;
     background-color: hsl(225, 100%, 98%);
     background-color: rgba(244.79999999999998, 247.35, 255, var(--bg-opacity));
-    --transform-translate-x: 0;
-    --transform-translate-y: 0;
-    --transform-rotate: 0;
-    --transform-skew-x: 0;
-    --transform-skew-y: 0;
-    --transform-scale-x: 1;
-    --transform-scale-y: 1;
-    transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
-    --transform-translate-x: calc(1.5rem - 2px);
     transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
     transition-duration: 200ms;
+    /* Just to avoid CSS variables. Tailwind uses CSS variables for transform */
+    transform: translateX(calc(1.5rem - 2px));
   }
 
   .switch:checked {
@@ -830,10 +823,10 @@ video {
   }
 
   .switch:checked::after {
-    --transform-translate-x: 0;
     --bg-opacity: 1;
     background-color: hsl(232, 19%, 15%);
     background-color: rgba(30.982499999999998, 32.92049999999999, 45.5175, var(--bg-opacity));
+    transform: translateX(0);
   }
 
   .switch:focus {
