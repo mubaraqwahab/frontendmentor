@@ -31,7 +31,7 @@ npm init -y
 # Add npm start script to package.json
 # NOTE: The spacing here actually doesn't matter.
 # NPM would reformat the file after installing stuff
-sed -i -r 's/("scripts": \{)/\1"start": "postcss main.css --output output.css --watch","build": "postcss main.css --output output.css",/' package.json
+sed -i -r 's/("scripts": \{)/\1"start": "postcss main.css --output output.css --watch","build": "NODE_ENV=production postcss main.css --output output.css",/' package.json
 
 
 # Install prettier for formatting
