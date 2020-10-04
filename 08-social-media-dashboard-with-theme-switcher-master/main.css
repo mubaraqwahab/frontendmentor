@@ -172,7 +172,9 @@
     border-top-color: theme("colors.youtube");
   }
 
-  .outline-transparent {
-    outline: 1px solid transparent;
+  @variants focus {
+    .outline-transparent {
+      outline: 1px solid transparent;
+    }
   }
 }

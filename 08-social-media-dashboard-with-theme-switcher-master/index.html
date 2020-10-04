@@ -27,29 +27,34 @@
     <main>
       <div class="container">
         <ul class="-mt-10 mb-12 text-center md:-mt-32 md:mb-16 md:grid md:grid-cols-2 md:gap-6 xl:grid-cols-4">
-          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-facebook themed-card md:mb-0">
-            <!-- Subtle point here: my choice of a span and not a div indicates its content is "inline" with the surrounding content. -->
-            <span class="flex items-center justify-center mb-6">
-              <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                <path
-                  fill="#178FF5"
-                  d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z"
-                />
-              </svg>
-              <!-- Note that visually-hidden text is still selectable. Is this good or bad? -->
-              <span class="sr-only">Your Facebook account</span>
-              <span class="font-bold text-sm">@nathanf</span>
-              <span class="sr-only">has</span>
-            </span>
-            <strong class="block text-6xl themed-display-text font-bold leading-none mb-1">1987</strong>
-            <span class="block uppercase tracking-widest mb-6">followers</span>
-            <div class="font-bold text-sm flex items-center justify-center text-lime-green">
-              <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
-                <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
-              </svg>
-              <span class="sr-only">Up</span>
-              12 Today
-            </div>
+          <li class="mb-8 md:mb-0">
+            <a
+              class="block p-6 border border-transparent border-t-5 rounded-md border-t-facebook themed-card focus:outline-transparent focus:shadow-outline"
+              href=""
+            >
+              <!-- Subtle point here: my choice of a span and not a div indicates its content is "inline" with the surrounding content. -->
+              <span class="flex items-center justify-center mb-6">
+                <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                  <path
+                    fill="#178FF5"
+                    d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z"
+                  />
+                </svg>
+                <!-- Note that visually-hidden text is still selectable. Is this good or bad? -->
+                <span class="sr-only">Your Facebook account</span>
+                <span class="font-bold text-sm">@nathanf</span>
+                <span class="sr-only">has</span>
+              </span>
+              <strong class="inline-block w-full text-6xl themed-display-text font-bold leading-none mb-1">1987</strong>
+              <span class="inline-block w-full uppercase tracking-widest mb-6">followers</span>
+              <span class="font-bold text-sm flex items-center justify-center text-lime-green">
+                <svg aria-hidden="true" focusable="false" class="mr-1" xmlns="http://www.w3.org/2000/svg" width="8" height="4">
+                  <path fill="currentColor" fill-rule="evenodd" d="M0 4l4-4 4 4z" />
+                </svg>
+                <span class="sr-only">Up</span>
+                12 Today
+              </span>
+            </a>
           </li>
           <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-twitter themed-card md:mb-0">
             <span class="flex items-center justify-center mb-6">
