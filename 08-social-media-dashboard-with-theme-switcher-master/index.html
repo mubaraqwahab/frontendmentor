@@ -10,15 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body>
-    <header class="font-bold pt-6 pb-16 rounded-b-xl themed-header">
-      <div class="container">
-        <div class="border-b themed-border-separator py-5">
-          <h1 class="text-2xl leading-tight themed-display-text">Social Media Dashboard</h1>
+  <body class="min-h-screen">
+    <header class="font-bold pt-6 pb-16 rounded-b-xl themed-header md:pb-40 lg:rounded-b-2xl">
+      <div class="container md:flex md:items-center md:justify-between">
+        <div class="border-b themed-border-separator py-5 md:border-b-0">
+          <h1 class="text-2xl leading-tight themed-display-text md:text-3xl lg:text-4xl">Social Media Dashboard</h1>
           <p>Total Followers: 23,004</p>
         </div>
         <div class="flex items-center justify-between py-4">
-          <label id="themeSwitcherLabel" for="themeSwitcher">Dark Mode</label>
+          <label id="themeSwitcherLabel" for="themeSwitcher" class="cursor-pointer md:mr-4">Dark Mode</label>
           <!-- ARIA role "switch" indicates its an on/off checkbox. See https://www.w3.org/TR/wai-aria-1.1/#switch. Support for the role appears not to be good however. -->
           <input type="checkbox" role="switch" id="themeSwitcher" class="switch" />
         </div>
@@ -26,8 +26,8 @@
     </header>
     <main>
       <div class="container">
-        <ul class="-mt-10 mb-12 text-center">
-          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-facebook themed-card">
+        <ul class="-mt-10 mb-12 text-center md:-mt-32 md:mb-16 md:grid md:grid-cols-2 md:gap-6 xl:grid-cols-4">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-facebook themed-card md:mb-0">
             <!-- Subtle point here: my choice of a span and not a div indicates its content is "inline" with the surrounding content. -->
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
@@ -51,7 +51,7 @@
               12 Today
             </div>
           </li>
-          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-twitter themed-card">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-twitter themed-card md:mb-0">
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="17">
                 <path
@@ -73,7 +73,7 @@
               99 Today
             </div>
           </li>
-          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-gradient-instagram themed-card">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-gradient-instagram themed-card md:mb-0">
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                 <defs>
@@ -102,7 +102,7 @@
               1099 Today
             </div>
           </li>
-          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-youtube themed-card">
+          <li class="p-6 mb-8 border border-transparent border-t-5 rounded-md border-t-youtube themed-card md:mb-0">
             <span class="flex items-center justify-center mb-6">
               <svg aria-hidden="true" focusable="false" class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                 <path
@@ -126,9 +126,9 @@
           </li>
         </ul>
 
-        <h2 class="font-bold text-xl leading-tight mb-6">Overview - Today</h2>
-        <ul class="font-bold mb-12">
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+        <h2 class="font-bold text-xl leading-tight mb-6 md:text-2xl lg:text-3xl">Overview - Today</h2>
+        <ul class="font-bold mb-16 md:grid md:grid-cols-2 md:gap-6 xl:grid-cols-4">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Page Views</span>
               <span class="sr-only">on Facebook:</span>
@@ -149,7 +149,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on Facebook:</span>
@@ -170,7 +170,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on Instagram:</span>
@@ -198,7 +198,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Profile Views</span>
               <span class="sr-only">on Instagram:</span>
@@ -226,7 +226,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Retweets</span>
               <span class="sr-only">on Twitter:</span>
@@ -247,7 +247,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on Twitter:</span>
@@ -268,7 +268,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Likes</span>
               <span class="sr-only">on YouTube:</span>
@@ -289,7 +289,7 @@
               </div>
             </div>
           </li>
-          <li class="p-6 mb-6 border border-transparent rounded-md themed-card">
+          <li class="p-6 mb-6 border border-transparent rounded-md themed-card md:mb-0">
             <div class="flex items-center justify-between mb-6">
               <span>Total Views</span>
               <span class="sr-only">on YouTube:</span>
