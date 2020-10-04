@@ -12,24 +12,19 @@
 
   /* Credit for the theme implementation: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/ */
   :root {
-    /* What's color-scheme? See https://web.dev/color-scheme/ */
-    color-scheme: light dark;
     @apply bg-white text-blue-gray-dark;
   }
 
   :root.dark {
-    color-scheme: dark light;
     @apply bg-blue-very-dark text-blue-desaturated;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      color-scheme: dark light;
       @apply bg-blue-very-dark text-blue-desaturated;
     }
 
     :root.light {
-      color-scheme: light dark;
       @apply bg-white text-blue-gray-dark;
     }
   }

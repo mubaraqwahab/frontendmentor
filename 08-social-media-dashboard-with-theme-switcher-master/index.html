@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- See https://web.dev/color-scheme/ -->
+    <!-- What's this? See https://web.dev/color-scheme/ -->
     <meta name="color-scheme" content="light dark" />
     <title>Frontend Mentor | Social Media Dashboard with Theme Switcher</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
@@ -326,12 +326,14 @@
       syncThemeFromLocalStorage();
 
       // Listen to changes to OS theme and update theme if user has no theme preference at the time of the change
-      osPrefersDark.addListener((e) => {
-        if (!localStorage.getItem("theme")) {
-          html.classList.remove("dark", "light"); // if any
-          themeSwitcher.checked = e.matches;
-        }
-      });
+      osPrefersDark.addListener(syncThemeFromLocalStorage);
+      // Could also just be
+      // osPrefersDark.addListener((e) => {
+      //   if (!localStorage.getItem("theme")) {
+      //     html.classList.remove("dark", "light"); // if any
+      //     themeSwitcher.checked = e.matches;
+      //   }
+      // });
 
       themeSwitcher.addEventListener("change", function () {
         const theme = localStorage.getItem("theme");

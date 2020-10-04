@@ -597,8 +597,6 @@ video {
 /* Credit for the theme implementation: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/ */
 
 :root {
-  /* What's color-scheme? See https://web.dev/color-scheme/ */
-  color-scheme: light dark;
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
@@ -608,7 +606,6 @@ video {
 }
 
 :root.dark {
-  color-scheme: dark light;
   --bg-opacity: 1;
   background-color: hsl(230, 17%, 14%);
   background-color: rgba(29.631000000000007, 31.654000000000007, 41.769, var(--bg-opacity));
@@ -619,7 +616,6 @@ video {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark light;
     --bg-opacity: 1;
     background-color: hsl(230, 17%, 14%);
     background-color: rgba(29.631000000000007, 31.654000000000007, 41.769, var(--bg-opacity));
@@ -629,7 +625,6 @@ video {
   }
 
   :root.light {
-    color-scheme: light dark;
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
