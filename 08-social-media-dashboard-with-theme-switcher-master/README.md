@@ -11,6 +11,9 @@ Resources that helped:
 * CSS tricks article on theme switcher
 * CSS tricks article on custom controls
 
+TODO:
+* Read https://www.w3.org/TR/css-text-3/#white-space-processing
+
 Tangential stuff
 * [How is whitespace handled in the DOM?](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace) (Talk about inline and block stuff here?)
 * Visually-hidden text is selectable (and thus copyable). Is this a problem? (Perhaps it's best to not need such text in the first place.)
