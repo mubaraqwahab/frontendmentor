@@ -2,6 +2,24 @@
 
 ![Design preview for the Social media dashboard with theme switcher coding challenge](./design/desktop-preview.jpg)
 
+* First time working on a theme switcher
+* First time creating a custom form control
+* Worked with media queries in JS
+* Explain how the theme switching works!
+
+Resources that helped:
+* CSS tricks article on theme switcher
+* CSS tricks article on custom controls
+
+Tangential stuff
+* [How is whitespace handled in the DOM?](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace) (Talk about inline and block stuff here?)
+* Visually-hidden text is selectable (and thus copyable). Is this a problem? (Perhaps it's best to not need such text in the first place.)
+
+---
+
+<details>
+<summary>See the default README for this challenge.</summary>
+
 ## Welcome! 👋
 
 Thanks for checking out this front-end coding challenge.
@@ -26,7 +44,7 @@ Want some support on the challenge? [Join our Slack community](https://www.front
 
 ## Where to find everything
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to. 
+Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to.
 
 The designs are in JPG static format. This will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. This should help train your eye to perceive differences in spacings and sizes.
 
@@ -79,3 +97,5 @@ A massive thank you to our community sponsors!
 - [Contrast](https://bit.ly/fem-contrast) reimagines how developers inspect, collaborate, and build components off Figma designs.
 - [Diversify Tech](https://bit.ly/fem-diversify-tech) is an amazing resource for underrepresented people in tech. The site features job listings for anyone seeking new opportunities. The resource section is also full of useful links to dive into!
 - [Triplebyte](http://bit.ly/fem-triplebyte) can save a lot of time and stress during the job hunting process. Their free, confidential quiz makes it so that companies end up pitching you for their vacant job roles.
+
+</details>
