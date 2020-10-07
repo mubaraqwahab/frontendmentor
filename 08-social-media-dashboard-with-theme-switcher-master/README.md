@@ -8,7 +8,7 @@ When you visit the page for the first time, it uses your operating system's (OS)
 
 This is also my first time creating a custom form control. (Apparently, HTML has no native "toggle switch" `<input>` type. The closest to that is `<input type="checkbox">`.) I learnt how to style the custom switch from another CSS Tricks article: [Custom Styling Form Inputs with Modern CSS](https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/).
 
-## Miscellany
+## Tangents
 
 This is somewhat unrelated to the challenge: I had some trouble with whitespace while doing this challenge so I had to read a bit on how whitespace in inline and block elements is handled in HTML and CSS.
 
@@ -16,7 +16,7 @@ You can read about this in the following links:
 * [How whitespace is handled by HTML, CSS, and in the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace) in the <abbr title="Mozilla Developer Network">MDN</abbr> Docs.
 * [White Space Processing](https://www.w3.org/TR/css-text-3/#white-space-processing) from the CSS Text Module Level 3 specification. (This one is very detailed but quite difficult to read.)
 
-### Other (unrelated) things:
+### Other (unrelated) things I learned
 * Not all HTML elements support the `::before` and `::after` pseudo-elements. In particular, [replaced elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element) don't support them.
 * Visually hidden text is selectable (and thus copyable). Is this a problem? (Perhaps it's best to not need such text in the first place.)
 * [Each item in a flexbox (i.e. an element with `display: flex;` or `display: inline-flex;`), called a _flex item_, is _blockified_](https://stackoverflow.com/a/55496749/12695621), that is, its `display` is set to a block-level one.
