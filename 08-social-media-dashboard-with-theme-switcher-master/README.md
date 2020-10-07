@@ -2,21 +2,24 @@
 
 ![Design preview for the Social media dashboard with theme switcher coding challenge](./design/desktop-preview.jpg)
 
-* First time working on a theme switcher
-* First time creating a custom form control
-* Worked with media queries in JS
-* Explain how the theme switching works!
+In this challenge, I created a theme switcher (my first :)). The implementation is primarily based on the [CSS Tricks article: A Complete Guide to Dark Mode on the Web](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/). Briefly, here's how it works:
 
-Resources that helped:
-* CSS tricks article on theme switcher
-* CSS tricks article on custom controls
+When you visit the page for the first time, it uses your operating system's (OS) theme. So, for example, if you have your OS's dark mode turned on, you would see the page in the dark theme. If you change the theme of the page, your preferred theme would be saved in your browser. So the next time you visit the page, you'd see it in your preferred theme.
 
-TODO:
-* Read https://www.w3.org/TR/css-text-3/#white-space-processing
+This is also my first time creating a custom form control. (Apparently, HTML has no native "toggle switch" `<input>` type. The closest to that is `<input type="checkbox">`.) I learnt how to style the custom switch from another CSS Tricks article: [Custom Styling Form Inputs with Modern CSS](https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/).
 
-Tangential stuff
-* [How is whitespace handled in the DOM?](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace) (Talk about inline and block stuff here?)
-* Visually-hidden text is selectable (and thus copyable). Is this a problem? (Perhaps it's best to not need such text in the first place.)
+## Miscellany
+
+This is somewhat unrelated to the challenge: I had some trouble with whitespace while doing this challenge so I had to read a bit on how whitespace in inline and block elements is handled in HTML and CSS.
+
+You can read about this in the following links:
+* [How whitespace is handled by HTML, CSS, and in the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace) in the <abbr title="Mozilla Developer Network">MDN</abbr> Docs.
+* [White Space Processing](https://www.w3.org/TR/css-text-3/#white-space-processing) from the CSS Text Module Level 3 specification. (This one is very detailed but quite difficult to read.)
+
+### Other (unrelated) things:
+* Not all HTML elements support the `::before` and `::after` pseudo-elements. In particular, [replaced elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element) don't support them.
+* Visually hidden text is selectable (and thus copyable). Is this a problem? (Perhaps it's best to not need such text in the first place.)
+* [Each item in a flexbox (i.e. an element with `display: flex;` or `display: inline-flex;`), called a _flex item_, is _blockified_](https://stackoverflow.com/a/55496749/12695621), that is, its `display` is set to a block-level one.
 
 ---
 
