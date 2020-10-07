@@ -24,6 +24,7 @@ module.exports = {
       padding: spacing["5"],
     },
     colors: {
+      inherit: "inherit",
       transparent: colors.transparent,
       white: colors.white,
       black: colors.black,

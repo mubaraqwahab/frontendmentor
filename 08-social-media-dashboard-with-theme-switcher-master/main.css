@@ -40,7 +40,7 @@
   }
 
   .themed-display-text-2 {
-    color: inherit;
+    @apply text-inherit;
   }
 
   .themed-separator {
@@ -95,7 +95,7 @@
     }
 
     .light .themed-display-text-2 {
-      color: inherit;
+      @apply text-inherit;
     }
 
     .light .themed-separator {
@@ -115,13 +115,13 @@
     }
 
     /* Interesting notes:
-     * Replaced elements don't support ::after and ::before. See https://developer.mozilla.org/en-US/docs/Web/CSS/::after and https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
+     * Replaced elements don't support ::after and ::before. (<input>s may be replaced.) See https://developer.mozilla.org/en-US/docs/Web/CSS/::after and https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
      * Your devtools might show the input element like <input>::after</input>
      */
     .switch::after {
       content: "";
       @apply inline-block h-4 w-4 rounded-full border border-transparent bg-blue-very-pale;
-      @apply transition duration-200;
+      @apply transition-transform duration-200;
       /* Just to avoid CSS variables. Tailwind uses CSS variables for transform */
       transform: translateX(calc(theme("spacing.6") - 2px));
     }
