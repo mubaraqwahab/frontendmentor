@@ -12344,13 +12344,13 @@ video {
   border-top-color: hsl(203, 89%, 53%);
 }
 
-.border-t-gradient-instagram {
+.border-t-instagram {
   position: relative;
   /* Fallback color */
   border-top-color: hsl(329, 70%, 58%);
 }
 
-.border-t-gradient-instagram::before {
+.border-t-instagram::before {
   content: "";
   height: 5px;
   top: calc(-1 * 5px);

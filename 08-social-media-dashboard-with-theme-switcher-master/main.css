@@ -155,13 +155,13 @@
     border-top-color: theme("colors.twitter");
   }
 
-  .border-t-gradient-instagram {
+  .border-t-instagram {
     @apply relative;
     /* Fallback color */
     border-top-color: theme("colors.instagram-2");
   }
 
-  .border-t-gradient-instagram::before {
+  .border-t-instagram::before {
     content: "";
     height: theme("borderWidth.5");
     top: calc(-1 * theme("borderWidth.5"));
