@@ -4,7 +4,7 @@
 
 In this challenge, I created a theme switcher (my first :)). The implementation is primarily based on the [CSS Tricks article: A Complete Guide to Dark Mode on the Web](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/). Briefly, here's how it works:
 
-When you visit the page for the first time, it uses your operating system's (OS) theme. So, for example, if you have your OS's dark mode turned on, you would see the page in the dark theme. If you change the theme of the page, your preferred theme would be saved in your browser. So the next time you visit the page, you'd see it in your preferred theme.
+When you visit the page for the first time, it uses your operating system's (OS) theme. So, for example, if you have your OS's dark mode turned on, you would see the page in the dark theme. When you change the theme of the page, your preferred theme would be saved in your [browser's local storage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). So the next time you visit the page, you'd see it in your preferred theme.
 
 This is also my first time creating a custom form control. (Apparently, HTML has no native "toggle switch" `<input>` type. The closest to that is `<input type="checkbox">`.) I learnt how to style the custom switch from another CSS Tricks article: [Custom Styling Form Inputs with Modern CSS](https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/).
 
