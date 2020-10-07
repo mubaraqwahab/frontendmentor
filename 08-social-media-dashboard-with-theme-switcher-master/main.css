@@ -43,7 +43,7 @@
     color: inherit;
   }
 
-  .themed-border-separator {
+  .themed-separator {
     @apply border-blue-gray-dark;
   }
 
@@ -60,7 +60,7 @@
     @apply text-white;
   }
 
-  .dark .themed-border-separator {
+  .dark .themed-separator {
     @apply border-blue-desaturated;
   }
 
@@ -78,7 +78,7 @@
       @apply text-white;
     }
 
-    .themed-border-separator {
+    .themed-separator {
       @apply border-blue-desaturated;
     }
 
@@ -98,7 +98,7 @@
       color: inherit;
     }
 
-    .light .themed-border-separator {
+    .light .themed-separator {
       @apply border-blue-gray-dark;
     }
 
