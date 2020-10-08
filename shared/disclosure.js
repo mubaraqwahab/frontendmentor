@@ -61,29 +61,29 @@ class Disclosure {
     this.button.addEventListener("click", () => this.toggle());
   }
 
-  get hidden() {
-    return this.button.getAttribute("aria-expanded") === "false";
+  get open() {
+    return this.button.getAttribute("aria-expanded") === "true";
   }
 
-  set hidden(bool) {
-    this.controlledElement.classList.toggle(this._hiddenClass, bool);
-    this.button.setAttribute("aria-expanded", !bool);
+  set open(bool) {
+    this.controlledElement.classList.toggle(this._hiddenClass, !bool);
+    this.button.setAttribute("aria-expanded", bool);
   }
 
   /**
    * Toggle the visibility of the controlled element of the disclosure widget.
    *
-   * @param {boolean} [force] - If `true`, the controlled element is shown.
-   * If `false`, the controlled element is hidden.
-   * @returns A boolean indicating if the controlled element is visible after toggling.
+   * @param {boolean} [force] - If `true`, the widget will be open.
+   * If `false`, the widget will be closed.
+   * @returns A boolean indicating whether widget is open after toggling.
    */
   toggle(force) {
     if (typeof force === "boolean") {
-      this.hidden = !force;
+      this.open = force;
     } else {
-      this.hidden = !this.hidden;
+      this.open = !this.open;
     }
-    return !this.hidden;
+    return this.open;
   }
 }
 
