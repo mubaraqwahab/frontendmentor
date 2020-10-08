@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>General-purpose disclosure widget</title>
+    <style>
+      :root {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      button {
+        display: inline-block;
+        background-color: rgb(72, 72, 72);
+        color: #fff;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      button:hover {
+        background-color: rgb(50, 50, 50);
+      }
+
+      button:active {
+        background-color: #000;
+      }
+
+      button:focus {
+        outline: 1px solid transparent;
+        box-shadow: 0 0 0 3px rgba(72, 72, 72, 0.5);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .mb {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>General-purpose disclosure widget</h1>
+
+    <div class="mb">
+      <button aria-expanded="false" aria-controls="content1" data-disclosure-btn>I'm hiding something!</button>
+      <div id="content1" class="hidden">
+        <p>What are you lookin' at?</p>
+      </div>
+    </div>
+
+    <div class="mb">
+      <button aria-expanded="true" aria-controls="content2" data-disclosure-btn>Another one!</button>
+      <div id="content2">
+        <p>You can't see me 🙈</p>
+      </div>
+    </div>
+
+    <script>
+      initializeDisclosures(document, "hidden");
+
+      /**
+       * Initialize disclosure widgets in a given DOM node
+       * @param {ParentNode} domNode
+       * @param {string} [hiddenClass] - The class to toggle to hide/unhide content
+       */
+      function initializeDisclosures(domNode, hiddenClass) {
+        domNode.querySelectorAll("button[data-disclosure-btn]").forEach((disclosureBtn) => {
+          const ariaExpanded = disclosureBtn.getAttribute("aria-expanded");
+          const contentId = disclosureBtn.getAttribute("aria-controls");
+
+          if (!ariaExpanded) {
+            return console.error(`There is no "aria-expanded" attribute on the disclosure button`, disclosureBtn);
+          }
+
+          // Note that aria-expanded has one of three valid values: true, false, undefined (default)
+          if (!(ariaExpanded === "true" || ariaExpanded === "false")) {
+            return console.error(
+              `Disclosure button has an invalid "aria-expanded" attribute value. Valid values are "true" and "false"`,
+              disclosureBtn
+            );
+          }
+
+          if (!contentId) {
+            return console.error(`There is no "aria-controls" attribute on the disclosure button`, disclosureBtn);
+          }
+
+          const content = domNode.querySelector(`#${contentId}`);
+
+          if (ariaExpanded === "true" && isElemHidden(content, hiddenClass)) {
+            const reason = hiddenClass ? `"${hiddenClass}" class` : `"hidden" attribute`;
+            return console.error(
+              `Disclosure button has "aria-expanded" attribute set to "true" but its controlled element has the ${reason}`,
+              disclosureBtn,
+              content
+            );
+          } else if (ariaExpanded === "false" && !isElemHidden(content, hiddenClass)) {
+            const reason = hiddenClass ? `"${hiddenClass}" class` : `"hidden" attribute`;
+            return console.error(
+              `Disclosure button has "aria-expanded" attribute set to "true" but its controlled element does not have the ${reason}`,
+              disclosureBtn,
+              content
+            );
+          }
+
+          disclosureBtn.addEventListener("click", function () {
+            let isHidden;
+            if (hiddenClass) {
+              isHidden = content.classList.toggle(hiddenClass);
+            } else {
+              isHidden = content.toggleAttribute("hidden");
+            }
+            disclosureBtn.setAttribute("aria-expanded", !isHidden);
+          });
+        });
+
+        function isElemHidden(element, hiddenClass) {
+          if (hiddenClass) return element.classList.contains(hiddenClass);
+          return element.hasAttribute("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>
