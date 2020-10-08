@@ -63,6 +63,7 @@
     <p>This document demonstrates the usage of <code>disclosure.js</code></p>
 
     <div class="mb">
+      <p>Closed by default:</p>
       <button aria-expanded="false" aria-controls="content1" data-disclosure-btn data-hidden-class="hidden">
         I'm hiding something!
       </button>
@@ -72,6 +73,7 @@
     </div>
 
     <div class="mb">
+      <p>Open by default:</p>
       <button aria-expanded="true" aria-controls="content2" data-disclosure-btn data-hidden-class="hidden">
         Another one
       </button>
@@ -81,7 +83,7 @@
     </div>
 
     <script type="module">
-      import initializeDisclosures from "./disclosure.js";
+      import { initializeDisclosures } from "./disclosure.js";
 
       initializeDisclosures(document);
     </script>

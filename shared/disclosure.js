@@ -1,93 +1,101 @@
 /**
- * Initialize disclosure widgets in a given DOM node.
- *
- * A disclosure widget is identified by a disclosure button;
- * a <button> with a "data-disclosure-btn" (boolean) attribute.
- *
- * The button is expected to have an "aria-expanded" attribute
- * indicating whether the controlled element is visible or not,
- * and an "aria-controls" attribute whose value is the ID of
- * the controlled element.
- *
- * The button must also have a "data-hidden-class" attribute
- * whose value is the "hidden" class to toggle on the controlled content.
- *
- * @param {ParentNode} domNode
+ * A disclosure widget implementing the WAI-ARIA disclosure pattern.
+ * See https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure
  */
-function initializeDisclosures(domNode) {
-  domNode
+class Disclosure {
+  /**
+   * Initialize a disclosure widget in a given parent DOM node.
+   *
+   * A disclosure widget is identified by a disclosure button.
+   * The button is expected to have an `aria-expanded` attribute
+   * indicating whether the controlled element is visible or not,
+   * and an `aria-controls` attribute whose value is the ID of
+   * the controlled element.
+   *
+   * The button must also have a `data-hidden-class` attribute
+   * whose value is the "hidden" class to toggle on the controlled content.
+   *
+   * @param {HTMLButtonElement} button
+   * @param {ParentNode} parentNode
+   */
+  constructor(button, parentNode = document) {
+    this.button = button;
+
+    const ariaExpanded = button.getAttribute("aria-expanded");
+    if (
+      !ariaExpanded ||
+      !(ariaExpanded === "true" || ariaExpanded === "false")
+    ) {
+      throw new Error(
+        `"aria-expanded" attribute must be present on a disclosure button` +
+          ` and its value must be one of "true" and "false".`
+      );
+    }
+
+    const controlledId = button.getAttribute("aria-controls");
+    if (!controlledId) {
+      throw new Error(
+        `"aria-controls" attribute must be present on a disclosure button.`
+      );
+    }
+
+    this.controlledElement = parentNode.getElementById(controlledId);
+    if (!this.controlledElement) {
+      throw new Error(
+        `"aria-controls" attribute on disclosure button has value "${controlledId}"` +
+          ` but there is no element with that ID.`
+      );
+    }
+
+    this._hiddenClass = button.dataset.hiddenClass?.trim();
+    if (!this._hiddenClass) {
+      throw new Error(
+        `"data-hidden-class" attribute must be present on a disclosure button.`
+      );
+    }
+
+    this.button.addEventListener("click", () => this.toggle());
+  }
+
+  get hidden() {
+    return this.button.getAttribute("aria-expanded") === "false";
+  }
+
+  set hidden(bool) {
+    this.controlledElement.classList.toggle(this._hiddenClass, bool);
+    this.button.setAttribute("aria-expanded", !bool);
+  }
+
+  /**
+   * Toggle the visibility of the controlled element of the disclosure widget.
+   *
+   * @param {boolean} [force] - If `true`, the controlled element is shown.
+   * If `false`, the controlled element is hidden.
+   * @returns A boolean indicating if the controlled element is visible after toggling.
+   */
+  toggle(force) {
+    if (typeof force === "boolean") {
+      this.hidden = !force;
+    } else {
+      this.hidden = !this.hidden;
+    }
+    return !this.hidden;
+  }
+}
+
+/**
+ * Initialize a disclosure widget from every button element
+ * with the `data-disclosure-btn` attribute in a given parent DOM node.
+ *
+ * Use this when you just want the disclosure widgets to work,
+ * but you don't need any references to them.
+ *
+ * @param {ParentNode} parentNode
+ */
+function initializeDisclosures(parentNode = document) {
+  parentNode
     .querySelectorAll("button[data-disclosure-btn]")
-    .forEach((disclosureBtn) => {
-      const ariaExpanded = disclosureBtn.getAttribute("aria-expanded");
-
-      if (!ariaExpanded) {
-        return console.error(
-          `There is no "aria-expanded" attribute on the disclosure button`,
-          disclosureBtn
-        );
-      }
-
-      // Note that aria-expanded has one of three valid values: true, false, undefined (default)
-      if (!(ariaExpanded === "true" || ariaExpanded === "false")) {
-        return console.error(
-          `Disclosure button has an invalid "aria-expanded" attribute value.`,
-          `Valid values are "true" and "false"`,
-          disclosureBtn
-        );
-      }
-
-      const controlledElemId = disclosureBtn.getAttribute("aria-controls");
-
-      if (!controlledElemId) {
-        return console.error(
-          `There is no "aria-controls" attribute on the disclosure button`,
-          disclosureBtn
-        );
-      }
-
-      const controlledElem = domNode.querySelector(`#${controlledElemId}`);
-      const hiddenClass = disclosureBtn.dataset.hiddenClass?.trim();
-
-      if (!hiddenClass) {
-        return console.error(
-          `Disclosure button must have a "data-hidden-class" attribute`,
-          `whose value is the class to toggle on the controlled content`
-        );
-      }
-
-      if (
-        ariaExpanded === "true" &&
-        controlledElem.classList.contains(hiddenClass)
-      ) {
-        return console.error(
-          `Disclosure button has "aria-expanded" attribute set to "true"`,
-          `but its controlled element has the "${hiddenClass}" class`,
-          disclosureBtn,
-          controlledElem
-        );
-      } else if (
-        ariaExpanded === "false" &&
-        !controlledElem.classList.contains(hiddenClass)
-      ) {
-        return console.error(
-          `Disclosure button has "aria-expanded" attribute set to "false"`,
-          `but its controlled element does not have the "${hiddenClass}" class`,
-          disclosureBtn,
-          controlledElem
-        );
-      }
-
-      disclosureBtn.addEventListener("click", function () {
-        handleDisclosureBtnClick(disclosureBtn, controlledElem);
-      });
-    });
+    .forEach((btn) => new Disclosure(btn, parentNode));
 }
 
-function handleDisclosureBtnClick(btn, controlledElem) {
-  // Assume it's guaranteed to exist
-  const hiddenClass = btn.dataset.hiddenClass.trim();
-  const isHidden = controlledElem.classList.toggle(hiddenClass);
-  btn.setAttribute("aria-expanded", !isHidden);
-}
-
-export default initializeDisclosures;
+export { Disclosure, initializeDisclosures };
