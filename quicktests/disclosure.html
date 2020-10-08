@@ -57,7 +57,9 @@
     <h1>General-purpose disclosure widget</h1>
 
     <div class="mb">
-      <button aria-expanded="false" aria-controls="content1" data-disclosure-btn>I'm hiding something!</button>
+      <button aria-expanded="false" aria-controls="content1" data-disclosure-btn data-hidden-class="hidden">
+        I'm hiding something!
+      </button>
       <div id="content1" class="hidden">
         <p>What are you lookin' at?</p>
       </div>
@@ -71,14 +73,13 @@
     </div>
 
     <script>
-      initializeDisclosures(document, "hidden");
+      initializeDisclosures(document);
 
       /**
        * Initialize disclosure widgets in a given DOM node
        * @param {ParentNode} domNode
-       * @param {string} [hiddenClass] - The class to toggle to hide/unhide content
        */
-      function initializeDisclosures(domNode, hiddenClass) {
+      function initializeDisclosures(domNode) {
         domNode.querySelectorAll("button[data-disclosure-btn]").forEach((disclosureBtn) => {
           const ariaExpanded = disclosureBtn.getAttribute("aria-expanded");
           const contentId = disclosureBtn.getAttribute("aria-controls");
@@ -100,6 +101,7 @@
           }
 
           const content = domNode.querySelector(`#${contentId}`);
+          const { hiddenClass } = disclosureBtn.dataset;
 
           if (ariaExpanded === "true" && isElemHidden(content, hiddenClass)) {
             const reason = hiddenClass ? `"${hiddenClass}" class` : `"hidden" attribute`;
@@ -118,19 +120,24 @@
           }
 
           disclosureBtn.addEventListener("click", function () {
-            let isHidden;
-            if (hiddenClass) {
-              isHidden = content.classList.toggle(hiddenClass);
-            } else {
-              isHidden = content.toggleAttribute("hidden");
-            }
-            disclosureBtn.setAttribute("aria-expanded", !isHidden);
+            handleDisclosureBtnClick(disclosureBtn, content);
           });
         });
 
         function isElemHidden(element, hiddenClass) {
           if (hiddenClass) return element.classList.contains(hiddenClass);
           return element.hasAttribute("hidden");
+        }
+
+        function handleDisclosureBtnClick(btn, content) {
+          const { hiddenClass } = btn.dataset;
+          let isHidden;
+          if (hiddenClass) {
+            isHidden = content.classList.toggle(hiddenClass);
+          } else {
+            isHidden = content.toggleAttribute("hidden");
+          }
+          btn.setAttribute("aria-expanded", !isHidden);
         }
       }
     </script>
