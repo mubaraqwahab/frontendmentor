@@ -3,15 +3,14 @@
  *
  * A disclosure widget is identified by a disclosure button;
  * a <button> with a "data-disclosure-btn" (boolean) attribute.
+ *
  * The button is expected to have an "aria-expanded" attribute
  * indicating whether the controlled element is visible or not,
  * and an "aria-controls" attribute whose value is the ID of
  * the controlled element.
  *
- * The button may optionally have a "data-hidden-class" attribute
+ * The button must also have a "data-hidden-class" attribute
  * whose value is the "hidden" class to toggle on the controlled content.
- * If the attribute is absent (or its value is the empty string or whitespace),
- * the HTML "hidden" attribute is used on the controlled content.
  *
  * @param {ParentNode} domNode
  */
@@ -49,29 +48,30 @@ function initializeDisclosures(domNode) {
       const controlledElem = domNode.querySelector(`#${controlledElemId}`);
       const hiddenClass = disclosureBtn.dataset.hiddenClass?.trim();
 
+      if (!hiddenClass) {
+        return console.error(
+          `Disclosure button must have a "data-hidden-class" attribute`,
+          `whose value is the class to toggle on the controlled content`
+        );
+      }
+
       if (
         ariaExpanded === "true" &&
-        isElemHidden(controlledElem, hiddenClass)
+        controlledElem.classList.contains(hiddenClass)
       ) {
-        const reason = hiddenClass
-          ? `"${hiddenClass}" class`
-          : `"hidden" attribute`;
         return console.error(
           `Disclosure button has "aria-expanded" attribute set to "true"`,
-          `but its controlled element has the ${reason}`,
+          `but its controlled element has the "${hiddenClass}" class`,
           disclosureBtn,
           controlledElem
         );
       } else if (
         ariaExpanded === "false" &&
-        !isElemHidden(controlledElem, hiddenClass)
+        !controlledElem.classList.contains(hiddenClass)
       ) {
-        const reason = hiddenClass
-          ? `"${hiddenClass}" class`
-          : `"hidden" attribute`;
         return console.error(
           `Disclosure button has "aria-expanded" attribute set to "false"`,
-          `but its controlled element does not have the ${reason}`,
+          `but its controlled element does not have the "${hiddenClass}" class`,
           disclosureBtn,
           controlledElem
         );
@@ -83,19 +83,10 @@ function initializeDisclosures(domNode) {
     });
 }
 
-function isElemHidden(element, hiddenClass) {
-  if (hiddenClass) return element.classList.contains(hiddenClass);
-  return element.hasAttribute("hidden");
-}
-
 function handleDisclosureBtnClick(btn, controlledElem) {
-  const hiddenClass = btn.dataset.hiddenClass?.trim();
-  let isHidden;
-  if (hiddenClass) {
-    isHidden = controlledElem.classList.toggle(hiddenClass);
-  } else {
-    isHidden = controlledElem.toggleAttribute("hidden");
-  }
+  // Assume it's guaranteed to exist
+  const hiddenClass = btn.dataset.hiddenClass.trim();
+  const isHidden = controlledElem.classList.toggle(hiddenClass);
   btn.setAttribute("aria-expanded", !isHidden);
 }
 

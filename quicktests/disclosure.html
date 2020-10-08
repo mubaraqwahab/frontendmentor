@@ -44,6 +44,11 @@
         box-shadow: 0 0 0 3px rgba(72, 72, 72, 0.5);
       }
 
+      .content {
+        border: 1px solid rgb(72, 72, 72);
+        padding: 0.25rem;
+      }
+
       .hidden {
         display: none;
       }
@@ -55,19 +60,22 @@
   </head>
   <body>
     <h1>General-purpose disclosure widget</h1>
+    <p>This document demonstrates the usage of <code>disclosure.js</code></p>
 
     <div class="mb">
       <button aria-expanded="false" aria-controls="content1" data-disclosure-btn data-hidden-class="hidden">
         I'm hiding something!
       </button>
-      <div id="content1" class="hidden">
+      <div id="content1" class="content hidden">
         <p>What are you lookin' at?</p>
       </div>
     </div>
 
     <div class="mb">
-      <button aria-expanded="true" aria-controls="content2" data-disclosure-btn>Another one</button>
-      <div id="content2">
+      <button aria-expanded="true" aria-controls="content2" data-disclosure-btn data-hidden-class="hidden">
+        Another one
+      </button>
+      <div id="content2" class="content">
         <p>You can't see me 🙈</p>
       </div>
     </div>
