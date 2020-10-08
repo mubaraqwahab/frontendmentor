@@ -19,7 +19,6 @@ function initializeDisclosures(domNode) {
     .querySelectorAll("button[data-disclosure-btn]")
     .forEach((disclosureBtn) => {
       const ariaExpanded = disclosureBtn.getAttribute("aria-expanded");
-      const contentId = disclosureBtn.getAttribute("aria-controls");
 
       if (!ariaExpanded) {
         return console.error(
@@ -37,17 +36,22 @@ function initializeDisclosures(domNode) {
         );
       }
 
-      if (!contentId) {
+      const controlledElemId = disclosureBtn.getAttribute("aria-controls");
+
+      if (!controlledElemId) {
         return console.error(
           `There is no "aria-controls" attribute on the disclosure button`,
           disclosureBtn
         );
       }
 
-      const content = domNode.querySelector(`#${contentId}`);
+      const controlledElem = domNode.querySelector(`#${controlledElemId}`);
       const hiddenClass = disclosureBtn.dataset.hiddenClass?.trim();
 
-      if (ariaExpanded === "true" && isElemHidden(content, hiddenClass)) {
+      if (
+        ariaExpanded === "true" &&
+        isElemHidden(controlledElem, hiddenClass)
+      ) {
         const reason = hiddenClass
           ? `"${hiddenClass}" class`
           : `"hidden" attribute`;
@@ -55,11 +59,11 @@ function initializeDisclosures(domNode) {
           `Disclosure button has "aria-expanded" attribute set to "true"`,
           `but its controlled element has the ${reason}`,
           disclosureBtn,
-          content
+          controlledElem
         );
       } else if (
         ariaExpanded === "false" &&
-        !isElemHidden(content, hiddenClass)
+        !isElemHidden(controlledElem, hiddenClass)
       ) {
         const reason = hiddenClass
           ? `"${hiddenClass}" class`
@@ -68,12 +72,12 @@ function initializeDisclosures(domNode) {
           `Disclosure button has "aria-expanded" attribute set to "false"`,
           `but its controlled element does not have the ${reason}`,
           disclosureBtn,
-          content
+          controlledElem
         );
       }
 
       disclosureBtn.addEventListener("click", function () {
-        handleDisclosureBtnClick(disclosureBtn, content);
+        handleDisclosureBtnClick(disclosureBtn, controlledElem);
       });
     });
 }
@@ -83,13 +87,13 @@ function isElemHidden(element, hiddenClass) {
   return element.hasAttribute("hidden");
 }
 
-function handleDisclosureBtnClick(btn, content) {
+function handleDisclosureBtnClick(btn, controlledElem) {
   const hiddenClass = btn.dataset.hiddenClass?.trim();
   let isHidden;
   if (hiddenClass) {
-    isHidden = content.classList.toggle(hiddenClass);
+    isHidden = controlledElem.classList.toggle(hiddenClass);
   } else {
-    isHidden = content.toggleAttribute("hidden");
+    isHidden = controlledElem.toggleAttribute("hidden");
   }
   btn.setAttribute("aria-expanded", !isHidden);
 }
