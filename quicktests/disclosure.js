@@ -5,7 +5,8 @@
  * a <button> with a "data-disclosure-btn" (boolean) attribute.
  * The button is expected to have an "aria-expanded" attribute
  * indicating whether the controlled element is visible or not,
- * and an "aria-controls" attribute whose value is the ID of the controlled element.
+ * and an "aria-controls" attribute whose value is the ID of
+ * the controlled element.
  *
  * The button may optionally have a "data-hidden-class" attribute
  * whose value is the "hidden" class to toggle on the controlled content.
