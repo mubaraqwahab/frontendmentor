@@ -76,7 +76,19 @@
       initializeDisclosures(document);
 
       /**
-       * Initialize disclosure widgets in a given DOM node
+       * Initialize disclosure widgets in a given DOM node.
+       *
+       * A disclosure widget is identified by a disclosure button;
+       * a <button> with a "data-disclosure-btn" (boolean) attribute.
+       * The button is expected to have an "aria-expanded" attribute
+       * indicating whether the controlled content is open or closed,
+       * and an "aria-controls" attribute whose value is the ID of the controlled content.
+       *
+       * The button may optionally have a "data-hidden-class" attribute
+       * whose value is the "hidden" class to toggle on the controlled content.
+       * If the attribute is absent (or its value is the empty string or whitespace),
+       * the HTML "hidden" attribute is used on the controlled content.
+       *
        * @param {ParentNode} domNode
        */
       function initializeDisclosures(domNode) {
@@ -101,7 +113,7 @@
           }
 
           const content = domNode.querySelector(`#${contentId}`);
-          const { hiddenClass } = disclosureBtn.dataset;
+          const hiddenClass = disclosureBtn.dataset.hiddenClass?.trim();
 
           if (ariaExpanded === "true" && isElemHidden(content, hiddenClass)) {
             const reason = hiddenClass ? `"${hiddenClass}" class` : `"hidden" attribute`;
@@ -130,7 +142,7 @@
         }
 
         function handleDisclosureBtnClick(btn, content) {
-          const { hiddenClass } = btn.dataset;
+          const hiddenClass = btn.dataset.hiddenClass?.trim();
           let isHidden;
           if (hiddenClass) {
             isHidden = content.classList.toggle(hiddenClass);
