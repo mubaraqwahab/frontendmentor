@@ -54,6 +54,10 @@ class Disclosure {
       );
     }
 
+    // Note: unlike before, there's no need to check if the button state
+    // and controlledElement state are out of sync.
+    // Should they be out of sync, they would be re-synced on toggle.
+
     this.button.addEventListener("click", () => this.toggle());
   }
 

@@ -82,6 +82,16 @@
       </div>
     </div>
 
+    <div class="mb">
+      <p>This is out of sync (should be fixed after a toggle):</p>
+      <button aria-expanded="true" aria-controls="content3" data-disclosure-btn data-hidden-class="hidden">
+        Toggle me to fix
+      </button>
+      <div id="content3" class="content hidden">
+        <p>Should be fixed now!</p>
+      </div>
+    </div>
+
     <script type="module">
       import { initializeDisclosures, Disclosure } from "./disclosure.js";
 
