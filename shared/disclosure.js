@@ -98,8 +98,7 @@ class Disclosure {
 
   /**
    * @callback eventListener
-   * @param {Object} event
-   * @param {Object} event.target
+   * @param {{ target: Disclosure }} event
    */
 
   /**
