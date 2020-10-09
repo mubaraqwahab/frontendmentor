@@ -93,12 +93,9 @@
     </div>
 
     <script type="module">
-      import { initializeDisclosures, Disclosure } from "./disclosure.js";
+      import { initializeAll } from "./disclosure.js";
 
-      initializeDisclosures(document);
-
-      // Or manually (if you need references to the disclosures)
-      // document.querySelectorAll("button").forEach((btn) => new Disclosure(btn));
+      const disclosures = initializeAll();
     </script>
   </body>
 </html>

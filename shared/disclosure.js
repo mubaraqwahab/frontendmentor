@@ -15,6 +15,11 @@ class Disclosure {
    * The button must also have a `data-hidden-class` attribute
    * whose value is the "hidden" class to toggle on the controlled content.
    *
+   * Note: Unlike this class, the WAI-ARIA disclosure pattern
+   * doesn't require the disclosure widget to be mounted on
+   * a button element. It also doesn't require that the
+   * `aria-controls` attribute be present on the mount.
+   *
    * @param {HTMLButtonElement} button
    * @param {ParentNode} parentNode
    */
@@ -56,7 +61,7 @@ class Disclosure {
     }
 
     /** @private */
-    this._listeners = {};
+    this._listeners = [];
 
     // Note: unlike before, there's no need to check if the button state
     // and controlledElement state are out of sync.
@@ -82,15 +87,19 @@ class Disclosure {
    * @returns A boolean indicating whether widget is open after toggling.
    */
   toggle(force) {
+    const wasOpen = this.open;
     if (typeof force === "boolean") {
       this.open = force;
     } else {
-      this.open = !this.open;
+      this.open = !wasOpen;
     }
 
-    // Trigger toggle listeners
-    for (const listener of this._listeners.toggle) {
-      listener.call(this, { target: this });
+    if (wasOpen !== this.open) {
+      // Trigger toggle listeners
+      const event = { target: this };
+      for (const listener of this._listeners) {
+        listener.call(this, event);
+      }
     }
 
     return this.open;
@@ -102,62 +111,46 @@ class Disclosure {
    */
 
   /**
-   * Register a listener for a disclosure event.
-   * The only recognized event is "toggle".
-   * @param {"toggle"} type
+   * Register a listener for a disclosure "toggle" event.
    * @param {eventListener} listener
    */
-  addEventListener(type, listener) {
-    // Credit for listener implementaion: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
-    switch (type) {
-      case "toggle":
-        if (!(type in this._listeners)) {
-          this._listeners[type] = [];
-        }
-        this._listeners[type].push(listener);
+  addListener(listener) {
+    // Credit for listener implementation: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+    this._listeners.push(listener);
+  }
+
+  /**
+   * Remove a listener registered using the addListener method.
+   * @param {eventListener} listener
+   */
+  removeListener(listener) {
+    const listeners = this._listeners;
+    for (let i = 0; i < listeners.length; i++) {
+      if (listeners[i] === listener) {
+        listeners.splice(i, 1);
         break;
-      default:
-        throw new Error(`Disclosure event type "${type}" is unknown.`);
+      }
     }
   }
 
   /**
-   * Remove a listener registered using the addEventListener method.
-   * @param {"toggle"} type
-   * @param {eventListener} listener
+   * Initialize a disclosure widget from every button element
+   * with the `data-disclosure-btn` attribute in a given parent DOM node.
+   *
+   * Use this when you just want the disclosure widgets to work,
+   * and you do or don't need any references to them.
+   *
+   * @param {ParentNode} parentNode
+   * @returns An array of the initialized disclosures,
+   * in the order the buttons appear in the DOM.
    */
-  removeEventListener(type, listener) {
-    switch (type) {
-      case "toggle":
-        if (!(type in this._listeners)) {
-          return;
-        }
-        const listeners = this._listeners[type];
-        for (let i = 0; i < listeners.length; i++) {
-          if (listeners[i] === listener) {
-            listeners.splice(i, 1);
-          }
-        }
-        break;
-      default:
-        throw new Error(`Disclosure event type "${type}" is unknown.`);
-    }
+  static initializeAll(parentNode = document) {
+    return [].map.call(
+      parentNode.querySelectorAll("button[data-disclosure-btn]"),
+      (btn) => new Disclosure(btn, parentNode)
+    );
   }
 }
 
-/**
- * Initialize a disclosure widget from every button element
- * with the `data-disclosure-btn` attribute in a given parent DOM node.
- *
- * Use this when you just want the disclosure widgets to work,
- * but you don't need any references to them.
- *
- * @param {ParentNode} parentNode
- */
-function initializeDisclosures(parentNode = document) {
-  parentNode
-    .querySelectorAll("button[data-disclosure-btn]")
-    .forEach((btn) => new Disclosure(btn, parentNode));
-}
-
-export { Disclosure, initializeDisclosures };
+export default Disclosure;
+export const { initializeAll } = Disclosure;
