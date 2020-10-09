@@ -4,7 +4,7 @@
  */
 class Disclosure {
   /**
-   * Initialize a disclosure widget in a given parent DOM node.
+   * Initialize a disclosure widget.
    *
    * A disclosure widget is identified by a disclosure button.
    * The button is expected to have an `aria-expanded` attribute
@@ -21,9 +21,8 @@ class Disclosure {
    * `aria-controls` attribute be present on the mount.
    *
    * @param {HTMLButtonElement} button
-   * @param {ParentNode} parentNode
    */
-  constructor(button, parentNode = document) {
+  constructor(button) {
     this.button = button;
 
     const ariaExpanded = button.getAttribute("aria-expanded");
@@ -44,7 +43,7 @@ class Disclosure {
       );
     }
 
-    this.controlledElement = parentNode.querySelector(`#${controlledId}`);
+    this.controlledElement = document.getElementById(controlledId);
     if (!this.controlledElement) {
       throw new Error(
         `"aria-controls" attribute on disclosure button has value "${controlledId}"` +
@@ -132,23 +131,24 @@ class Disclosure {
   }
 
   /**
-   * Initialize a disclosure widget from every button element
-   * with the `data-disclosure-btn` attribute in a given parent DOM node.
+   * Initialize a disclosure widget from each element matching a selector.
+   * The matching element should be a button.
    *
-   * Use this when you just want the disclosure widgets to work,
-   * and you do or don't need any references to them.
+   * Use this when you just want the disclosure widgets in the DOM to work,
+   * but you don't (or do) need any references to them.
    *
-   * @param {ParentNode} parentNode
+   * @param {string} [selector="button[data-disclosure-btn]"]
    * @returns An array of the initialized disclosures,
    * in the order the buttons appear in the DOM.
    */
-  static initializeAll(parentNode = document) {
+  static initializeAll(selector = "button[data-disclosure-btn]") {
     return [].map.call(
-      parentNode.querySelectorAll("button[data-disclosure-btn]"),
-      (btn) => new Disclosure(btn, parentNode)
+      document.querySelectorAll(selector),
+      (btn) => new Disclosure(btn)
     );
   }
 }
 
 export default Disclosure;
+// You may need to bind this method to Disclosure, if you ever use `this` within it.
 export const { initializeAll } = Disclosure;
