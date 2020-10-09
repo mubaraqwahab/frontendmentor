@@ -44,7 +44,7 @@ class Disclosure {
       );
     }
 
-    this.controlledElement = parentNode.getElementById(controlledId);
+    this.controlledElement = parentNode.querySelector(`#${controlledId}`);
     if (!this.controlledElement) {
       throw new Error(
         `"aria-controls" attribute on disclosure button has value "${controlledId}"` +
@@ -75,33 +75,31 @@ class Disclosure {
   }
 
   set open(bool) {
+    const wasOpen = this.open;
     this.controlledElement.classList.toggle(this._hiddenClass, !bool);
     this.button.setAttribute("aria-expanded", bool);
-  }
-
-  /**
-   * Toggle the visibility of the controlled element of the disclosure widget.
-   *
-   * @param {boolean} [force] - If `true`, the widget will be open.
-   * If `false`, the widget will be closed.
-   * @returns A boolean indicating whether widget is open after toggling.
-   */
-  toggle(force) {
-    const wasOpen = this.open;
-    if (typeof force === "boolean") {
-      this.open = force;
-    } else {
-      this.open = !wasOpen;
-    }
-
-    if (wasOpen !== this.open) {
+    if (wasOpen !== bool) {
       // Trigger toggle listeners
       const event = { target: this };
       for (const listener of this._listeners) {
         listener.call(this, event);
       }
     }
+  }
 
+  /**
+   * Toggle the visibility of (the controlled element of) the disclosure widget.
+   *
+   * @param {boolean} [force] - If absent, open the widget if it's closed
+   * and close it if it's open. If `true`, open the widget, else close the widget.
+   * @returns `true` if the widget is open after toggling, `false` otherwise.
+   */
+  toggle(force) {
+    if (typeof force === "boolean") {
+      this.open = force;
+    } else {
+      this.open = !this.open;
+    }
     return this.open;
   }
 
