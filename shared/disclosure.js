@@ -59,6 +59,8 @@ class Disclosure {
     // Should they be out of sync, they would be re-synced on toggle.
 
     this.button.addEventListener("click", () => this.toggle());
+
+    this._listeners = {};
   }
 
   get open() {
@@ -83,7 +85,43 @@ class Disclosure {
     } else {
       this.open = !this.open;
     }
+
+    for (const listener of this._listeners.toggle) {
+      listener.call(this, { target: this });
+    }
+
     return this.open;
+  }
+
+  addEventListener(type, listener) {
+    switch (type) {
+      case "toggle":
+        if (!(type in this._listeners)) {
+          this._listeners[type] = [];
+        }
+        this._listeners[type].push(listener);
+        break;
+      default:
+        throw new Error(`Disclosure event type "${type}" is unknown.`);
+    }
+  }
+
+  removeEventListener(type, listener) {
+    switch (type) {
+      case "toggle":
+        if (!(type in this._listeners)) {
+          return;
+        }
+        const listeners = this._listeners[type];
+        for (let i = 0; i < listeners.length; i++) {
+          if (listeners[i] === listener) {
+            listeners.splice(i, 1);
+          }
+        }
+        break;
+      default:
+        throw new Error(`Disclosure event type "${type}" is unknown.`);
+    }
   }
 }
 
