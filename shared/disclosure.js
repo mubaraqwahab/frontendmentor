@@ -47,6 +47,7 @@ class Disclosure {
       );
     }
 
+    /** @private */
     this._hiddenClass = button.dataset.hiddenClass?.trim();
     if (!this._hiddenClass) {
       throw new Error(
@@ -54,13 +55,14 @@ class Disclosure {
       );
     }
 
+    /** @private */
+    this._listeners = {};
+
     // Note: unlike before, there's no need to check if the button state
     // and controlledElement state are out of sync.
     // Should they be out of sync, they would be re-synced on toggle.
 
     this.button.addEventListener("click", () => this.toggle());
-
-    this._listeners = {};
   }
 
   get open() {
@@ -86,6 +88,7 @@ class Disclosure {
       this.open = !this.open;
     }
 
+    // Trigger toggle listeners
     for (const listener of this._listeners.toggle) {
       listener.call(this, { target: this });
     }
@@ -93,7 +96,20 @@ class Disclosure {
     return this.open;
   }
 
+  /**
+   * @callback eventListener
+   * @param {Object} event
+   * @param {Object} event.target
+   */
+
+  /**
+   * Register a listener for a disclosure event.
+   * The only recognized event is "toggle".
+   * @param {"toggle"} type
+   * @param {eventListener} listener
+   */
   addEventListener(type, listener) {
+    // Credit for listener implementaion: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
     switch (type) {
       case "toggle":
         if (!(type in this._listeners)) {
@@ -106,6 +122,11 @@ class Disclosure {
     }
   }
 
+  /**
+   * Remove a listener registered using the addEventListener method.
+   * @param {"toggle"} type
+   * @param {eventListener} listener
+   */
   removeEventListener(type, listener) {
     switch (type) {
       case "toggle":
