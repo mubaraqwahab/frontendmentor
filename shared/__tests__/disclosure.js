@@ -48,7 +48,7 @@ describe("API user", () => {
     disclosure.toggle();
     expect(disclosure.open).toBe(false);
 
-    // Force
+    // With `force` param
     disclosure.toggle(false);
     expect(disclosure.open).toBe(false);
   });
@@ -63,7 +63,13 @@ describe("API user", () => {
     expect(mockCallback).toHaveBeenCalledWith({ target: disclosure });
   });
 
-  test("can remove listener", () => {});
+  test("can remove listener", () => {
+    const mockCallback = jest.fn();
+    disclosure.addListener(mockCallback);
+    disclosure.removeListener(mockCallback);
+    disclosure.toggle();
+    expect(mockCallback).toHaveBeenCalledTimes(0);
+  });
 });
 
 describe("Browser user", () => {
