@@ -1,4 +1,4 @@
-const { beforeAll, describe, expect, test } = require("@jest/globals");
+const { beforeAll, describe, expect, test, jest } = require("@jest/globals");
 const { getByText } = require("@testing-library/dom");
 const { default: Disclosure, DisclosureError } = require("../disclosure.js");
 
