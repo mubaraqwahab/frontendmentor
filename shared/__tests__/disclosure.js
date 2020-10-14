@@ -1,4 +1,4 @@
-const { beforeAll, describe, expect, test, jest } = require("@jest/globals");
+const { beforeAll, describe, expect, test } = require("@jest/globals");
 const { getByText } = require("@testing-library/dom");
 const { default: Disclosure, DisclosureError } = require("../disclosure.js");
 
@@ -21,8 +21,8 @@ beforeAll(() => setupDisclosureDOM(document.body));
 
 describe("API user", () => {
   test("can initialize a disclosure", () => {
-    const button = getByText(document, /click/i);
-    const content = getByText(document, /content/i);
+    const button = document.querySelector("button");
+    const content = document.querySelector("[id^='content']");
 
     disclosure = new Disclosure(button);
     expect(disclosure.button).toBe(button);
@@ -34,7 +34,7 @@ describe("API user", () => {
   test("cannot initialize an out-of-sync disclosure", () => {
     const container = document.createElement("div");
     setupDisclosureDOM(container, false);
-    const button = getByText(container, /click/i);
+    const button = container.querySelector("button");
     expect(() => new Disclosure(button, container)).toThrow(DisclosureError);
   });
 
