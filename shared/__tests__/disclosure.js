@@ -1,11 +1,6 @@
 const { beforeAll, describe, expect, test } = require("@jest/globals");
-const {
-  getByLabelText,
-  getByText,
-  queryByTestId,
-  waitFor,
-} = require("@testing-library/dom");
-const Disclosure = require("../disclosure.js").default;
+const { getByText } = require("@testing-library/dom");
+const { default: Disclosure, DisclosureError } = require("../disclosure.js");
 
 function setupDisclosureDOM(container, sync = true, multiple = false) {
   const template = (n) => `
@@ -34,12 +29,13 @@ describe("API user", () => {
     expect(disclosure.controlledElement).toBe(content);
   });
 
+  // TODO: test cannot initialize disclosure from incomplete DOM
+
   test("cannot initialize an out-of-sync disclosure", () => {
     const container = document.createElement("div");
     setupDisclosureDOM(container, false);
     const button = getByText(container, /click/i);
-
-    // expect(() => new Disclosure(button, container)).toThrow();
+    expect(() => new Disclosure(button, container)).toThrow(DisclosureError);
   });
 
   test("can initialize multiple disclosures", () => {
@@ -91,17 +87,3 @@ describe("Browser user", () => {
     expect(disclosure.open).toBe(true);
   });
 });
-
-// test("examples of some things", async () => {
-//   const famousWomanInHistory = "Ada Lovelace";
-//   const container = getExampleDOM();
-
-//   const input = getByLabelText(container, "Username");
-//   input.value = famousWomanInHistory;
-
-//   getByText(container, "Print Username").click();
-
-//   await waitFor(() =>
-//     expect(queryByTestId(container, "printed-username")).toBeTruthy()
-//   );
-// });

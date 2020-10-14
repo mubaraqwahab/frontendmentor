@@ -26,12 +26,15 @@ class Disclosure {
   constructor(button, parentNode = document) {
     this.button = button;
 
-    const ariaExpanded = button.getAttribute("aria-expanded");
-    if (
-      !ariaExpanded ||
-      !(ariaExpanded === "true" || ariaExpanded === "false")
-    ) {
-      throw new Error(
+    const ariaExpandedAttribute = button.getAttribute("aria-expanded");
+    const ariaExpanded =
+      ariaExpandedAttribute === "true"
+        ? true
+        : ariaExpandedAttribute === "false"
+        ? false
+        : undefined;
+    if (typeof ariaExpanded === "undefined") {
+      throw new DisclosureError(
         `"aria-expanded" attribute must be present on a disclosure button` +
           ` and its value must be one of "true" and "false".`
       );
@@ -39,14 +42,14 @@ class Disclosure {
 
     const controlledId = button.getAttribute("aria-controls");
     if (!controlledId) {
-      throw new Error(
+      throw new DisclosureError(
         `"aria-controls" attribute must be present on a disclosure button.`
       );
     }
 
     this.controlledElement = parentNode.querySelector(`#${controlledId}`);
     if (!this.controlledElement) {
-      throw new Error(
+      throw new DisclosureError(
         `"aria-controls" attribute on disclosure button has value "${controlledId}"` +
           ` but there is no element with that ID.`
       );
@@ -55,12 +58,23 @@ class Disclosure {
     /** @private */
     this._hiddenClass = button.dataset.hiddenClass?.trim();
     if (!this._hiddenClass) {
-      throw new Error(
+      throw new DisclosureError(
         `"data-hidden-class" attribute must be present on a disclosure button.`
       );
     }
 
-    // TODO: throw error if button state and controlledElement state are out of sync!
+    const controlledElementHasHiddenClass = this.controlledElement.classList.contains(
+      this._hiddenClass
+    );
+    // If aria expanded === controlled has hidden class, throw
+    if (ariaExpanded === controlledElementHasHiddenClass) {
+      throw new DisclosureError(
+        `"aria-expanded" attribute on disclosure button has value "${ariaExpanded}"` +
+          ` but "${this._hiddenClass}" class is ${
+            controlledElementHasHiddenClass ? "" : "not "
+          }present on controlled element`
+      );
+    }
 
     /** @private */
     this._listeners = [];
@@ -155,3 +169,4 @@ class Disclosure {
 export default Disclosure;
 // You may need to bind this method to Disclosure, if you ever use `this` within it.
 export const { initializeAll } = Disclosure;
+export class DisclosureError extends Error {}
