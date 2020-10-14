@@ -21,8 +21,9 @@ class Disclosure {
    * `aria-controls` attribute be present on the mount.
    *
    * @param {HTMLButtonElement} button
+   * @param {ParentNode} [parentNode=document]
    */
-  constructor(button) {
+  constructor(button, parentNode = document) {
     this.button = button;
 
     const ariaExpanded = button.getAttribute("aria-expanded");
@@ -43,7 +44,7 @@ class Disclosure {
       );
     }
 
-    this.controlledElement = document.getElementById(controlledId);
+    this.controlledElement = parentNode.querySelector(`#${controlledId}`);
     if (!this.controlledElement) {
       throw new Error(
         `"aria-controls" attribute on disclosure button has value "${controlledId}"` +
@@ -136,12 +137,16 @@ class Disclosure {
    * but you don't (or do) need any references to them.
    *
    * @param {string} [selector="button[data-disclosure-btn]"]
+   * @param {ParentNode} [parentNode=document]
    * @returns An array of the initialized disclosures,
    * in the order the buttons appear in the DOM.
    */
-  static initializeAll(selector = "button[data-disclosure-btn]") {
+  static initializeAll(
+    selector = "button[data-disclosure-btn]",
+    parentNode = document
+  ) {
     return [].map.call(
-      document.querySelectorAll(selector),
+      parentNode.querySelectorAll(selector),
       (btn) => new Disclosure(btn)
     );
   }
