@@ -5,7 +5,11 @@ import Disclosure, { DisclosureError } from "../disclosure.js";
 function setup({ inSync = true } = {}) {
   const container = document.createElement("div");
   container.innerHTML = `
-    <button aria-expanded="${!inSync}" aria-controls="content" data-hidden-class="hidden">
+    <button
+      aria-expanded="${!inSync}"
+      aria-controls="content"
+      data-hidden-class="hidden"
+    >
       Click me!
     </button>
     <div id="content" class="hidden">
