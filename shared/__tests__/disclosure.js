@@ -38,7 +38,7 @@ describe("API user", () => {
     setupDisclosureDOM(container, false);
     const button = getByText(container, /click/i);
 
-    expect(() => new Disclosure(button)).toThrow();
+    // expect(() => new Disclosure(button)).toThrow();
   });
 
   test("can initialize multiple disclosures", () => {});
@@ -54,18 +54,22 @@ describe("API user", () => {
   });
 
   test("can add listener", () => {
-    // Consider sync and async
+    const mockCallback = jest.fn();
+
+    disclosure.addListener(mockCallback);
+    disclosure.toggle();
+
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+    expect(mockCallback).toHaveBeenCalledWith({ target: disclosure });
   });
 
   test("can remove listener", () => {});
 });
 
 describe("Browser user", () => {
-  test("can toggle a disclosure", async () => {
+  test("can toggle a disclosure", () => {
     disclosure.open = false;
-
-    const button = getByText(document, /click/i);
-    button.click();
+    getByText(document, /click/i).click();
     expect(disclosure.open).toBe(true);
   });
 });
