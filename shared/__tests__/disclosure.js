@@ -4,6 +4,7 @@ const {
   queryByTestId,
   waitFor,
 } = require("@testing-library/dom");
+const Disclosure = require("../disclosure.js");
 
 function getExampleDOM() {
   const div = document.createElement("div");
@@ -25,6 +26,12 @@ function getExampleDOM() {
   });
   return div;
 }
+
+describe("API user", () => {
+  test("can initialize a closed disclosure", () => {});
+
+  test("can initialize a open disclosure", () => {});
+});
 
 test("examples of some things", async () => {
   const famousWomanInHistory = "Ada Lovelace";
