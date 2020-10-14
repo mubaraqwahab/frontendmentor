@@ -7,15 +7,16 @@ const {
 } = require("@testing-library/dom");
 const Disclosure = require("../disclosure.js").default;
 
-function setupDisclosureDOM(container, sync = true) {
-  container.innerHTML = `
-    <button aria-expanded="${!sync}" aria-controls="content" data-disclosure-btn data-hidden-class="hidden">
+function setupDisclosureDOM(container, sync = true, multiple = false) {
+  const template = (n) => `
+    <button aria-expanded="${!sync}" aria-controls="content${n}" data-hidden-class="hidden">
       Click me!
     </button>
-    <div id="content" class="hidden">
+    <div id="content${n}" class="hidden">
       You're seeing the disclosure content
     </div>
   `;
+  container.innerHTML = multiple ? template(1) + template(2) : template(1);
 }
 
 /** @type {Disclosure} */
@@ -38,10 +39,19 @@ describe("API user", () => {
     setupDisclosureDOM(container, false);
     const button = getByText(container, /click/i);
 
-    // expect(() => new Disclosure(button)).toThrow();
+    // expect(() => new Disclosure(button, container)).toThrow();
   });
 
-  test("can initialize multiple disclosures", () => {});
+  test("can initialize multiple disclosures", () => {
+    const container = document.createElement("div");
+    setupDisclosureDOM(container, true, true);
+
+    const disclosures = Disclosure.initializeAll("button", container);
+
+    expect(disclosures).toHaveLength(2);
+    expect(disclosures[0]).toBeInstanceOf(Disclosure);
+    expect(disclosures[1]).toBeInstanceOf(Disclosure);
+  });
 
   test("can toggle a disclosure", () => {
     disclosure.open = true;
@@ -65,9 +75,11 @@ describe("API user", () => {
 
   test("can remove listener", () => {
     const mockCallback = jest.fn();
+
     disclosure.addListener(mockCallback);
     disclosure.removeListener(mockCallback);
     disclosure.toggle();
+
     expect(mockCallback).toHaveBeenCalledTimes(0);
   });
 });

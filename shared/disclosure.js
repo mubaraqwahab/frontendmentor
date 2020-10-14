@@ -4,7 +4,7 @@
  */
 class Disclosure {
   /**
-   * Initialize a disclosure widget.
+   * Initialize a disclosure widget in a parent DOM node.
    *
    * A disclosure widget is identified by a disclosure button.
    * The button is expected to have an `aria-expanded` attribute
@@ -21,8 +21,9 @@ class Disclosure {
    * `aria-controls` attribute be present on the mount.
    *
    * @param {HTMLButtonElement} button
+   * @param {ParentNode} [parentNode=document]
    */
-  constructor(button) {
+  constructor(button, parentNode = document) {
     this.button = button;
 
     const ariaExpanded = button.getAttribute("aria-expanded");
@@ -43,7 +44,7 @@ class Disclosure {
       );
     }
 
-    this.controlledElement = document.getElementById(controlledId);
+    this.controlledElement = parentNode.querySelector(`#${controlledId}`);
     if (!this.controlledElement) {
       throw new Error(
         `"aria-controls" attribute on disclosure button has value "${controlledId}"` +
@@ -129,20 +130,24 @@ class Disclosure {
   }
 
   /**
-   * Initialize a disclosure widget from each element matching a selector.
-   * The matching element should be a button.
+   * Initialize a disclosure widget from each element matching a selector
+   * in a parent DOM node. The matching element should be a button.
    *
    * Use this when you just want the disclosure widgets in the DOM to work,
    * but you don't (or do) need any references to them.
    *
    * @param {string} [selector="button[data-disclosure-btn]"]
+   * @param {ParentNode} [parentNode=document]
    * @returns An array of the initialized disclosures,
    * in the order the buttons appear in the DOM.
    */
-  static initializeAll(selector = "button[data-disclosure-btn]") {
+  static initializeAll(
+    selector = "button[data-disclosure-btn]",
+    parentNode = document
+  ) {
     return [].map.call(
-      document.querySelectorAll(selector),
-      (btn) => new Disclosure(btn)
+      parentNode.querySelectorAll(selector),
+      (btn) => new Disclosure(btn, parentNode)
     );
   }
 }
