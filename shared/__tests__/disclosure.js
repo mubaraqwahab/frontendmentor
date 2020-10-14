@@ -1,4 +1,4 @@
-const { describe, expect, test } = require("@jest/globals");
+const { beforeAll, describe, expect, test } = require("@jest/globals");
 const {
   getByLabelText,
   getByText,
@@ -7,8 +7,8 @@ const {
 } = require("@testing-library/dom");
 const Disclosure = require("../disclosure.js").default;
 
-function setupDisclosureDOM(sync = true) {
-  document.body.innerHTML = `
+function setupDisclosureDOM(container, sync = true) {
+  container.innerHTML = `
     <button aria-expanded="${!sync}" aria-controls="content" data-disclosure-btn data-hidden-class="hidden">
       Click me!
     </button>
@@ -18,29 +18,27 @@ function setupDisclosureDOM(sync = true) {
   `;
 }
 
+/** @type {Disclosure} */
+let disclosure;
+
+beforeAll(() => setupDisclosureDOM(document.body));
+
 describe("API user", () => {
-  setupDisclosureDOM();
-
-  /** @type {Disclosure} */
-  let disclosure;
-
   test("can initialize a disclosure", () => {
     const button = getByText(document, /click/i);
     const content = getByText(document, /content/i);
 
-    disclosure = new Disclosure(button, document);
+    disclosure = new Disclosure(button);
     expect(disclosure.button).toBe(button);
     expect(disclosure.controlledElement).toBe(content);
   });
 
   test("cannot initialize an out-of-sync disclosure", () => {
-    setupDisclosureDOM(false);
-    const button = getByText(document, /click/i);
+    const container = document.createElement("div");
+    setupDisclosureDOM(container, false);
+    const button = getByText(container, /click/i);
 
-    // expect(() => new Disclosure(button, outOfSyncContainer)).toThrow();
-
-    // Return back to normal
-    setupDisclosureDOM();
+    expect(() => new Disclosure(button)).toThrow();
   });
 
   test("can initialize multiple disclosures", () => {});
@@ -63,7 +61,13 @@ describe("API user", () => {
 });
 
 describe("Browser user", () => {
-  test("can toggle a disclosure", () => {});
+  test("can toggle a disclosure", async () => {
+    disclosure.open = false;
+
+    const button = getByText(document, /click/i);
+    button.click();
+    expect(disclosure.open).toBe(true);
+  });
 });
 
 // test("examples of some things", async () => {
