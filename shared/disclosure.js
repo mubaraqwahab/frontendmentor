@@ -150,14 +150,14 @@ class Disclosure {
    * Use this when you just want the disclosure widgets in the DOM to work,
    * but you don't (or do) need any references to them.
    *
-   * @param {string} [selector="button[data-disclosure-btn]"]
    * @param {ParentNode} [parentNode=document]
+   * @param {string} [selector="button[data-disclosure-btn]"]
    * @returns An array of the initialized disclosures,
    * in the order the buttons appear in the DOM.
    */
   static initializeAll(
-    selector = "button[data-disclosure-btn]",
-    parentNode = document
+    parentNode = document,
+    selector = "button[data-disclosure-btn]"
   ) {
     return [].map.call(
       parentNode.querySelectorAll(selector),

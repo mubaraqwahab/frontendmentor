@@ -1,4 +1,4 @@
-const { beforeAll, describe, expect, test } = require("@jest/globals");
+const { beforeAll, expect, test } = require("@jest/globals");
 const { getByText } = require("@testing-library/dom");
 const { default: Disclosure, DisclosureError } = require("../disclosure.js");
 
@@ -41,7 +41,7 @@ test("can initialize multiple disclosures", () => {
   const container = document.createElement("div");
   setupDisclosureDOM(container, true, true);
 
-  const disclosures = Disclosure.initializeAll("button", container);
+  const disclosures = Disclosure.initializeAll(container, "button");
 
   expect(disclosures).toHaveLength(2);
   expect(disclosures[0]).toBeInstanceOf(Disclosure);
