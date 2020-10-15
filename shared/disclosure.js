@@ -82,7 +82,10 @@ class Disclosure {
   }
 
   get open() {
-    return this.button.getAttribute("aria-expanded") === "true";
+    return (
+      this.button.getAttribute("aria-expanded") === "true" &&
+      !this.controlledElement.classList.contains(this._hiddenClass)
+    );
   }
 
   set open(bool) {
