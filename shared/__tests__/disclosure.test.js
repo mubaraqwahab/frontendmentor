@@ -1,6 +1,6 @@
 import { expect, test } from "@jest/globals";
 import { getByText } from "@testing-library/dom";
-import Disclosure, { DisclosureError } from "../disclosure.js";
+import Disclosure from "../disclosure.js";
 
 function setup({ inSync = true } = {}) {
   const container = document.createElement("div");
@@ -34,11 +34,111 @@ test("can initialize a disclosure", () => {
   expect(disclosure.controlledElement).toBe(content);
 });
 
-// TODO: test cannot initialize disclosure from incomplete DOM i.e.: when:
-// aria-expanded or aria-controls or data-hidden-class, or controlled elem is missing
+test("cannot initialize disclosure from invalid DOM", () => {
+  const container = document.createElement("div");
+  container.innerHTML = `
+    <!-- No aria-expanded -->
+    <button
+      id="noAriaExpanded"
+      aria-controls="content1"
+      data-hidden-class="hidden"
+    >
+      Click me!
+    </button>
+    <div id="content1" class="hidden">
+      You're seeing the disclosure content
+    </div>
 
-test("cannot initialize an out-of-sync disclosure", () => {
-  expect(() => setup({ inSync: false })).toThrow(DisclosureError);
+    <!-- Invalid aria-expanded -->
+    <button
+      id="invalidAriaExpanded"
+      aria-expanded="hi"
+      aria-controls="content2"
+      data-hidden-class="hidden"
+    >
+      Click me!
+    </button>
+    <div id="content2" class="hidden">
+      You're seeing the disclosure content
+    </div>
+
+    <!-- No aria-controls -->
+    <button
+      id="noAriaControls"
+      aria-expanded="false"
+      data-hidden-class="hidden"
+    >
+      Click me!
+    </button>
+    <div id="content3" class="hidden">
+      You're seeing the disclosure content
+    </div>
+
+    <!-- Invalid aria-controls -->
+    <button
+      id="invalidAriaControls"
+      aria-expanded="false"
+      aria-controls="content44"
+      data-hidden-class="hidden"
+    >
+      Click me!
+    </button>
+    <div id="content4" class="hidden">
+      You're seeing the disclosure content
+    </div>
+
+    <!-- No data-hidden-class -->
+    <button
+      id="noDataHiddenClass"
+      aria-expanded="false"
+      aria-controls="content5"
+    >
+      Click me!
+    </button>
+    <div id="content5" class="hidden">
+      You're seeing the disclosure content
+    </div>
+
+    <!-- Out-of-sync -->
+    <button
+      id="outOfSync"
+      aria-expanded="true"
+      aria-controls="content6"
+      data-hidden-class="hidden"
+    >
+      Click me!
+    </button>
+    <div id="content6" class="hidden">
+      You're seeing the disclosure content
+    </div>
+  `;
+
+  expect(
+    () => new Disclosure(container.querySelector("#noAriaExpanded"), container)
+  ).toThrow(/aria-expanded.*must be present/i);
+
+  expect(
+    () =>
+      new Disclosure(container.querySelector("#invalidAriaExpanded"), container)
+  ).toThrow(/aria-expanded.*must be.*true.*false/i);
+
+  expect(
+    () => new Disclosure(container.querySelector("#noAriaControls"), container)
+  ).toThrow(/aria-controls.*must be present/i);
+
+  expect(
+    () =>
+      new Disclosure(container.querySelector("#invalidAriaControls"), container)
+  ).toThrow(/aria-controls.*no element.*id/i);
+
+  expect(
+    () =>
+      new Disclosure(container.querySelector("#noDataHiddenClass"), container)
+  ).toThrow(/data-hidden-class.*must be present/i);
+
+  expect(
+    () => new Disclosure(container.querySelector("#outOfSync"), container)
+  ).toThrow(/aria-expanded.*value.*class.*present/i);
 });
 
 test("can initialize multiple disclosures", () => {
