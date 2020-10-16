@@ -6,7 +6,7 @@ function setup() {
   const container = document.createElement("div");
   container.innerHTML = `
     <button
-      aria-expanded="${!inSync}"
+      aria-expanded="false"
       aria-controls="content"
       data-hidden-class="hidden"
     >
