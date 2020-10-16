@@ -83,9 +83,9 @@
     </div>
 
     <div class="mb">
-      <p>This is out of sync (should be fixed after a toggle):</p>
+      <p>This is out of sync (should fail to toggle; check console):</p>
       <button aria-expanded="true" aria-controls="content3" data-disclosure-btn data-hidden-class="hidden">
-        Toggle me to fix
+        You can't toggle me!
       </button>
       <div id="content3" class="content hidden">
         <p>Should be fixed now!</p>
@@ -96,6 +96,7 @@
       import { initializeAll } from "./disclosure.js";
 
       const disclosures = initializeAll();
+      // Make it global so you can play with it from the browser's console.
       window.disclosures = disclosures;
     </script>
   </body>
