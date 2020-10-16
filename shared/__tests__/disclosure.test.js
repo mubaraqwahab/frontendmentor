@@ -2,7 +2,7 @@ import { expect, test } from "@jest/globals";
 import { getByText } from "@testing-library/dom";
 import Disclosure from "../disclosure.js";
 
-function setup({ inSync = true } = {}) {
+function setup() {
   const container = document.createElement("div");
   container.innerHTML = `
     <button
