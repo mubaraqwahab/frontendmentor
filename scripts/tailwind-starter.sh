@@ -123,3 +123,7 @@ echo "{
     }
   ]
 }" > .prettierrc
+
+# Git ignore node_modules and output.css
+echo "node_modules
+output.css" > .gitignore
