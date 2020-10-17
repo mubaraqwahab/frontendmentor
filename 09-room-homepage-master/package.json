@@ -1,0 +1,24 @@
+{
+  "name": "09-room-homepage-master",
+  "version": "1.0.0",
+  "description": "![Design preview for the Room homepage coding challenge](./design/desktop-preview.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "start": "postcss main.css --output output.css --watch",
+    "build": "NODE_ENV=production postcss main.css --output output.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.0.1",
+    "cssnano": "^4.1.10",
+    "postcss": "^8.1.1",
+    "postcss-cli": "^8.1.0",
+    "tailwindcss": "^1.9.4"
+  },
+  "devDependencies": {
+    "stylelint-config-recommended": "^3.0.0"
+  }
+}
