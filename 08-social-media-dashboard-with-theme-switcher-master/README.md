@@ -2,6 +2,8 @@
 
 ![Design preview for the Social media dashboard with theme switcher coding challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/08-social-media-dashboard-with-theme-switcher-master/).
+
 In this challenge, I created a theme switcher (my first :)). The implementation is primarily based on the [CSS Tricks article: A Complete Guide to Dark Mode on the Web](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/). Briefly, here's how it works:
 
 When you visit the page for the first time, it uses your operating system's (OS) theme. If, for example, you have your OS's dark mode turned on, you would see the page in the dark theme. When you change the theme of the page, your preferred theme would be saved in your [browser's local storage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). So the next time you visit the page, you'd see it in your preferred theme.
