@@ -45,8 +45,8 @@ shareBtn.addEventListener("click", () => toggleShareTooltip());
 
 // When user clicks outside share tooltip (but not on share btn), close share tooltip.
 document.addEventListener("click", function (e) {
-  const isTooltipClicked = e.target.closest("." + shareTooltipClass) !== null;
-  const isShareButtonClicked = e.target.closest("." + shareBtnClass) !== null;
+  const isTooltipClicked = shareTooltip.contains(e.target);
+  const isShareButtonClicked = shareBtn.contains(e.target);
 
   if (!isTooltipClicked && !isShareButtonClicked) {
     toggleShareTooltip(false);
@@ -74,10 +74,7 @@ shareTooltip
       // (See https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
       const nextFocused = e.relatedTarget;
 
-      // Hide the tooltip if the next focused isn't in the tooltip
-      // Note here: the tooltip isn't hidden when next focused === null
-      // i.e. when the next focused is outside the current document
-      if (nextFocused && !nextFocused.closest("." + shareTooltipClass)) {
+      if (!shareTooltip.contains(nextFocused)) {
         toggleShareTooltip(false);
       }
     });
