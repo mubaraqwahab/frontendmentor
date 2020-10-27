@@ -94,6 +94,10 @@ class Disclosure {
     this.button.setAttribute("aria-expanded", bool);
     if (wasOpen !== bool) {
       // Trigger toggle listeners
+      // Interesting note here:
+      // The same event object is passed to all listeners when a toggle happens.
+      // This is consistent with how native events are handled (at least on Chrome).
+      // Also note that a new event object is created for every toggle.
       const event = { target: this };
       for (const listener of this._listeners) {
         listener.call(this, event);
