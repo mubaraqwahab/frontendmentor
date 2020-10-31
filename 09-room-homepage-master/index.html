@@ -7,36 +7,39 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link rel="stylesheet" href="output.css" />
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;600;700&display=swap" rel="stylesheet" />
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const closedNav = document.querySelector("data-closed-nav");
-        const openNav = document.querySelector("data-open-nav");
+    <script type="module">
+      import Disclosure from "../shared/disclosure.js";
 
-        const navCloseBtn = openNav.querySelector("data-nav-toggle");
-        const navOpenBtn = closedNav.querySelector("data-nav-toggle");
-
-        navOpenBtn.addEventListener("click", function () {});
-        navCloseBtn.addEventListener("click", function () {});
+      const navDisclosure = new Disclosure(document.querySelector("[data-disclosure-btn]"));
+      navDisclosure.addListener(function (e) {
+        const toggleBtn = e.target.button;
+        const menuIcon = toggleBtn.querySelector("[data-menu-icon]");
+        const closeIcon = toggleBtn.querySelector("[data-close-icon]");
+        // const
+        if (e.target.open) {
+          // Hide menu icon
+          menuIcon.classList.add("hidden");
+          // Show close icon
+          closeIcon.classList.remove("hidden");
+        } else {
+          // Hide close icon
+          closeIcon.classList.add("hidden");
+          // Show menu icon
+          menuIcon.classList.remove("hidden");
+        }
       });
     </script>
   </head>
   <body>
     <header class="bg-transparent absolute top-0 left-0 right-0">
-      <div class="container flex items-center relative py-12" data-closed-nav>
+      <div class="container flex items-center relative py-12">
         <!-- absolute is necessary so that the logo is in the viewport center -->
-        <button class="p-1 absolute" data-nav-toggle>
-          <span class="sr-only">Open navigation</span>
-          <svg width="20" height="14" xmlns="http://www.w3.org/2000/svg">
+        <button class="p-1 absolute" aria-controls="nav" aria-expanded="true" data-hidden-class="hidden" data-disclosure-btn>
+          <span class="sr-only">Toggle navigation</span>
+          <svg width="20" height="14" xmlns="http://www.w3.org/2000/svg" data-menu-icon>
             <path d="M20 12v2H0v-2h20zm0-6v2H0V6h20zm0-6v2H0V0h20z" fill="#FFF" fill-rule="evenodd" />
           </svg>
-        </button>
-        <a href="" class="w-full flex-auto"><img class="mx-auto" src="images/logo.svg" alt="room home" /></a>
-      </div>
-      <!-- TODO: Hide this on document (js) load? -->
-      <div class="container flex justify-between items-center relative py-12 bg-white text-black" data-open-nav>
-        <button class="p-1" data-nav-toggle>
-          <span class="sr-only">Close navigation</span>
-          <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+          <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" data-close-icon>
             <path
               d="M14.364.222l1.414 1.414L9.414 8l6.364 6.364-1.414 1.414L8 9.414l-6.364 6.364-1.414-1.414L6.586 8 .222 1.636 1.636.222 8 6.586 14.364.222z"
               fill="#000"
@@ -45,7 +48,7 @@
             />
           </svg>
         </button>
-        <nav>
+        <nav id="nav">
           <ul class="flex lowercase font-bold">
             <li class="mr-8"><a href="">Home</a></li>
             <li class="mr-8"><a href="">Shop</a></li>
@@ -53,6 +56,7 @@
             <li class=""><a href="">Contact</a></li>
           </ul>
         </nav>
+        <a href="" class="w-full flex-auto"><img class="mx-auto" src="images/logo.svg" alt="room home" /></a>
       </div>
     </header>
 
