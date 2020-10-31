@@ -3,10 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    font-size: 12px;
+  }
 }
 
 @layer components {
 }
 
 @layer utilities {
+  .-order-1 {
+    order: -1;
+  }
 }
