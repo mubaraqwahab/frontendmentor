@@ -603,11 +603,13 @@ h1 {
 }
 
 h2 {
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-weight: 700;
+  font-size: 1.125rem;
   --text-opacity: 1;
   color: #000;
   color: rgba(0, 0, 0, var(--text-opacity));
+  letter-spacing: 0.4em;
+  margin-bottom: 1rem;
 }
 
 p {
@@ -654,6 +656,21 @@ p {
 
 .slide--current {
   display: block;
+}
+
+.slide__image {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 360px;
+}
+
+.carousel-controls {
+  display: flex;
+  position: absolute;
+  right: 0;
+  /* Note: On mobile (width 375px), image height = 360px, controls height = 60px. */
+  top: 300px;
 }
 
 .space-y-0 > :not(template) ~ :not(template) {
@@ -5566,13 +5583,6 @@ p {
   left: 0;
 }
 
-.inset-50 {
-  top: 50%;
-  right: 50%;
-  bottom: 50%;
-  left: 50%;
-}
-
 .inset-auto {
   top: auto;
   right: auto;
@@ -5588,16 +5598,6 @@ p {
 .inset-x-0 {
   right: 0;
   left: 0;
-}
-
-.inset-y-50 {
-  top: 50%;
-  bottom: 50%;
-}
-
-.inset-x-50 {
-  right: 50%;
-  left: 50%;
 }
 
 .inset-y-auto {
@@ -5624,22 +5624,6 @@ p {
 
 .left-0 {
   left: 0;
-}
-
-.top-50 {
-  top: 50%;
-}
-
-.right-50 {
-  right: 50%;
-}
-
-.bottom-50 {
-  bottom: 50%;
-}
-
-.left-50 {
-  left: 50%;
 }
 
 .top-auto {
@@ -6114,14 +6098,10 @@ p {
 }
 
 .tracking-wider {
-  letter-spacing: 0.05em;
+  letter-spacing: 0.4em;
 }
 
 .tracking-widest {
-  letter-spacing: 0.1em;
-}
-
-.tracking-ultrawide {
   letter-spacing: 0.8em;
 }
 
@@ -9240,6 +9220,14 @@ p {
 
 .-order-1 {
   order: -1;
+}
+
+.outline-transparent {
+  outline: 1px solid transparent;
+}
+
+.focus\:outline-transparent:focus {
+  outline: 1px solid transparent;
 }
 
 @media (min-width: 640px) {
@@ -14185,13 +14173,6 @@ p {
     left: 0;
   }
 
-  .sm\:inset-50 {
-    top: 50%;
-    right: 50%;
-    bottom: 50%;
-    left: 50%;
-  }
-
   .sm\:inset-auto {
     top: auto;
     right: auto;
@@ -14207,16 +14188,6 @@ p {
   .sm\:inset-x-0 {
     right: 0;
     left: 0;
-  }
-
-  .sm\:inset-y-50 {
-    top: 50%;
-    bottom: 50%;
-  }
-
-  .sm\:inset-x-50 {
-    right: 50%;
-    left: 50%;
   }
 
   .sm\:inset-y-auto {
@@ -14243,22 +14214,6 @@ p {
 
   .sm\:left-0 {
     left: 0;
-  }
-
-  .sm\:top-50 {
-    top: 50%;
-  }
-
-  .sm\:right-50 {
-    right: 50%;
-  }
-
-  .sm\:bottom-50 {
-    bottom: 50%;
-  }
-
-  .sm\:left-50 {
-    left: 50%;
   }
 
   .sm\:top-auto {
@@ -14733,14 +14688,10 @@ p {
   }
 
   .sm\:tracking-wider {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.4em;
   }
 
   .sm\:tracking-widest {
-    letter-spacing: 0.1em;
-  }
-
-  .sm\:tracking-ultrawide {
     letter-spacing: 0.8em;
   }
 
@@ -22735,13 +22686,6 @@ p {
     left: 0;
   }
 
-  .md\:inset-50 {
-    top: 50%;
-    right: 50%;
-    bottom: 50%;
-    left: 50%;
-  }
-
   .md\:inset-auto {
     top: auto;
     right: auto;
@@ -22757,16 +22701,6 @@ p {
   .md\:inset-x-0 {
     right: 0;
     left: 0;
-  }
-
-  .md\:inset-y-50 {
-    top: 50%;
-    bottom: 50%;
-  }
-
-  .md\:inset-x-50 {
-    right: 50%;
-    left: 50%;
   }
 
   .md\:inset-y-auto {
@@ -22793,22 +22727,6 @@ p {
 
   .md\:left-0 {
     left: 0;
-  }
-
-  .md\:top-50 {
-    top: 50%;
-  }
-
-  .md\:right-50 {
-    right: 50%;
-  }
-
-  .md\:bottom-50 {
-    bottom: 50%;
-  }
-
-  .md\:left-50 {
-    left: 50%;
   }
 
   .md\:top-auto {
@@ -23283,14 +23201,10 @@ p {
   }
 
   .md\:tracking-wider {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.4em;
   }
 
   .md\:tracking-widest {
-    letter-spacing: 0.1em;
-  }
-
-  .md\:tracking-ultrawide {
     letter-spacing: 0.8em;
   }
 
@@ -31285,13 +31199,6 @@ p {
     left: 0;
   }
 
-  .lg\:inset-50 {
-    top: 50%;
-    right: 50%;
-    bottom: 50%;
-    left: 50%;
-  }
-
   .lg\:inset-auto {
     top: auto;
     right: auto;
@@ -31307,16 +31214,6 @@ p {
   .lg\:inset-x-0 {
     right: 0;
     left: 0;
-  }
-
-  .lg\:inset-y-50 {
-    top: 50%;
-    bottom: 50%;
-  }
-
-  .lg\:inset-x-50 {
-    right: 50%;
-    left: 50%;
   }
 
   .lg\:inset-y-auto {
@@ -31343,22 +31240,6 @@ p {
 
   .lg\:left-0 {
     left: 0;
-  }
-
-  .lg\:top-50 {
-    top: 50%;
-  }
-
-  .lg\:right-50 {
-    right: 50%;
-  }
-
-  .lg\:bottom-50 {
-    bottom: 50%;
-  }
-
-  .lg\:left-50 {
-    left: 50%;
   }
 
   .lg\:top-auto {
@@ -31833,14 +31714,10 @@ p {
   }
 
   .lg\:tracking-wider {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.4em;
   }
 
   .lg\:tracking-widest {
-    letter-spacing: 0.1em;
-  }
-
-  .lg\:tracking-ultrawide {
     letter-spacing: 0.8em;
   }
 
@@ -39835,13 +39712,6 @@ p {
     left: 0;
   }
 
-  .xl\:inset-50 {
-    top: 50%;
-    right: 50%;
-    bottom: 50%;
-    left: 50%;
-  }
-
   .xl\:inset-auto {
     top: auto;
     right: auto;
@@ -39857,16 +39727,6 @@ p {
   .xl\:inset-x-0 {
     right: 0;
     left: 0;
-  }
-
-  .xl\:inset-y-50 {
-    top: 50%;
-    bottom: 50%;
-  }
-
-  .xl\:inset-x-50 {
-    right: 50%;
-    left: 50%;
   }
 
   .xl\:inset-y-auto {
@@ -39893,22 +39753,6 @@ p {
 
   .xl\:left-0 {
     left: 0;
-  }
-
-  .xl\:top-50 {
-    top: 50%;
-  }
-
-  .xl\:right-50 {
-    right: 50%;
-  }
-
-  .xl\:bottom-50 {
-    bottom: 50%;
-  }
-
-  .xl\:left-50 {
-    left: 50%;
   }
 
   .xl\:top-auto {
@@ -40383,14 +40227,10 @@ p {
   }
 
   .xl\:tracking-wider {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.4em;
   }
 
   .xl\:tracking-widest {
-    letter-spacing: 0.1em;
-  }
-
-  .xl\:tracking-ultrawide {
     letter-spacing: 0.8em;
   }
 

@@ -58,7 +58,10 @@
       <div data-controller="carousel" data-carousel-index="0" data-carousel-current-class="slide--current">
         <div id="carousel" aria-live="polite">
           <div class="slide" data-target="carousel.slide">
-            <img src="images/desktop-image-hero-1.jpg" alt="" />
+            <picture>
+              <source media="(min-width: 640px)" srcset="images/desktop-image-hero-1.jpg" />
+              <img src="images/mobile-image-hero-1.jpg" alt="" class="slide__image" />
+            </picture>
             <div class="container py-20">
               <h1>Discover innovative ways to decorate</h1>
               <p>
@@ -67,7 +70,7 @@
                 you love.
               </p>
               <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold">
-                <span class="mr-10 tracking-ultrawide">Shop now</span>
+                <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
@@ -79,7 +82,10 @@
             </div>
           </div>
           <div class="slide" data-target="carousel.slide">
-            <img src="images/desktop-image-hero-2.jpg" alt="" />
+            <picture>
+              <source media="(min-width: 640px)" srcset="images/desktop-image-hero-2.jpg" />
+              <img src="images/mobile-image-hero-2.jpg" alt="" class="slide__image" />
+            </picture>
             <div class="container py-20">
               <h1>We are available all across the globe</h1>
               <p>
@@ -87,7 +93,7 @@
                 cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don't hesitate to contact us today.
               </p>
               <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold">
-                <span class="mr-10 tracking-ultrawide">Shop now</span>
+                <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
@@ -99,7 +105,10 @@
             </div>
           </div>
           <div class="slide" data-target="carousel.slide">
-            <img src="images/desktop-image-hero-3.jpg" alt="" />
+            <picture>
+              <source media="(min-width: 640px)" srcset="images/desktop-image-hero-3.jpg" />
+              <img src="images/mobile-image-hero-3.jpg" alt="" class="slide__image" />
+            </picture>
             <div class="container py-20">
               <h1>Manufactured with the best materials</h1>
               <p>
@@ -108,7 +117,7 @@
                 customers want for their home and office.
               </p>
               <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold">
-                <span class="mr-10 tracking-ultrawide">Shop now</span>
+                <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
@@ -120,14 +129,20 @@
             </div>
           </div>
         </div>
-        <div role="group" aria-controls="carousel" class="flex">
-          <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#prevSlide">
+        <div role="group" aria-controls="carousel" class="carousel-controls">
+          <button
+            class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark focus:outline-transparent focus:shadow-outline"
+            data-action="click->carousel#prevSlide"
+          >
             <span class="sr-only">Previous slide</span>
             <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 0L1 12l12 12" stroke="#FFF" fill="none" fill-rule="evenodd" />
             </svg>
           </button>
-          <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#nextSlide">
+          <button
+            class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark focus:outline-transparent focus:shadow-outline"
+            data-action="click->carousel#nextSlide"
+          >
             <span class="sr-only">Next slide</span>
             <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 0l12 12L1 24" stroke="#FFF" fill="none" fill-rule="evenodd" />
@@ -136,9 +151,9 @@
         </div>
       </div>
       <section>
-        <img src="images/image-about-dark.jpg" alt="" />
-        <div>
-          <h2>About our furniture</h2>
+        <img class="w-full" src="images/image-about-dark.jpg" alt="" />
+        <div class="container py-16">
+          <h2 class="uppercase">About our furniture</h2>
           <p>
             Our multifunctional collection blends design and function to suit your individual taste. Make each room unique, or pick a cohesive theme
             that best express your interests and what inspires you. Find the furniture pieces you need, from traditional to contemporary styles or

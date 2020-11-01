@@ -12,10 +12,8 @@ module.exports = {
         "0": 0,
       },
       letterSpacing: {
-        ultrawide: "0.8em",
-      },
-      inset: {
-        "50": "50%",
+        wider: "0.4em",
+        widest: "0.8em",
       },
     },
     container: {
@@ -45,4 +43,19 @@ module.exports = {
     cursor: ({ after }) => after(["disabled"]),
   },
   plugins: [],
+};
+
+// Breakpoints
+const a = {
+  sm: "640px",
+  // => @media (min-width: 640px) { ... }
+
+  md: "768px",
+  // => @media (min-width: 768px) { ... }
+
+  lg: "1024px",
+  // => @media (min-width: 1024px) { ... }
+
+  xl: "1280px",
+  // => @media (min-width: 1280px) { ... }
 };

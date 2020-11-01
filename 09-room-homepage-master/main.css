@@ -13,7 +13,7 @@
   }
 
   h2 {
-    @apply font-semibold text-2xl text-black;
+    @apply font-bold text-lg text-black tracking-wider mb-4;
   }
 
   p {
@@ -29,10 +29,27 @@
   .slide--current {
     @apply block;
   }
+
+  .slide__image {
+    @apply w-full object-cover;
+    height: 360px;
+  }
+
+  .carousel-controls {
+    @apply flex absolute right-0;
+    /* Note: On mobile (width 375px), image height = 360px, controls height = 60px. */
+    top: 300px;
+  }
 }
 
 @layer utilities {
   .-order-1 {
     order: -1;
+  }
+
+  @variants focus {
+    .outline-transparent {
+      outline: 1px solid transparent;
+    }
   }
 }
