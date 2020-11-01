@@ -1,6 +1,10 @@
 import { Application, Controller } from "stimulus";
 
-class DisclosureController extends Controller {}
+class DisclosureController extends Controller {
+  connect() {
+    console.log("Hey, Stimulus");
+  }
+}
 
 class CarouselController extends Controller {}
 
