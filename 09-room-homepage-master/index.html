@@ -7,28 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link rel="stylesheet" href="output.css" />
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;600;700&display=swap" rel="stylesheet" />
-    <script type="module">
-      import Disclosure from "../shared/disclosure.js";
-
-      const navDisclosure = new Disclosure(document.querySelector("[data-disclosure-btn]"));
-      navDisclosure.addListener(function (e) {
-        const toggleBtn = e.target.button;
-        const menuIcon = toggleBtn.querySelector("[data-menu-icon]");
-        const closeIcon = toggleBtn.querySelector("[data-close-icon]");
-        // const
-        if (e.target.open) {
-          // Hide menu icon
-          menuIcon.classList.add("hidden");
-          // Show close icon
-          closeIcon.classList.remove("hidden");
-        } else {
-          // Hide close icon
-          closeIcon.classList.add("hidden");
-          // Show menu icon
-          menuIcon.classList.remove("hidden");
-        }
-      });
-    </script>
+    <script src="js/bundle.js" defer></script>
   </head>
   <body>
     <header class="bg-transparent absolute top-0 left-0 right-0">
