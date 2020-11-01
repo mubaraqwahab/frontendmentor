@@ -55,7 +55,7 @@
     </header>
 
     <main>
-      <div data-controller="carousel" data-carousel-index="0">
+      <div data-controller="carousel" data-carousel-index="0" data-carousel-current-class="slide--current">
         <div id="carousel" aria-live="polite">
           <div class="slide" data-target="carousel.slide">
             <img src="images/desktop-image-hero-1.jpg" alt="" />
@@ -121,22 +121,13 @@
           </div>
         </div>
         <div role="group" aria-controls="carousel" class="flex">
-          <button
-            class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark disabled:bg-gray-dark disabled:cursor-auto"
-            data-target="carousel.prevBtn"
-            data-action="click->carousel#prevSlide"
-            disabled
-          >
+          <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#prevSlide">
             <span class="sr-only">Previous slide</span>
             <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 0L1 12l12 12" stroke="#FFF" fill="none" fill-rule="evenodd" />
             </svg>
           </button>
-          <button
-            class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark disabled:bg-gray-dark disabled:cursor-auto"
-            data-target="carousel.nextBtn"
-            data-action="click->carousel#nextSlide"
-          >
+          <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#nextSlide">
             <span class="sr-only">Next slide</span>
             <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 0l12 12L1 24" stroke="#FFF" fill="none" fill-rule="evenodd" />

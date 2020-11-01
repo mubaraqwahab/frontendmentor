@@ -46,7 +46,7 @@ class NavigationController extends Controller {
 }
 
 class CarouselController extends Controller {
-  static targets = ["slide", "prevBtn", "nextBtn"];
+  static targets = ["slide"];
 
   connect() {
     this.showCurrentSlide();
@@ -61,23 +61,28 @@ class CarouselController extends Controller {
   }
 
   get index() {
-    return parseInt(this.data.get("index"), 10) || 0;
+    return parseInt(this.data.get("index"), 10);
   }
 
-  set index(i) {
+  set index(value) {
     this.prevIndex = this.index;
-    this.data.set("index", i);
+
+    // Index should never underflow/overflow
+    let normalizedIndex =
+      value < 0
+        ? value + this.slideTargets.length
+        : value % this.slideTargets.length;
+
+    this.data.set("index", normalizedIndex);
     this.showCurrentSlide();
   }
 
   showCurrentSlide() {
+    const currentClass = this.data.get("current-class");
     // Remove current class from previous slide
-    this.slideTargets[this.prevIndex]?.classList.remove("slide--current");
-
-    this.slideTargets[this.index].classList.add("slide--current");
-
-    this.prevBtnTarget.disabled = this.index === 0;
-    this.nextBtnTarget.disabled = this.index === this.slideTargets.length - 1;
+    this.slideTargets[this.prevIndex]?.classList.remove(currentClass);
+    // Add it to the new slide
+    this.slideTargets[this.index].classList.add(currentClass);
   }
 }
 
