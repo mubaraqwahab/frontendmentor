@@ -31,7 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo \"**NOTICE:** Don't forget to build files before pushing!\""
+      "pre-commit": "echo \"\n**NOTICE:** Don't forget to build files before pushing!\"\n"
     }
   }
 }
