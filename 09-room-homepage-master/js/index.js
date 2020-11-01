@@ -1,7 +1,8 @@
-import { Application } from "stimulus";
+import { Application, Controller } from "stimulus";
 
-import DisclosureController from "./disclosure_controller";
-import CarouselController from "./carousel_controller";
+class DisclosureController extends Controller {}
+
+class CarouselController extends Controller {}
 
 const application = Application.start();
 application.register("disclosure", DisclosureController);
