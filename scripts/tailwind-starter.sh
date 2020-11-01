@@ -124,5 +124,6 @@ echo "{
   ]
 }" > .prettierrc
 
-# Git ignore node_modules and output.css
+# Git ignore node_modules
+# NOTE: Don't ignore generated (CSS and JS) files so it's available for GitHub Pages
 echo "node_modules" > .gitignore
