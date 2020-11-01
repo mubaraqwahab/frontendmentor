@@ -19,6 +19,10 @@
   p {
     @apply text-gray-dark;
   }
+
+  :focus {
+    @apply outline-transparent shadow-outline !important;
+  }
 }
 
 @layer components {

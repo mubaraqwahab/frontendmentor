@@ -55,7 +55,22 @@
     </header>
 
     <main>
+      <!-- TODO: Slide transitions -->
       <div data-controller="carousel" data-carousel-index="0" data-carousel-current-class="slide--current">
+        <div role="group" aria-controls="carousel" class="carousel-controls">
+          <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#prevSlide">
+            <span class="sr-only">Previous slide</span>
+            <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 0L1 12l12 12" stroke="#FFF" fill="none" fill-rule="evenodd" />
+            </svg>
+          </button>
+          <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#nextSlide">
+            <span class="sr-only">Next slide</span>
+            <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0l12 12L1 24" stroke="#FFF" fill="none" fill-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
         <div id="carousel" aria-live="polite">
           <div class="slide" data-target="carousel.slide">
             <picture>
@@ -69,12 +84,12 @@
                 bringing your vision to life. Create a room in your own style with our collection and make your property a reflection of you and what
                 you love.
               </p>
-              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold">
+              <a href="" class="inline-flex mt-12 py-2 uppercase items-center text-black font-semibold hover:text-gray-dark">
                 <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
-                    fill="#000"
+                    fill="currentColor"
                     fill-rule="nonzero"
                   />
                 </svg>
@@ -92,12 +107,12 @@
                 With stores all over the world, it's easy for you to find furniture for your home or place of business. Locally, we’re in most major
                 cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don't hesitate to contact us today.
               </p>
-              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold">
+              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold hover:text-gray-dark">
                 <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
-                    fill="#000"
+                    fill="currentColor"
                     fill-rule="nonzero"
                   />
                 </svg>
@@ -116,38 +131,18 @@
                 product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what
                 customers want for their home and office.
               </p>
-              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold">
+              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold hover:text-gray-dark">
                 <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
-                    fill="#000"
+                    fill="currentColor"
                     fill-rule="nonzero"
                   />
                 </svg>
               </a>
             </div>
           </div>
-        </div>
-        <div role="group" aria-controls="carousel" class="carousel-controls">
-          <button
-            class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark focus:outline-transparent focus:shadow-outline"
-            data-action="click->carousel#prevSlide"
-          >
-            <span class="sr-only">Previous slide</span>
-            <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 0L1 12l12 12" stroke="#FFF" fill="none" fill-rule="evenodd" />
-            </svg>
-          </button>
-          <button
-            class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark focus:outline-transparent focus:shadow-outline"
-            data-action="click->carousel#nextSlide"
-          >
-            <span class="sr-only">Next slide</span>
-            <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 0l12 12L1 24" stroke="#FFF" fill="none" fill-rule="evenodd" />
-            </svg>
-          </button>
         </div>
       </div>
       <section>

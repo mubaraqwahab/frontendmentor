@@ -618,6 +618,11 @@ p {
   color: rgba(160.65, 160.65, 160.65, var(--text-opacity));
 }
 
+:focus {
+  outline: 1px solid transparent !important;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5) !important;
+}
+
 .container {
   width: 100%;
   margin-right: auto;
