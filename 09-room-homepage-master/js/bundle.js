@@ -1661,6 +1661,7 @@
        * @param {ParentNode} [parentNode=document]
        */
       constructor(button, parentNode = document) {
+        /** The disclosure button element */
         this.button = button;
 
         const ariaExpandedAttribute = button.getAttribute("aria-expanded");
@@ -1684,6 +1685,11 @@
           );
         }
 
+        /**
+         * The controlled element of the disclosure.
+         * The `aria-controls` attribute on the disclosure button must contain the ID of this element.
+         * The "hidden" class is toggled on this element.
+         */
         this.controlledElement = parentNode.querySelector(`#${controlledId}`);
         if (!this.controlledElement) {
           throw new Error(
@@ -1692,6 +1698,10 @@
           );
         }
 
+        /**
+         * The "hidden" class to be toggled on the controlled element.
+         * It is derived from the value of the `data-hidden-class` attribute on the disclosure button.
+         */
         this.hiddenClass = button.dataset.hiddenClass?.trim();
         if (!this.hiddenClass) {
           throw new Error(
@@ -1711,7 +1721,7 @@
           );
         }
 
-        /** @private */
+        /** @private Event listeners for a disclosure instance. */
         this._listeners = [];
 
         this.button.addEventListener("click", () => this.toggle());
@@ -1758,13 +1768,14 @@
       }
 
       /**
-       * @callback eventListener
-       * @param {{ target: Disclosure }} event
+       * @callback EventListener
+       * @param {object} event
+       * @param {Disclosure} event.target - The Disclosure instance on which the listener was attached.
        */
 
       /**
        * Register a listener for a disclosure "toggle" event.
-       * @param {eventListener} listener
+       * @param {EventListener} listener
        */
       addListener(listener) {
         // Credit for listener implementation: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
@@ -1773,7 +1784,7 @@
 
       /**
        * Remove a listener registered using the addListener method.
-       * @param {eventListener} listener
+       * @param {EventListener} listener
        */
       removeListener(listener) {
         const listeners = this._listeners;
@@ -1852,7 +1863,41 @@
       }
     }
 
-    class CarouselController extends Controller {}
+    class CarouselController extends Controller {
+      static targets = ["slide", "prevBtn", "nextBtn"];
+
+      connect() {
+        this.showCurrentSlide();
+      }
+
+      prevSlide() {
+        this.index--;
+      }
+
+      nextSlide() {
+        this.index++;
+      }
+
+      get index() {
+        return parseInt(this.data.get("index"), 10) || 0;
+      }
+
+      set index(i) {
+        this.prevIndex = this.index;
+        this.data.set("index", i);
+        this.showCurrentSlide();
+      }
+
+      showCurrentSlide() {
+        // Remove current class from previous slide
+        this.slideTargets[this.prevIndex]?.classList.remove("slide--current");
+
+        this.slideTargets[this.index].classList.add("slide--current");
+
+        this.prevBtnTarget.disabled = this.index === 0;
+        this.nextBtnTarget.disabled = this.index === this.slideTargets.length - 1;
+      }
+    }
 
     const application = Application.start();
     application.register("navigation", NavigationController);

@@ -5,10 +5,30 @@
 @layer base {
   :root {
     font-size: 12px;
+    @apply font-medium;
+  }
+
+  h1 {
+    @apply font-bold text-4xl text-black leading-none tracking-tight mb-6;
+  }
+
+  h2 {
+    @apply font-semibold text-2xl text-black;
+  }
+
+  p {
+    @apply text-gray-dark;
   }
 }
 
 @layer components {
+  .slide {
+    @apply hidden;
+  }
+
+  .slide--current {
+    @apply block;
+  }
 }
 
 @layer utilities {

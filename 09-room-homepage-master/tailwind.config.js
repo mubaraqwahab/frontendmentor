@@ -11,9 +11,15 @@ module.exports = {
       order: {
         "0": 0,
       },
+      letterSpacing: {
+        ultrawide: "0.8em",
+      },
+      inset: {
+        "50": "50%",
+      },
     },
     container: {
-      padding: spacing["6"],
+      padding: spacing["8"],
       center: true,
     },
     colors: {
@@ -34,6 +40,9 @@ module.exports = {
       bold: 700,
     },
   },
-  variants: {},
+  variants: {
+    backgroundColor: ({ after }) => after(["disabled"]),
+    cursor: ({ after }) => after(["disabled"]),
+  },
   plugins: [],
 };

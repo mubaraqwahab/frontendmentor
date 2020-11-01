@@ -45,7 +45,41 @@ class NavigationController extends Controller {
   }
 }
 
-class CarouselController extends Controller {}
+class CarouselController extends Controller {
+  static targets = ["slide", "prevBtn", "nextBtn"];
+
+  connect() {
+    this.showCurrentSlide();
+  }
+
+  prevSlide() {
+    this.index--;
+  }
+
+  nextSlide() {
+    this.index++;
+  }
+
+  get index() {
+    return parseInt(this.data.get("index"), 10) || 0;
+  }
+
+  set index(i) {
+    this.prevIndex = this.index;
+    this.data.set("index", i);
+    this.showCurrentSlide();
+  }
+
+  showCurrentSlide() {
+    // Remove current class from previous slide
+    this.slideTargets[this.prevIndex]?.classList.remove("slide--current");
+
+    this.slideTargets[this.index].classList.add("slide--current");
+
+    this.prevBtnTarget.disabled = this.index === 0;
+    this.nextBtnTarget.disabled = this.index === this.slideTargets.length - 1;
+  }
+}
 
 const application = Application.start();
 application.register("navigation", NavigationController);
