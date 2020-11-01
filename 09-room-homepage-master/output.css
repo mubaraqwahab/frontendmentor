@@ -597,7 +597,7 @@ h1 {
   --text-opacity: 1;
   color: #000;
   color: rgba(0, 0, 0, var(--text-opacity));
-  line-height: 1;
+  line-height: 1.25;
   letter-spacing: -0.025em;
   margin-bottom: 1.5rem;
 }
