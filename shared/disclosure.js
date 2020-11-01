@@ -158,30 +158,28 @@ class Disclosure {
       }
     }
   }
-
-  /**
-   * Initialize a disclosure widget from each element matching a selector
-   * in a parent DOM node. The matching element should be a button.
-   *
-   * Use this when you just want the disclosure widgets in the DOM to work,
-   * but you don't (or do) need any references to them.
-   *
-   * @param {ParentNode} [parentNode=document]
-   * @param {string} [selector="button[data-disclosure-btn]"]
-   * @returns An array of the initialized disclosures,
-   * in the order the buttons appear in the DOM.
-   */
-  static initializeAll(
-    parentNode = document,
-    selector = "button[data-disclosure-btn]"
-  ) {
-    return [].map.call(
-      parentNode.querySelectorAll(selector),
-      (btn) => new Disclosure(btn, parentNode)
-    );
-  }
 }
 
-export default Disclosure;
-// You may need to bind this method to Disclosure, if you ever use `this` within it.
-export const { initializeAll } = Disclosure;
+/**
+ * Initialize a disclosure widget from each element matching a selector
+ * in a parent DOM node. The matching element should be a button.
+ *
+ * Use this when you just want the disclosure widgets in the DOM to work,
+ * but you don't (or do) need any references to them.
+ *
+ * @param {ParentNode} [parentNode=document]
+ * @param {string} [selector="button[data-disclosure-btn]"]
+ * @returns An array of the initialized disclosures,
+ * in the order the buttons appear in the DOM.
+ */
+function initializeAll(
+  parentNode = document,
+  selector = "button[data-disclosure-btn]"
+) {
+  return [].map.call(
+    parentNode.querySelectorAll(selector),
+    (btn) => new Disclosure(btn, parentNode)
+  );
+}
+
+export { Disclosure as default, initializeAll };

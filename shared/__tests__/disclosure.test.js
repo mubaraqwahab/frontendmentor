@@ -1,6 +1,6 @@
 import { expect, test } from "@jest/globals";
 import { getByText } from "@testing-library/dom";
-import Disclosure from "../disclosure.js";
+import Disclosure, { initializeAll } from "../disclosure.js";
 
 function setup() {
   const container = document.createElement("div");
@@ -181,7 +181,7 @@ test("can initialize multiple disclosures", () => {
     </div>
   `;
 
-  const disclosures = Disclosure.initializeAll(container);
+  const disclosures = initializeAll(container);
 
   expect(disclosures).toHaveLength(2);
   expect(disclosures[0]).toBeInstanceOf(Disclosure);
