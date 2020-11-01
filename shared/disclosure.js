@@ -55,21 +55,20 @@ class Disclosure {
       );
     }
 
-    /** @private */
-    this._hiddenClass = button.dataset.hiddenClass?.trim();
-    if (!this._hiddenClass) {
+    this.hiddenClass = button.dataset.hiddenClass?.trim();
+    if (!this.hiddenClass) {
       throw new Error(
         `"data-hidden-class" attribute must be present on a disclosure button.`
       );
     }
 
     const controlledElementHasHiddenClass = this.controlledElement.classList.contains(
-      this._hiddenClass
+      this.hiddenClass
     );
     if (ariaExpanded === controlledElementHasHiddenClass) {
       throw new Error(
         `"aria-expanded" attribute on disclosure button has value "${ariaExpanded}"` +
-          ` but "${this._hiddenClass}" class is ${
+          ` but "${this.hiddenClass}" class is ${
             controlledElementHasHiddenClass ? "" : "not "
           }present on controlled element`
       );
@@ -84,13 +83,13 @@ class Disclosure {
   get open() {
     return (
       this.button.getAttribute("aria-expanded") === "true" &&
-      !this.controlledElement.classList.contains(this._hiddenClass)
+      !this.controlledElement.classList.contains(this.hiddenClass)
     );
   }
 
   set open(bool) {
     const wasOpen = this.open;
-    this.controlledElement.classList.toggle(this._hiddenClass, !bool);
+    this.controlledElement.classList.toggle(this.hiddenClass, !bool);
     this.button.setAttribute("aria-expanded", bool);
     if (wasOpen !== bool) {
       // Trigger toggle listeners
