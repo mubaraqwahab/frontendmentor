@@ -20,8 +20,9 @@
     @apply text-gray-dark;
   }
 
-  :focus {
-    @apply outline-transparent shadow-outline !important;
+  *:focus {
+    outline: 1px solid transparent !important;
+    @apply shadow-outline !important;
   }
 }
 
@@ -49,11 +50,5 @@
 @layer utilities {
   .-order-1 {
     order: -1;
-  }
-
-  @variants focus {
-    .outline-transparent {
-      outline: 1px solid transparent;
-    }
   }
 }
