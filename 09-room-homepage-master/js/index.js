@@ -50,6 +50,9 @@ class CarouselController extends Controller {
 
   connect() {
     this.showCurrentSlide();
+    // The carousel controls are hidden in the markup.
+    // Unhide them on connecting the carousel to this controller.
+    // Progressive enhancement ish.
     this.controlsTarget.classList.remove("hidden");
   }
 

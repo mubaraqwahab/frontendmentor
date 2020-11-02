@@ -45,14 +45,6 @@
     /* Note: On mobile (width 375px), image height = 360px, controls height = 60px. */
     top: 300px;
   }
-
-  .carousel-controls--hidden {
-    /*
-    The controls will be hidden initially and only unhidden when JS kicks in.
-    Progessive enhancement ish.
-    */
-    @apply hidden;
-  }
 }
 
 @layer utilities {
