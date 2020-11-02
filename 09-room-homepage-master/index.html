@@ -11,7 +11,7 @@
   </head>
   <body>
     <header class="bg-transparent absolute top-0 left-0 right-0">
-      <div class="container flex items-center relative px-6 py-12" data-controller="navigation">
+      <div class="container flex flex-wrap items-center relative px-6 py-12" data-controller="navigation">
         <!-- `absolute` is necessary so that the logo is in the viewport center -->
         <button class="p-1 absolute z-10" aria-controls="nav" aria-expanded="false" data-target="navigation.button" data-hidden-class="hidden">
           <span class="sr-only">Toggle navigation</span>
@@ -58,7 +58,7 @@
     <main>
       <!-- TODO: Slide transitions -->
       <div data-controller="carousel" data-carousel-index="0" data-carousel-current-class="slide--current">
-        <div role="group" aria-controls="carousel" class="carousel-controls">
+        <div role="group" aria-controls="carousel" class="carousel-controls hidden" data-target="carousel.controls">
           <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#prevSlide">
             <span class="sr-only">Previous slide</span>
             <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +73,7 @@
           </button>
         </div>
         <div id="carousel" aria-live="polite">
-          <div class="slide" data-target="carousel.slide">
+          <div class="slide slide--current" data-target="carousel.slide">
             <picture>
               <source media="(min-width: 640px)" srcset="images/desktop-image-hero-1.jpg" />
               <img src="images/mobile-image-hero-1.jpg" alt="" class="slide__image" />
@@ -156,7 +156,7 @@
             anything in between. Product specialists are available to help you create your dream space.
           </p>
         </div>
-        <img src="images/image-about-light.jpg" alt="" />
+        <img class="w-full" src="images/image-about-light.jpg" alt="" />
       </section>
     </main>
   </body>

@@ -46,10 +46,11 @@ class NavigationController extends Controller {
 }
 
 class CarouselController extends Controller {
-  static targets = ["slide"];
+  static targets = ["slide", "controls"];
 
   connect() {
     this.showCurrentSlide();
+    this.controlsTarget.classList.remove("hidden");
   }
 
   prevSlide() {
