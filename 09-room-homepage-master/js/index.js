@@ -2,7 +2,9 @@ import { Application, Controller } from "stimulus";
 import Disclosure from "../../shared/disclosure";
 
 class NavigationController extends Controller {
-  static targets = ["button", "menuIcon", "closeIcon", "body"];
+  static get targets() {
+    return ["button", "menuIcon", "closeIcon", "body"];
+  }
 
   connect() {
     this.disclosure = new Disclosure(this.buttonTarget);
@@ -46,7 +48,9 @@ class NavigationController extends Controller {
 }
 
 class CarouselController extends Controller {
-  static targets = ["slide", "controls"];
+  static get targets() {
+    return ["slide", "controls"];
+  }
 
   connect() {
     this.showCurrentSlide();
