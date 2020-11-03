@@ -10,11 +10,11 @@
     <script src="js/bundle.js" defer></script>
   </head>
   <body>
-    <div class="relative z-50 hidden font-bold uppercase text-center text-3xl p-2 text-white bg-black md:block">Not complete on this screen!</div>
-    <header class="bg-transparent absolute top-0 left-0 right-0">
+    <div class="relative z-50 hidden font-bold uppercase text-center text-3xl p-2 text-white bg-black xl:block">Not complete on desktop screen!</div>
+    <header class="bg-transparent absolute top-0 left-0 right-0 z-10">
       <div class="flex flex-wrap items-center relative px-6 py-12" data-controller="navigation">
         <!-- `absolute` is necessary so that the logo is in the viewport center -->
-        <button class="p-1 absolute z-10" aria-controls="nav" aria-expanded="false" data-target="navigation.button" data-hidden-class="hidden">
+        <button class="p-1 absolute z-20" aria-controls="nav" aria-expanded="false" data-target="navigation.button" data-hidden-class="hidden">
           <span class="sr-only">Toggle navigation</span>
           <svg aria-hidden="true" focusable="false" width="20" height="14" xmlns="http://www.w3.org/2000/svg" data-target="navigation.menuIcon">
             <path d="M20 12v2H0v-2h20zm0-6v2H0V6h20zm0-6v2H0V0h20z" fill="#FFF" fill-rule="evenodd" />
@@ -58,7 +58,7 @@
 
     <main>
       <!-- TODO: Slide transitions -->
-      <div data-controller="carousel" data-carousel-index="0" data-carousel-current-class="slide--current">
+      <div class="relative" data-controller="carousel" data-carousel-index="0" data-carousel-current-class="slide--current">
         <div role="group" aria-controls="carousel" class="carousel-controls hidden" data-target="carousel.controls">
           <button class="bg-black px-8 py-6 rounded-none hover:bg-gray-very-dark" data-action="click->carousel#prevSlide">
             <span class="sr-only">Previous slide</span>
@@ -109,7 +109,7 @@
                 With stores all over the world, it's easy for you to find furniture for your home or place of business. Locally, we’re in most major
                 cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don't hesitate to contact us today.
               </p>
-              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold hover:text-gray-dark">
+              <a href="" class="inline-flex mt-12 py-2 uppercase items-center text-black font-semibold hover:text-gray-dark">
                 <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -133,7 +133,7 @@
                 product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what
                 customers want for their home and office.
               </p>
-              <a href="" class="inline-flex mt-16 uppercase items-center text-black font-semibold hover:text-gray-dark">
+              <a href="" class="inline-flex mt-12 py-2 uppercase items-center text-black font-semibold hover:text-gray-dark">
                 <span class="mr-10 tracking-widest">Shop now</span>
                 <svg class="" aria-hidden="true" focusable="false" width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -148,7 +148,7 @@
         </div>
       </div>
       <section class="xl:flex">
-        <img class="w-full xl:w-auto" src="images/image-about-dark.jpg" alt="" />
+        <img class="w-full object-cover" src="images/image-about-dark.jpg" alt="" />
         <div class="px-8 py-16 xl:px-16 xl:py-24">
           <h2 class="uppercase">About our furniture</h2>
           <p>
@@ -157,7 +157,7 @@
             anything in between. Product specialists are available to help you create your dream space.
           </p>
         </div>
-        <img class="w-full xl:w-auto" src="images/image-about-light.jpg" alt="" />
+        <img class="w-full object-cover" src="images/image-about-light.jpg" alt="" />
       </section>
     </main>
   </body>

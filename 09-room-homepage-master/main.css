@@ -58,13 +58,12 @@
     }
 
     .slide__image {
-      @apply h-auto object-fill;
+      @apply h-full;
     }
 
     .carousel-controls {
-      top: 474px;
-      left: 60%;
-      right: initial;
+      @apply bottom-0 top-auto;
+      left: calc(0.6 * 100vw);
     }
   }
 }

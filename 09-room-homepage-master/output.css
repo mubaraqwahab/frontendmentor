@@ -692,15 +692,13 @@ p {
   }
 
   .slide__image {
-    height: auto;
-    -o-object-fit: fill;
-       object-fit: fill;
+    height: 100%;
   }
 
   .carousel-controls {
-    top: 474px;
-    left: 60%;
-    right: initial;
+    bottom: 0;
+    top: auto;
+    left: calc(0.6 * 100vw);
   }
 }
 
