@@ -12,6 +12,12 @@
     @apply font-bold text-4xl text-black leading-tight tracking-tight mb-6;
   }
 
+  @screen xl {
+    h1 {
+      @apply text-5xl leading-none mb-8;
+    }
+  }
+
   h2 {
     @apply font-bold text-lg text-black tracking-wider mb-4;
   }
@@ -44,6 +50,22 @@
     @apply flex absolute right-0;
     /* Note: On mobile (width 375px), image height = 360px, controls height = 60px. */
     top: 300px;
+  }
+
+  @screen xl {
+    .slide--current {
+      @apply flex;
+    }
+
+    .slide__image {
+      @apply h-auto object-fill;
+    }
+
+    .carousel-controls {
+      top: 474px;
+      left: 60%;
+      right: initial;
+    }
   }
 }
 

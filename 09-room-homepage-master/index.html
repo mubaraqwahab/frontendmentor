@@ -10,8 +10,9 @@
     <script src="js/bundle.js" defer></script>
   </head>
   <body>
+    <div class="relative z-50 hidden font-bold uppercase text-center text-3xl p-2 text-white bg-black md:block">Not complete on this screen!</div>
     <header class="bg-transparent absolute top-0 left-0 right-0">
-      <div class="container flex flex-wrap items-center relative px-6 py-12" data-controller="navigation">
+      <div class="flex flex-wrap items-center relative px-6 py-12" data-controller="navigation">
         <!-- `absolute` is necessary so that the logo is in the viewport center -->
         <button class="p-1 absolute z-10" aria-controls="nav" aria-expanded="false" data-target="navigation.button" data-hidden-class="hidden">
           <span class="sr-only">Toggle navigation</span>
@@ -78,7 +79,7 @@
               <source media="(min-width: 640px)" srcset="images/desktop-image-hero-1.jpg" />
               <img src="images/mobile-image-hero-1.jpg" alt="" class="slide__image" />
             </picture>
-            <div class="container py-20">
+            <div class="px-8 py-20 xl:w-2/5 xl:px-32 xl:py-40">
               <h1>Discover innovative ways to decorate</h1>
               <p>
                 We provide unmatched quality, comfort, and style for property owners across the country. Our experts combine form andnfunction in
@@ -102,7 +103,7 @@
               <source media="(min-width: 640px)" srcset="images/desktop-image-hero-2.jpg" />
               <img src="images/mobile-image-hero-2.jpg" alt="" class="slide__image" />
             </picture>
-            <div class="container py-20">
+            <div class="px-8 py-20 xl:w-2/5 xl:px-32 xl:py-40">
               <h1>We are available all across the globe</h1>
               <p>
                 With stores all over the world, it's easy for you to find furniture for your home or place of business. Locally, we’re in most major
@@ -125,7 +126,7 @@
               <source media="(min-width: 640px)" srcset="images/desktop-image-hero-3.jpg" />
               <img src="images/mobile-image-hero-3.jpg" alt="" class="slide__image" />
             </picture>
-            <div class="container py-20">
+            <div class="px-8 py-20 xl:w-2/5 xl:px-32 xl:py-40">
               <h1>Manufactured with the best materials</h1>
               <p>
                 Our modern furniture store provide a high level of quality. Our company has invested in advanced technology to ensure that every
@@ -146,9 +147,9 @@
           </div>
         </div>
       </div>
-      <section>
-        <img class="w-full" src="images/image-about-dark.jpg" alt="" />
-        <div class="container py-16">
+      <section class="xl:flex">
+        <img class="w-full xl:w-auto" src="images/image-about-dark.jpg" alt="" />
+        <div class="px-8 py-16 xl:px-16 xl:py-24">
           <h2 class="uppercase">About our furniture</h2>
           <p>
             Our multifunctional collection blends design and function to suit your individual taste. Make each room unique, or pick a cohesive theme
@@ -156,7 +157,7 @@
             anything in between. Product specialists are available to help you create your dream space.
           </p>
         </div>
-        <img class="w-full" src="images/image-about-light.jpg" alt="" />
+        <img class="w-full xl:w-auto" src="images/image-about-light.jpg" alt="" />
       </section>
     </main>
   </body>
