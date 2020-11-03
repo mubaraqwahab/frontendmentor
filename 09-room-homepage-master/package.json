@@ -26,12 +26,6 @@
     "tailwindcss": "^1.9.4"
   },
   "devDependencies": {
-    "husky": "^4.3.0",
     "stylelint-config-recommended": "^3.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"\n**NOTICE:** Don't forget to build files before pushing!\n\""
-    }
   }
 }
