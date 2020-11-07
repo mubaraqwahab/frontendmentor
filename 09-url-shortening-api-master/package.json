@@ -23,6 +23,7 @@
     "rollup": "^2.33.1",
     "rollup-plugin-terser": "^7.0.2",
     "stimulus": "^1.1.1",
+    "svgstore": "^3.0.0-2",
     "tailwindcss": "^1.9.6"
   },
   "devDependencies": {
