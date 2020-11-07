@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "![Design preview for the Room homepage coding challenge](./design/desktop-preview.jpg)",
   "main": "index.js",
-  "scripts": {
+  "scripts": {"start": "postcss main.css --output output.css --watch","build": "NODE_ENV=production postcss main.css --output output.css",
     "start": "npm-run-all --parallel \"build:css -- --watch\" \"build:js -- --watch\"",
     "build": "NODE_ENV=production npm-run-all build:*",
     "build:css": "postcss main.css --output output.css",
