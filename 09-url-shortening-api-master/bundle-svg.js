@@ -6,7 +6,11 @@ var imagesDir = "./images/";
 
 var sprites = fs
   .readdirSync(imagesDir)
-  .filter((filename) => filename.endsWith(".svg"))
+  .filter(
+    (filename) =>
+      filename.endsWith(".svg") &&
+      (filename.startsWith("icon-") || filename.startsWith("bg-"))
+  )
   .reduce(
     (sprites, svg) =>
       sprites.add(
