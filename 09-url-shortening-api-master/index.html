@@ -34,13 +34,35 @@
           <p>Build your brand’s recognition and get detailed insights on how your links are performing.</p>
           <a href="">Get Started</a>
         </div>
-        <form action="">
-          <label for="url">
-            <span>Shorten a link here...</span>
-            <input type="url" id="url" />
-          </label>
-          <button type="submit">Shorten It!</button>
-        </form>
+        <div>
+          <form action="">
+            <label for="url">
+              <span>Shorten a link here...</span>
+              <input type="url" id="url" />
+            </label>
+            <span>Please add a link</span>
+            <button type="submit">Shorten It!</button>
+          </form>
+          <template id="shortenedLinkTemplate">
+            <article>
+              <header id="{{ headerId }}">{{ originalLink }}</header>
+              <span>Shortened to:</span>
+              <a href="{{ shortenedLink }}">{{ shortenedLink }}</a>
+              <button aria-describedby="{{ headerId }}">Copy</button>
+            </article>
+          </template>
+          <!-- Just for test styling -->
+          <ul>
+            <li>
+              <article>
+                <header id="orig">https://www.frontendmentor.io</header>
+                <span>Shortened to:</span>
+                <a href="https://rel.ink/k4lKyk">https://rel.ink/k4lKyk</a>
+                <button aria-describedby="orig">Copy</button>
+              </article>
+            </li>
+          </ul>
+        </div>
       </div>
       <section>
         <div class="container">
