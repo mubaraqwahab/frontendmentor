@@ -8,16 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body class="font-medium">
+  <body class="font-medium text-gray-violet">
     <header>
-      <div class="container flex flex-wrap items-center justify-between">
+      <div class="container flex flex-wrap items-center justify-between py-8">
         <a href=".">
           <img src="images/logo.svg" alt="Shortly home" />
         </a>
         <button aria-expanded="false" aria-controls="nav">
           <span>Toggle navigation</span>
         </button>
-        <nav id="nav" class="w-full bg-violet-dark text-white text-center font-bold tracking-wide px-5 py-6 rounded-lg">
+        <nav id="nav" class="hidden w-full bg-violet-dark text-white text-center font-bold tracking-wide px-5 py-6 rounded-lg">
           <ul class="border-b mb-4">
             <li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
             <li><a href="" class="block p-2 rounded-full mb-2">Pricing</a></li>
@@ -28,22 +28,22 @@
         </nav>
       </div>
     </header>
-    <main>
+    <main class="text-center">
       <div class="container">
         <img src="images/illustration-working.svg" alt="" />
-        <div>
-          <h1>More than just shorter links</h1>
-          <p>Build your brand’s recognition and get detailed insights on how your links are performing.</p>
-          <a href="">Get Started</a>
+        <div class="text-lg mb-16">
+          <h1 class="mb-3">More than just shorter links</h1>
+          <p class="mb-6">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
+          <a href="" class="inline-block rounded-full py-2 px-8 bg-cyan text-white font-bold tracking-wide">Get Started</a>
         </div>
         <div>
-          <form action="">
-            <label for="url">
-              <span>Shorten a link here...</span>
-              <input type="url" id="url" />
+          <form action="" class="bg-violet-dark rounded-lg p-5">
+            <label for="url" class="relative">
+              <span class="absolute left-0 right-0 inline-block py-2 px-3 text-left">Shorten a link here...</span>
+              <input type="url" id="url" name="url" class="w-full rounded py-2 px-3" />
             </label>
-            <span>Please add a link</span>
-            <button type="submit">Shorten It!</button>
+            <span class="hidden">Please add a link</span>
+            <button type="submit" class="w-full rounded py-2 px-3 text-white bg-cyan font-bold tracking-wide mt-4">Shorten It!</button>
           </form>
           <template id="shortenedLinkTemplate">
             <article>
@@ -55,7 +55,7 @@
           </template>
           <!-- Just for test styling -->
           <ul>
-            <li>
+            <li class="hidden">
               <article>
                 <header id="orig">https://www.frontendmentor.io</header>
                 <span class="sr-only">Shortened to:</span>
@@ -66,15 +66,17 @@
           </ul>
         </div>
       </div>
-      <section>
+      <section class="bg-gray-200">
         <div class="container">
-          <h2>Advanced Statistics</h2>
-          <p>Track how your links are performing across the web with our advanced statistics dashboard.</p>
-          <section>
-            <svg aria-hidden="true" focusable="false" width="40" height="40">
-              <use xlink:href="images/sprites.svg#icon-brand-recognition"></use>
-            </svg>
-            <h3>Brand Recognition</h3>
+          <h2 class="mb-3">Advanced Statistics</h2>
+          <p class="mb-16">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+          <section class="bg-white rounded p-6">
+            <div class="inline-block rounded-full mx-auto p-5 relative bg-violet-dark">
+              <svg aria-hidden="true" focusable="false" width="40" height="40" class="">
+                <use xlink:href="images/sprites.svg#icon-brand-recognition"></use>
+              </svg>
+            </div>
+            <h3 class="">Brand Recognition</h3>
             <p>
               Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.
             </p>
@@ -104,13 +106,13 @@
         </div>
       </section>
     </main>
-    <footer>
+    <footer class="text-center">
       <a href="">
         <img src="images/logo.svg" alt="Shortly home" />
       </a>
       <nav>
         <section>
-          <h2>Features</h2>
+          <h2 class="text-base">Features</h2>
           <ul>
             <li><a href="">Link Shortening</a></li>
             <li><a href="">Branded Links</a></li>
@@ -118,7 +120,7 @@
           </ul>
         </section>
         <section>
-          <h2>Resources</h2>
+          <h2 class="text-base">Resources</h2>
           <ul>
             <li><a href="">Blog</a></li>
             <li><a href="">Developers</a></li>
@@ -126,7 +128,7 @@
           </ul>
         </section>
         <section>
-          <h2>Company</h2>
+          <h2 class="text-base">Company</h2>
           <ul>
             <li><a href="">About</a></li>
             <li><a href="">Our Team</a></li>

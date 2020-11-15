@@ -23,6 +23,7 @@ module.exports = {
       },
       red: "hsl(0, 87%, 67%)",
       gray: {
+        ...colors.gray,
         default: "hsl(0, 0%, 75%)",
         violet: "hsl(257, 7%, 63%)",
       },
