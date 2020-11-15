@@ -8,23 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body>
+  <body class="font-medium">
     <header>
-      <div class="container">
+      <div class="container flex flex-wrap items-center justify-between">
         <a href=".">
           <img src="images/logo.svg" alt="Shortly home" />
         </a>
-        <button aria-expanded="false" aria-controls="mainNav">
+        <button aria-expanded="false" aria-controls="nav">
           <span>Toggle navigation</span>
         </button>
-        <nav id="mainNav">
-          <ul>
-            <li><a href="">Features</a></li>
-            <li><a href="">Pricing</a></li>
-            <li><a href="">Resources</a></li>
+        <nav id="nav" class="w-full bg-violet-dark text-white text-center font-bold tracking-wide px-5 py-6 rounded-lg">
+          <ul class="border-b mb-4">
+            <li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
+            <li><a href="" class="block p-2 rounded-full mb-2">Pricing</a></li>
+            <li><a href="" class="block p-2 rounded-full mb-4">Resources</a></li>
           </ul>
-          <a href="">Login</a>
-          <a href="">Sign Up</a>
+          <a href="" class="block p-2 mb-3 rounded-full">Login</a>
+          <a href="" class="block p-2 mb-3 rounded-full bg-cyan">Sign Up</a>
         </nav>
       </div>
     </header>
@@ -58,7 +58,7 @@
             <li>
               <article>
                 <header id="orig">https://www.frontendmentor.io</header>
-                <span>Shortened to:</span>
+                <span class="sr-only">Shortened to:</span>
                 <a href="https://rel.ink/k4lKyk">https://rel.ink/k4lKyk</a>
                 <button aria-describedby="orig">Copy</button>
               </article>
