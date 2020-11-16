@@ -49,6 +49,8 @@ module.exports = {
       bold: 700,
     },
   },
-  variants: {},
+  variants: {
+    transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
+  },
   plugins: [],
 };
