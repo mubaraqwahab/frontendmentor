@@ -10,14 +10,17 @@
   </head>
   <body class="font-medium text-gray-violet">
     <header>
-      <div class="container flex flex-wrap items-center justify-between py-8">
+      <div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative">
         <a href=".">
           <img src="images/logo.svg" alt="Shortly home" />
         </a>
         <button aria-expanded="false" aria-controls="nav">
           <span>Toggle navigation</span>
         </button>
-        <nav id="nav" class="hidden w-full bg-violet-dark text-white text-center font-bold tracking-wide px-5 py-6 rounded-lg">
+        <nav
+          id="nav"
+          class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0"
+        >
           <ul class="border-b mb-4">
             <li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
             <li><a href="" class="block p-2 rounded-full mb-2">Pricing</a></li>

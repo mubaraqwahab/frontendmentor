@@ -14,6 +14,9 @@ module.exports = {
       boxShadow: {
         "outline-red": "0 0 0 3px hsla(0, 87%, 67%, 0.5)",
       },
+      inset: {
+        full: "100%"
+      }
     },
     container: {
       center: true,

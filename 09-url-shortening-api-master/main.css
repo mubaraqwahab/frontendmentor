@@ -40,8 +40,7 @@
   }
 
   .after\:line::after {
-    @apply block w-2 h-20 bg-cyan absolute mx-auto left-0 right-0;
+    @apply block w-2 h-20 bg-cyan absolute mx-auto left-0 right-0 top-full;
     content: "";
-    top: 100%;
   }
 }
