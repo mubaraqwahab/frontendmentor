@@ -1733,40 +1733,20 @@ h3 {
   background-color: rgba(53.0145, 49.928999999999995, 62.27100000000001, var(--bg-opacity));
 }
 
-.bg-none {
-  background-image: none;
+.bg-shorten-mobile {
+  background-image: url(images/bg-shorten-mobile.svg);
 }
 
-.bg-gradient-to-t {
-  background-image: linear-gradient(to top, var(--gradient-color-stops));
+.bg-shorten-desktop {
+  background-image: url(images/bg-shorten-desktop.svg);
 }
 
-.bg-gradient-to-tr {
-  background-image: linear-gradient(to top right, var(--gradient-color-stops));
+.bg-boost-mobile {
+  background-image: url(images/bg-boost-mobile.svg);
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--gradient-color-stops));
-}
-
-.bg-gradient-to-br {
-  background-image: linear-gradient(to bottom right, var(--gradient-color-stops));
-}
-
-.bg-gradient-to-b {
-  background-image: linear-gradient(to bottom, var(--gradient-color-stops));
-}
-
-.bg-gradient-to-bl {
-  background-image: linear-gradient(to bottom left, var(--gradient-color-stops));
-}
-
-.bg-gradient-to-l {
-  background-image: linear-gradient(to left, var(--gradient-color-stops));
-}
-
-.bg-gradient-to-tl {
-  background-image: linear-gradient(to top left, var(--gradient-color-stops));
+.bg-boost-desktop {
+  background-image: url(images/bg-boost-desktop.svg);
 }
 
 .from-transparent {
@@ -11079,18 +11059,6 @@ h3 {
           animation: bounce 1s infinite;
 }
 
-.bg-shorten {
-  background-image: url("images/bg-shorten-mobile.svg");
-  background-repeat: no-repeat;
-  background-position: right top;
-}
-
-@media (min-width: 1024px) {
-  .bg-shorten {
-    background-image: url("images/bg-shorten-desktop.svg");
-  }
-}
-
 .after\:line {
   position: relative;
 }
@@ -12233,40 +12201,20 @@ h3 {
     background-color: rgba(53.0145, 49.928999999999995, 62.27100000000001, var(--bg-opacity));
   }
 
-  .sm\:bg-none {
-    background-image: none;
+  .sm\:bg-shorten-mobile {
+    background-image: url(images/bg-shorten-mobile.svg);
   }
 
-  .sm\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--gradient-color-stops));
+  .sm\:bg-shorten-desktop {
+    background-image: url(images/bg-shorten-desktop.svg);
   }
 
-  .sm\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--gradient-color-stops));
+  .sm\:bg-boost-mobile {
+    background-image: url(images/bg-boost-mobile.svg);
   }
 
-  .sm\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--gradient-color-stops));
-  }
-
-  .sm\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--gradient-color-stops));
-  }
-
-  .sm\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--gradient-color-stops));
-  }
-
-  .sm\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--gradient-color-stops));
-  }
-
-  .sm\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--gradient-color-stops));
-  }
-
-  .sm\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--gradient-color-stops));
+  .sm\:bg-boost-desktop {
+    background-image: url(images/bg-boost-desktop.svg);
   }
 
   .sm\:from-transparent {
@@ -22636,40 +22584,20 @@ h3 {
     background-color: rgba(53.0145, 49.928999999999995, 62.27100000000001, var(--bg-opacity));
   }
 
-  .md\:bg-none {
-    background-image: none;
+  .md\:bg-shorten-mobile {
+    background-image: url(images/bg-shorten-mobile.svg);
   }
 
-  .md\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--gradient-color-stops));
+  .md\:bg-shorten-desktop {
+    background-image: url(images/bg-shorten-desktop.svg);
   }
 
-  .md\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--gradient-color-stops));
+  .md\:bg-boost-mobile {
+    background-image: url(images/bg-boost-mobile.svg);
   }
 
-  .md\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--gradient-color-stops));
-  }
-
-  .md\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--gradient-color-stops));
-  }
-
-  .md\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--gradient-color-stops));
-  }
-
-  .md\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--gradient-color-stops));
-  }
-
-  .md\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--gradient-color-stops));
-  }
-
-  .md\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--gradient-color-stops));
+  .md\:bg-boost-desktop {
+    background-image: url(images/bg-boost-desktop.svg);
   }
 
   .md\:from-transparent {
@@ -33039,40 +32967,20 @@ h3 {
     background-color: rgba(53.0145, 49.928999999999995, 62.27100000000001, var(--bg-opacity));
   }
 
-  .lg\:bg-none {
-    background-image: none;
+  .lg\:bg-shorten-mobile {
+    background-image: url(images/bg-shorten-mobile.svg);
   }
 
-  .lg\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--gradient-color-stops));
+  .lg\:bg-shorten-desktop {
+    background-image: url(images/bg-shorten-desktop.svg);
   }
 
-  .lg\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--gradient-color-stops));
+  .lg\:bg-boost-mobile {
+    background-image: url(images/bg-boost-mobile.svg);
   }
 
-  .lg\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--gradient-color-stops));
-  }
-
-  .lg\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--gradient-color-stops));
-  }
-
-  .lg\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--gradient-color-stops));
-  }
-
-  .lg\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--gradient-color-stops));
-  }
-
-  .lg\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--gradient-color-stops));
-  }
-
-  .lg\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--gradient-color-stops));
+  .lg\:bg-boost-desktop {
+    background-image: url(images/bg-boost-desktop.svg);
   }
 
   .lg\:from-transparent {
@@ -43442,40 +43350,20 @@ h3 {
     background-color: rgba(53.0145, 49.928999999999995, 62.27100000000001, var(--bg-opacity));
   }
 
-  .xl\:bg-none {
-    background-image: none;
+  .xl\:bg-shorten-mobile {
+    background-image: url(images/bg-shorten-mobile.svg);
   }
 
-  .xl\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--gradient-color-stops));
+  .xl\:bg-shorten-desktop {
+    background-image: url(images/bg-shorten-desktop.svg);
   }
 
-  .xl\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--gradient-color-stops));
+  .xl\:bg-boost-mobile {
+    background-image: url(images/bg-boost-mobile.svg);
   }
 
-  .xl\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--gradient-color-stops));
-  }
-
-  .xl\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--gradient-color-stops));
-  }
-
-  .xl\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--gradient-color-stops));
-  }
-
-  .xl\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--gradient-color-stops));
-  }
-
-  .xl\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--gradient-color-stops));
-  }
-
-  .xl\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--gradient-color-stops));
+  .xl\:bg-boost-desktop {
+    background-image: url(images/bg-boost-desktop.svg);
   }
 
   .xl\:from-transparent {

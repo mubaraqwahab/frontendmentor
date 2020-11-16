@@ -30,17 +30,6 @@
 }
 
 @layer utilities {
-  .bg-shorten {
-    background-image: url("images/bg-shorten-mobile.svg");
-    @apply bg-no-repeat bg-right-top;
-  }
-
-  @screen lg {
-    .bg-shorten {
-      background-image: url("images/bg-shorten-desktop.svg");
-    }
-  }
-
   .after\:line {
     @apply relative;
   }
