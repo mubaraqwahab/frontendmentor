@@ -7,7 +7,11 @@ module.exports = {
   },
   purge: ["./*.html"],
   theme: {
-    extend: {},
+    extend: {
+      padding: {
+        "36": "9rem",
+      },
+    },
     container: {
       center: true,
       padding: spacing["5"],

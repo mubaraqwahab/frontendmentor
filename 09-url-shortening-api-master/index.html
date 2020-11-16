@@ -30,20 +30,20 @@
     </header>
     <main class="text-center">
       <div class="container">
-        <img src="images/illustration-working.svg" alt="" />
-        <div class="text-lg mb-16">
+        <img src="images/illustration-working.svg" alt="" class="mb-8" />
+        <div class="text-lg mb-20">
           <h1 class="mb-3">More than just shorter links</h1>
           <p class="mb-6">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
           <a href="" class="inline-block rounded-full py-2 px-8 bg-cyan text-white font-bold tracking-wide">Get Started</a>
         </div>
-        <div>
-          <form action="" class="bg-violet-dark rounded-lg p-5">
+        <div class="-mb-16 relative">
+          <form action="" class="bg-violet-dark bg-shorten rounded-lg p-5">
             <label for="url" class="relative">
-              <span class="absolute left-0 right-0 inline-block py-2 px-3 text-left">Shorten a link here...</span>
-              <input type="url" id="url" name="url" class="w-full rounded py-2 px-3" />
+              <span class="absolute left-0 right-0 inline-block py-2 px-4 text-left select-none">Shorten a link here...</span>
+              <input type="url" id="url" name="url" required aria-invalid="false" class="w-full rounded py-2 px-4" />
             </label>
             <span class="hidden">Please add a link</span>
-            <button type="submit" class="w-full rounded py-2 px-3 text-white bg-cyan font-bold tracking-wide mt-4">Shorten It!</button>
+            <button type="submit" class="w-full rounded py-2 px-4 text-white bg-cyan font-bold tracking-wide mt-4">Shorten It!</button>
           </form>
           <template id="shortenedLinkTemplate">
             <article>
@@ -67,34 +67,38 @@
         </div>
       </div>
       <section class="bg-gray-200">
-        <div class="container">
-          <h2 class="mb-3">Advanced Statistics</h2>
-          <p class="mb-16">Track how your links are performing across the web with our advanced statistics dashboard.</p>
-          <section class="bg-white rounded p-6">
-            <div class="inline-block rounded-full mx-auto p-5 relative bg-violet-dark">
-              <svg aria-hidden="true" focusable="false" width="40" height="40" class="">
-                <use xlink:href="images/sprites.svg#icon-brand-recognition"></use>
+        <div class="container pt-36 pb-20">
+          <h2 class="mb-4">Advanced Statistics</h2>
+          <p class="mb-20">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+          <section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
+            <div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+              <svg aria-hidden="true" focusable="false" width="40" height="40">
+                <use xlink:href="images/icons.svg#icon-brand-recognition"></use>
               </svg>
             </div>
-            <h3 class="">Brand Recognition</h3>
+            <h3 class="mb-4">Brand Recognition</h3>
             <p>
               Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.
             </p>
           </section>
-          <section>
-            <svg aria-hidden="true" focusable="false" width="40" height="40">
-              <use xlink:href="images/sprites.svg#icon-detailed-records"></use>
-            </svg>
-            <h3>Detailed Records</h3>
+          <section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
+            <div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+              <svg aria-hidden="true" focusable="false" width="40" height="40">
+                <use xlink:href="images/icons.svg#icon-detailed-records"></use>
+              </svg>
+            </div>
+            <h3 class="mb-4">Detailed Records</h3>
             <p>
               Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.
             </p>
           </section>
-          <section>
-            <svg aria-hidden="true" focusable="false" width="48" height="48">
-              <use xlink:href="images/sprites.svg#icon-fully-customizable"></use>
-            </svg>
-            <h3>Fully Customizable</h3>
+          <section class="bg-white rounded-lg p-6 pb-10">
+            <div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 48 48" width="40" height="40">
+                <use xlink:href="images/icons.svg#icon-fully-customizable"></use>
+              </svg>
+            </div>
+            <h3 class="mb-4">Fully Customizable</h3>
             <p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
           </section>
         </div>
@@ -142,7 +146,7 @@
           <li>
             <a href="">
               <svg aria-hidden="true" focusable="false" width="24" height="24">
-                <use xlink:href="images/sprites.svg#icon-facebook"></use>
+                <use xlink:href="images/icons.svg#icon-facebook"></use>
               </svg>
               <span>Facebook</span>
             </a>
@@ -150,7 +154,7 @@
           <li>
             <a href="">
               <svg aria-hidden="true" focusable="false" width="24" height="20">
-                <use xlink:href="images/sprites.svg#icon-twitter"></use>
+                <use xlink:href="images/icons.svg#icon-twitter"></use>
               </svg>
               <span>Twitter</span>
             </a>
@@ -158,7 +162,7 @@
           <li>
             <a href="">
               <svg aria-hidden="true" focusable="false" width="24" height="24">
-                <use xlink:href="images/sprites.svg#icon-pinterest"></use>
+                <use xlink:href="images/icons.svg#icon-pinterest"></use>
               </svg>
               <span>Pinterest</span>
             </a>
@@ -166,7 +170,7 @@
           <li>
             <a href="">
               <svg aria-hidden="true" focusable="false" width="24" height="24">
-                <use xlink:href="images/sprites.svg#icon-instagram"></use>
+                <use xlink:href="images/icons.svg#icon-instagram"></use>
               </svg>
               <span>Instagram</span>
             </a>

@@ -7,9 +7,7 @@ var imagesDir = "./images/";
 var sprites = fs
   .readdirSync(imagesDir)
   .filter(
-    (filename) =>
-      filename.endsWith(".svg") &&
-      (filename.startsWith("icon-") || filename.startsWith("bg-"))
+    (filename) => filename.endsWith(".svg") && filename.startsWith("icon-")
   )
   .reduce(
     (sprites, svg) =>
@@ -20,4 +18,4 @@ var sprites = fs
     svgstore()
   );
 
-fs.writeFileSync(path.join(imagesDir, "sprites.svg"), sprites);
+fs.writeFileSync(path.join(imagesDir, "icons.svg"), sprites);

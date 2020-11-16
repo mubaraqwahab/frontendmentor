@@ -30,4 +30,24 @@
 }
 
 @layer utilities {
+  .bg-shorten {
+    background-image: url("images/bg-shorten-mobile.svg");
+    @apply bg-no-repeat bg-right-top;
+  }
+
+  @screen lg {
+    .bg-shorten {
+      background-image: url("images/bg-shorten-desktop.svg");
+    }
+  }
+
+  .after\:line {
+    @apply relative;
+  }
+
+  .after\:line::after {
+    @apply block w-2 h-20 bg-cyan absolute mx-auto left-0 right-0;
+    content: "";
+    top: 100%;
+  }
 }
