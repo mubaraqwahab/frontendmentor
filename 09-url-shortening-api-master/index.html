@@ -7,14 +7,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="output.css" />
+    <script src="js/bundle.js" defer></script>
   </head>
   <body class="font-medium text-gray-violet">
-    <header>
+    <header data-controller="navigation" data-navigation-hidden-class="hidden">
       <div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative">
         <a href=".">
           <img src="images/logo.svg" alt="Shortly home" />
         </a>
-        <button aria-expanded="false" aria-controls="nav">
+        <button aria-expanded="false" data-action="navigation#toggle">
           <span class="sr-only">Toggle navigation</span>
           <!-- Credit: ionicons (https://ionicons.com/) -->
           <svg aria-hidden="true" focusable="false" viewBox="0 0 512 512" width="36" height="36">
@@ -29,8 +30,8 @@
           </svg>
         </button>
         <nav
-          id="nav"
           class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0"
+          data-target="navigation.nav"
         >
           <ul class="border-b mb-4">
             <li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
