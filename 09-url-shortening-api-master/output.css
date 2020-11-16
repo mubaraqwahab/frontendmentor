@@ -612,6 +612,11 @@ h3 {
   font-size: 1.25rem;
 }
 
+:focus {
+  outline: 1px solid transparent !important;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
 .container {
   width: 100%;
   margin-right: auto;

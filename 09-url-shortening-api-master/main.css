@@ -24,6 +24,11 @@
   h3 {
     @apply text-xl;
   }
+
+  :focus {
+    outline: 1px solid transparent !important;
+    @apply shadow-outline;
+  }
 }
 
 @layer components {
