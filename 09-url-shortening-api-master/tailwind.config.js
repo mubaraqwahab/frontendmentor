@@ -8,8 +8,11 @@ module.exports = {
   purge: ["./*.html"],
   theme: {
     extend: {
-      padding: {
+      spacing: {
         "36": "9rem",
+      },
+      boxShadow: {
+        "outline-red": "0 0 0 3px hsla(0, 87%, 67%, 0.5)",
       },
     },
     container: {

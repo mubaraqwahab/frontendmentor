@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    font-size: 18px;
-  }
-
   h1,
   h2,
   h3 {
@@ -28,6 +24,10 @@
   :focus {
     outline: 1px solid transparent !important;
     @apply shadow-outline;
+  }
+
+  input[aria-invalid="true"]:focus {
+    @apply shadow-outline-red !important;
   }
 }
 
