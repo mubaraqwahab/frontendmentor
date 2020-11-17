@@ -19,5 +19,21 @@ class NavigationController extends Controller {
   }
 }
 
+class FormFieldController extends Controller {
+  static get targets() {
+    return ["label"];
+  }
+
+  /**
+   * Simulate the <input> placeholder attribute behaviour;
+   * show the label when input is empty, hide otherwise.
+   */
+  toggleLabel(e) {
+    const labelHiddenClass = this.data.get("labelHiddenClass");
+    this.labelTarget.classList.toggle(labelHiddenClass, !!e.target.value);
+  }
+}
+
 const application = Application.start();
 application.register("navigation", NavigationController);
+application.register("form-field", FormFieldController);
