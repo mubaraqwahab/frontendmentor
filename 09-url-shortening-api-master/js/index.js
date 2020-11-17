@@ -34,6 +34,21 @@ class FormFieldController extends Controller {
   }
 }
 
+class UrlShortenerController extends Controller {
+  static get targets() {
+    return ["form", "resultTemplate", "resultList"];
+  }
+
+  connect() {
+    /** @type {HTMLFormElement}     */ this.formTarget;
+    /** @type {HTMLTemplateElement} */ this.resultTemplateTarget;
+    /** @type {HTMLUListElement}    */ this.resultListTarget;
+
+    this.formTarget.noValidate = true;
+  }
+}
+
 const application = Application.start();
 application.register("navigation", NavigationController);
 application.register("form-field", FormFieldController);
+application.register("url-shortener", UrlShortenerController);
