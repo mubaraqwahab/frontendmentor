@@ -36,14 +36,48 @@ class FormFieldController extends Controller {
 }
 
 class UrlShortenerController extends Controller {
-  static targets = ["form", "resultTemplate", "resultList"];
+  static targets = [
+    "form",
+    "input",
+    "helperText",
+    "resultTemplate",
+    "resultList",
+  ];
 
   formTarget!: HTMLFormElement;
+  inputTarget!: HTMLInputElement;
+  helperTextTarget!: HTMLElement;
   resultTemplateTarget!: HTMLTemplateElement;
   resultListTarget!: HTMLUListElement;
 
   connect() {
     this.formTarget.noValidate = true;
+  }
+
+  submit(e: Event) {
+    e.preventDefault();
+    const hiddenClass: string = this.data.get("hiddenClass")!;
+    const { formTarget, helperTextTarget, inputTarget, shorten } = this;
+
+    if (formTarget.checkValidity()) {
+      helperTextTarget.classList.add(hiddenClass); // if needed
+      inputTarget.setAttribute("aria-invalid", "false");
+      inputTarget.removeAttribute("aria-describedby");
+      console.log(shorten(inputTarget.value));
+    } else {
+      helperTextTarget.classList.remove(hiddenClass);
+      inputTarget.setAttribute("aria-invalid", "true");
+      inputTarget.setAttribute("aria-describedby", helperTextTarget.id);
+      inputTarget.focus();
+    }
+  }
+
+  private shorten(longUrl: string) {
+    return {
+      id: 0,
+      originalUrl: longUrl,
+      shortUrl: "",
+    };
   }
 }
 

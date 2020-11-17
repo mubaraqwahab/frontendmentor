@@ -60,8 +60,13 @@
 
       <div class="bg-gray-200">
         <div class="container pt-16 pb-20">
-          <div class="mb-20 -mt-32" data-controller="url-shortener">
-            <form action="" data-target="url-shortener.form" class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5">
+          <div class="mb-20 -mt-32" data-controller="url-shortener" data-url-shortener-hidden-class="hidden">
+            <form
+              action=""
+              data-target="url-shortener.form"
+              data-action="submit->url-shortener#submit"
+              class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5"
+            >
               <label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
                 <!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
                 <span class="absolute left-0 right-0 inline-block py-2 px-4 select-none" data-target="form-field.label">Shorten a link here...</span>
@@ -73,9 +78,10 @@
                   aria-invalid="false"
                   class="w-full rounded py-2 px-4"
                   data-action="input->form-field#toggleLabel"
+                  data-target="url-shortener.input"
                 />
               </label>
-              <div class="text-red hidden text-sm italic mt-1">Please add a link</div>
+              <div id="urlHelper" data-target="url-shortener.helperText" class="text-red hidden text-sm italic mt-1">Please add a link</div>
               <button
                 type="submit"
                 class="w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
@@ -85,7 +91,7 @@
             </form>
             <template data-target="url-shortener.resultTemplate">
               <article class="rounded-lg bg-white">
-                <header id="originalUrl" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</header>
+                <header id="originalUrl{{ id }}" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</header>
                 <div class="p-4">
                   <span class="sr-only">Shortened to:</span>
                   <a href="{{ shortUrl }}" class="block text-cyan mb-3 truncate">{{ shortUrl }}</a>
