@@ -50,16 +50,30 @@ class UrlShortenerController extends Controller {
     this.formTarget.noValidate = true;
   }
 
-  submit(e: Event) {
+  async submit(e: Event) {
     e.preventDefault();
-    const hiddenClass = this.data.get("hiddenClass");
-    const { formTarget, helperTextTarget, inputTarget, shorten } = this;
+    const { formTarget, inputTarget }: UrlShortenerController = this;
 
     if (formTarget.checkValidity()) {
+      this.setInputValidity(true);
+      const shortened = await this.shorten(inputTarget.value);
+      if ("error" in shortened) {
+        return this.setInputValidity(false);
+      }
+      // ...
+    } else {
+      this.setInputValidity(false);
+    }
+  }
+
+  private setInputValidity(valid: boolean) {
+    const { helperTextTarget, inputTarget }: UrlShortenerController = this;
+    const hiddenClass = this.data.get("hiddenClass");
+
+    if (valid) {
       helperTextTarget.classList.add(hiddenClass); // if needed
       inputTarget.setAttribute("aria-invalid", "false");
       inputTarget.removeAttribute("aria-describedby");
-      console.log(shorten(inputTarget.value));
     } else {
       helperTextTarget.classList.remove(hiddenClass);
       inputTarget.setAttribute("aria-invalid", "true");
@@ -69,11 +83,29 @@ class UrlShortenerController extends Controller {
   }
 
   private shorten(url: string) {
-    return {
-      id: 0,
-      originalUrl: url,
-      shortUrl: "",
-    };
+    interface ShrtCodeResponse {
+      ok: boolean;
+      result: {
+        short_link: string;
+      };
+    }
+
+    return fetch(
+      `https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
+    )
+      .then((response) => response.json())
+      .then((data: ShrtCodeResponse) => {
+        if (data.ok) {
+          return {
+            id: 0,
+            originalUrl: url,
+            shortUrl: data.result.short_link,
+          };
+        } else {
+          throw new Error(`Malformed URL ${url}`);
+        }
+      })
+      .catch((error) => ({ error }));
   }
 }
 
