@@ -1689,19 +1689,29 @@
         submit(e) {
             return __awaiter(this, void 0, void 0, function* () {
                 e.preventDefault();
-                const { formTarget, inputTarget } = this;
+                const { formTarget, inputTarget, resultTemplateTarget, resultListTarget, createResultLi, shorten, } = this;
                 if (formTarget.checkValidity()) {
                     this.setInputValidity(true);
-                    const shortened = yield this.shorten(inputTarget.value);
+                    const shortened = yield shorten(inputTarget.value);
                     if ("error" in shortened) {
-                        return this.setInputValidity(false);
+                        this.setInputValidity(false);
                     }
-                    // ...
+                    else {
+                        const resultLi = createResultLi(resultTemplateTarget.innerHTML, shortened);
+                        resultListTarget.appendChild(resultLi);
+                        inputTarget.value = "";
+                    }
                 }
                 else {
                     this.setInputValidity(false);
                 }
             });
+        }
+        createResultLi(html, shortened) {
+            const resultHTML = html.replace(/{{ ([a-zA-Z]+) }}/g, (_, placeholder) => "" + shortened[placeholder]);
+            const resultLi = document.createElement("li");
+            resultLi.innerHTML = resultHTML;
+            return resultLi;
         }
         setInputValidity(valid) {
             const { helperTextTarget, inputTarget } = this;

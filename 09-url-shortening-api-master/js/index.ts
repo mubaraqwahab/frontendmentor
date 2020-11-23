@@ -31,6 +31,12 @@ class FormFieldController extends Controller {
   }
 }
 
+interface ShortenedURLResult {
+  id: number;
+  originalUrl: string;
+  shortUrl: string;
+}
+
 class UrlShortenerController extends Controller {
   static targets = [
     "form",
@@ -52,18 +58,45 @@ class UrlShortenerController extends Controller {
 
   async submit(e: Event) {
     e.preventDefault();
-    const { formTarget, inputTarget }: UrlShortenerController = this;
+    const {
+      formTarget,
+      inputTarget,
+      resultTemplateTarget,
+      resultListTarget,
+      createResultLi,
+      shorten,
+    }: UrlShortenerController = this;
 
     if (formTarget.checkValidity()) {
       this.setInputValidity(true);
-      const shortened = await this.shorten(inputTarget.value);
+      const shortened = await shorten(inputTarget.value);
+
       if ("error" in shortened) {
-        return this.setInputValidity(false);
+        this.setInputValidity(false);
+      } else {
+        const resultLi = createResultLi(
+          resultTemplateTarget.innerHTML,
+          shortened
+        );
+        resultListTarget.appendChild(resultLi);
+        inputTarget.value = "";
       }
-      // ...
     } else {
       this.setInputValidity(false);
     }
+  }
+
+  private createResultLi(
+    html: string,
+    shortened: ShortenedURLResult
+  ): HTMLLIElement {
+    const resultHTML = html.replace(
+      /{{ ([a-zA-Z]+) }}/g,
+      (_, placeholder: string) => "" + shortened[placeholder]
+    );
+    const resultLi = document.createElement("li");
+    resultLi.innerHTML = resultHTML;
+    return resultLi;
   }
 
   private setInputValidity(valid: boolean) {
@@ -82,7 +115,7 @@ class UrlShortenerController extends Controller {
     }
   }
 
-  private shorten(url: string) {
+  private shorten(url: string): Promise<ShortenedURLResult | { error: Error }> {
     interface ShrtCodeResponse {
       ok: boolean;
       result: {
@@ -94,17 +127,19 @@ class UrlShortenerController extends Controller {
       `https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
     )
       .then((response) => response.json())
-      .then((data: ShrtCodeResponse) => {
-        if (data.ok) {
-          return {
-            id: 0,
-            originalUrl: url,
-            shortUrl: data.result.short_link,
-          };
-        } else {
-          throw new Error(`Malformed URL ${url}`);
+      .then(
+        (data: ShrtCodeResponse): ShortenedURLResult => {
+          if (data.ok) {
+            return {
+              id: 0,
+              originalUrl: url,
+              shortUrl: data.result.short_link,
+            };
+          } else {
+            throw new Error(`Malformed URL ${url}`);
+          }
         }
-      })
+      )
       .catch((error) => ({ error }));
   }
 }
