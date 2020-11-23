@@ -1686,6 +1686,9 @@
         connect() {
             this.formTarget.noValidate = true;
         }
+        // TODO
+        // * Announce <li> insertion
+        // * Prepend https:// to shortUrl
         submit(e) {
             return __awaiter(this, void 0, void 0, function* () {
                 e.preventDefault();

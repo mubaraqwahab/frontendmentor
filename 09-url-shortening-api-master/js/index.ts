@@ -56,6 +56,10 @@ class UrlShortenerController extends Controller {
     this.formTarget.noValidate = true;
   }
 
+  // TODO
+  // * Announce <li> insertion
+  // * Prepend https:// to shortUrl
+
   async submit(e: Event) {
     e.preventDefault();
     const {
