@@ -1,229 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="output.css" />
-    <script src="js/bundle.js" defer></script>
-  </head>
-  <body class="font-medium text-gray-violet">
-    <header data-controller="navigation" data-navigation-hidden-class="hidden">
-      <div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative">
-        <a href=".">
-          <img src="images/logo.svg" alt="Shortly home" />
-        </a>
-        <button aria-expanded="false" data-action="navigation#toggle">
-          <span class="sr-only">Toggle navigation</span>
-          <!-- Credit: ionicons (https://ionicons.com/) -->
-          <svg aria-hidden="true" focusable="false" viewBox="0 0 512 512" width="36" height="36">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="32"
-              d="M80 160h352M80 256h352M80 352h352"
-            />
-          </svg>
-        </button>
-        <nav
-          class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0"
-          data-target="navigation.nav"
-        >
-          <ul class="border-b mb-4">
-            <li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
-            <li><a href="" class="block p-2 rounded-full mb-2">Pricing</a></li>
-            <li><a href="" class="block p-2 rounded-full mb-4">Resources</a></li>
-          </ul>
-          <a href="" class="block p-2 mb-3 rounded-full">Login</a>
-          <a href="" class="block p-2 mb-3 rounded-full bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark">Sign Up</a>
-        </nav>
-      </div>
-    </header>
-    <main>
-      <div class="container overflow-x-hidden">
-        <img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg" />
-        <div class="text-lg mb-36 text-center">
-          <h1 class="mb-3">More than just shorter links</h1>
-          <p class="mb-6">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
-          <a
-            href=""
-            class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark text-white font-bold tracking-wide"
-          >
-            Get Started
-          </a>
-        </div>
-      </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Frontend Mentor | Shortly URL shortening API Challenge</title>
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="output.css" />
+		<script src="js/bundle.js" defer></script>
+	</head>
+	<body class="font-medium text-gray-violet">
+		<header data-controller="navigation" data-navigation-hidden-class="hidden">
+			<div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative">
+				<a href=".">
+					<img src="images/logo.svg" alt="Shortly home" />
+				</a>
+				<button aria-expanded="false" data-action="navigation#toggle">
+					<span class="sr-only">Toggle navigation</span>
+					<!-- Credit: ionicons (https://ionicons.com/) -->
+					<svg aria-hidden="true" focusable="false" viewBox="0 0 512 512" width="36" height="36">
+						<path
+							fill="none"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-miterlimit="10"
+							stroke-width="32"
+							d="M80 160h352M80 256h352M80 352h352"
+						/>
+					</svg>
+				</button>
+				<nav
+					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0"
+					data-target="navigation.nav"
+				>
+					<ul class="border-b mb-4">
+						<li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-2">Pricing</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-4">Resources</a></li>
+					</ul>
+					<a href="" class="block p-2 mb-3 rounded-full">Login</a>
+					<a href="" class="block p-2 mb-3 rounded-full bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark">Sign Up</a>
+				</nav>
+			</div>
+		</header>
+		<main>
+			<div class="container overflow-x-hidden">
+				<img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg" />
+				<div class="text-lg mb-36 text-center">
+					<h1 class="mb-3">More than just shorter links</h1>
+					<p class="mb-6">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
+					<a
+						href=""
+						class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark text-white font-bold tracking-wide"
+					>
+						Get Started
+					</a>
+				</div>
+			</div>
 
-      <div class="bg-gray-200">
-        <div class="container pt-16 pb-20">
-          <div class="mb-20 -mt-32" data-controller="url-shortener" data-url-shortener-hidden-class="hidden">
-            <form
-              action=""
-              data-target="url-shortener.form"
-              data-action="submit->url-shortener#submit"
-              class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5"
-            >
-              <label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
-                <!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
-                <span class="absolute left-0 right-0 inline-block py-2 px-4 select-none" data-target="form-field.label">Shorten a link here...</span>
-                <input
-                  type="url"
-                  id="url"
-                  name="url"
-                  required
-                  aria-invalid="false"
-                  class="w-full rounded py-2 px-4 text-violet-dark"
-                  data-action="input->form-field#toggleLabel"
-                  data-target="url-shortener.input"
-                />
-              </label>
-              <div id="urlHelper" data-target="url-shortener.helperText" class="text-red hidden text-sm italic mt-1">Please add a link</div>
-              <button
-                type="submit"
-                class="w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
-              >
-                Shorten It!
-              </button>
-            </form>
-            <template data-target="url-shortener.resultTemplate">
-              <article class="rounded-lg bg-white">
-                <header id="originalUrl{{ id }}" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</header>
-                <div class="p-4">
-                  <span class="sr-only">Shortened to:</span>
-                  <a href="{{ shortUrl }}" class="inline-block text-cyan mb-3 truncate">{{ shortUrl }}</a>
-                  <button
-                    aria-describedby="originalUrl"
-                    class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
-                  >
-                    Copy <span class="sr-only">shortened</span>
-                  </button>
-                </div>
-              </article>
-            </template>
-            <ul data-target="url-shortener.resultList"></ul>
-          </div>
-          <section class="text-center">
-            <h2 class="mb-4">Advanced Statistics</h2>
-            <p class="mb-20">Track how your links are performing across the web with our advanced statistics dashboard.</p>
-            <section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
-              <div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
-                <svg aria-hidden="true" focusable="false" width="40" height="40">
-                  <use xlink:href="images/icons.svg#icon-brand-recognition"></use>
-                </svg>
-              </div>
-              <h3 class="mb-4">Brand Recognition</h3>
-              <p>
-                Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.
-              </p>
-            </section>
-            <section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
-              <div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
-                <svg aria-hidden="true" focusable="false" width="40" height="40">
-                  <use xlink:href="images/icons.svg#icon-detailed-records"></use>
-                </svg>
-              </div>
-              <h3 class="mb-4">Detailed Records</h3>
-              <p>
-                Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.
-              </p>
-            </section>
-            <section class="bg-white rounded-lg p-6 pb-10">
-              <div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
-                <svg aria-hidden="true" focusable="false" viewBox="0 0 48 48" width="40" height="40">
-                  <use xlink:href="images/icons.svg#icon-fully-customizable"></use>
-                </svg>
-              </div>
-              <h3 class="mb-4">Fully Customizable</h3>
-              <p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
-            </section>
-          </section>
-        </div>
-      </div>
-      <section class="text-white text-lg text-center bg-violet-dark bg-boost-mobile bg-cover">
-        <div class="container py-24">
-          <h2 class="text-white mb-4">Boost your links today</h2>
-          <a
-            href=""
-            class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
-          >
-            Get Started
-          </a>
-        </div>
-      </section>
-    </main>
-    <footer class="text-center bg-violet-very-dark text-gray">
-      <div class="container pt-12 pb-16">
-        <a href="" class="inline-block mx-auto mb-12">
-          <img src="images/logo-white.svg" alt="Shortly home" />
-        </a>
-        <nav class="mb-12">
-          <section class="mb-10">
-            <h2 class="text-base text-white mb-4">Features</h2>
-            <ul>
-              <li><a href="" class="inline-block p-1 hover:text-white">Link Shortening</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Branded Links</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Analytics</a></li>
-            </ul>
-          </section>
-          <section class="mb-10">
-            <h2 class="text-base text-white mb-4">Resources</h2>
-            <ul>
-              <li><a href="" class="inline-block p-1 hover:text-white">Blog</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Developers</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Support</a></li>
-            </ul>
-          </section>
-          <section class="mb-10">
-            <h2 class="text-base text-white mb-4">Company</h2>
-            <ul>
-              <li><a href="" class="inline-block p-1 hover:text-white">About</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Our Team</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Careers</a></li>
-              <li><a href="" class="inline-block p-1 hover:text-white">Contact</a></li>
-            </ul>
-          </section>
-        </nav>
-        <address class="not-italic">
-          <ul class="flex items-center justify-center">
-            <li class="mr-4">
-              <a href="" class="inline-block p-1">
-                <svg aria-hidden="true" focusable="false" width="24" height="24">
-                  <use xlink:href="images/icons.svg#icon-facebook"></use>
-                </svg>
-                <span class="sr-only">Facebook</span>
-              </a>
-            </li>
-            <li class="mr-4">
-              <a href="" class="inline-block p-1">
-                <svg aria-hidden="true" focusable="false" width="24" height="20">
-                  <use xlink:href="images/icons.svg#icon-twitter"></use>
-                </svg>
-                <span class="sr-only">Twitter</span>
-              </a>
-            </li>
-            <li class="mr-4">
-              <a href="" class="inline-block p-1">
-                <svg aria-hidden="true" focusable="false" width="24" height="24">
-                  <use xlink:href="images/icons.svg#icon-pinterest"></use>
-                </svg>
-                <span class="sr-only">Pinterest</span>
-              </a>
-            </li>
-            <li>
-              <a href="" class="inline-block p-1">
-                <svg aria-hidden="true" focusable="false" width="24" height="24">
-                  <use xlink:href="images/icons.svg#icon-instagram"></use>
-                </svg>
-                <span class="sr-only">Instagram</span>
-              </a>
-            </li>
-          </ul>
-        </address>
-      </div>
-    </footer>
-  </body>
+			<div class="bg-gray-200">
+				<div class="container pt-16 pb-20">
+					<div class="mb-20 -mt-32" data-controller="url-shortener" data-url-shortener-hidden-class="hidden">
+						<form
+							action=""
+							data-target="url-shortener.form"
+							data-action="submit->url-shortener#submit"
+							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5"
+						>
+							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
+								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
+								<span class="absolute left-0 right-0 inline-block py-2 px-4 select-none" data-target="form-field.label">Shorten a link here...</span>
+								<input
+									type="url"
+									id="url"
+									name="url"
+									required
+									aria-invalid="false"
+									class="w-full rounded py-2 px-4 text-violet-dark"
+									data-action="input->form-field#toggleLabel"
+									data-target="url-shortener.input"
+								/>
+							</label>
+							<div id="urlHelper" data-target="url-shortener.helperText" class="text-red hidden text-sm italic mt-1">Please add a link</div>
+							<button
+								type="submit"
+								class="w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+							>
+								Shorten It!
+							</button>
+						</form>
+						<template data-target="url-shortener.resultTemplate">
+							<article class="rounded-lg bg-white">
+								<header id="originalUrl{{ id }}" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</header>
+								<div class="p-4">
+									<span class="sr-only">Shortened to:</span>
+									<a href="{{ shortUrl }}" class="inline-block text-cyan mb-3 truncate">{{ shortUrl }}</a>
+									<button
+										aria-describedby="originalUrl"
+										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+									>
+										Copy <span class="sr-only">shortened</span>
+									</button>
+								</div>
+							</article>
+						</template>
+						<ul data-target="url-shortener.resultList"></ul>
+					</div>
+					<section class="text-center">
+						<h2 class="mb-4">Advanced Statistics</h2>
+						<p class="mb-20">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+						<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
+							<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+								<svg aria-hidden="true" focusable="false" width="40" height="40">
+									<use xlink:href="images/icons.svg#icon-brand-recognition"></use>
+								</svg>
+							</div>
+							<h3 class="mb-4">Brand Recognition</h3>
+							<p>
+								Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.
+							</p>
+						</section>
+						<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
+							<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+								<svg aria-hidden="true" focusable="false" width="40" height="40">
+									<use xlink:href="images/icons.svg#icon-detailed-records"></use>
+								</svg>
+							</div>
+							<h3 class="mb-4">Detailed Records</h3>
+							<p>
+								Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.
+							</p>
+						</section>
+						<section class="bg-white rounded-lg p-6 pb-10">
+							<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+								<svg aria-hidden="true" focusable="false" viewBox="0 0 48 48" width="40" height="40">
+									<use xlink:href="images/icons.svg#icon-fully-customizable"></use>
+								</svg>
+							</div>
+							<h3 class="mb-4">Fully Customizable</h3>
+							<p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
+						</section>
+					</section>
+				</div>
+			</div>
+			<section class="text-white text-lg text-center bg-violet-dark bg-boost-mobile bg-cover">
+				<div class="container py-24">
+					<h2 class="text-white mb-4">Boost your links today</h2>
+					<a
+						href=""
+						class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+					>
+						Get Started
+					</a>
+				</div>
+			</section>
+		</main>
+		<footer class="text-center bg-violet-very-dark text-gray">
+			<div class="container pt-12 pb-16">
+				<a href="" class="inline-block mx-auto mb-12">
+					<img src="images/logo-white.svg" alt="Shortly home" />
+				</a>
+				<nav class="mb-12">
+					<section class="mb-10">
+						<h2 class="text-base text-white mb-4">Features</h2>
+						<ul>
+							<li><a href="" class="inline-block p-1 hover:text-white">Link Shortening</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Branded Links</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Analytics</a></li>
+						</ul>
+					</section>
+					<section class="mb-10">
+						<h2 class="text-base text-white mb-4">Resources</h2>
+						<ul>
+							<li><a href="" class="inline-block p-1 hover:text-white">Blog</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Developers</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Support</a></li>
+						</ul>
+					</section>
+					<section class="mb-10">
+						<h2 class="text-base text-white mb-4">Company</h2>
+						<ul>
+							<li><a href="" class="inline-block p-1 hover:text-white">About</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Our Team</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Careers</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-white">Contact</a></li>
+						</ul>
+					</section>
+				</nav>
+				<address class="not-italic">
+					<ul class="flex items-center justify-center">
+						<li class="mr-4">
+							<a href="" class="inline-block p-1">
+								<svg aria-hidden="true" focusable="false" width="24" height="24">
+									<use xlink:href="images/icons.svg#icon-facebook"></use>
+								</svg>
+								<span class="sr-only">Facebook</span>
+							</a>
+						</li>
+						<li class="mr-4">
+							<a href="" class="inline-block p-1">
+								<svg aria-hidden="true" focusable="false" width="24" height="20">
+									<use xlink:href="images/icons.svg#icon-twitter"></use>
+								</svg>
+								<span class="sr-only">Twitter</span>
+							</a>
+						</li>
+						<li class="mr-4">
+							<a href="" class="inline-block p-1">
+								<svg aria-hidden="true" focusable="false" width="24" height="24">
+									<use xlink:href="images/icons.svg#icon-pinterest"></use>
+								</svg>
+								<span class="sr-only">Pinterest</span>
+							</a>
+						</li>
+						<li>
+							<a href="" class="inline-block p-1">
+								<svg aria-hidden="true" focusable="false" width="24" height="24">
+									<use xlink:href="images/icons.svg#icon-instagram"></use>
+								</svg>
+								<span class="sr-only">Instagram</span>
+							</a>
+						</li>
+					</ul>
+				</address>
+			</div>
+		</footer>
+	</body>
 </html>

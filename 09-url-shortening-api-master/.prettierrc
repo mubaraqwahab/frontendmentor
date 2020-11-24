@@ -1,10 +1,11 @@
 {
-  "overrides": [
-    {
-      "files": "*.html",
-      "options": {
-        "printWidth": 150
-      }
-    }
-  ]
+	"useTabs": true,
+	"overrides": [
+		{
+			"files": "*.html",
+			"options": {
+				"printWidth": 150
+			}
+		}
+	]
 }

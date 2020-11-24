@@ -3,44 +3,44 @@
 @tailwind utilities;
 
 @layer base {
-  h1,
-  h2,
-  h3 {
-    @apply font-bold text-violet-very-dark leading-tight;
-  }
+	h1,
+	h2,
+	h3 {
+		@apply font-bold text-violet-very-dark leading-tight;
+	}
 
-  h1 {
-    @apply text-4xl;
-  }
+	h1 {
+		@apply text-4xl;
+	}
 
-  h2 {
-    @apply text-2xl;
-  }
+	h2 {
+		@apply text-2xl;
+	}
 
-  h3 {
-    @apply text-xl;
-  }
+	h3 {
+		@apply text-xl;
+	}
 
-  :focus {
-    outline: 1px solid transparent !important;
-    @apply shadow-outline;
-  }
+	:focus {
+		outline: 1px solid transparent !important;
+		@apply shadow-outline;
+	}
 
-  input[aria-invalid="true"]:focus {
-    @apply shadow-outline-red !important;
-  }
+	input[aria-invalid="true"]:focus {
+		@apply shadow-outline-red !important;
+	}
 }
 
 @layer components {
 }
 
 @layer utilities {
-  .after\:line {
-    @apply relative;
-  }
+	.after\:line {
+		@apply relative;
+	}
 
-  .after\:line::after {
-    @apply block w-2 h-20 bg-cyan absolute mx-auto left-0 right-0 top-full;
-    content: "";
-  }
+	.after\:line::after {
+		@apply block w-2 h-20 bg-cyan absolute mx-auto left-0 right-0 top-full;
+		content: "";
+	}
 }
