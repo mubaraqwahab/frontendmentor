@@ -78,7 +78,7 @@
 									aria-invalid="false"
 									class="w-full rounded py-2 px-4 text-violet-dark"
 									data-action="input->form-field#toggleLabel"
-									data-target="url-shortener.input"
+									data-target="form-field.input url-shortener.input"
 								/>
 							</label>
 							<div id="urlHelper" data-target="url-shortener.helperText" class="text-red hidden text-sm italic mt-1">Please add a link</div>
@@ -91,12 +91,12 @@
 						</form>
 						<template data-target="url-shortener.resultTemplate">
 							<article class="rounded-lg bg-white">
-								<header id="originalUrl{{ id }}" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</header>
+								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
+								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</div>
 								<div class="p-4">
-									<span class="sr-only">Shortened to:</span>
-									<a href="{{ shortUrl }}" class="inline-block text-cyan mb-3 truncate">{{ shortUrl }}</a>
+									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-3 truncate">{{ shortUrl }}</a>
 									<button
-										aria-describedby="originalUrl"
+										aria-describedby="{{ shortUrl }}"
 										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 									>
 										Copy <span class="sr-only">shortened</span>
@@ -104,7 +104,7 @@
 								</div>
 							</article>
 						</template>
-						<ul data-target="url-shortener.resultList"></ul>
+						<ul data-target="url-shortener.resultList" aria-live="polite"></ul>
 					</div>
 					<section class="text-center">
 						<h2 class="mb-4">Advanced Statistics</h2>

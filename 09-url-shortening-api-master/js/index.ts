@@ -16,25 +16,45 @@ class NavigationController extends Controller {
 }
 
 class FormFieldController extends Controller {
-	static targets = ["label"];
+	static targets = ["label", "input"];
 
 	labelTarget: HTMLElement;
+	inputTarget: HTMLInputElement;
+
+	connect() {
+		// Programmatically changing input.value doesn't trigger event listeners.
+		// This is a workaround. See https://stackoverflow.com/a/55033939/12695621
+		const valueDesc = Object.getOwnPropertyDescriptor(
+			HTMLInputElement.prototype,
+			"value"
+		);
+		const toggleLabel = this.toggleLabel.bind(this);
+		Object.defineProperty(this.inputTarget, "value", {
+			...valueDesc,
+			set(value) {
+				valueDesc.set.call(this, value);
+				toggleLabel();
+			},
+		});
+	}
 
 	/**
 	 * Simulate the <input> placeholder attribute behaviour;
 	 * show the label when input is empty, hide otherwise.
 	 */
-	toggleLabel(e: Event) {
-		const input = e.target as HTMLInputElement;
+	toggleLabel() {
 		const labelHiddenClass = this.data.get("labelHiddenClass");
-		this.labelTarget.classList.toggle(labelHiddenClass, !!input.value);
+		this.labelTarget.classList.toggle(
+			labelHiddenClass,
+			!!this.inputTarget.value
+		);
 	}
 }
 
 interface ShortenedURLResult {
-	id: number;
-	originalUrl: string;
 	shortUrl: string;
+	fullShortUrl: string;
+	originalUrl: string;
 }
 
 class UrlShortenerController extends Controller {
@@ -82,8 +102,12 @@ class UrlShortenerController extends Controller {
 					resultTemplateTarget.innerHTML,
 					shortened
 				);
-				resultListTarget.appendChild(resultLi);
+				resultListTarget.insertBefore(
+					resultLi,
+					resultListTarget.firstElementChild
+				);
 				inputTarget.value = "";
+				inputTarget.setAttribute("value", "");
 			}
 		} else {
 			this.setInputValidity(false);
@@ -124,20 +148,24 @@ class UrlShortenerController extends Controller {
 			ok: boolean;
 			result: {
 				short_link: string;
+				full_short_link: string;
 			};
 		}
 
 		return fetch(
 			`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
 		)
-			.then((response) => response.json())
+			.then((response) => {
+				if (response.ok) return response.json();
+				throw new Error(response.statusText);
+			})
 			.then(
 				(data: ShrtCodeResponse): ShortenedURLResult => {
 					if (data.ok) {
 						return {
-							id: 0,
-							originalUrl: url,
 							shortUrl: data.result.short_link,
+							fullShortUrl: data.result.full_short_link,
+							originalUrl: url,
 						};
 					} else {
 						throw new Error(`Malformed URL ${url}`);
