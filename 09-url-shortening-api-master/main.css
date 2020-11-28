@@ -32,6 +32,21 @@
 }
 
 @layer components {
+	/* .copy-btn__copied-label {
+		display: none;
+	}
+
+	.copied .copy-btn__label {
+		display: none;
+	}
+
+	.copied .copy-btn__copied-label {
+		display: inline;
+	}
+
+	.copy-failed .copy-btn__copy-failed-label {
+		display: inline;
+	} */
 }
 
 @layer utilities {

@@ -93,13 +93,21 @@
 							<article class="rounded-lg bg-white">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
 								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</div>
-								<div class="p-4">
-									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-3 truncate">{{ shortUrl }}</a>
+								<div
+									class="px-4 py-3"
+									data-controller="clipboard"
+									data-clipboard-copy-text="Copy"
+									data-clipboard-copied-text="Copied!"
+									data-clipboard-copy-failed-text="Failed to copy!"
+								>
+									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 truncate" data-target="clipboard.source">{{ shortUrl }}</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
+										data-action="clipboard#copy"
 										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 									>
-										Copy <span class="sr-only">shortened</span>
+										<span data-target="clipboard.copyBtnText">Copy</span>
+										<span class="sr-only">shortened</span>
 									</button>
 								</div>
 							</article>

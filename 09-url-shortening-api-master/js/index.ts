@@ -31,8 +31,8 @@ class FormFieldController extends Controller {
 		const toggleLabel = this.toggleLabel.bind(this);
 		Object.defineProperty(this.inputTarget, "value", {
 			...valueDesc,
-			set(value) {
-				valueDesc.set.call(this, value);
+			set(v) {
+				valueDesc.set.call(this, v);
 				toggleLabel();
 			},
 		});
@@ -74,23 +74,24 @@ class UrlShortenerController extends Controller {
 
 	connect() {
 		this.formTarget.noValidate = true;
+		// For some reason, this is necessary
+		this.createResultLi = this.createResultLi.bind(this);
 	}
 
 	// TODO
 	// * Announce <li> insertion
-	// * Prepend https:// to shortUrl
 
 	async submit(e: Event) {
 		e.preventDefault();
 		const {
 			formTarget,
 			inputTarget,
-			resultTemplateTarget,
 			resultListTarget,
 			createResultLi,
 			shorten,
 		}: UrlShortenerController = this;
 
+		// TODO: loading text
 		if (formTarget.checkValidity()) {
 			this.setInputValidity(true);
 			const shortened = await shorten(inputTarget.value);
@@ -98,27 +99,24 @@ class UrlShortenerController extends Controller {
 			if ("error" in shortened) {
 				this.setInputValidity(false);
 			} else {
-				const resultLi = createResultLi(
-					resultTemplateTarget.innerHTML,
-					shortened
-				);
+				const resultLi = createResultLi(shortened);
+				// TODO: Limit shown result count to 3 or 5
 				resultListTarget.insertBefore(
 					resultLi,
 					resultListTarget.firstElementChild
 				);
 				inputTarget.value = "";
-				inputTarget.setAttribute("value", "");
 			}
 		} else {
 			this.setInputValidity(false);
 		}
 	}
 
-	private createResultLi(
-		html: string,
-		shortened: ShortenedURLResult
-	): HTMLLIElement {
-		const resultHTML = html.replace(
+	/**
+	 * Create an <li> element containing an expanded result template.
+	 */
+	private createResultLi(shortened: ShortenedURLResult): HTMLLIElement {
+		const resultHTML = this.resultTemplateTarget.innerHTML.replace(
 			/{{ ([a-zA-Z]+) }}/g,
 			(_, placeholder: string) => "" + shortened[placeholder]
 		);
@@ -176,7 +174,37 @@ class UrlShortenerController extends Controller {
 	}
 }
 
+class ClipboardController extends Controller {
+	static targets = ["source", "copyBtnText"];
+
+	sourceTarget: HTMLElement;
+	copyBtnTextTarget: HTMLElement;
+
+	initialize() {
+		this.resetCopyBtnTextOnBlur = this.resetCopyBtnTextOnBlur.bind(this);
+	}
+
+	copy(e: Event) {
+		navigator.clipboard.writeText(this.sourceTarget.textContent).then(
+			() => {
+				this.copyBtnTextTarget.textContent = this.data.get("copiedText");
+				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
+			},
+			() => {
+				this.copyBtnTextTarget.textContent = this.data.get("copyFailedText");
+				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
+			}
+		);
+	}
+
+	private resetCopyBtnTextOnBlur(e: Event) {
+		this.copyBtnTextTarget.textContent = this.data.get("copyText");
+		e.target.removeEventListener("blur", this.resetCopyBtnTextOnBlur);
+	}
+}
+
 const application = Application.start();
 application.register("navigation", NavigationController);
 application.register("form-field", FormFieldController);
 application.register("url-shortener", UrlShortenerController);
+application.register("clipboard", ClipboardController);
