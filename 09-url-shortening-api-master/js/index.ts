@@ -90,10 +90,7 @@ class UrlShortenerController extends Controller {
 		formTarget.noValidate = true;
 
 		results.forEach((result) =>
-			resultListTarget.insertBefore(
-				createResultLi(result),
-				resultListTarget.firstElementChild
-			)
+			resultListTarget.appendChild(createResultLi(result))
 		);
 	}
 
@@ -134,7 +131,7 @@ class UrlShortenerController extends Controller {
 	}
 
 	/**
-	 * Add a shortened URL result to the results list, DOM list and storage list.
+	 * Prepend a shortened URL result to the results list, DOM list and storage list.
 	 * This function also trims the lists, so they are never longer 3 elements.
 	 */
 	private addResult = (result: ShortenedURLResult) => {
@@ -145,11 +142,11 @@ class UrlShortenerController extends Controller {
 		}: UrlShortenerController = this;
 
 		if (results.length === 3) {
-			results.shift();
+			results.pop();
 			resultListTarget.lastElementChild.remove();
 		}
 
-		results.push(result);
+		results.unshift(result);
 		const resultLi = createResultLi(result);
 		resultListTarget.insertBefore(resultLi, resultListTarget.firstElementChild);
 
