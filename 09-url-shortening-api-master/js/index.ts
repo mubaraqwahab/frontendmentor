@@ -225,12 +225,12 @@ class UrlShortenerController extends Controller {
 }
 
 class ClipboardController extends Controller {
-	static targets = ["source", "copyBtnText"];
+	static targets = ["source"];
 
-	sourceTarget: HTMLElement;
+	sourceTarget: HTMLAnchorElement;
 
 	copy(e: Event) {
-		navigator.clipboard.writeText(this.sourceTarget.textContent).then(
+		navigator.clipboard.writeText(this.sourceTarget.href).then(
 			() => {
 				this.element.classList.add(this.data.get("copiedClass"));
 				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
