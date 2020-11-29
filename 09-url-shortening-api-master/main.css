@@ -32,6 +32,16 @@
 }
 
 @layer components {
+	.shorten-btn__loading-label {
+		@apply hidden;
+	}
+	.shortening .shorten-btn__label {
+		@apply hidden;
+	}
+
+	.shortening .shorten-btn__loading-label {
+		@apply inline;
+	}
 	/* .copy-btn__copied-label {
 		display: none;
 	}

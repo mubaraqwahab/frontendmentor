@@ -60,7 +60,12 @@
 
 			<div class="bg-gray-200">
 				<div class="container pt-16 pb-20">
-					<div class="mb-20 -mt-32" data-controller="url-shortener" data-url-shortener-hidden-class="hidden">
+					<div
+						class="mb-20 -mt-32"
+						data-controller="url-shortener"
+						data-url-shortener-hidden-class="hidden"
+						data-url-shortener-loading-class="shortening"
+					>
 						<form
 							action=""
 							data-target="url-shortener.form"
@@ -86,11 +91,12 @@
 								type="submit"
 								class="w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 							>
-								Shorten It!
+								<span class="shorten-btn__label">Shorten It!</span>
+								<span class="shorten-btn__loading-label">Shortening...</span>
 							</button>
 						</form>
 						<template data-target="url-shortener.resultTemplate">
-							<article class="rounded-lg bg-white">
+							<article class="rounded-lg bg-white mb-5">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
 								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</div>
 								<div

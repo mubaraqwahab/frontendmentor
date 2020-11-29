@@ -72,10 +72,29 @@ class UrlShortenerController extends Controller {
 	resultTemplateTarget: HTMLTemplateElement;
 	resultListTarget: HTMLUListElement;
 
+	private results: ShortenedURLResult[];
+
+	initialize() {
+		const resultsInStorage = sessionStorage.getItem("shortenedURLResults");
+		this.results = JSON.parse(resultsInStorage) ?? [];
+	}
+
 	connect() {
-		this.formTarget.noValidate = true;
-		// For some reason, this is necessary
-		this.createResultLi = this.createResultLi.bind(this);
+		const {
+			formTarget,
+			results,
+			createResultLi,
+			resultListTarget,
+		}: UrlShortenerController = this;
+
+		formTarget.noValidate = true;
+
+		results.forEach((result) =>
+			resultListTarget.insertBefore(
+				createResultLi(result),
+				resultListTarget.firstElementChild
+			)
+		);
 	}
 
 	// TODO
@@ -86,36 +105,62 @@ class UrlShortenerController extends Controller {
 		const {
 			formTarget,
 			inputTarget,
-			resultListTarget,
-			createResultLi,
+			addResult,
 			shorten,
+			setInputValidity,
+			data,
+			element,
 		}: UrlShortenerController = this;
 
 		// TODO: loading text
 		if (formTarget.checkValidity()) {
-			this.setInputValidity(true);
+			setInputValidity(true);
+
+			const loadingClass = data.get("loadingClass");
+			element.classList.add(loadingClass);
+
 			const shortened = await shorten(inputTarget.value);
 
 			if ("error" in shortened) {
-				this.setInputValidity(false);
+				setInputValidity(false);
 			} else {
-				const resultLi = createResultLi(shortened);
-				// TODO: Limit shown result count to 3 or 5
-				resultListTarget.insertBefore(
-					resultLi,
-					resultListTarget.firstElementChild
-				);
+				addResult(shortened);
 				inputTarget.value = "";
 			}
+
+			element.classList.remove(loadingClass);
 		} else {
-			this.setInputValidity(false);
+			setInputValidity(false);
 		}
 	}
 
 	/**
+	 * Add a shortened URL result to the results list, DOM list and storage list.
+	 * This function also trims the lists, so they are never longer 3 elements.
+	 */
+	private addResult = (result: ShortenedURLResult) => {
+		const {
+			results,
+			resultListTarget,
+			createResultLi,
+		}: UrlShortenerController = this;
+
+		if (results.length === 3) {
+			results.shift();
+			resultListTarget.lastElementChild.remove();
+		}
+
+		results.push(result);
+		const resultLi = createResultLi(result);
+		resultListTarget.insertBefore(resultLi, resultListTarget.firstElementChild);
+
+		sessionStorage.setItem("shortenedURLResults", JSON.stringify(results));
+	};
+
+	/**
 	 * Create an <li> element containing an expanded result template.
 	 */
-	private createResultLi(shortened: ShortenedURLResult): HTMLLIElement {
+	private createResultLi = (shortened: ShortenedURLResult): HTMLLIElement => {
 		const resultHTML = this.resultTemplateTarget.innerHTML.replace(
 			/{{ ([a-zA-Z]+) }}/g,
 			(_, placeholder: string) => "" + shortened[placeholder]
@@ -123,9 +168,9 @@ class UrlShortenerController extends Controller {
 		const resultLi = document.createElement("li");
 		resultLi.innerHTML = resultHTML;
 		return resultLi;
-	}
+	};
 
-	private setInputValidity(valid: boolean) {
+	private setInputValidity = (valid: boolean) => {
 		const { helperTextTarget, inputTarget }: UrlShortenerController = this;
 		const hiddenClass = this.data.get("hiddenClass");
 
@@ -139,7 +184,7 @@ class UrlShortenerController extends Controller {
 			inputTarget.setAttribute("aria-describedby", helperTextTarget.id);
 			inputTarget.focus();
 		}
-	}
+	};
 
 	private shorten(url: string): Promise<ShortenedURLResult | { error: Error }> {
 		interface ShrtCodeResponse {
@@ -180,10 +225,6 @@ class ClipboardController extends Controller {
 	sourceTarget: HTMLElement;
 	copyBtnTextTarget: HTMLElement;
 
-	initialize() {
-		this.resetCopyBtnTextOnBlur = this.resetCopyBtnTextOnBlur.bind(this);
-	}
-
 	copy(e: Event) {
 		navigator.clipboard.writeText(this.sourceTarget.textContent).then(
 			() => {
@@ -197,10 +238,10 @@ class ClipboardController extends Controller {
 		);
 	}
 
-	private resetCopyBtnTextOnBlur(e: Event) {
+	private resetCopyBtnTextOnBlur = (e: Event) => {
 		this.copyBtnTextTarget.textContent = this.data.get("copyText");
 		e.target.removeEventListener("blur", this.resetCopyBtnTextOnBlur);
-	}
+	};
 }
 
 const application = Application.start();
