@@ -11,11 +11,11 @@
 	</head>
 	<body class="font-medium text-gray-violet">
 		<header data-controller="navigation" data-navigation-hidden-class="hidden">
-			<div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative">
+			<div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative lg:justify-start">
 				<a href=".">
 					<img src="images/logo.svg" alt="Shortly home" />
 				</a>
-				<button aria-expanded="false" data-action="navigation#toggle">
+				<button aria-expanded="false" data-action="navigation#toggle" class="lg:hidden">
 					<span class="sr-only">Toggle navigation</span>
 					<!-- Credit: ionicons (https://ionicons.com/) -->
 					<svg aria-hidden="true" focusable="false" viewBox="0 0 512 512" width="36" height="36">
@@ -29,29 +29,33 @@
 						/>
 					</svg>
 				</button>
+				<!-- prettier-ignore -->
 				<nav
-					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0"
+					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0
+						lg:bg-transparent lg:text-gray-violet lg:flex lg:justify-between lg:items-center lg:static lg:flex-auto"
 					data-target="navigation.nav"
 				>
-					<ul class="border-b mb-4">
-						<li><a href="" class="block p-2 rounded-full mb-2">Features</a></li>
-						<li><a href="" class="block p-2 rounded-full mb-2">Pricing</a></li>
-						<li><a href="" class="block p-2 rounded-full mb-4">Resources</a></li>
+					<ul class="border-b mb-4 lg:flex lg:items-center lg:border-b-0 lg:mb-0">
+						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Features</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Pricing</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-4 lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Resources</a></li>
 					</ul>
-					<a href="" class="block p-2 mb-3 rounded-full">Login</a>
-					<a href="" class="block p-2 mb-3 rounded-full bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark">Sign Up</a>
+					<div class="lg:flex lg:items-center">
+						<a href="" class="block p-2 mb-3 rounded-full lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Login</a>
+						<a href="" class="block p-2 mb-3 rounded-full lg-px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark">Sign Up</a>
+					</div>
 				</nav>
 			</div>
 		</header>
 		<main>
-			<div class="container overflow-x-hidden">
-				<img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg" />
-				<div class="text-lg mb-36 text-center">
+			<div class="container overflow-x-hidden lg:flex">
+				<img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg lg:order-1" />
+				<div class="text-lg mb-36 text-center lg:text-left lg:w-1/2">
 					<h1 class="mb-3">More than just shorter links</h1>
 					<p class="mb-6">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
 					<a
 						href=""
-						class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark text-white font-bold tracking-wide"
+						class="inline-block rounded-full py-3 px-8 text-center bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark text-white font-bold tracking-wide"
 					>
 						Get Started
 					</a>
@@ -70,9 +74,9 @@
 						<form
 							data-target="url-shortener.form"
 							data-action="submit->url-shortener#submit"
-							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5"
+							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:flex lg:items-center"
 						>
-							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
+							<label for="url" class="block relative lg:w-full" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
 								<span class="form__label absolute left-0 right-0" data-target="form-field.label">Shorten a link here...</span>
 								<input
@@ -89,7 +93,7 @@
 							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper">Please add a link</div>
 							<button
 								type="submit"
-								class="w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+								class="lg:w-auto lg:flex-shrink-0 lg:mt-0 lg:ml-4 w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 							>
 								<span class="shorten-btn__label">Shorten It!</span>
 								<span class="shorten-btn__loading-label">Shortening...</span>
@@ -97,20 +101,22 @@
 							</button>
 						</form>
 						<template data-target="url-shortener.resultTemplate">
-							<article class="rounded-lg bg-white mb-5">
+							<article class="rounded-lg bg-white mb-5 lg:flex lg:items-center lg:justify-between">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
-								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate">{{ originalUrl }}</div>
+								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0">
+									{{ originalUrl }}
+								</div>
 								<div
-									class="px-4 py-3"
+									class="px-4 py-3 lg:flex lg:items-center"
 									data-controller="clipboard"
 									data-clipboard-copied-class="copied"
 									data-clipboard-copy-failed-class="copy-failed"
 								>
-									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 truncate" data-target="clipboard.source">{{ shortUrl }}</a>
+									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 truncate lg:mb-0" data-target="clipboard.source">{{ shortUrl }}</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
 										data-action="clipboard#copy"
-										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+										class="w-full lg:w-auto rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy</span>
 										<span class="copy-btn__copied-label">Copied!</span>
@@ -159,7 +165,7 @@
 					</section>
 				</div>
 			</div>
-			<section class="text-white text-lg text-center bg-violet-dark bg-boost-mobile bg-cover">
+			<section class="text-white text-lg text-center bg-violet-dark bg-boost-mobile bg-cover lg:bg-boost-desktop">
 				<div class="container py-24">
 					<h2 class="text-white mb-4">Boost your links today</h2>
 					<a
@@ -171,13 +177,13 @@
 				</div>
 			</section>
 		</main>
-		<footer class="text-center bg-violet-very-dark text-gray">
-			<div class="container pt-12 pb-16">
-				<a href="" class="inline-block mx-auto mb-12">
+		<footer class="text-center bg-violet-very-dark text-gray lg:text-left">
+			<div class="container pt-12 pb-16 lg:flex lg:justify-between">
+				<a href="" class="inline-block mx-auto mb-12 lg:m-0 lg:w-1/5">
 					<img src="images/logo-white.svg" alt="Shortly home" />
 				</a>
-				<nav class="mb-12">
-					<section class="mb-10">
+				<nav class="mb-12 lg:flex lg:justify-between lg:mb-0 lg:w-2/5">
+					<section class="mb-10 lg:mb-0">
 						<h2 class="text-base text-white mb-4">Features</h2>
 						<ul>
 							<li><a href="" class="inline-block p-1 hover:text-white">Link Shortening</a></li>
@@ -185,7 +191,7 @@
 							<li><a href="" class="inline-block p-1 hover:text-white">Analytics</a></li>
 						</ul>
 					</section>
-					<section class="mb-10">
+					<section class="mb-10 lg:mb-0">
 						<h2 class="text-base text-white mb-4">Resources</h2>
 						<ul>
 							<li><a href="" class="inline-block p-1 hover:text-white">Blog</a></li>
@@ -193,7 +199,7 @@
 							<li><a href="" class="inline-block p-1 hover:text-white">Support</a></li>
 						</ul>
 					</section>
-					<section class="mb-10">
+					<section class="mb-10 lg:mb-0">
 						<h2 class="text-base text-white mb-4">Company</h2>
 						<ul>
 							<li><a href="" class="inline-block p-1 hover:text-white">About</a></li>
@@ -206,7 +212,8 @@
 				<address class="not-italic">
 					<ul class="flex items-center justify-center">
 						<li class="mr-4">
-							<a href="" class="inline-block p-1">
+							<!-- TODO: svg color should change on hover -->
+							<a href="" class="inline-block p-1 hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="24">
 									<use xlink:href="images/icons.svg#icon-facebook"></use>
 								</svg>
@@ -214,7 +221,7 @@
 							</a>
 						</li>
 						<li class="mr-4">
-							<a href="" class="inline-block p-1">
+							<a href="" class="inline-block p-1 hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="20">
 									<use xlink:href="images/icons.svg#icon-twitter"></use>
 								</svg>
@@ -222,7 +229,7 @@
 							</a>
 						</li>
 						<li class="mr-4">
-							<a href="" class="inline-block p-1">
+							<a href="" class="inline-block p-1 hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="24">
 									<use xlink:href="images/icons.svg#icon-pinterest"></use>
 								</svg>
@@ -230,7 +237,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="" class="inline-block p-1">
+							<a href="" class="inline-block p-1 hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="24">
 									<use xlink:href="images/icons.svg#icon-instagram"></use>
 								</svg>
