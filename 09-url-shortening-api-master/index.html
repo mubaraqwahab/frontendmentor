@@ -102,9 +102,8 @@
 								<div
 									class="px-4 py-3"
 									data-controller="clipboard"
-									data-clipboard-copy-text="Copy"
-									data-clipboard-copied-text="Copied!"
-									data-clipboard-copy-failed-text="Failed to copy!"
+									data-clipboard-copied-class="copied"
+									data-clipboard-copy-failed-class="copy-failed"
 								>
 									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 truncate" data-target="clipboard.source">{{ shortUrl }}</a>
 									<button
@@ -112,7 +111,9 @@
 										data-action="clipboard#copy"
 										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 									>
-										<span data-target="clipboard.copyBtnText">Copy</span>
+										<span class="copy-btn__label">Copy</span>
+										<span class="copy-btn__copied-label">Copied!</span>
+										<span class="copy-btn__failed-label">Failed to copy</span>
 										<span class="sr-only">shortened</span>
 									</button>
 								</div>

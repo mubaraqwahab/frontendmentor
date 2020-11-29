@@ -1721,7 +1721,6 @@
             this.setInputValidity = (valid) => {
                 const { helperTextTarget, inputTarget, element, data, } = this;
                 const errorClass = data.get("errorClass");
-                console.log(errorClass);
                 if (valid) {
                     element.classList.remove(errorClass);
                     inputTarget.setAttribute("aria-invalid", "false");
@@ -1803,16 +1802,18 @@
         constructor() {
             super(...arguments);
             this.resetCopyBtnTextOnBlur = (e) => {
-                this.copyBtnTextTarget.textContent = this.data.get("copyText");
+                const copiedClass = this.data.get("copiedClass");
+                const copyFailedClass = this.data.get("copyFailedClass");
+                this.element.classList.remove(copiedClass, copyFailedClass);
                 e.target.removeEventListener("blur", this.resetCopyBtnTextOnBlur);
             };
         }
         copy(e) {
             navigator.clipboard.writeText(this.sourceTarget.textContent).then(() => {
-                this.copyBtnTextTarget.textContent = this.data.get("copiedText");
+                this.element.classList.add(this.data.get("copiedClass"));
                 e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
             }, () => {
-                this.copyBtnTextTarget.textContent = this.data.get("copyFailedText");
+                this.element.classList.add(this.data.get("copyFailedText"));
                 e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
             });
         }

@@ -675,21 +675,29 @@ input[aria-invalid="true"]:focus {
   display: inline;
 }
 
-/* .copy-btn__copied-label {
-		display: none;
-	}
+.copied {
+  --label-display: none;
+  --copied-label-display: inline;
+  --failed-label-display: none;
+}
 
-	.copied .copy-btn__label {
-		display: none;
-	}
+.copy-failed {
+  --label-display: none;
+  --copied-label-display: none;
+  --failed-label-display: inline;
+}
 
-	.copied .copy-btn__copied-label {
-		display: inline;
-	}
+.copy-btn__label {
+  display: var(--label-display, inline);
+}
 
-	.copy-failed .copy-btn__copy-failed-label {
-		display: inline;
-	} */
+.copy-btn__copied-label {
+  display: var(--copied-label-display, none);
+}
+
+.copy-btn__failed-label {
+  display: var(--failed-label-display, none);
+}
 
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;

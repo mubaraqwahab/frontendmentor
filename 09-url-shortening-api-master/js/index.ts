@@ -178,7 +178,6 @@ class UrlShortenerController extends Controller {
 		}: UrlShortenerController = this;
 
 		const errorClass = data.get("errorClass");
-		console.log(errorClass);
 
 		if (valid) {
 			element.classList.remove(errorClass);
@@ -229,23 +228,24 @@ class ClipboardController extends Controller {
 	static targets = ["source", "copyBtnText"];
 
 	sourceTarget: HTMLElement;
-	copyBtnTextTarget: HTMLElement;
 
 	copy(e: Event) {
 		navigator.clipboard.writeText(this.sourceTarget.textContent).then(
 			() => {
-				this.copyBtnTextTarget.textContent = this.data.get("copiedText");
+				this.element.classList.add(this.data.get("copiedClass"));
 				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
 			},
 			() => {
-				this.copyBtnTextTarget.textContent = this.data.get("copyFailedText");
+				this.element.classList.add(this.data.get("copyFailedText"));
 				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
 			}
 		);
 	}
 
 	private resetCopyBtnTextOnBlur = (e: Event) => {
-		this.copyBtnTextTarget.textContent = this.data.get("copyText");
+		const copiedClass = this.data.get("copiedClass");
+		const copyFailedClass = this.data.get("copyFailedClass");
+		this.element.classList.remove(copiedClass, copyFailedClass);
 		e.target.removeEventListener("blur", this.resetCopyBtnTextOnBlur);
 	};
 }
