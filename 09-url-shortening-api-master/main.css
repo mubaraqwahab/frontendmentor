@@ -32,8 +32,16 @@
 }
 
 @layer components {
+	.form__label {
+		@apply inline-block py-2 px-4 select-none;
+	}
+
 	.form__helper {
 		@apply hidden text-sm italic mt-1;
+	}
+
+	.form--invalid .form__label {
+		@apply text-red;
 	}
 
 	.form--invalid .form__helper {

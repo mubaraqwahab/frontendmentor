@@ -67,14 +67,13 @@
 						data-url-shortener-loading-class="shortening"
 					>
 						<form
-							action=""
 							data-target="url-shortener.form"
 							data-action="submit->url-shortener#submit"
 							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5"
 						>
 							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
-								<span class="absolute left-0 right-0 inline-block py-2 px-4 select-none" data-target="form-field.label">Shorten a link here...</span>
+								<span class="form__label absolute left-0 right-0" data-target="form-field.label">Shorten a link here...</span>
 								<input
 									type="url"
 									id="url"
