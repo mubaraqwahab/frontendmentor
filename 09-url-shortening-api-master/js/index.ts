@@ -109,6 +109,9 @@ class UrlShortenerController extends Controller {
 			element,
 		}: UrlShortenerController = this;
 
+		const failedClass = data.get("shortenFailedClass");
+		element.classList.remove(failedClass); // if necessary
+
 		if (formTarget.checkValidity()) {
 			setInputValidity(true);
 
@@ -117,14 +120,14 @@ class UrlShortenerController extends Controller {
 
 			const shortened = await shorten(inputTarget.value);
 
+			element.classList.remove(loadingClass);
+
 			if ("error" in shortened) {
-				setInputValidity(false);
+				element.classList.add(failedClass);
 			} else {
 				addResult(shortened);
 				inputTarget.value = "";
 			}
-
-			element.classList.remove(loadingClass);
 		} else {
 			setInputValidity(false);
 		}
@@ -174,7 +177,7 @@ class UrlShortenerController extends Controller {
 			data,
 		}: UrlShortenerController = this;
 
-		const errorClass = data.get("errorClass");
+		const errorClass = data.get("formErrorClass");
 
 		if (valid) {
 			element.classList.remove(errorClass);

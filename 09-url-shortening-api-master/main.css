@@ -49,32 +49,44 @@
 		@apply block text-red;
 	}
 
+	.shortening {
+		--shorten-label-display: none;
+		--shortening-label-display: inline;
+		--shorten-failed-label-display: none;
+	}
+
+	.shorten-failed {
+		--shorten-label-display: none;
+		--shortening-label-display: none;
+		--shorten-failed-label-display: inline;
+	}
+
+	.shorten-btn__label {
+		display: var(--shorten-label-display, inline);
+	}
+
 	.shorten-btn__loading-label {
-		@apply hidden;
+		display: var(--shortening-label-display, none);
 	}
 
-	.shortening .shorten-btn__label {
-		@apply hidden;
-	}
-
-	.shortening .shorten-btn__loading-label {
-		@apply inline;
+	.shorten-btn__failed-label {
+		display: var(--shorten-failed-label-display, none);
 	}
 
 	.copied {
-		--label-display: none;
+		--copy-label-display: none;
 		--copied-label-display: inline;
-		--failed-label-display: none;
+		--copy-failed-label-display: none;
 	}
 
 	.copy-failed {
-		--label-display: none;
+		--copy-label-display: none;
 		--copied-label-display: none;
-		--failed-label-display: inline;
+		--copy-failed-label-display: inline;
 	}
 
 	.copy-btn__label {
-		display: var(--label-display, inline);
+		display: var(--copy-label-display, inline);
 	}
 
 	.copy-btn__copied-label {
@@ -82,7 +94,7 @@
 	}
 
 	.copy-btn__failed-label {
-		display: var(--failed-label-display, none);
+		display: var(--copy-failed-label-display, none);
 	}
 }
 

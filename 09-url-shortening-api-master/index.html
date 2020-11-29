@@ -63,8 +63,9 @@
 					<div
 						class="mb-20 -mt-32"
 						data-controller="url-shortener"
-						data-url-shortener-error-class="form--invalid"
 						data-url-shortener-loading-class="shortening"
+						data-url-shortener-shorten-failed-class="shorten-failed"
+						data-url-shortener-form-error-class="form--invalid"
 					>
 						<form
 							data-target="url-shortener.form"
@@ -92,6 +93,7 @@
 							>
 								<span class="shorten-btn__label">Shorten It!</span>
 								<span class="shorten-btn__loading-label">Shortening...</span>
+								<span class="shorten-btn__failed-label">Something's wrong, try again</span>
 							</button>
 						</form>
 						<template data-target="url-shortener.resultTemplate">
