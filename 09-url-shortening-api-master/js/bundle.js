@@ -1719,15 +1719,16 @@
                 return resultLi;
             };
             this.setInputValidity = (valid) => {
-                const { helperTextTarget, inputTarget } = this;
-                const hiddenClass = this.data.get("hiddenClass");
+                const { helperTextTarget, inputTarget, element, data, } = this;
+                const errorClass = data.get("errorClass");
+                console.log(errorClass);
                 if (valid) {
-                    helperTextTarget.classList.add(hiddenClass); // if needed
+                    element.classList.remove(errorClass);
                     inputTarget.setAttribute("aria-invalid", "false");
                     inputTarget.removeAttribute("aria-describedby");
                 }
                 else {
-                    helperTextTarget.classList.remove(hiddenClass);
+                    element.classList.add(errorClass);
                     inputTarget.setAttribute("aria-invalid", "true");
                     inputTarget.setAttribute("aria-describedby", helperTextTarget.id);
                     inputTarget.focus();
@@ -1750,7 +1751,6 @@
             return __awaiter(this, void 0, void 0, function* () {
                 e.preventDefault();
                 const { formTarget, inputTarget, addResult, shorten, setInputValidity, data, element, } = this;
-                // TODO: loading text
                 if (formTarget.checkValidity()) {
                     setInputValidity(true);
                     const loadingClass = data.get("loadingClass");

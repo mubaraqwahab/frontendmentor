@@ -32,6 +32,14 @@
 }
 
 @layer components {
+	.form__helper {
+		@apply hidden text-sm italic mt-1;
+	}
+
+	.form--invalid .form__helper {
+		@apply block text-red;
+	}
+
 	.shorten-btn__loading-label {
 		@apply hidden;
 	}

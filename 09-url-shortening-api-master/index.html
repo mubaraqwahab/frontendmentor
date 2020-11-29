@@ -63,7 +63,7 @@
 					<div
 						class="mb-20 -mt-32"
 						data-controller="url-shortener"
-						data-url-shortener-hidden-class="hidden"
+						data-url-shortener-error-class="form--invalid"
 						data-url-shortener-loading-class="shortening"
 					>
 						<form
@@ -86,7 +86,7 @@
 									data-target="form-field.input url-shortener.input"
 								/>
 							</label>
-							<div id="urlHelper" data-target="url-shortener.helperText" class="text-red hidden text-sm italic mt-1">Please add a link</div>
+							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper">Please add a link</div>
 							<button
 								type="submit"
 								class="w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"

@@ -649,6 +649,20 @@ input[aria-invalid="true"]:focus {
   }
 }
 
+.form__helper {
+  display: none;
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.form--invalid .form__helper {
+  display: block;
+  --text-opacity: 1;
+  color: hsl(0, 87%, 67%);
+  color: rgba(244.0605, 97.63950000000003, 97.63950000000003, var(--text-opacity));
+}
+
 .shorten-btn__loading-label {
   display: none;
 }

@@ -112,7 +112,6 @@ class UrlShortenerController extends Controller {
 			element,
 		}: UrlShortenerController = this;
 
-		// TODO: loading text
 		if (formTarget.checkValidity()) {
 			setInputValidity(true);
 
@@ -171,15 +170,22 @@ class UrlShortenerController extends Controller {
 	};
 
 	private setInputValidity = (valid: boolean) => {
-		const { helperTextTarget, inputTarget }: UrlShortenerController = this;
-		const hiddenClass = this.data.get("hiddenClass");
+		const {
+			helperTextTarget,
+			inputTarget,
+			element,
+			data,
+		}: UrlShortenerController = this;
+
+		const errorClass = data.get("errorClass");
+		console.log(errorClass);
 
 		if (valid) {
-			helperTextTarget.classList.add(hiddenClass); // if needed
+			element.classList.remove(errorClass);
 			inputTarget.setAttribute("aria-invalid", "false");
 			inputTarget.removeAttribute("aria-describedby");
 		} else {
-			helperTextTarget.classList.remove(hiddenClass);
+			element.classList.add(errorClass);
 			inputTarget.setAttribute("aria-invalid", "true");
 			inputTarget.setAttribute("aria-describedby", helperTextTarget.id);
 			inputTarget.focus();
