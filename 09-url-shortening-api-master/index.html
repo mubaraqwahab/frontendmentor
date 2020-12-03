@@ -29,10 +29,8 @@
 						/>
 					</svg>
 				</button>
-				<!-- prettier-ignore -->
 				<nav
-					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0
-						lg:bg-transparent lg:text-gray-violet lg:flex lg:justify-between lg:items-center lg:static lg:flex-auto"
+					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0 lg:bg-transparent lg:text-gray-violet lg:flex lg:justify-between lg:items-center lg:static lg:flex-auto"
 					data-target="navigation.nav"
 				>
 					<ul class="border-b mb-4 lg:flex lg:items-center lg:border-b-0 lg:mb-0">
@@ -42,7 +40,11 @@
 					</ul>
 					<div class="lg:flex lg:items-center">
 						<a href="" class="block p-2 mb-3 rounded-full lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Login</a>
-						<a href="" class="block p-2 mb-3 rounded-full lg-px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark">Sign Up</a>
+						<a
+							href=""
+							class="block p-2 mb-3 rounded-full lg-px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark"
+							>Sign Up</a
+						>
 					</div>
 				</nav>
 			</div>
@@ -131,37 +133,40 @@
 					<section class="text-center">
 						<h2 class="mb-4">Advanced Statistics</h2>
 						<p class="mb-20">Track how your links are performing across the web with our advanced statistics dashboard.</p>
-						<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
-							<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
-								<svg aria-hidden="true" focusable="false" width="40" height="40">
-									<use xlink:href="images/icons.svg#icon-brand-recognition"></use>
-								</svg>
-							</div>
-							<h3 class="mb-4">Brand Recognition</h3>
-							<p>
-								Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.
-							</p>
-						</section>
-						<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line">
-							<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
-								<svg aria-hidden="true" focusable="false" width="40" height="40">
-									<use xlink:href="images/icons.svg#icon-detailed-records"></use>
-								</svg>
-							</div>
-							<h3 class="mb-4">Detailed Records</h3>
-							<p>
-								Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.
-							</p>
-						</section>
-						<section class="bg-white rounded-lg p-6 pb-10">
-							<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
-								<svg aria-hidden="true" focusable="false" viewBox="0 0 48 48" width="40" height="40">
-									<use xlink:href="images/icons.svg#icon-fully-customizable"></use>
-								</svg>
-							</div>
-							<h3 class="mb-4">Fully Customizable</h3>
-							<p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
-						</section>
+						<div class="lg:grid lg:grid-cols-3 lg:gap-x-6 lg:features-grid">
+							<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line lg:row-start-1 lg:row-span-3 lg:mb-0">
+								<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+									<svg aria-hidden="true" focusable="false" width="40" height="40">
+										<use xlink:href="images/icons.svg#icon-brand-recognition"></use>
+									</svg>
+								</div>
+								<h3 class="mb-4">Brand Recognition</h3>
+								<p>
+									Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your
+									content.
+								</p>
+							</section>
+							<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line lg:row-start-2 lg:row-span-3 lg:mb-0">
+								<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+									<svg aria-hidden="true" focusable="false" width="40" height="40">
+										<use xlink:href="images/icons.svg#icon-detailed-records"></use>
+									</svg>
+								</div>
+								<h3 class="mb-4">Detailed Records</h3>
+								<p>
+									Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.
+								</p>
+							</section>
+							<section class="bg-white rounded-lg p-6 pb-10 lg:row-start-3 lg:row-span-3 lg:mb-0">
+								<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
+									<svg aria-hidden="true" focusable="false" viewBox="0 0 48 48" width="40" height="40">
+										<use xlink:href="images/icons.svg#icon-fully-customizable"></use>
+									</svg>
+								</div>
+								<h3 class="mb-4">Fully Customizable</h3>
+								<p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
+							</section>
+						</div>
 					</section>
 				</div>
 			</div>

@@ -110,6 +110,13 @@
 	.copy-btn__failed-label {
 		display: var(--copy-failed-label-display, none);
 	}
+
+	@variants responsive {
+		.features-grid {
+			grid-template-rows: 40px 40px auto 40px 40px;
+			@apply text-left;
+		}
+	}
 }
 
 @layer utilities {
@@ -120,5 +127,12 @@
 	.after\:line::after {
 		@apply block w-2 h-20 bg-cyan absolute mx-auto left-0 right-0 top-full;
 		content: "";
+	}
+
+	@screen lg {
+		.after\:line::after {
+			@apply mx-0 inset-auto left-full h-2 w-6 -translate-x-1/2;
+			top: 50%;
+		}
 	}
 }
