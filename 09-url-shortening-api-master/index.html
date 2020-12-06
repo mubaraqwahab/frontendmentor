@@ -50,9 +50,9 @@
 				</nav>
 			</div>
 		</header>
-		<main>
-			<div class="container overflow-x-hidden pb-36 lg:flex lg:justify-between lg:pt-12">
-				<img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg lg:order-1 lg:mb-0" />
+		<main class="overflow-x-hidden">
+			<div class="container pb-36 lg:flex lg:justify-between lg:items-center">
+				<img src="images/illustration-working.svg" alt="" class="mb-8 mx-auto max-w-lg lg:order-1 lg:mx-0 lg:mb-0 lg:w-2/3 lg:max-w-none lg:-mr-40" />
 				<div class="text-lg text-center lg:text-left lg:w-2/5">
 					<h1 class="mb-3">More than just shorter links</h1>
 					<p class="mb-6 lg:mb-8">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
@@ -123,7 +123,7 @@
 									<button
 										aria-describedby="{{ shortUrl }}"
 										data-action="clipboard#copy"
-										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy</span>
 										<span class="copy-btn__copied-label">Copied!</span>

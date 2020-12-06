@@ -99,6 +99,10 @@
 		--copy-failed-label-display: inline;
 	}
 
+	.copied .copy-btn {
+		@apply bg-violet-dark;
+	}
+
 	.copy-btn__label {
 		display: var(--copy-label-display, inline);
 	}

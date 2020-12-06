@@ -21,7 +21,10 @@ module.exports = {
 		},
 		container: {
 			center: true,
-			padding: spacing["5"],
+			padding: {
+				default: spacing["5"],
+				lg: spacing["8"],
+			},
 		},
 		colors: {
 			transparent: colors.transparent,

@@ -52,9 +52,10 @@ class FormFieldController extends Controller {
 }
 
 interface ShortenedURLResult {
-	shortUrl: string;
-	fullShortUrl: string;
-	originalUrl: string;
+	ok: boolean;
+	shortUrl?: string;
+	fullShortUrl?: string;
+	originalUrl?: string;
 }
 
 class UrlShortenerController extends Controller {
@@ -105,28 +106,25 @@ class UrlShortenerController extends Controller {
 			addResult,
 			shorten,
 			setInputValidity,
-			data,
-			element,
 		}: UrlShortenerController = this;
 
-		const failedClass = data.get("shortenFailedClass");
-		element.classList.remove(failedClass); // if necessary
+		const failedClass = this.data.get("shortenFailedClass");
+		this.element.classList.remove(failedClass); // if necessary
 
 		if (formTarget.checkValidity()) {
 			setInputValidity(true);
 
-			const loadingClass = data.get("loadingClass");
-			element.classList.add(loadingClass);
+			const loadingClass = this.data.get("loadingClass");
+			this.element.classList.add(loadingClass);
 
-			const shortened = await shorten(inputTarget.value);
+			const shortened: ShortenedURLResult = await shorten(inputTarget.value);
+			this.element.classList.remove(loadingClass);
 
-			element.classList.remove(loadingClass);
-
-			if ("error" in shortened) {
-				element.classList.add(failedClass);
-			} else {
+			if (shortened.ok) {
 				addResult(shortened);
 				inputTarget.value = "";
+			} else {
+				this.element.classList.add(failedClass);
 			}
 		} else {
 			setInputValidity(false);
@@ -157,7 +155,7 @@ class UrlShortenerController extends Controller {
 	};
 
 	/**
-	 * Create an <li> element containing an expanded result template.
+	 * Create an <li> element containing a compiled result template.
 	 */
 	private createResultLi = (shortened: ShortenedURLResult): HTMLLIElement => {
 		const resultHTML = this.resultTemplateTarget.innerHTML.replace(
@@ -170,28 +168,22 @@ class UrlShortenerController extends Controller {
 	};
 
 	private setInputValidity = (valid: boolean) => {
-		const {
-			helperTextTarget,
-			inputTarget,
-			element,
-			data,
-		}: UrlShortenerController = this;
-
-		const errorClass = data.get("formErrorClass");
+		const { helperTextTarget, inputTarget }: UrlShortenerController = this;
+		const errorClass = this.data.get("formErrorClass");
 
 		if (valid) {
-			element.classList.remove(errorClass);
+			this.element.classList.remove(errorClass);
 			inputTarget.setAttribute("aria-invalid", "false");
 			inputTarget.removeAttribute("aria-describedby");
 		} else {
-			element.classList.add(errorClass);
+			this.element.classList.add(errorClass);
 			inputTarget.setAttribute("aria-invalid", "true");
 			inputTarget.setAttribute("aria-describedby", helperTextTarget.id);
 			inputTarget.focus();
 		}
 	};
 
-	private shorten(url: string): Promise<ShortenedURLResult | { error: Error }> {
+	private shorten(url: string): Promise<ShortenedURLResult> {
 		interface ShrtCodeResponse {
 			ok: boolean;
 			result: {
@@ -203,24 +195,16 @@ class UrlShortenerController extends Controller {
 		return fetch(
 			`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
 		)
-			.then((response) => {
-				if (response.ok) return response.json();
-				throw new Error(response.statusText);
-			})
+			.then((response) => response.json())
 			.then(
-				(data: ShrtCodeResponse): ShortenedURLResult => {
-					if (data.ok) {
-						return {
-							shortUrl: data.result.short_link,
-							fullShortUrl: data.result.full_short_link,
-							originalUrl: url,
-						};
-					} else {
-						throw new Error(`Malformed URL ${url}`);
-					}
-				}
-			)
-			.catch((error) => ({ error }));
+				(data: ShrtCodeResponse): ShortenedURLResult => ({
+					ok: data.ok,
+					shortUrl: data.result?.short_link,
+					fullShortUrl: data.result?.full_short_link,
+					originalUrl: url,
+				}),
+				() => ({ ok: false })
+			);
 	}
 }
 
@@ -231,23 +215,10 @@ class ClipboardController extends Controller {
 
 	copy(e: Event) {
 		navigator.clipboard.writeText(this.sourceTarget.href).then(
-			() => {
-				this.element.classList.add(this.data.get("copiedClass"));
-				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
-			},
-			() => {
-				this.element.classList.add(this.data.get("copyFailedText"));
-				e.target.addEventListener("blur", this.resetCopyBtnTextOnBlur);
-			}
+			() => this.element.classList.add(this.data.get("copiedClass")),
+			() => this.element.classList.add(this.data.get("copyFailedText"))
 		);
 	}
-
-	private resetCopyBtnTextOnBlur = (e: Event) => {
-		const copiedClass = this.data.get("copiedClass");
-		const copyFailedClass = this.data.get("copyFailedClass");
-		this.element.classList.remove(copiedClass, copyFailedClass);
-		e.target.removeEventListener("blur", this.resetCopyBtnTextOnBlur);
-	};
 }
 
 const application = Application.start();
