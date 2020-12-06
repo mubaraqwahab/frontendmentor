@@ -12,7 +12,7 @@
 	<body class="font-medium text-gray-violet">
 		<header data-controller="navigation" data-navigation-hidden-class="hidden">
 			<div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative lg:justify-start">
-				<a href=".">
+				<a href="." class="lg:mr-10">
 					<img src="images/logo.svg" alt="Shortly home" />
 				</a>
 				<button aria-expanded="false" data-action="navigation#toggle" class="lg:hidden">
@@ -30,31 +30,32 @@
 					</svg>
 				</button>
 				<nav
-					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0 lg:bg-transparent lg:text-gray-violet lg:flex lg:justify-between lg:items-center lg:static lg:flex-auto"
+					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0 lg:mx-0 lg:px-0 lg:bg-transparent lg:text-gray-violet lg:flex lg:justify-between lg:items-center lg:static lg:flex-auto"
 					data-target="navigation.nav"
 				>
 					<ul class="border-b mb-4 lg:flex lg:items-center lg:border-b-0 lg:mb-0">
-						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Features</a></li>
-						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Pricing</a></li>
-						<li><a href="" class="block p-2 rounded-full mb-4 lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Resources</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:mr-8 lg:rounded-none lg:hover:text-blue-very-dark">Features</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:mr-8 lg:rounded-none lg:hover:text-blue-very-dark">Pricing</a></li>
+						<li><a href="" class="block p-2 rounded-full mb-4 lg:p-0 lg:mb-0 lg:mr-8 lg:rounded-none lg:hover:text-blue-very-dark">Resources</a></li>
 					</ul>
 					<div class="lg:flex lg:items-center">
-						<a href="" class="block p-2 mb-3 rounded-full lg:p-0 lg:mb-0 lg:rounded-none lg:hover:text-blue-very-dark">Login</a>
+						<a href="" class="block p-2 mb-3 rounded-full lg:p-0 lg:mb-0 lg:mr-8 lg:rounded-none lg:hover:text-blue-very-dark">Login</a>
 						<a
 							href=""
-							class="block p-2 mb-3 rounded-full lg-px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark"
-							>Sign Up</a
+							class="block p-2 mb-3 rounded-full lg:px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark"
 						>
+							Sign Up
+						</a>
 					</div>
 				</nav>
 			</div>
 		</header>
 		<main>
-			<div class="container overflow-x-hidden lg:flex">
-				<img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg lg:order-1" />
-				<div class="text-lg mb-36 text-center lg:text-left lg:w-1/2">
+			<div class="container overflow-x-hidden pb-36 lg:flex lg:justify-between lg:pt-12">
+				<img src="images/illustration-working.svg" alt="" class="mb-8 max-w-lg lg:order-1 lg:mb-0" />
+				<div class="text-lg text-center lg:text-left lg:w-2/5">
 					<h1 class="mb-3">More than just shorter links</h1>
-					<p class="mb-6">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
+					<p class="mb-6 lg:mb-8">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
 					<a
 						href=""
 						class="inline-block rounded-full py-3 px-8 text-center bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark text-white font-bold tracking-wide"
@@ -65,9 +66,9 @@
 			</div>
 
 			<div class="bg-gray-200">
-				<div class="container pt-16 pb-20">
+				<div class="container pt-16 pb-32">
 					<div
-						class="mb-20 -mt-32"
+						class="mb-24 -mt-32"
 						data-controller="url-shortener"
 						data-url-shortener-loading-class="shortening"
 						data-url-shortener-shorten-failed-class="shorten-failed"
@@ -76,18 +77,20 @@
 						<form
 							data-target="url-shortener.form"
 							data-action="submit->url-shortener#submit"
-							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:flex lg:items-center"
+							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:url-form lg:py-10 lg:px-12"
 						>
-							<label for="url" class="block relative lg:w-full" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
+							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
-								<span class="form__label absolute left-0 right-0" data-target="form-field.label">Shorten a link here...</span>
+								<span class="block select-none absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5" data-target="form-field.label">
+									Shorten a link here...
+								</span>
 								<input
 									type="url"
 									id="url"
 									name="url"
 									required
 									aria-invalid="false"
-									class="w-full rounded py-2 px-4 text-violet-dark"
+									class="w-full rounded py-2 px-4 text-violet-dark lg:py-3 lg:px-5"
 									data-action="input->form-field#toggleLabel"
 									data-target="form-field.input url-shortener.input"
 								/>
@@ -95,7 +98,7 @@
 							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper">Please add a link</div>
 							<button
 								type="submit"
-								class="lg:w-auto lg:flex-shrink-0 lg:mt-0 lg:ml-4 w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+								class="lg:mt-0 w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 							>
 								<span class="shorten-btn__label">Shorten It!</span>
 								<span class="shorten-btn__loading-label">Shortening...</span>
@@ -103,22 +106,24 @@
 							</button>
 						</form>
 						<template data-target="url-shortener.resultTemplate">
-							<article class="rounded-lg bg-white mb-5 lg:flex lg:items-center lg:justify-between">
+							<article class="rounded-lg bg-white mb-5 lg:flex lg:items-center lg:justify-between lg:px-5 lg:py-3">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
-								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0">
+								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0 lg:p-0">
 									{{ originalUrl }}
 								</div>
 								<div
-									class="px-4 py-3 lg:flex lg:items-center"
+									class="px-4 py-3 lg:flex lg:items-center lg:p-0"
 									data-controller="clipboard"
 									data-clipboard-copied-class="copied"
 									data-clipboard-copy-failed-class="copy-failed"
 								>
-									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 truncate lg:mb-0" data-target="clipboard.source">{{ shortUrl }}</a>
+									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5" data-target="clipboard.source">
+										{{ shortUrl }}
+									</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
 										data-action="clipboard#copy"
-										class="w-full lg:w-auto rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+										class="w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy</span>
 										<span class="copy-btn__copied-label">Copied!</span>
@@ -131,9 +136,9 @@
 						<ul data-target="url-shortener.resultList" aria-live="polite"></ul>
 					</div>
 					<section class="text-center">
-						<h2 class="mb-4">Advanced Statistics</h2>
-						<p class="mb-20">Track how your links are performing across the web with our advanced statistics dashboard.</p>
-						<div class="lg:grid lg:grid-cols-3 lg:gap-x-6 lg:features-grid">
+						<h2 class="mb-5">Advanced Statistics</h2>
+						<p class="mb-24 mx-auto w-1/2">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+						<div class="lg:features-grid">
 							<section class="bg-white rounded-lg p-6 pb-10 mb-20 after:line lg:row-start-1 lg:row-span-3 lg:mb-0">
 								<div class="inline-block rounded-full mx-auto -mt-16 mb-8 p-5 relative bg-violet-dark">
 									<svg aria-hidden="true" focusable="false" width="40" height="40">
@@ -171,8 +176,8 @@
 				</div>
 			</div>
 			<section class="text-white text-lg text-center bg-violet-dark bg-boost-mobile bg-cover lg:bg-boost-desktop">
-				<div class="container py-24">
-					<h2 class="text-white mb-4">Boost your links today</h2>
+				<div class="container py-24 lg:py-16">
+					<h2 class="text-white mb-4 lg:mb-6">Boost your links today</h2>
 					<a
 						href=""
 						class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
@@ -184,9 +189,11 @@
 		</main>
 		<footer class="text-center bg-violet-very-dark text-gray lg:text-left">
 			<div class="container pt-12 pb-16 lg:flex lg:justify-between">
-				<a href="" class="inline-block mx-auto mb-12 lg:m-0 lg:w-1/5">
-					<img src="images/logo-white.svg" alt="Shortly home" />
-				</a>
+				<div class="mx-auto mb-12 lg:m-0 lg:w-1/5">
+					<a href="" class="inline-block">
+						<img src="images/logo-white.svg" alt="Shortly home" />
+					</a>
+				</div>
 				<nav class="mb-12 lg:flex lg:justify-between lg:mb-0 lg:w-2/5">
 					<section class="mb-10 lg:mb-0">
 						<h2 class="text-base text-white mb-4">Features</h2>
@@ -199,26 +206,25 @@
 					<section class="mb-10 lg:mb-0">
 						<h2 class="text-base text-white mb-4">Resources</h2>
 						<ul>
-							<li><a href="" class="inline-block p-1 hover:text-white">Blog</a></li>
-							<li><a href="" class="inline-block p-1 hover:text-white">Developers</a></li>
-							<li><a href="" class="inline-block p-1 hover:text-white">Support</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">Blog</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">Developers</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">Support</a></li>
 						</ul>
 					</section>
 					<section class="mb-10 lg:mb-0">
 						<h2 class="text-base text-white mb-4">Company</h2>
 						<ul>
-							<li><a href="" class="inline-block p-1 hover:text-white">About</a></li>
-							<li><a href="" class="inline-block p-1 hover:text-white">Our Team</a></li>
-							<li><a href="" class="inline-block p-1 hover:text-white">Careers</a></li>
-							<li><a href="" class="inline-block p-1 hover:text-white">Contact</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">About</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">Our Team</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">Careers</a></li>
+							<li><a href="" class="inline-block p-1 hover:text-cyan">Contact</a></li>
 						</ul>
 					</section>
 				</nav>
 				<address class="not-italic">
 					<ul class="flex items-center justify-center">
 						<li class="mr-4">
-							<!-- TODO: svg color should change on hover -->
-							<a href="" class="inline-block p-1 hover:text-cyan">
+							<a href="" class="inline-block p-1 text-white hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="24">
 									<use xlink:href="images/icons.svg#icon-facebook"></use>
 								</svg>
@@ -226,7 +232,7 @@
 							</a>
 						</li>
 						<li class="mr-4">
-							<a href="" class="inline-block p-1 hover:text-cyan">
+							<a href="" class="inline-block p-1 text-white hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="20">
 									<use xlink:href="images/icons.svg#icon-twitter"></use>
 								</svg>
@@ -234,7 +240,7 @@
 							</a>
 						</li>
 						<li class="mr-4">
-							<a href="" class="inline-block p-1 hover:text-cyan">
+							<a href="" class="inline-block p-1 text-white hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="24">
 									<use xlink:href="images/icons.svg#icon-pinterest"></use>
 								</svg>
@@ -242,7 +248,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="" class="inline-block p-1 hover:text-cyan">
+							<a href="" class="inline-block p-1 text-white hover:text-cyan">
 								<svg aria-hidden="true" focusable="false" width="24" height="24">
 									<use xlink:href="images/icons.svg#icon-instagram"></use>
 								</svg>

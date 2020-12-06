@@ -6,7 +6,7 @@
 	h1,
 	h2,
 	h3 {
-		@apply font-bold text-violet-very-dark leading-none;
+		@apply font-bold text-violet-very-dark leading-tight;
 	}
 
 	h1 {
@@ -33,6 +33,10 @@
 		h3 {
 			@apply text-2xl;
 		}
+
+		p {
+			@apply leading-relaxed;
+		}
 	}
 
 	/* purgecss ignore */
@@ -47,10 +51,6 @@
 }
 
 @layer components {
-	.form__label {
-		@apply inline-block py-2 px-4 select-none;
-	}
-
 	.form__helper {
 		@apply hidden text-sm italic mt-1;
 	}
@@ -113,13 +113,29 @@
 
 	@variants responsive {
 		.features-grid {
-			grid-template-rows: 40px 40px auto 40px 40px;
-			@apply text-left;
+			grid-template-rows:
+				theme("spacing.12")
+				theme("spacing.12")
+				auto
+				theme("spacing.12")
+				theme("spacing.12");
+			@apply text-left grid grid-cols-3 gap-x-8;
+		}
+
+		.url-form {
+			@apply grid gap-x-5;
+			grid-template-columns: 3fr 1fr;
 		}
 	}
 }
 
 @layer utilities {
+	@variants responsive {
+		.flex-basis-full {
+			flex-basis: full;
+		}
+	}
+
 	.after\:line {
 		@apply relative;
 	}
@@ -131,7 +147,7 @@
 
 	@screen lg {
 		.after\:line::after {
-			@apply mx-0 inset-auto left-full h-2 w-6 -translate-x-1/2;
+			@apply mx-0 inset-auto left-full h-2 w-8 -translate-x-1/2;
 			top: 50%;
 		}
 	}
