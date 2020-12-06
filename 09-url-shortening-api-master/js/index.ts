@@ -97,6 +97,8 @@ class UrlShortenerController extends Controller {
 
 	// TODO
 	// * Announce <li> insertion
+	// * SR test
+	// * Hover colors, etc.
 
 	async submit(e: Event) {
 		e.preventDefault();
