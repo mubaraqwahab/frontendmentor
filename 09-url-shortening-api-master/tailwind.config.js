@@ -18,6 +18,9 @@ module.exports = {
 				full: "100%",
 				"1/2": "50%",
 			},
+			margin: {
+				"22": "5.5rem",
+			},
 		},
 		container: {
 			center: true,

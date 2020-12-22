@@ -77,7 +77,7 @@
 						<form
 							data-target="url-shortener.form"
 							data-action="submit->url-shortener#submit"
-							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:url-form lg:py-10 lg:px-12"
+							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:url-form lg:py-10 lg:px-12 lg:relative"
 						>
 							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
@@ -95,7 +95,9 @@
 									data-target="form-field.input url-shortener.input"
 								/>
 							</label>
-							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper">Please add a link</div>
+							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper text-xs lg:absolute lg:mx-12 lg:mt-22 lg:py-1">
+								Please add a link
+							</div>
 							<button
 								type="submit"
 								class="lg:mt-0 w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-cyan-light font-bold tracking-wide"
