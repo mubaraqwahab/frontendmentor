@@ -110,9 +110,10 @@
 						<template data-target="url-shortener.resultTemplate">
 							<article class="rounded-lg bg-white mb-5 lg:flex lg:items-center lg:justify-between lg:px-5 lg:py-3">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
-								<div id="{{ shortUrl }}" aria-hidden="true" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0 lg:p-0">
+								<div id="{{ shortUrl }}" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0 lg:p-0">
 									{{ originalUrl }}
 								</div>
+								<span class="sr-only">has been shortened to</span>
 								<div
 									class="px-4 py-3 lg:flex lg:items-center lg:p-0"
 									data-controller="clipboard"
@@ -131,14 +132,14 @@
 										data-action="clipboard#copy"
 										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
-										<span class="copy-btn__label">Copy</span>
+										<span class="copy-btn__label">Copy <span class="sr-only">shortened</span></span>
 										<span class="copy-btn__copied-label">Copied!</span>
 										<span class="copy-btn__failed-label">Failed to copy</span>
-										<span class="sr-only">shortened</span>
 									</button>
 								</div>
 							</article>
 						</template>
+						<!-- NVDA announces all children of this node when something changes. Why?? -->
 						<ul data-target="url-shortener.resultList" aria-live="polite"></ul>
 					</div>
 					<section class="text-center">
