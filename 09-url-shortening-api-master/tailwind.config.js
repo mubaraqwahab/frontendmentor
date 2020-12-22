@@ -30,7 +30,10 @@ module.exports = {
 			transparent: colors.transparent,
 			white: colors.white,
 			black: colors.black,
-			cyan: "hsl(180, 66%, 49%)",
+			cyan: {
+				default: "hsl(180, 66%, 49%)",
+				light: "hsl(180, 66%, 70%)",
+			},
 			violet: {
 				dark: "hsl(257, 27%, 26%)",
 				"very-dark": "hsl(260, 8%, 14%)",

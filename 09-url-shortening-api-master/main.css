@@ -45,6 +45,10 @@
 		@apply shadow-outline;
 	}
 
+	input[aria-invalid="true"] {
+		@apply text-red !important;
+	}
+
 	input[aria-invalid="true"]:focus {
 		@apply shadow-outline-red !important;
 	}
@@ -87,6 +91,10 @@
 		display: var(--shorten-failed-label-display, none);
 	}
 
+	.copy-btn:hover {
+		@apply bg-cyan-light;
+	}
+
 	.copied {
 		--copy-label-display: none;
 		--copied-label-display: inline;
@@ -101,6 +109,10 @@
 
 	.copied .copy-btn {
 		@apply bg-violet-dark;
+	}
+
+	.copied .copy-btn:hover {
+		@apply bg-violet-very-dark;
 	}
 
 	.copy-btn__label {

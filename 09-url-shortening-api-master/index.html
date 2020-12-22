@@ -42,7 +42,7 @@
 						<a href="" class="block p-2 mb-3 rounded-full lg:p-0 lg:mb-0 lg:mr-8 lg:rounded-none lg:hover:text-blue-very-dark">Login</a>
 						<a
 							href=""
-							class="block p-2 mb-3 rounded-full lg:px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark"
+							class="block p-2 mb-3 rounded-full lg:px-6 lg:mb-0 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-cyan-light"
 						>
 							Sign Up
 						</a>
@@ -58,7 +58,7 @@
 					<p class="mb-6 lg:mb-8">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
 					<a
 						href=""
-						class="inline-block rounded-full py-3 px-8 text-center bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark text-white font-bold tracking-wide"
+						class="inline-block rounded-full py-3 px-8 text-center bg-cyan motion-safe:transition-colors duration-150 hover:bg-cyan-light text-white font-bold tracking-wide"
 					>
 						Get Started
 					</a>
@@ -81,7 +81,7 @@
 						>
 							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
-								<span class="block select-none absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5" data-target="form-field.label">
+								<span class="block select-none absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5 form__label" data-target="form-field.label">
 									Shorten a link here...
 								</span>
 								<input
@@ -98,7 +98,7 @@
 							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper">Please add a link</div>
 							<button
 								type="submit"
-								class="lg:mt-0 w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+								class="lg:mt-0 w-full rounded py-2 px-4 mt-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-cyan-light font-bold tracking-wide"
 							>
 								<span class="shorten-btn__label">Shorten It!</span>
 								<span class="shorten-btn__loading-label">Shortening...</span>
@@ -117,13 +117,17 @@
 									data-clipboard-copied-class="copied"
 									data-clipboard-copy-failed-class="copy-failed"
 								>
-									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5" data-target="clipboard.source">
+									<a
+										href="{{ fullShortUrl }}"
+										class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5 hover:text-cyan-light"
+										data-target="clipboard.source"
+									>
 										{{ shortUrl }}
 									</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
 										data-action="clipboard#copy"
-										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy</span>
 										<span class="copy-btn__copied-label">Copied!</span>
@@ -180,7 +184,7 @@
 					<h2 class="text-white mb-4 lg:mb-6">Boost your links today</h2>
 					<a
 						href=""
-						class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-violet-dark font-bold tracking-wide"
+						class="inline-block rounded-full py-3 px-8 bg-cyan motion-safe:transition-colors duration-150 hover:bg-cyan-light font-bold tracking-wide"
 					>
 						Get Started
 					</a>

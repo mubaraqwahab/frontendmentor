@@ -170,15 +170,20 @@ class UrlShortenerController extends Controller {
 	};
 
 	private setInputValidity = (valid: boolean) => {
-		const { helperTextTarget, inputTarget }: UrlShortenerController = this;
-		const errorClass = this.data.get("formErrorClass");
+		const {
+			helperTextTarget,
+			inputTarget,
+			formTarget,
+			data,
+		}: UrlShortenerController = this;
+		const errorClass = data.get("formErrorClass");
 
 		if (valid) {
-			this.element.classList.remove(errorClass);
+			formTarget.classList.remove(errorClass);
 			inputTarget.setAttribute("aria-invalid", "false");
 			inputTarget.removeAttribute("aria-describedby");
 		} else {
-			this.element.classList.add(errorClass);
+			formTarget.classList.add(errorClass);
 			inputTarget.setAttribute("aria-invalid", "true");
 			inputTarget.setAttribute("aria-describedby", helperTextTarget.id);
 			inputTarget.focus();
