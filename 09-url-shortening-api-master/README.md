@@ -2,6 +2,17 @@
 
 ![Design preview for the Shortly URL shortening API coding challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/09-url-shortening-api-master/).
+
+What's new here?
+* Stimulus. Why? I needed a simple way to organize JS and I wanted a small framework
+* Typescript. Why? I wasn't comfortable with JSDoc type annotations
+* Rollup. Why? Simple, yet configurable bundler; minify js, etc.
+* Aria live regions. NVDA issue
+* Clipboard API
+* Classnames quite messy
+* Use `<template>`, metaprogramming in JS/TS
+* Programmatically changing input.value doesn't trigger event listeners. Workaround? `Object.defineProperty`
 ---
 
 <details>
