@@ -17,7 +17,7 @@ I decided to try out some technologies for this challenge:
 * Use arrow functions to avoid `this` issues
 -->
 
-An interesting thing I learnt while doing this challenge is that changing `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a user types into the input field.)
+An interesting thing I learnt while doing this challenge is that changing `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a user _types_ into the input field.)
 
 I found a [workaround for this on StackOverflow](https://stackoverflow.com/a/55033939/12695621) that uses [`Object.defineProperty`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). The workaround basically wraps the original `input.value` but calls the necessary event listener when `input.value` is set.
 
