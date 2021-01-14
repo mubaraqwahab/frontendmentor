@@ -9,7 +9,9 @@ I decided to try out some technologies for this challenge:
 * I use JSDoc type annotations often in JavaScript so that my editor ([VS Code](https://code.visualstudio.com/)) might provide me more intelligent code suggestions, etc. I found it somewhat tedious however to do that for this challenge so I chose to use [TypeScript](https://www.typescriptlang.org/) instead. It's my first time using TypeScript for this much code and I don't regret it 🙂. (I should mention that I didn't use TypeScript in strict mode; that was too difficult for me.)
 * Using Stimulus and TypeScript meant that I had to bundle and compile my code. I used [Rollup](https://rollupjs.org/) to manage this "build" process. Rollup is a simple yet configurable JavaScript bundler that supports plugins for doing things like compiling TypeScript and minifying JavaScript.
 
-<!-- How you built it
+<!--
+## How I built the site
+
 * Aria live regions. NVDA issue
 * Clipboard API
 * Classnames quite messy
@@ -17,7 +19,9 @@ I decided to try out some technologies for this challenge:
 * Use arrow functions to avoid `this` issues
 -->
 
-An interesting thing I learnt while doing this challenge is that changing `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a user types into the input field.)
+## Interesting findings
+
+Something I learnt while doing this challenge is that changing `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a user types into the input field.)
 
 I found a [workaround for this on StackOverflow](https://stackoverflow.com/a/55033939/12695621) that uses [`Object.defineProperty`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). The workaround basically wraps the original `input.value` but calls the necessary event listener when `input.value` is set.
 
