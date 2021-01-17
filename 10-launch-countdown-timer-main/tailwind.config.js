@@ -22,6 +22,9 @@ module.exports = {
 		fontFamily: {
 			sans: ["Red Hat Text", ...fontFamily.sans],
 		},
+		backgroundImage: {
+			stars: "url(images/bg-stars.svg)",
+		},
 	},
 	variants: {
 		extend: {},

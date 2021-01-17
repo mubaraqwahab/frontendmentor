@@ -1918,40 +1918,8 @@ video {
   background-color: rgba(250.91999999999996, 95.88000000000005, 134.64000000000001, var(--tw-bg-opacity));
 }
 
-.bg-none {
-  background-image: none;
-}
-
-.bg-gradient-to-t {
-  background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-tr {
-  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-br {
-  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-b {
-  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-bl {
-  background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-l {
-  background-image: linear-gradient(to left, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-tl {
-  background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+.bg-stars {
+  background-image: url(images/bg-stars.svg);
 }
 
 .from-transparent {
@@ -19181,40 +19149,8 @@ video {
     background-color: rgba(250.91999999999996, 95.88000000000005, 134.64000000000001, var(--tw-bg-opacity));
   }
 
-  .sm\:bg-none {
-    background-image: none;
-  }
-
-  .sm\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--tw-gradient-stops));
-  }
-
-  .sm\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  .sm\:bg-stars {
+    background-image: url(images/bg-stars.svg);
   }
 
   .sm\:from-transparent {
@@ -36366,40 +36302,8 @@ video {
     background-color: rgba(250.91999999999996, 95.88000000000005, 134.64000000000001, var(--tw-bg-opacity));
   }
 
-  .md\:bg-none {
-    background-image: none;
-  }
-
-  .md\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--tw-gradient-stops));
-  }
-
-  .md\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  .md\:bg-stars {
+    background-image: url(images/bg-stars.svg);
   }
 
   .md\:from-transparent {
@@ -53551,40 +53455,8 @@ video {
     background-color: rgba(250.91999999999996, 95.88000000000005, 134.64000000000001, var(--tw-bg-opacity));
   }
 
-  .lg\:bg-none {
-    background-image: none;
-  }
-
-  .lg\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--tw-gradient-stops));
-  }
-
-  .lg\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  .lg\:bg-stars {
+    background-image: url(images/bg-stars.svg);
   }
 
   .lg\:from-transparent {
@@ -70736,40 +70608,8 @@ video {
     background-color: rgba(250.91999999999996, 95.88000000000005, 134.64000000000001, var(--tw-bg-opacity));
   }
 
-  .xl\:bg-none {
-    background-image: none;
-  }
-
-  .xl\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--tw-gradient-stops));
-  }
-
-  .xl\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  .xl\:bg-stars {
+    background-image: url(images/bg-stars.svg);
   }
 
   .xl\:from-transparent {
@@ -87921,40 +87761,8 @@ video {
     background-color: rgba(250.91999999999996, 95.88000000000005, 134.64000000000001, var(--tw-bg-opacity));
   }
 
-  .\32xl\:bg-none {
-    background-image: none;
-  }
-
-  .\32xl\:bg-gradient-to-t {
-    background-image: linear-gradient(to top, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-tr {
-    background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-br {
-    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-bl {
-    background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-l {
-    background-image: linear-gradient(to left, var(--tw-gradient-stops));
-  }
-
-  .\32xl\:bg-gradient-to-tl {
-    background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  .\32xl\:bg-stars {
+    background-image: url(images/bg-stars.svg);
   }
 
   .\32xl\:from-transparent {
