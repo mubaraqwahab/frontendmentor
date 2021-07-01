@@ -18,8 +18,12 @@ type UserState =
 	| { value: "idle" }
 	| { value: "changed" }
 	| { value: "submitting" }
+	| { value: "invalid" }
+	| { value: "success" }
+	| { value: "failed" }
+	| { value: "copied" }
 
-// const shortenerFormMachine = createMachine<UserContext, UserEvent, UserState>({
+// const shortenerMachine = createMachine<UserContext, UserEvent, UserState>({
 // 	id: "user",
 // 	initial: "idle",
 // 	states: {
