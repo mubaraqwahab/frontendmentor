@@ -28,7 +28,8 @@
     "svgstore": "^3.0.0-2",
     "tailwindcss": "^1.9.6",
     "tslib": "^2.0.3",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "xstate": "^4.20.2"
   },
   "devDependencies": {
     "stylelint-config-recommended": "^3.0.0"

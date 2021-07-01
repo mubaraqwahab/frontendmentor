@@ -1,4 +1,12 @@
+import { createMachine, interpret, Interpreter } from "xstate"
 import { Application, Controller } from "stimulus"
+import {
+	createURLShortenerMachineConfig,
+	URLShortenerContext,
+	URLShortenerEvent,
+	URLShortenerState,
+} from "./machine"
+import type { ShortenedURLResult } from "./types"
 
 class NavigationController extends Controller {
 	static targets = ["nav"]
@@ -51,13 +59,6 @@ class FormFieldController extends Controller {
 	}
 }
 
-interface ShortenedURLResult {
-	ok: boolean
-	shortUrl?: string
-	fullShortUrl?: string
-	originalUrl?: string
-}
-
 class UrlShortenerController extends Controller {
 	static targets = [
 		"form",
@@ -73,11 +74,43 @@ class UrlShortenerController extends Controller {
 	resultTemplateTarget: HTMLTemplateElement
 	resultListTarget: HTMLUListElement
 
+	private service: Interpreter<
+		URLShortenerContext,
+		any,
+		URLShortenerEvent,
+		URLShortenerState
+	>
 	private results: ShortenedURLResult[]
 
 	initialize() {
 		const resultsInStorage = sessionStorage.getItem("shortenedURLResults")
-		this.results = JSON.parse(resultsInStorage) ?? []
+		const initialResults = JSON.parse(resultsInStorage) ?? []
+
+		const urlShortenerMachine = createMachine<
+			URLShortenerContext,
+			URLShortenerEvent,
+			URLShortenerState
+		>(createURLShortenerMachineConfig(initialResults), {
+			actions: {
+				handleChange: this.handleChange,
+				shortenURL: this.shortenURL,
+				handleInvalid: this.handleInvalid,
+				handleShortened: this.handleShortened,
+				handleFail: this.handleFail,
+				handleCopy: this.handleCopy,
+			},
+			guards: {
+				isValidURL(): boolean {
+					// Lazy way to do this, but works :)
+					return this.formTarget.checkValidity()
+				},
+				hasResults(): boolean {
+					return this.results.length > 0
+				},
+			},
+		})
+
+		this.service = interpret(urlShortenerMachine)
 	}
 
 	connect() {
@@ -93,10 +126,33 @@ class UrlShortenerController extends Controller {
 		results.forEach((result) =>
 			resultListTarget.appendChild(createResultLi(result))
 		)
+
+		this.service.start()
 	}
+
+	disconnect() {
+		this.service.stop()
+	}
+
+	handleChange = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+
+	shortenURL = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+
+	handleInvalid = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+
+	handleShortened = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+
+	handleFail = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+
+	handleCopy = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
 
 	async submit(e: Event) {
 		e.preventDefault()
+
+		this.service.send("SHORTEN")
+
+		// Continue from here
+
 		const {
 			formTarget,
 			inputTarget,
