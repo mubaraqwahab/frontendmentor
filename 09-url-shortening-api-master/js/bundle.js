@@ -6522,6 +6522,9 @@
                 */
             });
         }
+        copy() {
+            this.service.send("COPY");
+        }
         shorten(url) {
             return fetch(`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`)
                 .then((response) => response.json())

@@ -118,19 +118,19 @@
 								<div
 									class="px-4 py-3 lg:flex lg:items-center lg:p-0"
 									data-controller="clipboard"
-									data-clipboard-copied-class="copied"
-									data-clipboard-copy-failed-class="copy-failed"
+									data-url-shortener-copied-class="copied"
+									data-url-shortener-copy-failed-class="copy-failed"
 								>
 									<a
 										href="{{ fullShortUrl }}"
 										class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5 hover:text-cyan-light"
-										data-target="clipboard.source"
+										data-target="url-shortener.source"
 									>
 										{{ shortUrl }}
 									</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
-										data-action="clipboard#copy"
+										data-action="url-shortener#copy"
 										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy <span class="sr-only">shortened</span></span>

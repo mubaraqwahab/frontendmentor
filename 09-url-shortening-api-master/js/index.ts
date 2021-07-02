@@ -238,6 +238,10 @@ class UrlShortenerController extends Controller {
 		*/
 	}
 
+	copy() {
+		this.service.send("COPY")
+	}
+
 	/**
 	 * Prepend a shortened URL result to the results list, DOM list and storage list.
 	 * This function also trims the lists, so they are never longer 3 elements.
