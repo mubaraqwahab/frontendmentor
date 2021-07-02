@@ -1,12 +1,12 @@
 import { createMachine, interpret, Interpreter } from "xstate"
 import { Application, Controller } from "stimulus"
 import {
-	createURLShortenerMachineConfig,
 	URLShortenerContext,
 	URLShortenerEvent,
+	urlShortenerMachineConfig,
 	URLShortenerState,
 } from "./machine"
-import type { ShortenedURLResult } from "./types"
+import type { ShortenedURLResult, ShrtCodeAPIResponse } from "./types"
 
 class NavigationController extends Controller {
 	static targets = ["nav"]
@@ -66,6 +66,7 @@ class UrlShortenerController extends Controller {
 		"helperText",
 		"resultTemplate",
 		"resultList",
+		"source",
 	]
 
 	formTarget: HTMLFormElement
@@ -73,6 +74,7 @@ class UrlShortenerController extends Controller {
 	helperTextTarget: HTMLElement
 	resultTemplateTarget: HTMLTemplateElement
 	resultListTarget: HTMLUListElement
+	sourceTarget: HTMLAnchorElement
 
 	private service: Interpreter<
 		URLShortenerContext,
@@ -84,49 +86,49 @@ class UrlShortenerController extends Controller {
 
 	initialize() {
 		const resultsInStorage = sessionStorage.getItem("shortenedURLResults")
-		const initialResults = JSON.parse(resultsInStorage) ?? []
+		this.results = JSON.parse(resultsInStorage) ?? []
+
+		const {
+			// handleChange,
+			handleSubmit,
+			handleInvalid,
+			handleShortened,
+			handleFail,
+			handleCopy,
+			isValidURL,
+			hasResults,
+		} = this
 
 		const urlShortenerMachine = createMachine<
 			URLShortenerContext,
 			URLShortenerEvent,
 			URLShortenerState
-		>(createURLShortenerMachineConfig(initialResults), {
+		>(urlShortenerMachineConfig, {
 			actions: {
-				handleChange: this.handleChange,
-				shortenURL: this.shortenURL,
-				handleInvalid: this.handleInvalid,
-				handleShortened: this.handleShortened,
-				handleFail: this.handleFail,
-				handleCopy: this.handleCopy,
+				// handleChange,
+				handleSubmit,
+				handleInvalid,
+				handleShortened,
+				handleFail,
+				handleCopy,
 			},
 			guards: {
-				isValidURL(): boolean {
-					// Lazy way to do this, but works :)
-					return this.formTarget.checkValidity()
-				},
-				hasResults(): boolean {
-					return this.results.length > 0
-				},
+				isValidURL,
+				hasResults,
 			},
 		})
 
 		this.service = interpret(urlShortenerMachine)
+		this.service.subscribe((state) => {
+			console.log(state.value)
+		})
 	}
 
 	connect() {
-		const {
-			formTarget,
-			results,
-			createResultLi,
-			resultListTarget,
-		}: UrlShortenerController = this
-
-		formTarget.noValidate = true
-
-		results.forEach((result) =>
-			resultListTarget.appendChild(createResultLi(result))
-		)
-
+		this.formTarget.noValidate = true
+		this.results.forEach((result) => {
+			this.resultListTarget.appendChild(this.createResultLi(result))
+		})
 		this.service.start()
 	}
 
@@ -134,24 +136,75 @@ class UrlShortenerController extends Controller {
 		this.service.stop()
 	}
 
-	handleChange = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+	// handleChange = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
 
-	shortenURL = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+	handleSubmit = async () => {
+		const loadingClass = this.data.get("loadingClass")
+		this.element.classList.add(loadingClass)
+		this.setInputValidity(true)
 
-	handleInvalid = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+		const url = this.inputTarget.value
+		try {
+			const response = await fetch(
+				`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
+			)
+			const data: ShrtCodeAPIResponse = await response.json()
+			const result = {
+				ok: data.ok,
+				shortUrl: data.result?.short_link,
+				fullShortUrl: data.result?.full_short_link,
+				originalUrl: url,
+			}
 
-	handleShortened = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+			this.service.send({ type: "SUCCESS", payload: result })
+		} catch {
+			this.service.send("FAIL")
+		}
+	}
 
-	handleFail = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+	handleInvalid = () => {
+		this.setInputValidity(false)
+	}
 
-	handleCopy = (ctx: URLShortenerContext, e: URLShortenerEvent) => {}
+	handleShortened = (_, e: URLShortenerEvent) => {
+		const loadingClass = this.data.get("loadingClass")
+		this.element.classList.remove(loadingClass)
+
+		if (e.type === "SUCCESS") {
+			const result = e.payload
+			this.addResult(result)
+		}
+	}
+
+	handleFail = () => {
+		const failedClass = this.data.get("shortenFailedClass")
+		this.element.classList.add(failedClass)
+	}
+
+	handleCopy = () => {
+		// Continue from here
+		navigator.clipboard.writeText(this.sourceTarget.href).then(
+			() => this.element.classList.add(this.data.get("copiedClass")),
+			() => this.element.classList.add(this.data.get("copyFailedText"))
+		)
+	}
+
+	isValidURL = (): boolean => {
+		// Lazy way to do this, but works :)
+		console.log(this.formTarget.checkValidity())
+		return this.formTarget.checkValidity()
+	}
+
+	hasResults = (): boolean => {
+		return this.results.length > 0
+	}
 
 	async submit(e: Event) {
 		e.preventDefault()
 
 		this.service.send("SHORTEN")
 
-		// Continue from here
+		/*
 
 		const {
 			formTarget,
@@ -159,7 +212,7 @@ class UrlShortenerController extends Controller {
 			addResult,
 			shorten,
 			setInputValidity,
-		}: UrlShortenerController = this
+		} = this
 
 		const failedClass = this.data.get("shortenFailedClass")
 		this.element.classList.remove(failedClass) // if necessary
@@ -182,6 +235,7 @@ class UrlShortenerController extends Controller {
 		} else {
 			setInputValidity(false)
 		}
+		*/
 	}
 
 	/**
@@ -189,22 +243,19 @@ class UrlShortenerController extends Controller {
 	 * This function also trims the lists, so they are never longer 3 elements.
 	 */
 	private addResult = (result: ShortenedURLResult) => {
-		const {
-			results,
-			resultListTarget,
-			createResultLi,
-		}: UrlShortenerController = this
-
-		if (results.length === 3) {
-			results.pop()
-			resultListTarget.lastElementChild.remove()
+		if (this.results.length === 3) {
+			this.results.pop()
+			this.resultListTarget.lastElementChild.remove()
 		}
 
-		results.unshift(result)
-		const resultLi = createResultLi(result)
-		resultListTarget.insertBefore(resultLi, resultListTarget.firstElementChild)
+		this.results.unshift(result)
+		const resultLi = this.createResultLi(result)
+		this.resultListTarget.insertBefore(
+			resultLi,
+			this.resultListTarget.firstElementChild
+		)
 
-		sessionStorage.setItem("shortenedURLResults", JSON.stringify(results))
+		sessionStorage.setItem("shortenedURLResults", JSON.stringify(this.results))
 	}
 
 	/**
@@ -221,12 +272,7 @@ class UrlShortenerController extends Controller {
 	}
 
 	private setInputValidity = (valid: boolean) => {
-		const {
-			helperTextTarget,
-			inputTarget,
-			formTarget,
-			data,
-		}: UrlShortenerController = this
+		const { helperTextTarget, inputTarget, formTarget, data } = this
 		const errorClass = data.get("formErrorClass")
 
 		if (valid) {
@@ -242,20 +288,12 @@ class UrlShortenerController extends Controller {
 	}
 
 	private shorten(url: string): Promise<ShortenedURLResult> {
-		interface ShrtCodeResponse {
-			ok: boolean
-			result: {
-				short_link: string
-				full_short_link: string
-			}
-		}
-
 		return fetch(
 			`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
 		)
 			.then((response) => response.json())
 			.then(
-				(data: ShrtCodeResponse): ShortenedURLResult => ({
+				(data: ShrtCodeAPIResponse): ShortenedURLResult => ({
 					ok: data.ok,
 					shortUrl: data.result?.short_link,
 					fullShortUrl: data.result?.full_short_link,
