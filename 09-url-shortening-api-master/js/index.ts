@@ -156,7 +156,7 @@ class UrlShortenerController extends Controller {
 				originalUrl: url,
 			}
 
-			this.service.send({ type: "SUCCESS", payload: result })
+			this.service.send({ type: "SUCCESS", result })
 		} catch {
 			this.service.send("FAIL")
 		}
@@ -171,8 +171,7 @@ class UrlShortenerController extends Controller {
 		this.element.classList.remove(loadingClass)
 
 		if (e.type === "SUCCESS") {
-			const result = e.payload
-			this.addResult(result)
+			this.addResult(e.result)
 		}
 	}
 

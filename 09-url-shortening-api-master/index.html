@@ -73,8 +73,8 @@
 						data-url-shortener-loading-class="shortening"
 						data-url-shortener-shorten-failed-class="shorten-failed"
 						data-url-shortener-form-error-class="form--invalid"
+						data-state=""
 					>
-						<!-- TODO: replace data-*-class'es with data-state -->
 						<form
 							data-target="url-shortener.form"
 							data-action="submit->url-shortener#submit"
@@ -130,7 +130,8 @@
 									</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
-										data-action="url-shortener#copy"
+										data-copy-btn
+										data-url="{{ shortUrl }}"
 										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy <span class="sr-only">shortened</span></span>
@@ -141,7 +142,7 @@
 							</article>
 						</template>
 						<!-- TODO: NVDA announces all children of this node when something changes. Why?? -->
-						<ul data-target="url-shortener.resultList" aria-live="polite"></ul>
+						<ul id="shortenedURLList" data-target="url-shortener.resultList" aria-live="polite"></ul>
 					</div>
 					<section class="text-center">
 						<h2 class="mb-5">Advanced Statistics</h2>

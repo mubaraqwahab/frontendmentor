@@ -5,10 +5,10 @@ export interface URLShortenerContext {}
 
 export type URLShortenerEvent =
 	// | { type: "CHANGE"; target: HTMLInputElement }
-	| { type: "SHORTEN" }
-	| { type: "SUCCESS"; payload: ShortenedURLResult }
+	| { type: "SHORTEN"; form: HTMLFormElement }
+	| { type: "SUCCESS"; result: ShortenedURLResult }
 	| { type: "FAIL" }
-	| { type: "COPY" }
+	| { type: "COPY"; url: string }
 
 export type URLShortenerState =
 	| { value: "idle"; context: URLShortenerContext }

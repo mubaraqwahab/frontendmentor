@@ -6376,7 +6376,7 @@
                         fullShortUrl: (_b = data.result) === null || _b === void 0 ? void 0 : _b.full_short_link,
                         originalUrl: url,
                     };
-                    this.service.send({ type: "SUCCESS", payload: result });
+                    this.service.send({ type: "SUCCESS", result });
                 }
                 catch (_c) {
                     this.service.send("FAIL");
@@ -6389,8 +6389,7 @@
                 const loadingClass = this.data.get("loadingClass");
                 this.element.classList.remove(loadingClass);
                 if (e.type === "SUCCESS") {
-                    const result = e.payload;
-                    this.addResult(result);
+                    this.addResult(e.result);
                 }
             };
             this.handleFail = () => {
