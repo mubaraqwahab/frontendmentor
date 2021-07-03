@@ -4,7 +4,7 @@ import { terser } from "rollup-plugin-terser"
 import replace from "@rollup/plugin-replace"
 
 export default {
-	input: "js/index.ts",
+	input: "js/url-shortener.ts",
 	output: {
 		file: "js/bundle.js",
 		format: "iife",

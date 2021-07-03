@@ -76,13 +76,11 @@
 						data-state=""
 					>
 						<form
-							data-target="url-shortener.form"
-							data-action="submit->url-shortener#submit"
-							class="bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:url-form lg:py-10 lg:px-12 lg:relative"
+							class="form bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:url-form lg:py-10 lg:px-12 lg:relative"
 						>
-							<label for="url" class="block relative" data-controller="form-field" data-form-field-label-hidden-class="sr-only">
+							<label for="url" class="block relative" data-form-field-label-hidden-class="sr-only">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
-								<span class="block select-none absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5 form__label" data-target="form-field.label">
+								<span data-label-for="url" class="block select-none cursor-text absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5 form__label">
 									Shorten a link here...
 								</span>
 								<input
