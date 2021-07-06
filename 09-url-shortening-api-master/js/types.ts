@@ -1,9 +1,10 @@
+// Do you still need this?
 export interface ShortenedURLResult {
-	ok: boolean
+	ok: boolean // ?
 	shortUrl?: string
 	fullShortUrl?: string
 	originalUrl?: string
-	errorCode?: string
+	errorCode?: string // ?
 }
 
 export interface ShrtCodeAPIResponse {
