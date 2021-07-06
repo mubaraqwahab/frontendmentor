@@ -3,12 +3,15 @@ export interface ShortenedURLResult {
 	shortUrl?: string
 	fullShortUrl?: string
 	originalUrl?: string
+	errorCode?: string
 }
 
 export interface ShrtCodeAPIResponse {
 	ok: boolean
-	result: {
+	result?: {
 		short_link: string
 		full_short_link: string
+		original_link: string
 	}
+	error_code?: number
 }

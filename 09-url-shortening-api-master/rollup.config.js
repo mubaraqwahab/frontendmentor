@@ -1,10 +1,10 @@
 import resolve from "@rollup/plugin-node-resolve"
-import typescript from "@rollup/plugin-typescript"
+// import typescript from "@rollup/plugin-typescript"
 import { terser } from "rollup-plugin-terser"
 import replace from "@rollup/plugin-replace"
 
 export default {
-	input: "js/url-shortener.ts",
+	input: "js/index.js",
 	output: {
 		file: "js/bundle.js",
 		format: "iife",
@@ -12,7 +12,7 @@ export default {
 	},
 	plugins: [
 		resolve(),
-		typescript(),
+		// typescript(),
 		replace({
 			"process.env.NODE_ENV": JSON.stringify("production"),
 		}),

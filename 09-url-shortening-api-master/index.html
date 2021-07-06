@@ -10,12 +10,12 @@
 		<script src="js/bundle.js" defer></script>
 	</head>
 	<body class="font-medium text-gray-violet">
-		<header data-controller="navigation" data-navigation-hidden-class="hidden">
+		<header>
 			<div class="container flex flex-wrap items-center justify-between pt-8 pb-5 relative lg:justify-start">
 				<a href="." class="lg:mr-10">
 					<img src="images/logo.svg" alt="Shortly home" />
 				</a>
-				<button aria-expanded="false" data-action="navigation#toggle" class="lg:hidden">
+				<button aria-expanded="false" aria-controls="nav" data-disclosure-btn data-hidden-class="hidden" class="lg:hidden">
 					<span class="sr-only">Toggle navigation</span>
 					<!-- Credit: ionicons (https://ionicons.com/) -->
 					<svg aria-hidden="true" focusable="false" viewBox="0 0 512 512" width="36" height="36">
@@ -30,8 +30,8 @@
 					</svg>
 				</button>
 				<nav
+					id="nav"
 					class="hidden bg-violet-dark text-white text-center text-lg font-bold tracking-wide px-5 py-6 mx-5 rounded-lg absolute top-full left-0 right-0 lg:mx-0 lg:px-0 lg:bg-transparent lg:text-gray-violet lg:flex lg:justify-between lg:items-center lg:static lg:flex-auto"
-					data-target="navigation.nav"
 				>
 					<ul class="border-b mb-4 lg:flex lg:items-center lg:border-b-0 lg:mb-0">
 						<li><a href="" class="block p-2 rounded-full mb-2 lg:p-0 lg:mb-0 lg:mr-8 lg:rounded-none lg:hover:text-blue-very-dark">Features</a></li>
@@ -67,20 +67,13 @@
 
 			<div class="bg-gray-200">
 				<div class="container pt-16 pb-32">
-					<div
-						class="mb-24 -mt-32"
-						data-controller="url-shortener"
-						data-url-shortener-loading-class="shortening"
-						data-url-shortener-shorten-failed-class="shorten-failed"
-						data-url-shortener-form-error-class="form--invalid"
-						data-state=""
-					>
+					<div class="mb-24 -mt-32" data-state="">
 						<form
 							class="form bg-violet-dark bg-shorten-mobile bg-no-repeat bg-right-top rounded-lg p-5 mb-5 lg:url-form lg:py-10 lg:px-12 lg:relative"
 						>
-							<label for="url" class="block relative" data-form-field-label-hidden-class="sr-only">
+							<label for="url" class="block relative">
 								<!-- I refuse to use a placeholder instead. See https://css-tricks.com/dont-use-the-placeholder-attribute/ -->
-								<span data-label-for="url" class="block select-none cursor-text absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5 form__label">
+								<span class="block select-none cursor-text absolute left-0 right-0 py-2 px-4 lg:py-3 lg:px-5 form__label">
 									Shorten a link here...
 								</span>
 								<input
@@ -90,11 +83,9 @@
 									required
 									aria-invalid="false"
 									class="w-full rounded py-2 px-4 text-violet-dark lg:py-3 lg:px-5"
-									data-action="input->form-field#toggleLabel"
-									data-target="form-field.input url-shortener.input"
 								/>
 							</label>
-							<div id="urlHelper" data-target="url-shortener.helperText" class="form__helper text-xs lg:absolute lg:mx-12 lg:mt-22 lg:py-1">
+							<div id="urlHelper" class="form__helper text-xs lg:absolute lg:mx-12 lg:mt-22 lg:py-1">
 								Please add a link
 							</div>
 							<button
@@ -103,33 +94,22 @@
 							>
 								<span class="shorten-btn__label">Shorten It!</span>
 								<span class="shorten-btn__loading-label">Shortening...</span>
-								<span class="shorten-btn__failed-label">Something's wrong, try again</span>
+								<!-- <span class="shorten-btn__failed-label">Something's wrong, try again</span> -->
 							</button>
 						</form>
-						<template data-target="url-shortener.resultTemplate">
+						<template id="shortenerResultTemplate">
 							<article class="rounded-lg bg-white mb-5 lg:flex lg:items-center lg:justify-between lg:px-5 lg:py-3">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
 								<div id="{{ shortUrl }}" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0 lg:p-0">
 									{{ originalUrl }}
 								</div>
 								<span class="sr-only">has been shortened to</span>
-								<div
-									class="px-4 py-3 lg:flex lg:items-center lg:p-0"
-									data-controller="clipboard"
-									data-url-shortener-copied-class="copied"
-									data-url-shortener-copy-failed-class="copy-failed"
-								>
-									<a
-										href="{{ fullShortUrl }}"
-										class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5 hover:text-cyan-light"
-										data-target="url-shortener.source"
-									>
+								<div class="px-4 py-3 lg:flex lg:items-center lg:p-0">
+									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5 hover:text-cyan-light">
 										{{ shortUrl }}
 									</a>
 									<button
 										aria-describedby="{{ shortUrl }}"
-										data-copy-btn
-										data-url="{{ shortUrl }}"
 										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy <span class="sr-only">shortened</span></span>
@@ -140,7 +120,7 @@
 							</article>
 						</template>
 						<!-- TODO: NVDA announces all children of this node when something changes. Why?? -->
-						<ul id="shortenedURLList" data-target="url-shortener.resultList" aria-live="polite"></ul>
+						<ul id="shortenedURLList" aria-live="polite"></ul>
 					</div>
 					<section class="text-center">
 						<h2 class="mb-5">Advanced Statistics</h2>
