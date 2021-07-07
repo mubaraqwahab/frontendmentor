@@ -50,44 +50,32 @@ const shortenURL = async (context) => {
 
 const urlShortenerMachine = createMachine({
 	id: "urlShortener",
-	initial: "idle",
+	type: "parallel",
 	context: {
 		url: "",
 		results: [],
 	},
 	states: {
-		idle: {
-			on: {
-				input: "inputted",
-				submit: "invalid",
-			},
-		},
-		inputted: {
-			entry: assignURL,
-			always: [{ target: "nonemptyURL", cond: hasInput }, { target: "idle" }],
-		},
-		invalid: {
-			on: {
-				input: "inputted",
-			},
-		},
-		nonemptyURL: {
-			on: {
-				input: "inputted",
-				submit: "shortening",
-			},
-		},
-		shortening: {
-			invoke: {
-				src: shortenURL,
-				onDone: {
-					actions: [assignResults /* TODO */],
+		input: {
+			initial: "empty",
+			states: {
+				empty: {
+					on: {
+						input: "changed",
+					},
 				},
-				onError: {
-					actions: (context, event) => console.log("Failure", event.data),
+				changed: {
+					entry: assignURL,
+					always: [{ target: "nonempty", cond: hasInput }, { target: "empty" }],
+				},
+				nonempty: {
+					on: {
+						input: "changed",
+					},
 				},
 			},
 		},
+		shortener: {},
 	},
 })
 

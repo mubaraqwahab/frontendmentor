@@ -674,6 +674,18 @@ h3 {
   margin-top: 0.25rem;
 }
 
+form[data-state~="input.nonempty"] .form__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 form[data-state~="invalid"] input {
   --text-opacity: 1;
   color: hsl(0, 87%, 67%);

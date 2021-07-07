@@ -51,6 +51,10 @@
 		@apply hidden text-sm italic mt-1;
 	}
 
+	form[data-state~="input.nonempty"] .form__label {
+		@apply sr-only;
+	}
+
 	form[data-state~="invalid"] input {
 		@apply text-red;
 	}
