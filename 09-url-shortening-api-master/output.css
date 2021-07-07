@@ -686,30 +686,30 @@ form[data-state~="input.nonempty"] .form__label {
   border-width: 0;
 }
 
-form[data-state~="invalid"] input {
+form[data-state~="shortener.invalid"] input {
   --text-opacity: 1;
   color: hsl(0, 87%, 67%);
   color: rgba(244.0605, 97.63950000000003, 97.63950000000003, var(--text-opacity));
 }
 
-form[data-state~="invalid"] input {
+form[data-state~="shortener.invalid"] input {
   box-shadow: 0 0 0 3px hsla(0, 87%, 67%, 0.5);
 }
 
-form[data-state~="invalid"] .form__label {
+form[data-state~="shortener.invalid"] .form__label {
   --text-opacity: 1;
   color: hsl(0, 87%, 67%);
   color: rgba(244.0605, 97.63950000000003, 97.63950000000003, var(--text-opacity));
 }
 
-form[data-state~="invalid"] .form__helper {
+form[data-state~="shortener.invalid"] .form__helper {
   display: block;
   --text-opacity: 1;
   color: hsl(0, 87%, 67%);
   color: rgba(244.0605, 97.63950000000003, 97.63950000000003, var(--text-opacity));
 }
 
-form[data-state~="shortening"] {
+form[data-state~="shortener.shortening"] {
   --shorten-label-display: none;
   --shortening-label-display: inline;
   --shorten-failed-label-display: none;

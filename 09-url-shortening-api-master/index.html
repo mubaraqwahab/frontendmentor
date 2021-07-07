@@ -98,19 +98,19 @@
 								<!-- <span class="shorten-btn__failed-label">Something's wrong, try again</span> -->
 							</button>
 						</form>
-						<template id="shortenerResultTemplate">
+						<template id="shortenedURLTemplate">
 							<article class="rounded-lg bg-white mb-5 lg:flex lg:items-center lg:justify-between lg:px-5 lg:py-3">
 								<!-- ID can contain (almost) any character (See https://mathiasbynens.be/notes/html5-id-class)  -->
-								<div id="{{ shortUrl }}" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0 lg:p-0">
-									{{ originalUrl }}
+								<div id="{{ shortURL }}" class="border-b text-violet-very-dark px-4 py-3 truncate lg:border-b-0 lg:p-0">
+									{{ originalURL }}
 								</div>
 								<span class="sr-only">has been shortened to</span>
 								<div class="px-4 py-3 lg:flex lg:items-center lg:p-0">
-									<a href="{{ fullShortUrl }}" class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5 hover:text-cyan-light">
-										{{ shortUrl }}
+									<a href="{{ fullShortURL }}" class="inline-block text-cyan mb-2 lg:mb-0 lg:mr-5 hover:text-cyan-light">
+										{{ shortURL }}
 									</a>
 									<button
-										aria-describedby="{{ shortUrl }}"
+										aria-describedby="{{ shortURL }}"
 										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy <span class="sr-only">shortened</span></span>

@@ -55,23 +55,23 @@
 		@apply sr-only;
 	}
 
-	form[data-state~="invalid"] input {
+	form[data-state~="shortener.invalid"] input {
 		@apply text-red;
 	}
 
-	form[data-state~="invalid"] input {
+	form[data-state~="shortener.invalid"] input {
 		@apply shadow-outline-red;
 	}
 
-	form[data-state~="invalid"] .form__label {
+	form[data-state~="shortener.invalid"] .form__label {
 		@apply text-red;
 	}
 
-	form[data-state~="invalid"] .form__helper {
+	form[data-state~="shortener.invalid"] .form__helper {
 		@apply block text-red;
 	}
 
-	form[data-state~="shortening"] {
+	form[data-state~="shortener.shortening"] {
 		--shorten-label-display: none;
 		--shortening-label-display: inline;
 		--shorten-failed-label-display: none;

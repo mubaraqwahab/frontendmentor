@@ -5,6 +5,16 @@ import * as disclosure from "../../shared/disclosure"
 
 disclosure.initializeAll()
 
+const form = document.querySelector("form")
+const urlInput = form.elements.namedItem("url")
+const resultUL = document.querySelector("#shortenedURLList")
+const resultTemplate = document.querySelector("#shortenedURLTemplate")
+const resultTemplateHTML = resultTemplate.innerHTML
+
+form.noValidate = true
+
+/* Actions */
+
 const assignURL = assign({
 	url: (context, event) => event.target.value,
 })
@@ -14,6 +24,31 @@ const assignResults = assign({
 		return [event.data, ...context.results.slice(0, 2)]
 	},
 })
+
+const resetURL = assign({ url: "" })
+
+const saveResults = (context) => {
+	try {
+		sessionStorage.setItem("shortenedURLs", JSON.stringify(context.results))
+	} catch {
+		// noop
+	}
+}
+
+const showResults = (context) => {
+	let resultULHTML = ""
+	for (const result of context.results) {
+		const resultHTML = resultTemplateHTML.replace(
+			/{{ ([a-zA-Z]+) }}/g,
+			(_, placeholder) => result[placeholder]
+		)
+		const resultLIHTML = "<li>" + resultHTML + "</li>"
+		resultULHTML += resultLIHTML
+	}
+	resultUL.innerHTML = resultULHTML
+}
+
+/* Guards */
 
 const hasInput = (context) => !!context.url
 
@@ -25,6 +60,8 @@ const isValidURL = (context) => {
 		return false
 	}
 }
+
+/* Services */
 
 const shortenURL = async (context) => {
 	const endpoint =
@@ -48,12 +85,22 @@ const shortenURL = async (context) => {
 	}
 }
 
+/* Machine */
+
+let initialResults
+try {
+	const resultsInStorage = sessionStorage.getItem("shortenedURLs")
+	initialResults = JSON.parse(resultsInStorage) ?? []
+} catch {
+	initialResults = []
+}
+
 const urlShortenerMachine = createMachine({
 	id: "urlShortener",
 	type: "parallel",
 	context: {
 		url: "",
-		results: [],
+		results: initialResults,
 	},
 	states: {
 		input: {
@@ -75,15 +122,49 @@ const urlShortenerMachine = createMachine({
 				},
 			},
 		},
-		shortener: {},
+		shortener: {
+			initial: "idle",
+			states: {
+				idle: {
+					entry: showResults,
+					on: {
+						submit: "beforeSubmit",
+					},
+				},
+				beforeSubmit: {
+					always: [
+						{ target: "shortening", cond: isValidURL },
+						{ target: "invalid" },
+					],
+				},
+				invalid: {
+					on: {
+						submit: "beforeSubmit",
+					},
+				},
+				shortening: {
+					invoke: {
+						src: shortenURL,
+						onDone: {
+							target: "save",
+							actions: [assignResults, resetURL],
+						},
+						onError: "failed",
+					},
+				},
+				save: {
+					entry: saveResults,
+					always: "idle",
+				},
+				failed: {
+					on: {
+						submit: "beforeSubmit",
+					},
+				},
+			},
+		},
 	},
 })
-
-const form = document.querySelector("form")
-form.noValidate = true
-
-/** @type {HTMLInputElement} */
-const urlInput = form.elements.namedItem("url")
 
 const service = interpret(urlShortenerMachine)
 
