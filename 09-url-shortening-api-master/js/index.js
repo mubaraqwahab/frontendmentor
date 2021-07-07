@@ -1,3 +1,5 @@
+// @ts-check
+
 import { createMachine, interpret, assign } from "xstate"
 import * as disclosure from "../../shared/disclosure"
 
@@ -5,6 +7,12 @@ disclosure.initializeAll()
 
 const assignURL = assign({
 	url: (context, event) => event.target.value,
+})
+
+const assignResults = assign({
+	results: (context, event) => {
+		return [event.data, ...context.results.slice(0, 2)]
+	},
 })
 
 const hasInput = (context) => !!context.url
@@ -18,12 +26,11 @@ const isValidURL = (context) => {
 	}
 }
 
-const invokeShortenURL = (context) => shortenURL(context.url)
+const shortenURL = async (context) => {
+	const endpoint =
+		"https://api.shrtco.de/v2/shorten?url=" + encodeURIComponent(context.url)
 
-async function shortenURL(url) {
-	const response = await fetch(
-		`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
-	)
+	const response = await fetch(endpoint)
 
 	/**
 	 * @type {import("./types").ShrtCodeAPIResponse}
@@ -46,6 +53,7 @@ const urlShortenerMachine = createMachine({
 	initial: "idle",
 	context: {
 		url: "",
+		results: [],
 	},
 	states: {
 		idle: {
@@ -71,10 +79,9 @@ const urlShortenerMachine = createMachine({
 		},
 		shortening: {
 			invoke: {
-				id: "shortenURL",
-				src: invokeShortenURL,
+				src: shortenURL,
 				onDone: {
-					actions: (context, event) => console.log("Success", event.data),
+					actions: [assignResults /* TODO */],
 				},
 				onError: {
 					actions: (context, event) => console.log("Failure", event.data),

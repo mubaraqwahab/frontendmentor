@@ -4808,20 +4808,27 @@
     );
   }
 
+  // @ts-check
+
   initializeAll();
 
   const assignURL = assign$1({
   	url: (context, event) => event.target.value,
   });
 
+  const assignResults = assign$1({
+  	results: (context, event) => {
+  		return [event.data, ...context.results.slice(0, 2)]
+  	},
+  });
+
   const hasInput = (context) => !!context.url;
 
-  const invokeShortenURL = (context) => shortenURL(context.url);
+  const shortenURL = async (context) => {
+  	const endpoint =
+  		"https://api.shrtco.de/v2/shorten?url=" + encodeURIComponent(context.url);
 
-  async function shortenURL(url) {
-  	const response = await fetch(
-  		`https://api.shrtco.de/v2/shorten?url=${encodeURIComponent(url)}`
-  	);
+  	const response = await fetch(endpoint);
 
   	/**
   	 * @type {import("./types").ShrtCodeAPIResponse}
@@ -4837,13 +4844,14 @@
   	} else {
   		throw new Error("Failed to shorten. Error code " + data.error_code)
   	}
-  }
+  };
 
   const urlShortenerMachine = createMachine({
   	id: "urlShortener",
   	initial: "idle",
   	context: {
   		url: "",
+  		results: [],
   	},
   	states: {
   		idle: {
@@ -4869,10 +4877,9 @@
   		},
   		shortening: {
   			invoke: {
-  				id: "shortenURL",
-  				src: invokeShortenURL,
+  				src: shortenURL,
   				onDone: {
-  					actions: (context, event) => console.log("Success", event.data),
+  					actions: [assignResults /* TODO */],
   				},
   				onError: {
   					actions: (context, event) => console.log("Failure", event.data),

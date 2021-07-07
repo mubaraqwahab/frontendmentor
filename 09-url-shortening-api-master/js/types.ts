@@ -1,9 +1,9 @@
 // Do you still need this?
 export interface ShortenedURLResult {
-	ok: boolean // ?
-	shortUrl?: string
-	fullShortUrl?: string
-	originalUrl?: string
+	ok?: boolean // ?
+	shortUrl: string
+	fullShortUrl: string
+	originalUrl: string
 	errorCode?: string // ?
 }
 
