@@ -4808,49 +4808,29 @@
     );
   }
 
-  const copyShortURL = (context, event) => {
-  	return navigator.clipboard.writeText(event.value).then(() => event.value)
-  };
-
-  // TODO
-  const isDifferentCopy = (context, event) => true;
-
-  const copyMachineConfig = {
-  	id: "copy",
-  	initial: "idle",
-  	states: {
-  		idle: {
-  			on: {
-  				COPY: "copying",
-  			},
-  		},
-  		copying: {
-  			invoke: {
-  				src: copyShortURL,
-  				onDone: "copied",
-  				onError: "idle",
-  			},
-  			on: {
-  				COPY: {
-  					target: "copying",
-  					cond: isDifferentCopy,
-  				},
-  			},
-  		},
-  		copied: {
-  			on: {
-  				COPY: "copying",
-  			},
-  			after: {
-  				3000: "idle",
-  			},
-  		},
-  	},
-  };
-
   // @ts-check
 
-  /* Actions */
+  initializeAll();
+
+  const form = document.querySelector("form");
+  const urlInput = form.elements.namedItem("url");
+  const resultUL = document.querySelector("#shortenedURLList");
+  const resultTemplate = document.querySelector("#shortenedURLTemplate");
+  const resultTemplateHTML = resultTemplate.innerHTML;
+
+  form.noValidate = true;
+
+  /**
+   * @typedef {object} ShrtCodeAPIResponse
+   * @prop {boolean} ok
+   * @prop {object} [result]
+   * @prop {string} result.short_link
+   * @prop {string} result.full_short_link
+   * @prop {string} result.original_link
+   * @prop {string} [error_code]
+   */
+
+  /* URL Shortener Machine */
 
   const assignURL = assign$1({
   	url: (context, event) => event.target.value,
@@ -4864,6 +4844,7 @@
 
   const resetURL = send$1({
   	type: "input",
+  	// Mimick event.target.value
   	target: {
   		value: "",
   	},
@@ -4877,7 +4858,17 @@
   	}
   };
 
-  /* Guards */
+  const showResults = (context) => {
+  	for (const result of context.results) {
+  		const resultHTML = resultTemplateHTML.replace(
+  			/{{ ([a-zA-Z]+) }}/g,
+  			(_, placeholder) => result[placeholder]
+  		);
+  		const resultLI = document.createElement("li");
+  		resultLI.innerHTML = resultHTML;
+  		resultUL.appendChild(resultLI);
+  	}
+  };
 
   const hasInput = (context) => !!context.url;
 
@@ -4890,8 +4881,6 @@
   	}
   };
 
-  /* Services */
-
   const shortenURL = async (context) => {
   	const endpoint =
   		"https://api.shrtco.de/v2/shorten?url=" + encodeURIComponent(context.url);
@@ -4899,7 +4888,7 @@
   	const response = await fetch(endpoint);
 
   	/**
-  	 * @type {import("../types").ShrtCodeAPIResponse}
+  	 * @type {ShrtCodeAPIResponse}
   	 */
   	const data = await response.json();
 
@@ -4914,8 +4903,6 @@
   	}
   };
 
-  /* Machines */
-
   let initialResults;
   try {
   	const resultsInStorage = sessionStorage.getItem("shortenedURLs");
@@ -4924,7 +4911,7 @@
   	initialResults = [];
   }
 
-  const urlShortenerMachineConfig = {
+  const urlShortenerMachine = createMachine({
   	id: "urlShortener",
   	type: "parallel",
   	context: {
@@ -4955,7 +4942,7 @@
   			initial: "idle",
   			states: {
   				idle: {
-  					entry: "showResults",
+  					entry: showResults,
   					on: {
   						submit: "beforeSubmit",
   					},
@@ -4993,38 +4980,49 @@
   			},
   		},
   	},
+  });
+
+  /* Copy Machine */
+
+  const copyShortURL = (context, event) => {
+  	return navigator.clipboard.writeText(event.value).then(() => event.value)
   };
 
-  // @ts-check
+  // TODO
+  const isDifferentCopy = (context, event) => true;
 
-  initializeAll();
-
-  const form = document.querySelector("form");
-  const urlInput = form.elements.namedItem("url");
-  const resultUL = document.querySelector("#shortenedURLList");
-  const resultTemplate = document.querySelector("#shortenedURLTemplate");
-  const resultTemplateHTML = resultTemplate.innerHTML;
-
-  form.noValidate = true;
-
-  /* Machines */
-
-  const urlShortenerMachine = createMachine(urlShortenerMachineConfig, {
-  	actions: {
-  		showResults: (context) => {
-  			for (const result of context.results) {
-  				const resultHTML = resultTemplateHTML.replace(
-  					/{{ ([a-zA-Z]+) }}/g,
-  					(_, placeholder) => result[placeholder]
-  				);
-  				const resultLI = document.createElement("li");
-  				resultLI.innerHTML = resultHTML;
-  				resultUL.appendChild(resultLI);
-  			}
+  const copyMachine = createMachine({
+  	id: "copy",
+  	initial: "idle",
+  	states: {
+  		idle: {
+  			on: {
+  				COPY: "copying",
+  			},
+  		},
+  		copying: {
+  			invoke: {
+  				src: copyShortURL,
+  				onDone: "copied",
+  				onError: "idle",
+  			},
+  			on: {
+  				COPY: {
+  					target: "copying",
+  					cond: isDifferentCopy,
+  				},
+  			},
+  		},
+  		copied: {
+  			on: {
+  				COPY: "copying",
+  			},
+  			after: {
+  				3000: "idle",
+  			},
   		},
   	},
   });
-  const copyMachine = createMachine(copyMachineConfig);
 
   const urlShortenerService = interpret(urlShortenerMachine);
   const copyService = interpret(copyMachine);
