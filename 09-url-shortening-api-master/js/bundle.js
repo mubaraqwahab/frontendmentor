@@ -4832,7 +4832,12 @@
   	},
   });
 
-  const resetURL = assign$1({ url: "" });
+  const resetURL = send$1({
+  	type: "input",
+  	target: {
+  		value: "",
+  	},
+  });
 
   const saveResults = (context) => {
   	try {
@@ -4978,6 +4983,11 @@
   service.onTransition((state) => {
   	if (state.changed) {
   		console.log(state.toStrings().join(" "));
+
+  		// The two go out of sync only when context.url is reset (e.g. in the resetURL action)
+  		if (urlInput.value !== state.context.url) {
+  			urlInput.value = state.context.url;
+  		}
 
   		form.dataset.state = state.toStrings().join(" ");
   	}

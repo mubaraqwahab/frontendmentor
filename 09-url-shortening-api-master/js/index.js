@@ -1,6 +1,6 @@
 // @ts-check
 
-import { createMachine, interpret, assign } from "xstate"
+import { createMachine, interpret, assign, send } from "xstate"
 import * as disclosure from "../../shared/disclosure"
 
 disclosure.initializeAll()
@@ -25,7 +25,12 @@ const assignResults = assign({
 	},
 })
 
-const resetURL = assign({ url: "" })
+const resetURL = send({
+	type: "input",
+	target: {
+		value: "",
+	},
+})
 
 const saveResults = (context) => {
 	try {
@@ -171,6 +176,11 @@ const service = interpret(urlShortenerMachine)
 service.onTransition((state) => {
 	if (state.changed) {
 		console.log(state.toStrings().join(" "))
+
+		// The two go out of sync only when context.url is reset (e.g. in the resetURL action)
+		if (urlInput.value !== state.context.url) {
+			urlInput.value = state.context.url
+		}
 
 		form.dataset.state = state.toStrings().join(" ")
 	}
