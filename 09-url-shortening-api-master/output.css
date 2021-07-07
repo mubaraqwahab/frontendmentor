@@ -715,7 +715,7 @@ form[data-state~="shortener.shortening"] {
   --shorten-failed-label-display: none;
 }
 
-form[data-state~="shorten-failed"] {
+form[data-state~="shortener.failed"] {
   --shorten-label-display: none;
   --shortening-label-display: none;
   --shorten-failed-label-display: inline;
@@ -733,16 +733,23 @@ form .shorten-btn__failed-label {
   display: var(--shorten-failed-label-display, none);
 }
 
-.copy-btn:hover {
-  --bg-opacity: 1;
-  background-color: hsl(180, 66%, 70%);
-  background-color: rgba(128.01, 228.98999999999998, 228.98999999999998, var(--bg-opacity));
+.copy-btn {
+  background-color: var(--bg-color);
 }
 
-.copied {
+.copy-btn:hover {
+  --bg-color: hsl(180, 66%, 70%);
+}
+
+.copy-btn[data-state~="copied"] {
   --copy-label-display: none;
   --copied-label-display: inline;
   --copy-failed-label-display: none;
+  --bg-color: hsl(257, 27%, 26%);
+}
+
+.copy-btn[data-state~="copied"]:hover {
+  --bg-color: hsl(260, 8%, 14%);
 }
 
 .copy-failed {

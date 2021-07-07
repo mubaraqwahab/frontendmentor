@@ -95,7 +95,7 @@
 							>
 								<span class="shorten-btn__label">Shorten It!</span>
 								<span class="shorten-btn__loading-label">Shortening...</span>
-								<!-- <span class="shorten-btn__failed-label">Something's wrong, try again</span> -->
+								<span class="shorten-btn__failed-label">Something's wrong, try again</span>
 							</button>
 						</form>
 						<template id="shortenedURLTemplate">
@@ -111,6 +111,8 @@
 									</a>
 									<button
 										aria-describedby="{{ shortURL }}"
+										data-copy="{{ shortURL }}"
+										data-state=""
 										class="copy-btn w-full rounded py-2 px-4 text-white bg-cyan motion-safe:transition-colors duration-150 font-bold tracking-wide"
 									>
 										<span class="copy-btn__label">Copy <span class="sr-only">shortened</span></span>

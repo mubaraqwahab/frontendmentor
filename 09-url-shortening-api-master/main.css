@@ -77,7 +77,7 @@
 		--shorten-failed-label-display: none;
 	}
 
-	form[data-state~="shorten-failed"] {
+	form[data-state~="shortener.failed"] {
 		--shorten-label-display: none;
 		--shortening-label-display: none;
 		--shorten-failed-label-display: inline;
@@ -95,14 +95,23 @@
 		display: var(--shorten-failed-label-display, none);
 	}
 
-	.copy-btn:hover {
-		@apply bg-cyan-light;
+	.copy-btn {
+		background-color: var(--bg-color);
 	}
 
-	.copied {
+	.copy-btn:hover {
+		--bg-color: theme("colors.cyan.light");
+	}
+
+	.copy-btn[data-state~="copied"] {
 		--copy-label-display: none;
 		--copied-label-display: inline;
 		--copy-failed-label-display: none;
+		--bg-color: theme("colors.violet.dark");
+	}
+
+	.copy-btn[data-state~="copied"]:hover {
+		--bg-color: theme("colors.violet.very-dark");
 	}
 
 	.copy-failed {

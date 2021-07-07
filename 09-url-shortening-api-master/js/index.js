@@ -1,7 +1,9 @@
 // @ts-check
 
-import { createMachine, interpret, assign, send } from "xstate"
+import { createMachine, interpret } from "xstate"
 import * as disclosure from "../../shared/disclosure"
+import copyMachineConfig from "./machines/copy"
+import urlShortenerMachineConfig from "./machines/url-shortener"
 
 disclosure.initializeAll()
 
@@ -13,167 +15,29 @@ const resultTemplateHTML = resultTemplate.innerHTML
 
 form.noValidate = true
 
-/* Actions */
+/* Machines */
 
-const assignURL = assign({
-	url: (context, event) => event.target.value,
-})
-
-const assignResults = assign({
-	results: (context, event) => {
-		return [event.data, ...context.results.slice(0, 2)]
-	},
-})
-
-const resetURL = send({
-	type: "input",
-	target: {
-		value: "",
-	},
-})
-
-const saveResults = (context) => {
-	try {
-		sessionStorage.setItem("shortenedURLs", JSON.stringify(context.results))
-	} catch {
-		// noop
-	}
-}
-
-const showResults = (context) => {
-	let resultULHTML = ""
-	for (const result of context.results) {
-		const resultHTML = resultTemplateHTML.replace(
-			/{{ ([a-zA-Z]+) }}/g,
-			(_, placeholder) => result[placeholder]
-		)
-		const resultLIHTML = "<li>" + resultHTML + "</li>"
-		resultULHTML += resultLIHTML
-	}
-	resultUL.innerHTML = resultULHTML
-}
-
-/* Guards */
-
-const hasInput = (context) => !!context.url
-
-const isValidURL = (context) => {
-	try {
-		new URL(context.url)
-		return true
-	} catch {
-		return false
-	}
-}
-
-/* Services */
-
-const shortenURL = async (context) => {
-	const endpoint =
-		"https://api.shrtco.de/v2/shorten?url=" + encodeURIComponent(context.url)
-
-	const response = await fetch(endpoint)
-
-	/**
-	 * @type {import("./types").ShrtCodeAPIResponse}
-	 */
-	const data = await response.json()
-
-	if (data.ok) {
-		return {
-			shortURL: data.result.short_link,
-			fullShortURL: data.result.full_short_link,
-			originalURL: data.result.original_link,
-		}
-	} else {
-		throw new Error("Failed to shorten. Error code " + data.error_code)
-	}
-}
-
-/* Machine */
-
-let initialResults
-try {
-	const resultsInStorage = sessionStorage.getItem("shortenedURLs")
-	initialResults = JSON.parse(resultsInStorage) ?? []
-} catch {
-	initialResults = []
-}
-
-const urlShortenerMachine = createMachine({
-	id: "urlShortener",
-	type: "parallel",
-	context: {
-		url: "",
-		results: initialResults,
-	},
-	states: {
-		input: {
-			initial: "empty",
-			states: {
-				empty: {
-					on: {
-						input: "changed",
-					},
-				},
-				changed: {
-					entry: assignURL,
-					always: [{ target: "nonempty", cond: hasInput }, { target: "empty" }],
-				},
-				nonempty: {
-					on: {
-						input: "changed",
-					},
-				},
-			},
-		},
-		shortener: {
-			initial: "idle",
-			states: {
-				idle: {
-					entry: showResults,
-					on: {
-						submit: "beforeSubmit",
-					},
-				},
-				beforeSubmit: {
-					always: [
-						{ target: "shortening", cond: isValidURL },
-						{ target: "invalid" },
-					],
-				},
-				invalid: {
-					on: {
-						submit: "beforeSubmit",
-					},
-				},
-				shortening: {
-					invoke: {
-						src: shortenURL,
-						onDone: {
-							target: "save",
-							actions: [assignResults, resetURL],
-						},
-						onError: "failed",
-					},
-				},
-				save: {
-					entry: saveResults,
-					always: "idle",
-				},
-				failed: {
-					on: {
-						submit: "beforeSubmit",
-					},
-				},
-			},
+const urlShortenerMachine = createMachine(urlShortenerMachineConfig, {
+	actions: {
+		showResults: (context) => {
+			for (const result of context.results) {
+				const resultHTML = resultTemplateHTML.replace(
+					/{{ ([a-zA-Z]+) }}/g,
+					(_, placeholder) => result[placeholder]
+				)
+				const resultLI = document.createElement("li")
+				resultLI.innerHTML = resultHTML
+				resultUL.appendChild(resultLI)
+			}
 		},
 	},
 })
+const copyMachine = createMachine(copyMachineConfig)
 
-const service = interpret(urlShortenerMachine)
+const urlShortenerService = interpret(urlShortenerMachine)
+const copyService = interpret(copyMachine)
 
-service.onTransition((state) => {
+urlShortenerService.onTransition((state) => {
 	if (state.changed) {
 		console.log(state.toStrings().join(" "))
 
@@ -186,13 +50,58 @@ service.onTransition((state) => {
 	}
 })
 
-service.start()
+copyService.onTransition((state) => {
+	if (state.changed) {
+		console.log(state.toStrings().join(" "))
+
+		// const { event } = state
+		// if (event.data) {
+		// 	// Find the clicked copy button
+		// 	const copyBtn = resultUL.querySelector(`button[data-copy="${event.data}"`)
+		// 	copyBtn.dataset.state = state.toStrings().join(" ")
+		// }
+	}
+})
+
+// First time using MutationObserver!
+
+const resultsObserver = new MutationObserver(function (mutations) {
+	for (const mutation of mutations) {
+		if (mutation.type === "childList") {
+			// Add a copy handler to the copy button of each new result <li>
+			mutation.addedNodes.forEach((resultLI) => {
+				const copyBtn = resultLI.querySelector("button[data-copy]")
+
+				// TODO: consider setting up the service for each button
+
+				copyBtn.addEventListener("click", handleCopyBtnClick)
+			})
+
+			// Remove the copy handler from the copy button of the removed result <li>
+			mutation.removedNodes.forEach((resultLI) => {
+				const copyBtn = resultLI.querySelector("button[data-copy]")
+				copyBtn.removeEventListener("click", handleCopyBtnClick)
+			})
+		}
+	}
+})
+
+// Observe before starting shortener service
+resultsObserver.observe(resultUL, { childList: true })
+
+urlShortenerService.start()
+copyService.start()
 
 form.addEventListener("submit", (e) => {
 	e.preventDefault()
-	service.send(e)
+	urlShortenerService.send(e)
 })
 
 urlInput.addEventListener("input", (e) => {
-	service.send(e)
+	urlShortenerService.send(e)
 })
+
+function handleCopyBtnClick(e) {
+	const copyBtn = e.currentTarget
+	copyService.send({ type: "COPY", value: copyBtn.dataset.copy })
+}
