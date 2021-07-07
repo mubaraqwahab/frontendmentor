@@ -178,7 +178,7 @@ const urlShortenerMachine = createMachine({
 /* Copy Machine */
 
 const copyShortURL = (context, event) => {
-	return navigator.clipboard.writeText(event.value).then(() => event.value)
+	return navigator.clipboard.writeText(event.value)
 }
 
 // TODO

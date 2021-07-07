@@ -719,6 +719,7 @@ form[data-state~="shortener.failed"] {
   --shorten-label-display: none;
   --shortening-label-display: none;
   --shorten-failed-label-display: inline;
+  font-size: 0.875rem;
 }
 
 form .shorten-btn__label {

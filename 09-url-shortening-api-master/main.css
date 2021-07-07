@@ -81,6 +81,7 @@
 		--shorten-label-display: none;
 		--shortening-label-display: none;
 		--shorten-failed-label-display: inline;
+		@apply text-sm;
 	}
 
 	form .shorten-btn__label {
