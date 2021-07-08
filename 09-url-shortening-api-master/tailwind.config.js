@@ -1,5 +1,6 @@
-const { colors, fontFamily, spacing } = require("tailwindcss/defaultTheme");
+const { colors, fontFamily, spacing } = require("tailwindcss/defaultTheme")
 
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
 	future: {
 		removeDeprecatedGapUtilities: true,
@@ -20,6 +21,9 @@ module.exports = {
 			},
 			margin: {
 				"22": "5.5rem",
+			},
+			transitionDuration: {
+				"400": "400ms",
 			},
 		},
 		container: {
@@ -69,4 +73,4 @@ module.exports = {
 		transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
 	},
 	plugins: [],
-};
+}

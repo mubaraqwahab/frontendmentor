@@ -1,9 +1,19 @@
 // @ts-check
 
 import { createMachine, interpret, assign, send } from "xstate"
-import * as disclosure from "../../shared/disclosure"
+import Disclosure from "../../shared/disclosure"
 
-disclosure.initializeAll()
+new Disclosure(document.querySelector("[data-disclosure-btn]")).addListener(
+	(e) => {
+		const disclosure = e.target
+
+		// aria-hidden is opposite of open
+		disclosure.controlledElement.setAttribute(
+			"aria-hidden",
+			"" + !disclosure.open
+		)
+	}
+)
 
 const form = document.querySelector("form")
 const urlInput = form.elements.namedItem("url")

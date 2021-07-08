@@ -32,6 +32,7 @@
     "xstate": "^4.20.2"
   },
   "devDependencies": {
+    "@types/tailwindcss": "^2.0.3",
     "stylelint-config-recommended": "^3.0.0"
   }
 }

@@ -47,6 +47,17 @@
 }
 
 @layer components {
+	/* Credit for open/close animation: https://davidwalsh.name/css-slide */
+	#nav {
+		@apply block overflow-hidden transition-all duration-400;
+		max-height: 400px;
+	}
+
+	#nav.closed {
+		@apply py-0 invisible;
+		max-height: 0px;
+	}
+
 	.form__helper {
 		@apply hidden text-sm italic mt-1;
 	}

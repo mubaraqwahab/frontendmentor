@@ -667,6 +667,23 @@ h3 {
   }
 }
 
+/* Credit for open/close animation: https://davidwalsh.name/css-slide */
+
+#nav {
+  display: block;
+  overflow: hidden;
+  transition-property: all;
+  transition-duration: 400ms;
+  max-height: 400px;
+}
+
+#nav.closed {
+  padding-top: 0;
+  padding-bottom: 0;
+  visibility: hidden;
+  max-height: 0px;
+}
+
 .form__helper {
   display: none;
   font-size: 0.875rem;
@@ -11549,6 +11566,10 @@ form .shorten-btn__failed-label {
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-400 {
+  transition-duration: 400ms;
 }
 
 .duration-500 {
@@ -22526,6 +22547,10 @@ form .shorten-btn__failed-label {
     transition-duration: 300ms;
   }
 
+  .sm\:duration-400 {
+    transition-duration: 400ms;
+  }
+
   .sm\:duration-500 {
     transition-duration: 500ms;
   }
@@ -33398,6 +33423,10 @@ form .shorten-btn__failed-label {
 
   .md\:duration-300 {
     transition-duration: 300ms;
+  }
+
+  .md\:duration-400 {
+    transition-duration: 400ms;
   }
 
   .md\:duration-500 {
@@ -44274,6 +44303,10 @@ form .shorten-btn__failed-label {
     transition-duration: 300ms;
   }
 
+  .lg\:duration-400 {
+    transition-duration: 400ms;
+  }
+
   .lg\:duration-500 {
     transition-duration: 500ms;
   }
@@ -55146,6 +55179,10 @@ form .shorten-btn__failed-label {
 
   .xl\:duration-300 {
     transition-duration: 300ms;
+  }
+
+  .xl\:duration-400 {
+    transition-duration: 400ms;
   }
 
   .xl\:duration-500 {
