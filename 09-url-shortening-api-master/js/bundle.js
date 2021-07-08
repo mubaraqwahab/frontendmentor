@@ -5047,9 +5047,11 @@
   const resultsObserver = new MutationObserver(function (mutations) {
   	for (const mutation of mutations) {
   		if (mutation.type === "childList") {
-  			// Add a copy handler to the copy button of each new result <li>
   			console.log({ mutation });
-  			mutation.addedNodes.forEach((resultLI) => {
+
+  			// For each new copy button,
+  			// start a machine service and attach a click handler
+  			for (const resultLI of mutation.addedNodes) {
   				const copyBtn = resultLI.querySelector("button[data-copy]");
   				const copyService = interpret(copyMachine);
   				copyService.onTransition((state) => {
@@ -5063,17 +5065,17 @@
   				// even for the same original URL.
   				copyServices.set(copyBtn.dataset.copy, copyService);
   				copyBtn.addEventListener("click", handleCopyBtnClick);
-  			});
+  			}
 
   			// Cleanup
-  			mutation.removedNodes.forEach((resultLI) => {
+  			for (const resultLI of mutation.removedNodes) {
   				const copyBtn = resultLI.querySelector("button[data-copy]");
   				const shortURL = copyBtn.dataset.copy;
 
   				copyBtn.removeEventListener("click", handleCopyBtnClick);
   				copyServices.get(shortURL)?.stop();
   				copyServices.delete(shortURL);
-  			});
+  			}
   		}
   	}
 
