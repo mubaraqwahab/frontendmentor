@@ -77,6 +77,10 @@
 		--shorten-failed-label-display: none;
 	}
 
+	form[data-state~="shortener.shortening"] .shorten-btn:hover {
+		@apply bg-cyan;
+	}
+
 	form[data-state~="shortener.failed"] {
 		--shorten-label-display: none;
 		--shortening-label-display: none;
@@ -98,6 +102,7 @@
 
 	.copy-btn {
 		background-color: var(--bg-color);
+		--bg-color: theme("colors.cyan.default");
 	}
 
 	.copy-btn:hover {
@@ -115,19 +120,19 @@
 		--bg-color: theme("colors.violet.very-dark");
 	}
 
-	.copy-failed {
+	.copy-btn[data-state~="failed"] {
 		--copy-label-display: none;
 		--copied-label-display: none;
 		--copy-failed-label-display: inline;
 	}
 
-	.copied .copy-btn {
+	/* .copied .copy-btn {
 		@apply bg-violet-dark;
 	}
 
 	.copied .copy-btn:hover {
 		@apply bg-violet-very-dark;
-	}
+	} */
 
 	.copy-btn__label {
 		display: var(--copy-label-display, inline);
