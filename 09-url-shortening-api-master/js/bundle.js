@@ -4795,7 +4795,7 @@
    *
    * @param {ParentNode} [parentNode=document]
    * @param {string} [selector="button[data-disclosure-btn]"]
-   * @returns An array of the initialized disclosures,
+   * @returns {Element[]} An array of the initialized disclosures,
    * in the order the buttons appear in the DOM.
    */
   function initializeAll(
