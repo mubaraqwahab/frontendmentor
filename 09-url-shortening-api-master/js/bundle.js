@@ -4793,17 +4793,8 @@
 
   // @ts-check
 
-  new Disclosure(document.querySelector("[data-disclosure-btn]")).addListener(
-  	(e) => {
-  		const disclosure = e.target;
-
-  		// aria-hidden is opposite of open
-  		disclosure.controlledElement.setAttribute(
-  			"aria-hidden",
-  			"" + !disclosure.open
-  		);
-  	}
-  );
+  // Activate the nav disclosure
+  new Disclosure(document.querySelector("[data-disclosure-btn]"));
 
   const form = document.querySelector("form");
   const urlInput = form.elements.namedItem("url");
