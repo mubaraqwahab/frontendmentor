@@ -58,56 +58,69 @@
 		max-height: 0px;
 	}
 
-	.form__helper {
+	@screen lg {
+		.url-form {
+			@apply grid gap-x-5;
+			grid-template-columns: 3fr 1fr;
+		}
+	}
+
+	.url-form .form__helper {
 		@apply hidden text-sm italic mt-1;
 	}
 
-	form[data-state~="input.nonempty"] .form__label {
+	/* For some reason, purgecss doesn't like the [data-state] attr on the form. */
+
+	/* purgecss start ignore */
+
+	.url-form[data-state~="input.nonempty"] .form__label {
 		@apply sr-only;
 	}
 
-	form[data-state~="shortener.invalid"] input {
+	.url-form[data-state~="shortener.invalid"] input {
 		@apply text-red;
 	}
 
-	form[data-state~="shortener.invalid"] input {
+	.url-form[data-state~="shortener.invalid"] input {
 		@apply shadow-outline-red;
 	}
 
-	form[data-state~="shortener.invalid"] .form__label {
+	.url-form[data-state~="shortener.invalid"] .form__label {
 		@apply text-red;
 	}
 
-	form[data-state~="shortener.invalid"] .form__helper {
+	.url-form[data-state~="shortener.invalid"] .form__helper {
 		@apply block text-red;
 	}
 
-	form[data-state~="shortener.shortening"] {
+	.url-form[data-state~="shortener.shortening"] {
 		--shorten-label-display: none;
 		--shortening-label-display: inline;
 		--shorten-failed-label-display: none;
 	}
 
-	form[data-state~="shortener.shortening"] .shorten-btn:hover {
+	.url-form[data-state~="shortener.shortening"] .shorten-btn:hover {
 		@apply bg-cyan;
 	}
 
-	form[data-state~="shortener.failed"] {
+	.url-form[data-state~="shortener.failed"] {
 		--shorten-label-display: none;
 		--shortening-label-display: none;
 		--shorten-failed-label-display: inline;
 		@apply text-sm;
 	}
 
-	form .shorten-btn__label {
+	/* purgecss end ignore */
+
+	.url-form .shorten-btn__label {
 		display: var(--shorten-label-display, inline);
 	}
 
-	form .shorten-btn__loading-label {
+	.url-form .shorten-btn__loading-label {
 		display: var(--shortening-label-display, none);
 	}
 
-	form .shorten-btn__failed-label {
+	.url-form .shorten-btn__failed-label {
 		display: var(--shorten-failed-label-display, none);
 	}
 
@@ -137,14 +150,6 @@
 		--copy-failed-label-display: inline;
 	}
 
-	/* .copied .copy-btn {
-		@apply bg-violet-dark;
-	}
-
-	.copied .copy-btn:hover {
-		@apply bg-violet-very-dark;
-	} */
-
 	.copy-btn__label {
 		display: var(--copy-label-display, inline);
 	}
@@ -166,11 +171,6 @@
 				theme("spacing.12")
 				theme("spacing.12");
 			@apply text-left grid grid-cols-3 gap-x-8;
-		}
-
-		.url-form {
-			@apply grid gap-x-5;
-			grid-template-columns: 3fr 1fr;
 		}
 	}
 }
