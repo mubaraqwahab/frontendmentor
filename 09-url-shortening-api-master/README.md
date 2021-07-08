@@ -4,10 +4,12 @@
 
 [View my solution](https://mubaraqwahab.github.io/frontendmentor/09-url-shortening-api-master/).
 
-I decided to try out some technologies for this challenge:
+TODO: describe solution
+
+<!-- I decided to try out some technologies for this challenge:
 * The JavaScript needs in this challenge have so far been the most; I realized I needed a "proper" way to organize my JavaScript code. I used [Stimulus](https://stimulusjs.org/) to solve this issue. It's a small JavaScript framework that works well with existing HTML code.
 * I use JSDoc type annotations often in JavaScript so that my editor ([VS Code](https://code.visualstudio.com/)) might provide me more intelligent code suggestions, etc. I found it somewhat tedious however to do that for this challenge so I chose to use [TypeScript](https://www.typescriptlang.org/) instead. It's my first time using TypeScript for this much code and I don't regret it 🙂. (I should mention that I didn't use TypeScript in strict mode; that was too difficult for me.)
-* Using Stimulus and TypeScript meant that I had to bundle and compile my code. I used [Rollup](https://rollupjs.org/) to manage this "build" process. Rollup is a simple yet configurable JavaScript bundler that supports plugins for doing things like compiling TypeScript and minifying JavaScript.
+* Using Stimulus and TypeScript meant that I had to bundle and compile my code. I used [Rollup](https://rollupjs.org/) to manage this "build" process. Rollup is a simple yet configurable JavaScript bundler that supports plugins for doing things like compiling TypeScript and minifying JavaScript. -->
 
 <!--
 ## How I built the site
@@ -19,11 +21,11 @@ I decided to try out some technologies for this challenge:
 * Use arrow functions to avoid `this` issues
 -->
 
-## Interesting findings
+<!-- ## Interesting findings
 
 Something I learnt while doing this challenge is that changing `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a user _types_ into the input field.)
 
-I found a [workaround for this on StackOverflow](https://stackoverflow.com/a/55033939/12695621) that uses [`Object.defineProperty`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). The workaround basically wraps the original `input.value` but calls the necessary event listener when `input.value` is set.
+I found a [workaround for this on StackOverflow](https://stackoverflow.com/a/55033939/12695621) that uses [`Object.defineProperty`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). The workaround basically wraps the original `input.value` but calls the necessary event listener when `input.value` is set. -->
 
 ---
 
