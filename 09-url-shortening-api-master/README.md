@@ -4,33 +4,26 @@
 
 [View my solution](https://mubaraqwahab.github.io/frontendmentor/09-url-shortening-api-master/).
 
-TODO: describe solution
+I used a lot more JavaScript than in previous challenges. Initially, I started with a simple script as I'd always done, but things got wild very quickly. I realized I need a way to organize my code. I tried [Stimulus](https://stimulusjs.org) and while I enjoyed it, I wasn't very satisfied it. (You can find my solution with Stimulus in the [09-stimulus branch](https://github.com/mubaraqwahab/frontendmentor/tree/09-stimulus/09-url-shortening-api-master).) Later on (months later, in fact 😅), I found [XState](https://xstate.js.org/docs/) and decided to try it out. (XState is a state machine and statechart libray.) I enjoyed it, and I hope to use it in future projects.
 
-<!-- I decided to try out some technologies for this challenge:
-* The JavaScript needs in this challenge have so far been the most; I realized I needed a "proper" way to organize my JavaScript code. I used [Stimulus](https://stimulusjs.org/) to solve this issue. It's a small JavaScript framework that works well with existing HTML code.
-* I use JSDoc type annotations often in JavaScript so that my editor ([VS Code](https://code.visualstudio.com/)) might provide me more intelligent code suggestions, etc. I found it somewhat tedious however to do that for this challenge so I chose to use [TypeScript](https://www.typescriptlang.org/) instead. It's my first time using TypeScript for this much code and I don't regret it 🙂. (I should mention that I didn't use TypeScript in strict mode; that was too difficult for me.)
-* Using Stimulus and TypeScript meant that I had to bundle and compile my code. I used [Rollup](https://rollupjs.org/) to manage this "build" process. Rollup is a simple yet configurable JavaScript bundler that supports plugins for doing things like compiling TypeScript and minifying JavaScript. -->
+Other new things I used in this challenge are:
+* [Rollup](https://rollupjs.org), a simple JavaScript module bundler. I had to bundle my code since I was importing an npm library (XState) in my code. Furthermore, I used a Rollup plugin for [Terser](https://terser.org/) to minify the code (just for fun!)
+* The [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API) for copying links.
+* A [`<template>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) to contain the 'template' of the shortened result. (Why? I like to see all possible markup in HTML.) I filled the placeholders in the template with JavaScript for every new shortened result before adding the result to the DOM.
+* An ARIA live region (with the `aria-live` attribute) to announce new shortened results to assistive technology users.
 
-<!--
-## How I built the site
+## An interesting finding 💡
 
-* Aria live regions. NVDA issue
-* Clipboard API
-* Classnames quite messy
-* Use `<template>`, metaprogramming in JS/TS
-* Use arrow functions to avoid `this` issues
--->
+One interesting thing I learnt while doing this challenge is that changing the `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a _user_ actually fills the input field.)
 
-<!-- ## Interesting findings
+I found a [workaround for this on StackOverflow](https://stackoverflow.com/a/55033939/12695621) that uses [`Object.defineProperty`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). The workaround basically wraps the original `input.value` but calls the necessary event listener when `input.value` is set.
 
-Something I learnt while doing this challenge is that changing `value` of an `<input>` element programmatically won't trigger event listeners. (In other words, listeners for events like the `input` event won't fire unless a user _types_ into the input field.)
-
-I found a [workaround for this on StackOverflow](https://stackoverflow.com/a/55033939/12695621) that uses [`Object.defineProperty`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). The workaround basically wraps the original `input.value` but calls the necessary event listener when `input.value` is set. -->
+I did not use the workaround for my XState solution though as I did not need it :)
 
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 
