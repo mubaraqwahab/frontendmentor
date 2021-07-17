@@ -25,6 +25,9 @@ module.exports = {
 			transitionDuration: {
 				"400": "400ms",
 			},
+			maxHeight: {
+				auto: "auto",
+			},
 		},
 		container: {
 			center: true,
