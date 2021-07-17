@@ -6,6 +6,12 @@
 	:root {
 		font-size: 14px;
 	}
+
+	:active {
+		/* Removes the overlaying (blue) highlight box on mobile
+		See https://stackoverflow.com/a/45050338/12695621 */
+		-webkit-tap-highlight-color: transparent;
+	}
 }
 
 @layer components {

@@ -550,6 +550,12 @@ video {
   font-size: 14px;
 }
 
+:active {
+  /* Removes the overlaying (blue) highlight box on mobile
+		See https://stackoverflow.com/a/45050338/12695621 */
+  -webkit-tap-highlight-color: transparent;
+}
+
 .container {
   width: 100%;
 }
@@ -6862,6 +6868,10 @@ video {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+}
+
+.min-w-1\/2 {
+  min-width: 50%;
 }
 
 .object-contain {
@@ -24136,6 +24146,10 @@ video {
     min-width: max-content;
   }
 
+  .sm\:min-w-1\/2 {
+    min-width: 50%;
+  }
+
   .sm\:object-contain {
     -o-object-fit: contain;
        object-fit: contain;
@@ -41328,6 +41342,10 @@ video {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
+  }
+
+  .md\:min-w-1\/2 {
+    min-width: 50%;
   }
 
   .md\:object-contain {
@@ -58524,6 +58542,10 @@ video {
     min-width: max-content;
   }
 
+  .lg\:min-w-1\/2 {
+    min-width: 50%;
+  }
+
   .lg\:object-contain {
     -o-object-fit: contain;
        object-fit: contain;
@@ -75718,6 +75740,10 @@ video {
     min-width: max-content;
   }
 
+  .xl\:min-w-1\/2 {
+    min-width: 50%;
+  }
+
   .xl\:object-contain {
     -o-object-fit: contain;
        object-fit: contain;
@@ -92910,6 +92936,10 @@ video {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
+  }
+
+  .\32xl\:min-w-1\/2 {
+    min-width: 50%;
   }
 
   .\32xl\:object-contain {

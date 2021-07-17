@@ -18,6 +18,9 @@ module.exports = {
 			boxShadow: {
 				b: "0 8px 4px -4px hsla(234, 17%, 12%, 1)",
 			},
+			minWidth: {
+				"1/2": "50%",
+			},
 		},
 		colors: {
 			transparent: colors.transparent,
