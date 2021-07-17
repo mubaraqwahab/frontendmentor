@@ -2,6 +2,14 @@
 
 ![Design preview for the Launch countdown timer coding challenge](./design/desktop-preview.jpg)
 
+[View my solution](https://mubaraqwahab.github.io/frontendmentor/10-launch-countdown-timer-main)
+
+This challenge was fairly straightforward to do&mdash;a lot more than I had thought!
+
+For the countdown, I started by manipulating [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) objects. I learnt a few things about working with dates in JavaScript in the process. In particular, I found that working with Date objects is (very) tricky. My solution got complicated very quickly as a result.
+
+My final solution does not use Date objects and is a lot simpler.
+
 ---
 
 <details>
