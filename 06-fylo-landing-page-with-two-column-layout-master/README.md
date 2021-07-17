@@ -9,7 +9,7 @@ I learnt a little about [SVGs](https://css-tricks.com/using-svg/) ([SVG masks](h
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 

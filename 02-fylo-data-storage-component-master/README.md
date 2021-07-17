@@ -9,7 +9,7 @@ My main takeaway here is using CSS animations!
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 

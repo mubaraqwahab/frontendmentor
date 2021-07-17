@@ -9,7 +9,7 @@ I wrote this in pure HTML, CSS and JavaScript. In particular, I tried the [Block
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 

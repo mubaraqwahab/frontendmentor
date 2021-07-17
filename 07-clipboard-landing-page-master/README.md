@@ -11,7 +11,7 @@ Also, I learnt that the [CSS `gap` property](https://developer.mozilla.org/en-US
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 

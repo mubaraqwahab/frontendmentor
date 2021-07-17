@@ -30,7 +30,7 @@ if (!firstArg || firstArg === "-h" || firstArg === "--help") {
     if (readmeLines[0].startsWith("# Frontend Mentor - ")) {
       const detailsOpenTag = "<details>";
       const summary =
-        "<summary>See the default README for this challenge.</summary>";
+        "<summary>See the original README for this challenge.</summary>";
       const detailsCloseTag = "</details>";
 
       // Insert an <hr>, an opening <details> tag and

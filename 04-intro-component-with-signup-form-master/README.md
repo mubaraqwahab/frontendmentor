@@ -11,7 +11,7 @@ One particularly interesting thing I learnt was [not to use the `placeholder` at
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 

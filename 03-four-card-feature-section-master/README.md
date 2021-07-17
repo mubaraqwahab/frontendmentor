@@ -9,7 +9,7 @@ I learnt how to use [CSS Grid](https://css-tricks.com/snippets/css/complete-guid
 ---
 
 <details>
-<summary>See the default README for this challenge.</summary>
+<summary>See the original README for this challenge.</summary>
 
 ## Welcome! 👋
 
