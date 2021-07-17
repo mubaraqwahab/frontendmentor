@@ -11,9 +11,17 @@
 		<link rel="stylesheet" href="output.css" />
 	</head>
 	<body class="flex flex-col justify-between uppercase px-8 py-20 text-center font-bold bg-blue-very-dark bg-image min-h-screen md:pt-12 md:pb-16">
-		<div class="py-32 md:py-12 lg:py-24">
+		<main class="py-32 md:py-12 lg:py-24">
 			<h1 class="text-white text-xl tracking-0.3 mb-16 mb:mb-20 lg:mb-24">We're launching soon</h1>
-			<time data-timer role="timer" class="grid grid-cols-4 gap-x-4 mx-auto md:w-2/3 md:gap-x-6 lg:w-3/5 lg:gap-x-8 xl:w-1/2 xl:gap-x-10">
+			<!-- See https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/ARIA_timer_role
+			The countdown changes so fast that NVDA can't catch up. -->
+			<div
+				data-timer
+				role="timer"
+				aria-live="polite"
+				aria-atomic="true"
+				class="grid grid-cols-4 gap-x-4 mx-auto md:w-2/3 md:gap-x-6 lg:w-3/5 lg:gap-x-8 xl:w-1/2 xl:gap-x-10"
+			>
 				<span>
 					<div data-days class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b md:py-8 md:mb-4 lg:py-10 md:text-6xl">
 						08
@@ -44,8 +52,8 @@
 					</div>
 					<span class="text-blue-gray text-2xs tracking-0.3">Seconds</span>
 				</span>
-			</time>
-		</div>
+			</div>
+		</main>
 		<address class="not-italic">
 			<ul class="mx-auto text-blue-gray">
 				<li class="inline-block mr-8">
