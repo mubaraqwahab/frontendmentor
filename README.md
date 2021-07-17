@@ -9,4 +9,5 @@ I'm using this to practice things frontend-related:
 * Semantic markup + accessibility
 * Responsive, mobile-first design
 * Cross-browser compatibility
+* State machines and statecharts
 * Web technologies, frameworks etc.
