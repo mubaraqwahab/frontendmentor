@@ -10,29 +10,31 @@
 		<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="output.css" />
 	</head>
-	<body class="text-center uppercase bg-stars">
-		<h1 class="">We're launching soon</h1>
-		<!-- Ideally, perhaps a <time datetime="" role="timer"> element instead -->
-		<div role="timer" class="grid grid-cols-4">
-			<span>
-				<span class="block">08</span>
-				<span>Days</span>
-			</span>
-			<span>
-				<span class="block">23</span>
-				<span>Hours</span>
-			</span>
-			<span>
-				<span class="block">55</span>
-				<span>Minutes</span>
-			</span>
-			<span>
-				<span class="block">41</span>
-				<span>Seconds</span>
-			</span>
+	<body class="flex flex-col justify-between uppercase px-8 py-20 text-center font-bold bg-blue-very-dark bg-image min-h-screen">
+		<div class="py-32">
+			<h1 class="text-white text-2xl tracking-0.3 mb-20">We're launching soon</h1>
+			<time data-timer role="timer" class="grid grid-cols-4 gap-x-4">
+				<span>
+					<div data-days class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b">08</div>
+					<span class="text-blue-gray text-2xs tracking-0.3">Days</span>
+				</span>
+				<span>
+					<div data-hours class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b">23</div>
+					<span class="text-blue-gray text-2xs tracking-0.3">Hours</span>
+				</span>
+				<span>
+					<div data-minutes class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b">55</div>
+					<span class="text-blue-gray text-2xs tracking-0.3">Minutes</span>
+				</span>
+				<span>
+					<!-- <div data-seconds class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b">41</div> -->
+					<div data-seconds class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b">4</div>
+					<span class="text-blue-gray text-2xs tracking-0.3">Seconds</span>
+				</span>
+			</time>
 		</div>
-		<address class="not-italic">
-			<ul>
+		<address class="not-italic justify-self-end">
+			<ul class="flex items-center justify-between w-2/5 mx-auto">
 				<li>
 					<a href="" aria-label="Facebook">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -65,5 +67,89 @@
 				</li>
 			</ul>
 		</address>
+
+		<script>
+			// @ts-check
+
+			const timerEl = /** @type {HTMLTimeElement} */ (document.querySelector("[data-timer]"));
+			const daysEl = document.querySelector("[data-days]");
+			const hoursEl = document.querySelector("[data-hours]");
+			const minutesEl = document.querySelector("[data-minutes]");
+			const secondsEl = document.querySelector("[data-seconds]");
+
+			// const days = +daysEl.textContent;
+			// const hours = +hoursEl.textContent;
+			// const minutes = +minutesEl.textContent;
+			// const seconds = +secondsEl.textContent;
+
+			function pad(num) {
+				return ("" + num).padStart(2, "0");
+			}
+
+			const timer = {
+				get days() {
+					return +daysEl.textContent;
+				},
+				set days(value) {
+					daysEl.textContent = pad(value);
+				},
+				get hours() {
+					return +hoursEl.textContent;
+				},
+				set hours(value) {
+					hoursEl.textContent = pad(value);
+				},
+				get minutes() {
+					return +minutesEl.textContent;
+				},
+				set minutes(value) {
+					minutesEl.textContent = pad(value);
+				},
+				get seconds() {
+					return +secondsEl.textContent;
+				},
+				set seconds(value) {
+					secondsEl.textContent = pad(value);
+				},
+			};
+
+			// TODO:
+			// get date
+			// tick until date is exhausted
+			// on each tick, update UI
+
+			// Build the target date from the countdown time
+			// In a real countdown to a product launch, the target date should be set in the DOM
+			// (e.g. the datetime attribute) and we'd just get it from there.
+			// This is a demo however, so the target date will always be now + countdown time
+			const targetDate = new Date();
+			targetDate.setDate(targetDate.getDate() + timer.days);
+			targetDate.setHours(targetDate.getHours() + timer.hours);
+			targetDate.setMinutes(targetDate.getMinutes() + timer.minutes);
+			targetDate.setSeconds(targetDate.getSeconds() + timer.seconds);
+
+			timerEl.dateTime = targetDate.toISOString();
+
+			const MS_PER_SECOND = 1000;
+			const MS_PER_MINUTE = MS_PER_SECOND * 60;
+			const MS_PER_HOUR = MS_PER_MINUTE * 60;
+			const MS_PER_DAY = MS_PER_HOUR * 24;
+
+			setInterval(() => {
+				let diff = targetDate - new Date();
+				timer.days = Math.floor(diff / MS_PER_DAY);
+
+				diff = diff - timer.days * MS_PER_DAY;
+				timer.hours = Math.floor(diff / MS_PER_HOUR);
+
+				diff = diff - timer.hours * MS_PER_HOUR;
+				timer.minutes = Math.floor(diff / MS_PER_MINUTE);
+
+				diff = diff - timer.minutes * MS_PER_MINUTE;
+				timer.seconds = Math.floor(diff / MS_PER_SECOND);
+
+				console.log(diff);
+			}, 1000);
+		</script>
 	</body>
 </html>

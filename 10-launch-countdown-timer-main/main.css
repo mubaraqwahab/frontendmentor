@@ -9,6 +9,17 @@
 }
 
 @layer components {
+	.bg-image {
+		background-image: theme("backgroundImage.stars"),
+			theme("backgroundImage.hills");
+		@apply bg-no-repeat;
+		background-position: left top, 84% 100%;
+		background-size: auto 30%;
+	}
+
+	.grid-rows-2-1 {
+		grid-template-rows: 2fr 1fr;
+	}
 }
 
 @layer utilities {

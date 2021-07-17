@@ -1,10 +1,24 @@
 const { colors, fontFamily } = require("tailwindcss/defaultTheme");
 
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
 	purge: ["./*.html"],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		extend: {},
+		extend: {
+			letterSpacing: {
+				"0.3": "0.3em",
+			},
+			flex: {
+				full: "1 0 100%",
+			},
+			fontSize: {
+				"2xs": "0.7rem",
+			},
+			boxShadow: {
+				b: "0 8px 4px -4px hsla(234, 17%, 12%, 1)",
+			},
+		},
 		colors: {
 			transparent: colors.transparent,
 			white: colors.white,
@@ -24,6 +38,7 @@ module.exports = {
 		},
 		backgroundImage: {
 			stars: "url(images/bg-stars.svg)",
+			hills: "url(images/pattern-hills.svg)",
 		},
 	},
 	variants: {
