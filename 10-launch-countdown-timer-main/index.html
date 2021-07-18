@@ -22,36 +22,22 @@
 				aria-atomic="true"
 				class="grid grid-cols-4 gap-x-4 mx-auto md:w-2/3 md:gap-x-6 lg:w-3/5 lg:gap-x-8 xl:w-1/2 xl:gap-x-10"
 			>
-				<span>
-					<div data-days class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b md:py-8 md:mb-4 lg:py-10 md:text-6xl">
-						08
-					</div>
+				<div>
+					<span data-days data-value="08" class="timer-card">08</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Days</span>
-				</span>
-				<span>
-					<div data-hours class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b md:py-8 md:mb-4 lg:py-10 md:text-6xl">
-						23
-					</div>
+				</div>
+				<div>
+					<span data-hours data-value="23" class="timer-card">23</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Hours</span>
-				</span>
-				<span>
-					<div
-						data-minutes
-						class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b md:py-8 md:mb-4 lg:py-10 md:text-6xl"
-					>
-						55
-					</div>
+				</div>
+				<div>
+					<span data-minutes data-value="55" class="timer-card">55</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Minutes</span>
-				</span>
-				<span>
-					<div
-						data-seconds
-						class="rounded-md py-5 mb-3 bg-blue-dark-desaturated text-red-soft text-4xl shadow-b md:py-8 md:mb-4 lg:py-10 md:text-6xl"
-					>
-						41
-					</div>
+				</div>
+				<div>
+					<span data-seconds data-value="41" class="timer-card">41</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Seconds</span>
-				</span>
+				</div>
 			</div>
 		</main>
 		<address class="not-italic">
@@ -103,27 +89,31 @@
 
 			const timer = {
 				get days() {
-					return +daysEl.textContent;
+					return +daysEl.dataset.value;
 				},
 				set days(value) {
+					daysEl.dataset.value = pad(value);
 					daysEl.textContent = pad(value);
 				},
 				get hours() {
-					return +hoursEl.textContent;
+					return +hoursEl.dataset.value;
 				},
 				set hours(value) {
+					hoursEl.dataset.value = pad(value);
 					hoursEl.textContent = pad(value);
 				},
 				get minutes() {
-					return +minutesEl.textContent;
+					return +minutesEl.dataset.value;
 				},
 				set minutes(value) {
+					minutesEl.dataset.value = pad(value);
 					minutesEl.textContent = pad(value);
 				},
 				get seconds() {
-					return +secondsEl.textContent;
+					return +secondsEl.dataset.value;
 				},
 				set seconds(value) {
+					secondsEl.dataset.value = pad(value);
 					secondsEl.textContent = pad(value);
 				},
 			};

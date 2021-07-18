@@ -26,6 +26,29 @@
 	.grid-rows-2-1 {
 		grid-template-rows: 2fr 1fr;
 	}
+
+	.timer-card {
+		@apply block rounded-md py-5 mb-3 text-4xl shadow-b relative;
+		@apply text-red-soft;
+		@apply md:py-8 md:mb-4 md:text-6xl lg:py-10;
+		perspective: 1000px;
+	}
+
+	/* .timer-card::before {
+		content: attr(data-value);
+		transform: rotateX(-0deg);
+		transform-origin: bottom;
+		@apply block absolute top-0 left-0 h-1/2 w-full pt-5 text-4xl rounded-t-md rounded-b-lg border-t-2 overflow-hidden;
+		@apply bg-white text-red-soft border-blue-very-dark border-opacity-10;
+		@apply md:pt-8 md:text-6xl lg:pt-10;
+	} */
+
+	.timer-card::after {
+		content: attr(data-value);
+		@apply block absolute bottom-0 left-0 h-1/2 w-full pb-5 text-4xl rounded-b-md rounded-t-lg border-t-2 overflow-hidden;
+		@apply bg-blue-dark-desaturated text-red-soft border-blue-very-dark border-opacity-10;
+		@apply md:pb-8 md:text-6xl lg:pb-10;
+	}
 }
 
 @layer utilities {
