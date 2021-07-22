@@ -23,19 +23,19 @@
 				class="grid grid-cols-4 gap-x-4 mx-auto md:w-2/3 md:gap-x-6 lg:w-3/5 lg:gap-x-8 xl:w-1/2 xl:gap-x-10"
 			>
 				<div>
-					<span data-days data-value="08" class="timer-card">08</span>
+					<span data-days class="timer-card">08</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Days</span>
 				</div>
 				<div>
-					<span data-hours data-value="23" class="timer-card">23</span>
+					<span data-hours class="timer-card">23</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Hours</span>
 				</div>
 				<div>
-					<span data-minutes data-value="55" class="timer-card">55</span>
+					<span data-minutes class="timer-card">55</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Minutes</span>
 				</div>
 				<div>
-					<span data-seconds data-value="41" class="timer-card">41</span>
+					<span data-seconds class="timer-card">41</span>
 					<span class="text-blue-gray text-2xs tracking-0.3">Seconds</span>
 				</div>
 			</div>
@@ -89,31 +89,35 @@
 
 			const timer = {
 				get days() {
-					return +daysEl.dataset.value;
+					// return +daysEl.dataset.value;
+					return +daysEl.textContent;
 				},
 				set days(value) {
-					daysEl.dataset.value = pad(value);
+					// daysEl.dataset.value = pad(value);
 					daysEl.textContent = pad(value);
 				},
 				get hours() {
-					return +hoursEl.dataset.value;
+					// return +hoursEl.dataset.value;
+					return +hoursEl.textContent;
 				},
 				set hours(value) {
-					hoursEl.dataset.value = pad(value);
+					// hoursEl.dataset.value = pad(value);
 					hoursEl.textContent = pad(value);
 				},
 				get minutes() {
-					return +minutesEl.dataset.value;
+					// return +minutesEl.dataset.value;
+					return +minutesEl.textContent;
 				},
 				set minutes(value) {
-					minutesEl.dataset.value = pad(value);
+					// minutesEl.dataset.value = pad(value);
 					minutesEl.textContent = pad(value);
 				},
 				get seconds() {
-					return +secondsEl.dataset.value;
+					// return +secondsEl.dataset.value;
+					return +secondsEl.textContent;
 				},
 				set seconds(value) {
-					secondsEl.dataset.value = pad(value);
+					// secondsEl.dataset.value = pad(value);
 					secondsEl.textContent = pad(value);
 				},
 			};
