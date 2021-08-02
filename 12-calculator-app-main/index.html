@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Frontend Mentor | Calculator app</title>
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="normalize.css" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js" defer></script>
+	</head>
+	<body class="p-4">
+		<header class="flex items-center justify-between py-2 mb-4">
+			<div class="">calc</div>
+			<div>
+				<label for="themeSwitch"></label>
+				<input type="checkbox" id="themeSwitch" />
+			</div>
+		</header>
+		<form>
+			<output class="block p-4 mb-4 rounded-lg border" name="view">0</output>
+			<div class="p-4 rounded-lg border" data-calc-keys>
+				<input class="Key" type="button" value="7" />
+				<input class="Key" type="button" value="8" />
+				<input class="Key" type="button" value="9" />
+				<input class="Key Key--primary Key--text" type="button" value="Del" />
+				<input class="Key" type="button" value="4" />
+				<input class="Key" type="button" value="5" />
+				<input class="Key" type="button" value="6" />
+				<input class="Key" type="button" value="+" />
+				<input class="Key" type="button" value="1" />
+				<input class="Key" type="button" value="2" />
+				<input class="Key" type="button" value="3" />
+				<input class="Key" type="button" value="-" />
+				<input class="Key" type="button" value="." />
+				<input class="Key" type="button" value="0" />
+				<input class="Key" type="button" value="/" />
+				<input class="Key" type="button" value="×" />
+				<input class="Key Key--primary Key--text Key--lg" type="reset" value="Reset" />
+				<input class="Key Key--secondary Key--lg" type="submit" value="=" />
+			</div>
+		</form>
+	</body>
+</html>
