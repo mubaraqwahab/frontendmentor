@@ -4,8 +4,8 @@
 	"description": "![Design preview for the Calculator app coding challenge](./design/desktop-preview.jpg)",
 	"main": "script.js",
 	"scripts": {
-		"start": "tailwindcss --watch -i main.css -o output.css",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "tailwindcss -i main.css -o output.css --watch",
+		"build": "NODE_ENV=production tailwindcss -i main.css -o output.css --minify"
 	},
 	"keywords": [],
 	"author": "",
