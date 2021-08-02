@@ -11,8 +11,7 @@
 			href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="normalize.css" />
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="output.css" />
 		<script src="script.js" defer></script>
 	</head>
 	<body class="p-4">
@@ -24,8 +23,8 @@
 			</div>
 		</header>
 		<form>
-			<output class="block p-4 mb-4 rounded-lg border" name="view">0</output>
-			<div class="p-4 rounded-lg border" data-calc-keys>
+			<output class="block p-4 mb-4 rounded-lg border text-right" name="view">0</output>
+			<div class="p-4 rounded-lg border grid grid-cols-4 gap-2" data-calc-keys>
 				<input class="Key" type="button" value="7" />
 				<input class="Key" type="button" value="8" />
 				<input class="Key" type="button" value="9" />
@@ -42,8 +41,8 @@
 				<input class="Key" type="button" value="0" />
 				<input class="Key" type="button" value="/" />
 				<input class="Key" type="button" value="×" />
-				<input class="Key Key--primary Key--text Key--lg" type="reset" value="Reset" />
-				<input class="Key Key--secondary Key--lg" type="submit" value="=" />
+				<input class="Key Key--primary Key--text col-span-2" type="reset" value="Reset" />
+				<input class="Key Key--secondary col-span-2" type="submit" value="=" />
 			</div>
 		</form>
 	</body>

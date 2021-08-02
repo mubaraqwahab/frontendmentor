@@ -1,0 +1,16 @@
+{
+	"name": "12-calculator-app-main",
+	"version": "1.0.0",
+	"description": "![Design preview for the Calculator app coding challenge](./design/desktop-preview.jpg)",
+	"main": "script.js",
+	"scripts": {
+		"start": "tailwindcss --watch -i main.css -o output.css",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"tailwindcss": "^2.2.7"
+	}
+}
