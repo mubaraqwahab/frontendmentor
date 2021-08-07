@@ -17,12 +17,19 @@
 	<body class="p-4">
 		<header class="flex items-center justify-between py-2 mb-4">
 			<div class="">calc</div>
-			<div>
-				<label for="themeSwitch"></label>
-				<input type="checkbox" id="themeSwitch" />
+			<div class="flex items-center uppercase">
+				<p>Theme</p>
+				<div>
+					<label for="theme1">1</label>
+					<label for="theme2">2</label>
+					<label for="theme3">3</label>
+					<input type="radio" name="themeSwitch" value="1" id="theme1" />
+					<input type="radio" name="themeSwitch" value="2" id="theme2" />
+					<input type="radio" name="themeSwitch" value="3" id="theme3" />
+				</div>
 			</div>
 		</header>
-		<form class="theme-1:text-soft-cyan theme-1:bg-very-dark-desat-blue-1">
+		<form class="">
 			<output class="block p-4 mb-4 rounded-lg border text-right" name="view">0</output>
 			<div class="p-4 rounded-lg border grid grid-cols-4 gap-2" data-calc-keys>
 				<input class="Key" type="button" value="7" />

@@ -624,8 +624,6 @@ video {
 }
 
 .Key--text {
-  --tw-bg-opacity: 1;
-  background-color: hsla(222, 26%, 31%, var(--tw-bg-opacity));
 }
 
 .col-span-2 {
@@ -683,6 +681,10 @@ video {
 
 .text-right {
   text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .theme-1\:bg-very-dark-desat-blue-1 {
