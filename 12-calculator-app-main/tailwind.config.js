@@ -66,21 +66,13 @@ module.exports = {
 	plugins: [
 		// Auto-prefix utils with 'theme-1', 'theme-2', and 'theme-3'.
 		plugin(function ({ addVariant, e }) {
-			addVariant("theme-1", ({ modifySelectors, separator }) => {
-				modifySelectors(({ className }) => {
-					return `.${e(`theme-1${separator}${className}`)}`
-				})
-			})
-
-			addVariant("theme-2", ({ modifySelectors, separator }) => {
-				modifySelectors(({ className }) => {
-					return `.${e(`theme-1${separator}${className}`)}`
-				})
-			})
-
-			addVariant("theme-3", ({ modifySelectors, separator }) => {
-				modifySelectors(({ className }) => {
-					return `.${e(`theme-1${separator}${className}`)}`
+			const themes = ["1", "2", "3"]
+			themes.forEach((themeNo) => {
+				const theme = `theme-${themeNo}`
+				addVariant(theme, ({ modifySelectors, separator }) => {
+					modifySelectors(({ className }) => {
+						return `[data-theme="${themeNo}"] .${e(`${theme}${separator}${className}`)}`
+					})
 				})
 			})
 		}),

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="1">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,42 +14,58 @@
 		<link rel="stylesheet" href="output.css" />
 		<script type="module" src="index.js"></script>
 	</head>
-	<body class="p-4">
-		<header class="flex items-center justify-between py-2 mb-4">
-			<div class="">calc</div>
-			<div class="flex items-center uppercase">
-				<p>Theme</p>
+	<body class="p-6 font-body font-bold theme-1:bg-very-dark-desat-blue-1">
+		<header class="flex items-center justify-between py-2 mb-6 text-white">
+			<div class="text-3xl">calc</div>
+			<div class="flex items-end uppercase">
+				<p class="mr-4 mb-1">Theme</p>
 				<div>
-					<label for="theme1">1</label>
-					<label for="theme2">2</label>
-					<label for="theme3">3</label>
-					<input type="radio" name="themeSwitch" value="1" id="theme1" />
-					<input type="radio" name="themeSwitch" value="2" id="theme2" />
-					<input type="radio" name="themeSwitch" value="3" id="theme3" />
+					<div>
+						<label for="theme1">1</label>
+						<label for="theme2">2</label>
+						<label for="theme3">3</label>
+					</div>
+					<div>
+						<input type="radio" name="themeSwitch" value="1" id="theme1" />
+						<input type="radio" name="themeSwitch" value="2" id="theme2" />
+						<input type="radio" name="themeSwitch" value="3" id="theme3" />
+					</div>
 				</div>
 			</div>
 		</header>
-		<form class="">
-			<output class="block p-4 mb-4 rounded-lg border text-right" name="view">0</output>
-			<div class="p-4 rounded-lg border grid grid-cols-4 gap-2" data-calc-keys>
-				<input class="Key" type="button" value="7" />
-				<input class="Key" type="button" value="8" />
-				<input class="Key" type="button" value="9" />
-				<input class="Key Key--primary Key--text" type="button" value="Del" />
-				<input class="Key" type="button" value="4" />
-				<input class="Key" type="button" value="5" />
-				<input class="Key" type="button" value="6" />
-				<input class="Key" type="button" value="+" />
-				<input class="Key" type="button" value="1" />
-				<input class="Key" type="button" value="2" />
-				<input class="Key" type="button" value="3" />
-				<input class="Key" type="button" value="-" />
-				<input class="Key" type="button" value="." />
-				<input class="Key" type="button" value="0" />
-				<input class="Key" type="button" value="/" />
-				<input class="Key" type="button" value="×" />
-				<input class="Key Key--primary Key--text col-span-2" type="reset" value="Reset" />
-				<input class="Key Key--secondary col-span-2" type="submit" value="=" />
+		<form class="text-3xl">
+			<output
+				class="block p-6 mb-6 rounded-xl text-right text-white theme-1:bg-very-dark-desat-blue-3"
+				name="view"
+			>
+				0
+			</output>
+			<div
+				class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2"
+				data-calc-keys
+			>
+				<button class="Key" type="button">7</button>
+				<button class="Key" type="button" data-accesskey="8">8</button>
+				<button class="Key" type="button" data-accesskey="9">9</button>
+				<button class="Key Key--primary Key--text" type="button" data-accesskey="Backspace">
+					Del
+				</button>
+				<button class="Key" type="button" data-accesskey="4">4</button>
+				<button class="Key" type="button" data-accesskey="5">5</button>
+				<button class="Key" type="button" data-accesskey="6">6</button>
+				<button class="Key" type="button" data-accesskey="+">+</button>
+				<button class="Key" type="button" data-accesskey="1">1</button>
+				<button class="Key" type="button" data-accesskey="2">2</button>
+				<button class="Key" type="button" data-accesskey="3">3</button>
+				<button class="Key" type="button" data-accesskey="-">-</button>
+				<button class="Key" type="button" data-accesskey=".">.</button>
+				<button class="Key" type="button" data-accesskey="0">0</button>
+				<button class="Key" type="button" data-accesskey="/">/</button>
+				<button class="Key" type="button" data-accesskey="*">×</button>
+				<button class="Key Key--primary Key--text col-span-2" type="reset">Reset</button>
+				<button class="Key Key--secondary col-span-2" type="submit" data-accesskey="=">
+					=
+				</button>
 			</div>
 		</form>
 	</body>

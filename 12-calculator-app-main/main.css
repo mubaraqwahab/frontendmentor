@@ -29,16 +29,34 @@
 
 @layer components {
 	.Key {
-		@apply inline-block p-2 rounded uppercase border border-black;
+		@apply inline-block p-2 pt-4 rounded-md uppercase border-b-[5px];
+		@apply theme-1:text-very-dark-grayish-blue theme-1:bg-light-grayish-orange theme-1:border-grayish-orange;
+	}
+
+	.Key:hover,
+	.Key:active {
+		@apply theme-1:bg-grayish-orange;
+	}
+
+	.Key:focus {
+		@apply outline-none ring ring-light-grayish-orange;
 	}
 
 	.Key--primary {
+		@apply theme-1:text-white theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
+	}
+
+	.Key--primary:hover,
+	.Key--primary:active {
+		@apply theme-1:bg-desat-dark-blue-2;
 	}
 
 	.Key--secondary {
+		@apply theme-1:text-white theme-1:bg-red theme-1:border-dark-red;
 	}
 
 	.Key--text {
+		@apply text-base;
 	}
 }
 
