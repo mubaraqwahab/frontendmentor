@@ -39,5 +39,9 @@
 	}
 
 	.Key--text {
+		@apply theme-1:bg-very-dark-desat-blue-1;
 	}
+}
+
+@layer utilities {
 }
