@@ -15,62 +15,64 @@
 		<script type="module" src="index.js"></script>
 	</head>
 	<body
-		class="p-6 font-body font-bold theme-1:bg-very-dark-desat-blue-1 theme-2:bg-light-gray theme-3:bg-very-dark-violet-1"
+		class="font-body font-bold min-h-screen theme-1:bg-very-dark-desat-blue-1 theme-2:bg-light-gray theme-3:bg-very-dark-violet-1 md:flex md:items-center md:justify-center"
 	>
-		<header
-			class="flex items-center justify-between py-2 mb-6 theme-1:text-white theme-2:text-very-dark-grayish-blue theme-3:text-light-yellow"
-		>
-			<div class="text-3xl">calc</div>
-			<div class="flex items-end uppercase">
-				<p class="mr-4 mb-1">Theme</p>
-				<div>
+		<div class="p-6 md:w-[500px] md:mx-auto">
+			<header
+				class="flex items-center justify-between py-2 mb-4 theme-1:text-white theme-2:text-very-dark-grayish-blue theme-3:text-light-yellow"
+			>
+				<div class="text-2xl">calc</div>
+				<div class="flex items-end uppercase text-xs">
+					<p class="mr-4 mb-1">Theme</p>
 					<div>
-						<label for="theme1">1</label>
-						<label for="theme2">2</label>
-						<label for="theme3">3</label>
-					</div>
-					<div>
-						<input type="radio" name="themeSwitch" value="1" id="theme1" checked />
-						<input type="radio" name="themeSwitch" value="2" id="theme2" />
-						<input type="radio" name="themeSwitch" value="3" id="theme3" />
+						<div class="flex justify-around">
+							<label class="p-1" for="theme1">1</label>
+							<label class="p-1" for="theme2">2</label>
+							<label class="p-1" for="theme3">3</label>
+						</div>
+						<div class="ThreeSwitch">
+							<input type="radio" name="themeSwitch" value="1" id="theme1" checked />
+							<input type="radio" name="themeSwitch" value="2" id="theme2" />
+							<input type="radio" name="themeSwitch" value="3" id="theme3" />
+						</div>
 					</div>
 				</div>
-			</div>
-		</header>
-		<form class="text-3xl">
-			<output
-				class="block p-6 mb-6 rounded-xl text-right overflow-x-auto theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray theme-3:text-light-yellow theme-3:bg-very-dark-violet-2"
-				name="view"
-			>
-				0
-			</output>
-			<div
-				class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"
-				data-calc-keys
-			>
-				<button class="Key" type="button">7</button>
-				<button class="Key" type="button" data-accesskey="8">8</button>
-				<button class="Key" type="button" data-accesskey="9">9</button>
-				<button class="Key Key--primary Key--text" type="button" data-accesskey="Backspace">
-					Del
-				</button>
-				<button class="Key" type="button" data-accesskey="4">4</button>
-				<button class="Key" type="button" data-accesskey="5">5</button>
-				<button class="Key" type="button" data-accesskey="6">6</button>
-				<button class="Key" type="button" data-accesskey="+">+</button>
-				<button class="Key" type="button" data-accesskey="1">1</button>
-				<button class="Key" type="button" data-accesskey="2">2</button>
-				<button class="Key" type="button" data-accesskey="3">3</button>
-				<button class="Key" type="button" data-accesskey="-">-</button>
-				<button class="Key" type="button" data-accesskey=".">.</button>
-				<button class="Key" type="button" data-accesskey="0">0</button>
-				<button class="Key" type="button" data-accesskey="/">/</button>
-				<button class="Key" type="button" data-accesskey="*">×</button>
-				<button class="Key Key--primary Key--text col-span-2" type="reset">Reset</button>
-				<button class="Key Key--accent col-span-2" type="submit" data-accesskey="=">
-					=
-				</button>
-			</div>
-		</form>
+			</header>
+			<form class="text-2xl">
+				<output
+					class="block p-6 mb-6 rounded-xl text-right overflow-x-auto theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray theme-3:text-light-yellow theme-3:bg-very-dark-violet-2"
+					name="view"
+				>
+					0
+				</output>
+				<div
+					class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"
+					data-calc-keys
+				>
+					<button class="Key" type="button">7</button>
+					<button class="Key" type="button" data-accesskey="8">8</button>
+					<button class="Key" type="button" data-accesskey="9">9</button>
+					<button class="Key Key--primary Key--text" type="button" data-accesskey="Backspace">
+						Del
+					</button>
+					<button class="Key" type="button" data-accesskey="4">4</button>
+					<button class="Key" type="button" data-accesskey="5">5</button>
+					<button class="Key" type="button" data-accesskey="6">6</button>
+					<button class="Key" type="button" data-accesskey="+">+</button>
+					<button class="Key" type="button" data-accesskey="1">1</button>
+					<button class="Key" type="button" data-accesskey="2">2</button>
+					<button class="Key" type="button" data-accesskey="3">3</button>
+					<button class="Key" type="button" data-accesskey="-">-</button>
+					<button class="Key" type="button" data-accesskey=".">.</button>
+					<button class="Key" type="button" data-accesskey="0">0</button>
+					<button class="Key" type="button" data-accesskey="/">/</button>
+					<button class="Key" type="button" data-accesskey="*">×</button>
+					<button class="Key Key--primary Key--text col-span-2" type="reset">Reset</button>
+					<button class="Key Key--accent col-span-2" type="submit" data-accesskey="=">
+						=
+					</button>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

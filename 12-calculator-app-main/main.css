@@ -15,6 +15,23 @@
 }
 
 @layer components {
+	/* See https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
+	@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+		.ThreeSwitch {
+			@apply flex items-center justify-between w-[4.5rem] rounded-2xl p-1.5;
+			@apply theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2;
+		}
+
+		.ThreeSwitch input[type="radio"] {
+			@apply appearance-none block h-4 w-4 rounded-full;
+			@apply motion-safe:transition motion-safe:duration-200;
+		}
+
+		.ThreeSwitch input[type="radio"]:checked {
+			@apply theme-1:bg-red theme-2:bg-orange theme-3:bg-pure-cyan;
+		}
+	}
+
 	.Key {
 		@apply inline-block p-2 pt-4 rounded-md uppercase border-b-[5px] select-none;
 		@apply theme-1:text-very-dark-grayish-blue theme-1:bg-light-grayish-orange theme-1:border-grayish-orange;
