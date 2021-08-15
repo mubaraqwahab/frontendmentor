@@ -6,39 +6,60 @@
 	:root {
 		font-size: 16px;
 	}
+
+	:active {
+		/* Removes the overlaying (blue) highlight box on mobile
+		See https://stackoverflow.com/a/45050338/12695621 */
+		-webkit-tap-highlight-color: transparent;
+	}
 }
 
 @layer components {
 	.Key {
-		@apply inline-block p-2 pt-4 rounded-md uppercase border-b-[5px];
+		@apply inline-block p-2 pt-4 rounded-md uppercase border-b-[5px] select-none;
 		@apply theme-1:text-very-dark-grayish-blue theme-1:bg-light-grayish-orange theme-1:border-grayish-orange;
-		@apply theme-1:text-very-dark-grayish-blue theme-2:bg-light-grayish-yellow theme-2:border-dark-grayish-orange;
+		@apply theme-2:text-very-dark-grayish-blue theme-2:bg-light-grayish-yellow theme-2:border-dark-grayish-orange;
+		@apply theme-3:text-light-yellow theme-3:bg-very-dark-violet-3 theme-3:border-dark-magenta;
 	}
 
 	.Key:hover,
 	.Key:active {
 		@apply theme-1:bg-grayish-orange;
+		@apply theme-2:bg-dark-grayish-orange;
+		@apply theme-3:bg-dark-magenta;
 	}
 
 	.Key:focus {
-		@apply outline-none ring ring-light-grayish-orange;
+		@apply outline-none ring;
+		@apply theme-1:ring-light-grayish-orange;
+		@apply theme-2:ring-dark-grayish-orange;
+		@apply theme-3:ring-vivid-magenta;
 	}
 
 	.Key--primary {
-		@apply text-white;
-		@apply theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
-		@apply theme-2:bg-dark-mod-cyan theme-2:border-very-dark-cyan;
+		@apply theme-1:text-white theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
+		@apply theme-2:text-white theme-2:bg-dark-mod-cyan theme-2:border-very-dark-cyan;
+		@apply theme-3:text-white theme-3:bg-dark-violet theme-3:border-vivid-magenta;
 	}
 
 	.Key--primary:hover,
 	.Key--primary:active {
 		@apply theme-1:bg-desat-dark-blue-2;
+		@apply theme-2:bg-very-dark-cyan;
+		@apply theme-3:bg-vivid-magenta;
 	}
 
 	.Key--accent {
-		@apply text-white;
-		@apply theme-1:bg-red theme-1:border-dark-red;
-		@apply theme-2:bg-orange theme-2:border-dark-orange;
+		@apply theme-1:text-white theme-1:bg-red theme-1:border-dark-red;
+		@apply theme-2:text-white theme-2:bg-orange theme-2:border-dark-orange;
+		@apply theme-3:text-very-dark-blue theme-3:bg-pure-cyan theme-3:border-soft-cyan;
+	}
+
+	.Key--accent:hover,
+	.Key--accent:active {
+		@apply theme-1:bg-dark-red;
+		@apply theme-2:bg-dark-orange;
+		@apply theme-3:bg-soft-cyan;
 	}
 
 	.Key--text {

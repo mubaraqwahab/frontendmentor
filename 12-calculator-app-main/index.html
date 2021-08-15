@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="2">
+<html lang="en" data-theme="1">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,9 +14,11 @@
 		<link rel="stylesheet" href="output.css" />
 		<script type="module" src="index.js"></script>
 	</head>
-	<body class="p-6 font-body font-bold theme-1:bg-very-dark-desat-blue-1 theme-2:bg-light-gray">
+	<body
+		class="p-6 font-body font-bold theme-1:bg-very-dark-desat-blue-1 theme-2:bg-light-gray theme-3:bg-very-dark-violet-1"
+	>
 		<header
-			class="flex items-center justify-between py-2 mb-6 theme-1:text-white theme-2:text-very-dark-grayish-blue"
+			class="flex items-center justify-between py-2 mb-6 theme-1:text-white theme-2:text-very-dark-grayish-blue theme-3:text-light-yellow"
 		>
 			<div class="text-3xl">calc</div>
 			<div class="flex items-end uppercase">
@@ -28,7 +30,7 @@
 						<label for="theme3">3</label>
 					</div>
 					<div>
-						<input type="radio" name="themeSwitch" value="1" id="theme1" />
+						<input type="radio" name="themeSwitch" value="1" id="theme1" checked />
 						<input type="radio" name="themeSwitch" value="2" id="theme2" />
 						<input type="radio" name="themeSwitch" value="3" id="theme3" />
 					</div>
@@ -37,13 +39,13 @@
 		</header>
 		<form class="text-3xl">
 			<output
-				class="block p-6 mb-6 rounded-xl text-right theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray"
+				class="block p-6 mb-6 rounded-xl text-right overflow-x-auto theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray theme-3:text-light-yellow theme-3:bg-very-dark-violet-2"
 				name="view"
 			>
 				0
 			</output>
 			<div
-				class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red"
+				class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"
 				data-calc-keys
 			>
 				<button class="Key" type="button">7</button>

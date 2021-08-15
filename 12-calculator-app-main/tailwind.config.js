@@ -54,6 +54,8 @@ module.exports = {
 			"pure-cyan": "hsl(176, 100%, 44%)",
 			"soft-cyan": "hsl(177, 92%, 70%)",
 			"dark-magenta": "hsl(290, 70%, 36%)",
+			"light-yellow": "hsl(52, 100%, 62%)",
+			"very-dark-blue": "hsl(198, 20%, 13%)",
 		},
 		fontFamily: {
 			body: ["Spartan", ...fontFamily.sans],
