@@ -4,33 +4,15 @@
 
 @layer base {
 	:root {
-		/* Backgrounds */
-		--very-dark-desat-blue-1: hsl(222, 26%, 31%);
-		--very-dark-desat-blue-2: hsl(223, 31%, 20%);
-		--very-dark-desat-blue-3: hsl(224, 36%, 15%);
-
-		/* Keys */
-		--desat-dark-blue-1: hsl(225, 21%, 49%);
-		--desat-dark-blue-2: hsl(224, 28%, 35%);
-		--red: hsl(6, 63%, 50%);
-		--dark-red: hsl(6, 70%, 34%);
-		--light-gray-orange: hsl(30, 25%, 89%);
-		--gray-orange: hsl(28, 16%, 65%);
-
-		/* Text */
-		--very-dark-gray-blue: hsl(221, 14%, 31%);
-		--white: hsl(0, 0, 100%);
-
 		font-size: 16px;
 	}
-
-	/* TODO: Other theme colors */
 }
 
 @layer components {
 	.Key {
 		@apply inline-block p-2 pt-4 rounded-md uppercase border-b-[5px];
 		@apply theme-1:text-very-dark-grayish-blue theme-1:bg-light-grayish-orange theme-1:border-grayish-orange;
+		@apply theme-1:text-very-dark-grayish-blue theme-2:bg-light-grayish-yellow theme-2:border-dark-grayish-orange;
 	}
 
 	.Key:hover,
@@ -43,7 +25,9 @@
 	}
 
 	.Key--primary {
-		@apply theme-1:text-white theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
+		@apply text-white;
+		@apply theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
+		@apply theme-2:bg-dark-mod-cyan theme-2:border-very-dark-cyan;
 	}
 
 	.Key--primary:hover,
@@ -51,8 +35,10 @@
 		@apply theme-1:bg-desat-dark-blue-2;
 	}
 
-	.Key--secondary {
-		@apply theme-1:text-white theme-1:bg-red theme-1:border-dark-red;
+	.Key--accent {
+		@apply text-white;
+		@apply theme-1:bg-red theme-1:border-dark-red;
+		@apply theme-2:bg-orange theme-2:border-dark-orange;
 	}
 
 	.Key--text {

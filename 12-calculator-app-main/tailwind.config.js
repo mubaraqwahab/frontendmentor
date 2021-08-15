@@ -3,6 +3,7 @@
 const { fontFamily, colors } = require("tailwindcss/defaultTheme")
 const plugin = require("tailwindcss/plugin")
 
+/** @type {import("tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
 	purge: ["**/*.html"],
 	mode: "jit",
@@ -40,6 +41,7 @@ module.exports = {
 			"dark-orange": "hsl(25, 99%, 27%)",
 			"light-grayish-yellow": "hsl(45, 7%, 89%)",
 			"dark-grayish-orange": "hsl(35, 11%, 61%)",
+			"very-dark-grayish-yellow": "hsl(0, 0, 100%)",
 
 			// Theme 3
 			"very-dark-violet": {

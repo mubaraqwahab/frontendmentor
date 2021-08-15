@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="1">
+<html lang="en" data-theme="2">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,8 +14,10 @@
 		<link rel="stylesheet" href="output.css" />
 		<script type="module" src="index.js"></script>
 	</head>
-	<body class="p-6 font-body font-bold theme-1:bg-very-dark-desat-blue-1">
-		<header class="flex items-center justify-between py-2 mb-6 text-white">
+	<body class="p-6 font-body font-bold theme-1:bg-very-dark-desat-blue-1 theme-2:bg-light-gray">
+		<header
+			class="flex items-center justify-between py-2 mb-6 theme-1:text-white theme-2:text-very-dark-grayish-blue"
+		>
 			<div class="text-3xl">calc</div>
 			<div class="flex items-end uppercase">
 				<p class="mr-4 mb-1">Theme</p>
@@ -35,13 +37,13 @@
 		</header>
 		<form class="text-3xl">
 			<output
-				class="block p-6 mb-6 rounded-xl text-right text-white theme-1:bg-very-dark-desat-blue-3"
+				class="block p-6 mb-6 rounded-xl text-right theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray"
 				name="view"
 			>
 				0
 			</output>
 			<div
-				class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2"
+				class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red"
 				data-calc-keys
 			>
 				<button class="Key" type="button">7</button>
@@ -63,7 +65,7 @@
 				<button class="Key" type="button" data-accesskey="/">/</button>
 				<button class="Key" type="button" data-accesskey="*">×</button>
 				<button class="Key Key--primary Key--text col-span-2" type="reset">Reset</button>
-				<button class="Key Key--secondary col-span-2" type="submit" data-accesskey="=">
+				<button class="Key Key--accent col-span-2" type="submit" data-accesskey="=">
 					=
 				</button>
 			</div>
