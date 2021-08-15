@@ -10,11 +10,13 @@ themeSwitch.forEach((radio) => {
 	})
 })
 
+const view = document.querySelector("[data-view]")
 const keys = document.querySelectorAll(".Key")
 keys.forEach((key) => {
 	key.addEventListener("click", (e) => {
 		e.preventDefault()
-		console.log(key.textContent.trim())
+		view.textContent = [...view.textContent.split(" "), key.textContent.trim()].join(" ")
+		// console.log(key.textContent.trim())
 	})
 })
 
