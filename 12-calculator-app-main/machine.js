@@ -1,3 +1,7 @@
+// @ts-check
+
+// See https://stately.ai/viz/eb5fc349-c9e3-4d34-9b35-49526d113628
+
 function _(machine) {
 	let currentState = calcMachine.initial
 
