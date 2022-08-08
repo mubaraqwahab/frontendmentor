@@ -1,9 +1,4 @@
-// @ts-check
-
-/**
- * @type {NodeListOf<HTMLInputElement>}
- */
-const themeSwitch = document.querySelectorAll("input[name='themeSwitch']")
+const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
 themeSwitch.forEach((radio) => {
 	radio.addEventListener("change", () => {
 		document.documentElement.dataset.theme = radio.value
@@ -15,16 +10,15 @@ const keys = document.querySelectorAll(".Key")
 keys.forEach((key) => {
 	key.addEventListener("click", (e) => {
 		e.preventDefault()
-		view.textContent = [...view.textContent.split(" "), key.textContent.trim()].join(" ")
+		view!.textContent = [...view!.textContent!.split(" "), key.textContent!.trim()].join(" ")
 		// console.log(key.textContent.trim())
 	})
 })
 
 /**
  * Format a numeric string into a comma-separated one.
- * @param {string} numStr
  */
-function formatNum(numStr) {
+function formatNumStr(numStr: string) {
 	let formatted = ""
 
 	// TODO: what if the numstr begins with a sign or is a float?
@@ -39,9 +33,9 @@ function formatNum(numStr) {
 	return formatted
 }
 
-window.play = function (num) {
-	const fmtted = formatNum(num)
+window.play = function (num: string) {
+	const formatted = formatNumStr(num)
 	const pattern = /^(\d{1,3})(,\d{3})*$/
-	console.log(fmtted)
-	console.log(pattern.test(fmtted))
+	console.log(formatted)
+	console.log(pattern.test(formatted))
 }
