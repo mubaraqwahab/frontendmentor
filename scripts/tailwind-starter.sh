@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# TAILWINDCSS v1.x STARTER FOR VSCODE
+# TAILWINDCSS v3.x STARTER FOR VSCODE
 # This script is for automating my TailwindCSS setup in VSCode.
 
 
@@ -28,10 +28,9 @@ fi
 npm init -y
 
 
-# Add npm start script to package.json
-# NOTE: The spacing here actually doesn't matter.
-# NPM would reformat the file after installing stuff
-sed -i -r 's/("scripts": \{)/\1"start": "postcss main.css --output output.css --watch","build": "NODE_ENV=production postcss main.css --output output.css",/' package.json
+# Add npm start and build scripts to package.json
+# NOTE: The spacing here doesn't matter; npm reformats the file after installing stuff
+sed -i -r 's/("scripts": \{)/\1"start": "npx tailwindcss -i main.css -o output.css --watch","build": "npx tailwindcss -i main.css -o output.css --minify",/' package.json
 
 
 # Install prettier for formatting
@@ -39,77 +38,34 @@ sed -i -r 's/("scripts": \{)/\1"start": "postcss main.css --output output.css --
 
 
 # Install dependencies
-npm install postcss-cli postcss tailwindcss autoprefixer cssnano
-npm install --save-dev stylelint-config-recommended
+npm install tailwindcss
 
 
 # Create Tailwind config
-npx tailwind init
+npx tailwindcss init
 
 
-# Add HTML purge rule to Tailwind config
-sed -i 's|purge: \[\],|purge: \["./*.html"\],|' tailwind.config.js
-
-
-# PostCSS config
-echo "module.exports = {
-  plugins: [
-    require(\"tailwindcss\"),
-    require(\"autoprefixer\"),
-    process.env.NODE_ENV === \"production\" &&
-      require(\"cssnano\")({
-        preset: \"default\",
-      }),
-  ],
-};" > postcss.config.js
+# Specify content extensions in Tailwind config
+sed -i 's|content: \[\],|content: \["./*.html"\],|' tailwind.config.js
 
 
 # Create Tailwind .css source file
 echo "@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
 }
+
 @layer components {
 }
+
 @layer utilities {
-}" > main.css
+}
+" > main.css
 
 
-# Disable VSCode's CSS lint
-mkdir -p .vscode/
-echo "{
-  \"css.validate\": false
-}" > .vscode/settings.json
-
-
-# Stylelint config for TailwindCSS + VSCode
-echo "// Credit: https://www.meidev.co/blog/visual-studio-code-css-linting-with-tailwind/
-module.exports = {
-  extends: [\"stylelint-config-recommended\"],
-  rules: {
-    \"at-rule-no-unknown\": [
-      true,
-      {
-        ignoreAtRules: [
-          \"tailwind\",
-          \"apply\",
-          \"layer\",
-          \"variants\",
-          \"responsive\",
-          \"screen\",
-        ],
-      },
-    ],
-    \"declaration-block-trailing-semicolon\": null,
-    \"no-descending-specificity\": null,
-    \"no-duplicate-selectors\": null,
-    \"block-no-empty\": null,
-  },
-};" > stylelint.config.js
-
-
-# Tell Prettier to use longer lines for HTML files
+# Make Prettier use longer lines for HTML files
 echo "{
   \"overrides\": [
     {
