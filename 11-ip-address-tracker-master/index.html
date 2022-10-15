@@ -10,50 +10,54 @@
 		<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet" />
 		<title>Frontend Mentor | IP Address Tracker</title>
 	</head>
-	<body class="bg-[url(images/pattern-bg.png)] bg-no-repeat text-center text-lg text-black">
-		<div class="container py-8">
-			<h1 class="text-2xl text-white font-medium">IP Address Tracker</h1>
-			<form>
-				<label for="query">Query (TODO?)</label>
-				<div class="flex justify-center">
-					<input
-						type="text"
-						name="query"
-						id="query"
-						placeholder="Search for any IP address or domain"
-						class="rounded-l-xl flex-grow py-4 px-6"
-						pattern="(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
-						required
-					/>
-					<button type="submit" class="rounded-r-xl bg-black py-4 px-6" aria-label="Search">
+	<body class="text-center text-lg text-gray-very-dark h-screen flex flex-col">
+		<div class="py-8 h-1/3 bg-[url(images/pattern-bg.png)] bg-cover">
+			<div class="container relative">
+				<h1 class="text-2xl text-white font-medium mb-8 tracking-wide">IP Address Tracker</h1>
+				<form class="flex text-left mb-6">
+					<div class="relative truncate flex-grow">
+						<!--
+						`[&:focus+label]` in the classes below is equivalent to the selector: `input:focus + label`
+						It essentially hides (that's what the `hidden` is for) the label when the input has focus.
+						It creates a "floating label" that is.
+					-->
+						<input
+							type="text"
+							name="query"
+							id="query"
+							class="w-full rounded-l-2xl py-4 px-6 [&:focus+label]:hidden"
+							pattern="(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
+							required
+						/>
+						<label for="query" class="absolute block left-6 top-1/2 -translate-y-1/2 truncate w-[calc(100%-1.5rem*2)] cursor-text">
+							Search for any IP address or domain
+						</label>
+					</div>
+					<button type="submit" class="rounded-r-2xl bg-black py-4 px-6" aria-label="Search">
 						<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6" /></svg>
 					</button>
-				</div>
-			</form>
-			<div>
-				<div class="bg-white rounded-xl p-8 border font-bold text-xl">
-					<dl>
-						<div class="mb-6">
-							<dt class="text-gray-dark uppercase text-xs">IP Address</dt>
-							<dd class="">192.212.174.101</dd>
-						</div>
-						<div class="mb-6">
-							<dt class="text-gray-dark uppercase text-xs">Location</dt>
-							<dd class="">Brooklyn, NY 10001</dd>
-						</div>
-						<div class="mb-6">
-							<dt class="text-gray-dark uppercase text-xs">Timezone</dt>
-							<dd class="">UTC-05:00</dd>
-						</div>
-						<div>
-							<dt class="text-gray-dark uppercase text-xs">ISP</dt>
-							<dd class="">SpaceX Starlink</dd>
-						</div>
-					</dl>
-				</div>
-				<div id="map"></div>
+				</form>
+				<dl class="bg-white rounded-2xl p-6 font-bold text-xl shadow-xl">
+					<div class="mb-6">
+						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">IP Address</dt>
+						<dd class="">192.212.174.101</dd>
+					</div>
+					<div class="mb-6">
+						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">Location</dt>
+						<dd class="">Brooklyn, NY 10001</dd>
+					</div>
+					<div class="mb-6">
+						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">Timezone</dt>
+						<dd class="">UTC-05:00</dd>
+					</div>
+					<div>
+						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">ISP</dt>
+						<dd class="">SpaceX Starlink</dd>
+					</div>
+				</dl>
 			</div>
 		</div>
+		<div id="map" class="bg-gray-700 flex-grow">HI</div>
 		<script>
 			// On load, determine IP address
 		</script>

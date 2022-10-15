@@ -1,4 +1,4 @@
-const { colors, fontFamily, fontWeight } = require("tailwindcss/defaultTheme");
+const { fontFamily, fontWeight } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,16 +12,15 @@ module.exports = {
 			medium: fontWeight.medium, // 500
 			bold: fontWeight.bold, // 700
 		},
-		// colors: {
-		// 	white: colors.white,
-		// 	black: colors.black,
-		// 	transparent: colors.transparent,
-		// 	gray: {
-		// 		...colors.gray,
-		// 		dark: "hsl(0, 0%, 59%)",
-		// 		"very-dark": "hsl(0, 0%, 17%)",
-		// 	},
-		// },
+		colors: {
+			white: "white",
+			black: "black",
+			transparent: "transparent",
+			gray: {
+				dark: "hsl(0, 0%, 59%)",
+				"very-dark": "hsl(0, 0%, 17%)",
+			},
+		},
 		extend: {
 			container: {
 				center: true,

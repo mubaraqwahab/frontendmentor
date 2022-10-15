@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+	/* TODO */
+	:focus {
+	}
 }
 
 @layer components {
