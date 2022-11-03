@@ -41,35 +41,34 @@
 			<form class="text-2xl">
 				<output
 					class="block p-6 mb-6 rounded-xl text-right overflow-x-auto whitespace-nowrap theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray theme-3:text-light-yellow theme-3:bg-very-dark-violet-2"
-					data-view
+					tabindex="-1"
 				>
 					0
 				</output>
 				<div
 					class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"
 				>
-					<button class="Key" type="button">7</button>
-					<button class="Key" type="button" data-accesskey="8">8</button>
-					<button class="Key" type="button" data-accesskey="9">9</button>
-					<button class="Key Key--primary Key--text" type="button" data-accesskey="Backspace">
+					<button class="Key" type="button" aria-keyshortcuts="7">7</button>
+					<button class="Key" type="button" aria-keyshortcuts="8">8</button>
+					<button class="Key" type="button" aria-keyshortcuts="9">9</button>
+					<button class="Key Key--primary Key--text" type="button" aria-keyshortcuts="Backspace">
 						Del
 					</button>
-					<button class="Key" type="button" data-accesskey="4">4</button>
-					<button class="Key" type="button" data-accesskey="5">5</button>
-					<button class="Key" type="button" data-accesskey="6">6</button>
-					<button class="Key" type="button" data-accesskey="+">+</button>
-					<button class="Key" type="button" data-accesskey="1">1</button>
-					<button class="Key" type="button" data-accesskey="2">2</button>
-					<button class="Key" type="button" data-accesskey="3">3</button>
-					<button class="Key" type="button" data-accesskey="-">-</button>
-					<button class="Key" type="button" data-accesskey=".">.</button>
-					<button class="Key" type="button" data-accesskey="0">0</button>
-					<button class="Key" type="button" data-accesskey="/">/</button>
-					<button class="Key" type="button" data-accesskey="*">&times;</button>
+					<button class="Key" type="button" aria-keyshortcuts="4">4</button>
+					<button class="Key" type="button" aria-keyshortcuts="5">5</button>
+					<button class="Key" type="button" aria-keyshortcuts="6">6</button>
+					<button class="Key" type="button" aria-keyshortcuts="Plus">+</button>
+					<button class="Key" type="button" aria-keyshortcuts="1">1</button>
+					<button class="Key" type="button" aria-keyshortcuts="2">2</button>
+					<button class="Key" type="button" aria-keyshortcuts="3">3</button>
+					<button class="Key" type="button" aria-keyshortcuts="Minus">-</button>
+					<button class="Key" type="button" aria-keyshortcuts=".">.</button>
+					<button class="Key" type="button" aria-keyshortcuts="0">0</button>
+					<button class="Key" type="button" aria-keyshortcuts="/">/</button>
+					<button class="Key" type="button" aria-keyshortcuts="*">&times;</button>
 					<button class="Key Key--primary Key--text col-span-2" type="reset">Reset</button>
-					<button class="Key Key--accent col-span-2" type="submit" data-accesskey="=">
-						=
-					</button>
+					<!-- Should this really be a submit button? -->
+					<button class="Key Key--accent col-span-2" type="submit" aria-keyshortcuts="=">=</button>
 				</div>
 			</form>
 		</div>

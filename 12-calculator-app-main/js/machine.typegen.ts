@@ -12,10 +12,17 @@ export interface Typegen0 {
 		guards: never
 		delays: never
 	}
-	eventsCausingActions: {}
+	eventsCausingActions: {
+		appendDecimalPointToInput: "DECIMAL_POINT"
+		appendDigitToInput: "DIGIT"
+		appendOperatorToInput: "OPERATOR"
+		replaceLastOperator: "OPERATOR"
+		resetInput: "DECIMAL_POINT" | "DIGIT" | "RESET"
+		solveInput: "SOLVE"
+	}
 	eventsCausingServices: {}
 	eventsCausingGuards: {}
 	eventsCausingDelays: {}
-	matchesStates: "fraction" | "hist" | "idle" | "int" | "operator" | "solution"
+	matchesStates: "fraction" | "idle" | "int" | "operator" | "solution"
 	tags: never
 }
