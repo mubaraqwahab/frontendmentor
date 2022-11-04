@@ -177,12 +177,6 @@ export const calcMachine =
 						},
 						error: {
 							entry: "setMathError",
-							on: {
-								OPERATOR: {
-									actions: ["resetInput", "appendOperatorToInput"],
-									target: "#calc.operator",
-								},
-							},
 						},
 					},
 				},
@@ -238,7 +232,6 @@ export const calcMachine =
 				}),
 				delete: assign({
 					input: (context) => {
-						// [12, +, 3]
 						const {input} = context
 						const last = input.at(-1)!
 						if (last.length === 1) {
@@ -246,7 +239,6 @@ export const calcMachine =
 						} else {
 							return [...exceptLast(input), exceptLast(last)]
 						}
-						// return [...exceptLast(context.input)]
 					},
 				}),
 			},

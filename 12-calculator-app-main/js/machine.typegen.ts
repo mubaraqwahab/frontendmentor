@@ -29,7 +29,7 @@ export interface Typegen0 {
 		appendOperatorToInput: "OPERATOR"
 		delete: "DELETE"
 		replaceLastOperator: "OPERATOR"
-		resetInput: "DECIMAL_POINT" | "DELETE" | "DIGIT" | "OPERATOR" | "RESET" | "xstate.init"
+		resetInput: "DECIMAL_POINT" | "DELETE" | "DIGIT" | "RESET" | "xstate.init"
 		setMathError: "ERROR" | "error.platform.calc.solving:invocation[0]"
 		setResult: "done.invoke.calc.solving:invocation[0]"
 	}

@@ -4992,12 +4992,6 @@
                     },
                     error: {
                         entry: "setMathError",
-                        on: {
-                            OPERATOR: {
-                                actions: ["resetInput", "appendOperatorToInput"],
-                                target: "#calc.operator",
-                            },
-                        },
                     },
                 },
             },
@@ -5054,7 +5048,6 @@
             }),
             delete: assign({
                 input: (context) => {
-                    // [12, +, 3]
                     const { input } = context;
                     const last = input.at(-1);
                     if (last.length === 1) {
@@ -5063,7 +5056,6 @@
                     else {
                         return [...exceptLast(input), exceptLast(last)];
                     }
-                    // return [...exceptLast(context.input)]
                 },
             }),
         },
@@ -5194,7 +5186,6 @@
         }
         return formatted;
     }
-    window.fmt = formatNumStr;
 
 })();
 //# sourceMappingURL=bundle.js.map

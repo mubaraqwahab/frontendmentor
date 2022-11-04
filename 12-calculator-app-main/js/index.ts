@@ -1,4 +1,4 @@
-import {interpret, StateValue} from "xstate"
+import {interpret} from "xstate"
 import {calcMachine, isDigit, isOperator} from "./machine"
 
 const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
@@ -99,5 +99,3 @@ function formatIntStr(intStr: string) {
 	}
 	return formatted
 }
-
-window.fmt = formatNumStr
