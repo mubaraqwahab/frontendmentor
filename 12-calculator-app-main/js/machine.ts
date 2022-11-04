@@ -1,8 +1,20 @@
-import {assign, createMachine, send} from "xstate"
+import {assign, createMachine} from "xstate"
+
+export function isDigit(str: string): str is `${number}` {
+	return /^[0-9]$/.test(str)
+}
+
+const OPERATORS = ["+", "-", "×", "/"] as const
+type Operator = typeof OPERATORS[number]
+
+export function isOperator(str: string): str is Operator {
+	// @ts-ignore (I don't get why TS is complaining about str 😕)
+	return OPERATORS.includes(str)
+}
 
 type Event =
 	| {type: "DIGIT"; data: `${number}`}
-	| {type: "OPERATOR"; data: "+" | "-" | "×" | "/"}
+	| {type: "OPERATOR"; data: Operator}
 	| {type: "DECIMAL_POINT"}
 	| {type: "SOLVE"}
 	| {type: "RESET"}
@@ -37,6 +49,7 @@ export const calcMachine =
 							actions: "appendOperatorToInput",
 							target: "operator",
 						},
+						// DELETE here has no effect
 					},
 				},
 				int: {
@@ -56,6 +69,22 @@ export const calcMachine =
 						SOLVE: {
 							target: "solving",
 						},
+						DELETE: [
+							{
+								target: "idle",
+								cond: "inputHasOnlyOneDigit",
+							},
+							{
+								cond: "lastItemHasManyDigits",
+								actions: "delete",
+								target: "int",
+							},
+							{
+								cond: "lastItemHasOnlyOneDigit",
+								actions: "delete",
+								target: "operator",
+							},
+						],
 					},
 				},
 				fraction: {
@@ -71,6 +100,17 @@ export const calcMachine =
 						SOLVE: {
 							target: "solving",
 						},
+						DELETE: [
+							{
+								actions: "delete",
+								target: "fraction",
+								cond: "lastItemEndsWithDigit",
+							},
+							{
+								actions: "delete",
+								target: "int",
+							},
+						],
 					},
 				},
 				operator: {
@@ -87,6 +127,17 @@ export const calcMachine =
 							actions: "appendDecimalPointToInput",
 							target: "fraction",
 						},
+						DELETE: [
+							{
+								actions: "delete",
+								target: "fraction",
+								cond: "prevToLastItemHasDecimalPoint",
+							},
+							{
+								actions: "delete",
+								target: "int",
+							},
+						],
 					},
 				},
 				solving: {
@@ -109,6 +160,9 @@ export const calcMachine =
 						},
 						ERROR: {
 							target: "solution.error",
+						},
+						DELETE: {
+							target: "idle",
 						},
 					},
 					states: {
@@ -137,10 +191,6 @@ export const calcMachine =
 				RESET: {
 					target: "idle",
 				},
-				DELETE: {
-					actions: "delete",
-					// target: "idle",
-				},
 			},
 		},
 		{
@@ -149,23 +199,23 @@ export const calcMachine =
 				appendDigitToInput: assign({
 					input: (context, event) => {
 						const {input} = context
-						const oldTop = input.at(-1)!
-						if (Number.isNaN(+oldTop)) {
+						const last = input.at(-1)!
+						if (Number.isNaN(+last)) {
 							// Append a new top
 							return [...input, event.data]
-						} else if (oldTop === "0") {
+						} else if (last === "0") {
 							// Replace the old top
 							return [...exceptLast(input), event.data]
 						} else {
 							// Append to the old top
-							return [...exceptLast(input), oldTop + event.data]
+							return [...exceptLast(input), last + event.data]
 						}
 					},
 				}),
 				appendDecimalPointToInput: assign({
 					input: (context) => {
-						const oldTop = context.input.at(-1)!
-						return [...exceptLast(context.input), oldTop + "."]
+						const last = context.input.at(-1)!
+						return [...exceptLast(context.input), last + "."]
 					},
 				}),
 				appendOperatorToInput: assign({
@@ -188,7 +238,15 @@ export const calcMachine =
 				}),
 				delete: assign({
 					input: (context) => {
-						return [...exceptLast(context.input)]
+						// [12, +, 3]
+						const {input} = context
+						const last = input.at(-1)!
+						if (last.length === 1) {
+							return [...exceptLast(input)]
+						} else {
+							return [...exceptLast(input), exceptLast(last)]
+						}
+						// return [...exceptLast(context.input)]
 					},
 				}),
 			},
@@ -204,9 +262,34 @@ export const calcMachine =
 					}
 				},
 			},
+			guards: {
+				/** Check if the input has a single item which is a single digit */
+				inputHasOnlyOneDigit(context) {
+					return context.input.length === 1 && context.input.at(-1)!.length === 1
+				},
+				/** Check if the last input item has many digits */
+				lastItemHasManyDigits(context) {
+					return context.input.at(-1)!.length > 1
+				},
+				/** Check if the last input item has only one digit */
+				lastItemHasOnlyOneDigit(context) {
+					return context.input.at(-1)!.length === 1
+				},
+				/** Check if the last input item ends with a digit */
+				lastItemEndsWithDigit(context) {
+					const last = context.input.at(-1)!
+					return isDigit(last.at(-1)!)
+				},
+				/** Check if the penultimate item has a decimal point */
+				prevToLastItemHasDecimalPoint(context) {
+					return context.input.at(-2)!.includes(".")
+				},
+			},
 		}
 	)
 
-function exceptLast<T>(array: Array<T>): Array<T> {
-	return array.slice(0, array.length - 1)
+function exceptLast<T>(arr: Array<T>): Array<T>
+function exceptLast(str: string): string
+function exceptLast<T>(sliceable: Array<T> | string) {
+	return sliceable.slice(0, sliceable.length - 1)
 }
