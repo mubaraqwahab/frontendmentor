@@ -28,15 +28,13 @@ calcService.onTransition((state) => {
 
 		// TODO: is it good/bad UX to disable?
 		// const {nextEvents} = state
-		// const solveBtn = document.querySelector("[data-solve-btn]") as HTMLButtonElement
+		// const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")
 		// solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE")
 
-		// const decimalPointBtn = document.querySelector("[data-decimal-point-btn]") as HTMLButtonElement
+		// const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")
 		// decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT")
 
-		// const operatorBtns = document.querySelectorAll(
-		// 	"[data-operator-btn]"
-		// ) as NodeListOf<HTMLButtonElement>
+		// const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
 		// operatorBtns.forEach((btn) => {
 		// 	btn.disabled = nextEvents.every((e) => e !== "OPERATOR")
 		// })
