@@ -208,8 +208,12 @@ export const calcMachine =
 				}),
 				appendDecimalPointToInput: assign({
 					input: (context) => {
-						const last = context.input.at(-1)!
-						return [...exceptLast(context.input), last + "."]
+						const lastToken = context.input.at(-1)!
+						if (isOperator(lastToken)) {
+							return [...context.input, "0."]
+						} else {
+							return [...exceptLast(context.input), lastToken + "."]
+						}
 					},
 				}),
 				appendOperatorToInput: assign({
