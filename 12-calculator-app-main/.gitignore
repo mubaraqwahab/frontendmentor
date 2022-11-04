@@ -15,4 +15,4 @@
 .DS_Store
 
 .prettierignore
-*.typegen.ts
+bundle.typegen.ts
