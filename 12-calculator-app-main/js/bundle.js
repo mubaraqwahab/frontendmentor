@@ -4830,7 +4830,10 @@
     }
 
     function isDigit(str) {
-        return /^[0-9]$/.test(str);
+        return /^\d$/.test(str);
+    }
+    function isNumeric(str) {
+        return /^\d+(\.\d*)?$/.test(str);
     }
     const OPERATORS = ["+", "-", "×", "/"];
     function isOperator(str) {
@@ -5003,29 +5006,36 @@
         },
     }, {
         actions: {
-            resetInput: assign({ input: ["0"] }),
+            resetInput: assign({
+                input: ["0"],
+            }),
             appendDigitToInput: assign({
                 input: (context, event) => {
                     const { input } = context;
-                    const last = input.at(-1);
-                    if (Number.isNaN(+last)) {
+                    const lastToken = input.at(-1);
+                    if (!isNumeric(lastToken)) {
                         // Append a new top
                         return [...input, event.data];
                     }
-                    else if (last === "0") {
+                    else if (lastToken === "0") {
                         // Replace the old top
                         return [...exceptLast(input), event.data];
                     }
                     else {
                         // Append to the old top
-                        return [...exceptLast(input), last + event.data];
+                        return [...exceptLast(input), lastToken + event.data];
                     }
                 },
             }),
             appendDecimalPointToInput: assign({
                 input: (context) => {
-                    const last = context.input.at(-1);
-                    return [...exceptLast(context.input), last + "."];
+                    const lastToken = context.input.at(-1);
+                    if (isOperator(lastToken)) {
+                        return [...context.input, "0."];
+                    }
+                    else {
+                        return [...exceptLast(context.input), lastToken + "."];
+                    }
                 },
             }),
             appendOperatorToInput: assign({
@@ -5049,12 +5059,12 @@
             delete: assign({
                 input: (context) => {
                     const { input } = context;
-                    const last = input.at(-1);
-                    if (last.length === 1) {
+                    const lastToken = input.at(-1);
+                    if (lastToken.length === 1) {
                         return [...exceptLast(input)];
                     }
                     else {
-                        return [...exceptLast(input), exceptLast(last)];
+                        return [...exceptLast(input), exceptLast(lastToken)];
                     }
                 },
             }),
@@ -5114,7 +5124,7 @@
     calcService.onTransition((state) => {
         if (state.changed) {
             outputEl.textContent = state.context.input
-                .map((item) => (isDigit(item[0]) ? formatNumStr(item) : item))
+                .map((item) => (isNumeric(item) ? formatNumStr(item) : item))
                 .join("");
             console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`);
             const { nextEvents } = state;

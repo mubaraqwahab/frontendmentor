@@ -1,7 +1,11 @@
 import {assign, createMachine} from "xstate"
 
 export function isDigit(str: string): str is `${number}` {
-	return /^[0-9]$/.test(str)
+	return /^\d$/.test(str)
+}
+
+export function isNumeric(str: string): str is `${number}` {
+	return /^\d+(\.\d*)?$/.test(str)
 }
 
 const OPERATORS = ["+", "-", "×", "/"] as const
@@ -189,20 +193,22 @@ export const calcMachine =
 		},
 		{
 			actions: {
-				resetInput: assign({input: ["0"]}),
+				resetInput: assign({
+					input: ["0"],
+				}),
 				appendDigitToInput: assign({
 					input: (context, event) => {
 						const {input} = context
-						const last = input.at(-1)!
-						if (Number.isNaN(+last)) {
+						const lastToken = input.at(-1)!
+						if (!isNumeric(lastToken)) {
 							// Append a new top
 							return [...input, event.data]
-						} else if (last === "0") {
+						} else if (lastToken === "0") {
 							// Replace the old top
 							return [...exceptLast(input), event.data]
 						} else {
 							// Append to the old top
-							return [...exceptLast(input), last + event.data]
+							return [...exceptLast(input), lastToken + event.data]
 						}
 					},
 				}),
@@ -237,11 +243,11 @@ export const calcMachine =
 				delete: assign({
 					input: (context) => {
 						const {input} = context
-						const last = input.at(-1)!
-						if (last.length === 1) {
+						const lastToken = input.at(-1)!
+						if (lastToken.length === 1) {
 							return [...exceptLast(input)]
 						} else {
-							return [...exceptLast(input), exceptLast(last)]
+							return [...exceptLast(input), exceptLast(lastToken)]
 						}
 					},
 				}),

@@ -1,5 +1,5 @@
 import {interpret} from "xstate"
-import {calcMachine, isDigit, isOperator} from "./machine"
+import {calcMachine, isDigit, isNumeric, isOperator} from "./machine"
 
 const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
 themeSwitch.forEach((radio) => {
@@ -16,7 +16,7 @@ const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (state.changed) {
 		outputEl.textContent = state.context.input
-			.map((item) => (isDigit(item[0]!) ? formatNumStr(item) : item))
+			.map((item) => (isNumeric(item) ? formatNumStr(item) : item))
 			.join("")
 
 		console.log(
