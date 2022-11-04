@@ -26,19 +26,20 @@ calcService.onTransition((state) => {
 			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`
 		)
 
-		const {nextEvents} = state
-		const solveBtn = document.querySelector("[data-solve-btn]") as HTMLButtonElement
-		solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE")
+		// TODO: is it good/bad UX to disable?
+		// const {nextEvents} = state
+		// const solveBtn = document.querySelector("[data-solve-btn]") as HTMLButtonElement
+		// solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE")
 
-		const decimalPointBtn = document.querySelector("[data-decimal-point-btn]") as HTMLButtonElement
-		decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT")
+		// const decimalPointBtn = document.querySelector("[data-decimal-point-btn]") as HTMLButtonElement
+		// decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT")
 
-		const operatorBtns = document.querySelectorAll(
-			"[data-operator-btn]"
-		) as NodeListOf<HTMLButtonElement>
-		operatorBtns.forEach((btn) => {
-			btn.disabled = nextEvents.every((e) => e !== "OPERATOR")
-		})
+		// const operatorBtns = document.querySelectorAll(
+		// 	"[data-operator-btn]"
+		// ) as NodeListOf<HTMLButtonElement>
+		// operatorBtns.forEach((btn) => {
+		// 	btn.disabled = nextEvents.every((e) => e !== "OPERATOR")
+		// })
 	}
 })
 
@@ -47,8 +48,7 @@ const keyEls = document.querySelectorAll<HTMLButtonElement>(".Key")
 keyEls.forEach((keyEl) => {
 	keyEl.addEventListener("click", (e) => {
 		e.preventDefault()
-		// TODO: get from aria-accesskey?
-		const key = keyEl.textContent!.trim().toUpperCase()
+		const key = keyEl.getAttribute("aria-keyshortcuts")!
 		handleKey(key)
 		// TODO: is this below a good idea?
 		outputEl.focus()
@@ -63,17 +63,18 @@ outputEl.addEventListener("keyup", (e) => {
 function handleKey(key: string) {
 	if (isDigit(key)) {
 		calcService.send({type: "DIGIT", data: key})
-	} else if (isOperator(key) || key === "×") {
-		calcService.send({type: "OPERATOR", data: key === "×" ? "*" : key})
+	} else if (isOperator(key) || key === "Plus") {
+		calcService.send({type: "OPERATOR", data: key === "Plus" ? "+" : key})
 	} else if (key === ".") {
 		calcService.send({type: "DECIMAL_POINT"})
-	} else if (key === "RESET" || key === "Reset") {
-		// TODO: there's no such key as Reset
+	} else if (key === "Delete") {
 		calcService.send({type: "RESET"})
 	} else if (key === "=" || key === "Enter") {
 		calcService.send({type: "SOLVE"})
-	} else if (key === "DEL" || key === "Backspace" || key === "Delete") {
+	} else if (key === "Backspace") {
 		calcService.send({type: "DELETE"})
+	} else {
+		console.error("Unknown key", key)
 	}
 }
 
