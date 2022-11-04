@@ -1,5 +1,5 @@
 import {interpret, StateValue} from "xstate"
-import {calcMachine} from "./machine"
+import {calcMachine, isDigit, isOperator} from "./machine"
 
 const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
 themeSwitch.forEach((radio) => {
@@ -9,39 +9,26 @@ themeSwitch.forEach((radio) => {
 })
 
 // Actual calc stuff starts here
-const stack: Array<StackElement> = []
+
 const calcService = interpret(calcMachine).start()
-
-type StackElement = {
-	value: StateValue
-	context: typeof calcService.initialState.context
-}
-
-// calcService.onTransition((state, event) => {
-// 	if (!state.history || state.changed) {
-// 		if (event.type === "SOLVE") {
-// 			// Clear the stack
-// 			stack.length = 0
-// 		}
-// 		stack.push({value: state.value, context: state.context})
-// 		console.log(JSON.stringify(stack, null, 2))
-// 	}
-// })
 
 const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (state.changed) {
-		console.log(state.context)
-		outputEl.textContent = state.context.input.join("")
+		outputEl.textContent = state.context.input
+			.map((item) => (isDigit(item[0]!) ? formatNumStr(item) : item))
+			.join("")
 
-		console.log("State", state.toStrings().join(" "))
+		console.log(
+			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`
+		)
 
 		const {nextEvents} = state
 		if (nextEvents.every((e) => e !== "SOLVE")) {
-			// Disable solve button
+			// TODO: Disable solve button
 		}
 		if (nextEvents.every((e) => e !== "DECIMAL_POINT")) {
-			// Disable decimal point button
+			// TODO: Disable decimal point button
 		}
 	}
 })
@@ -53,15 +40,14 @@ keyEls.forEach((keyEl) => {
 		e.preventDefault()
 		// TODO: get from aria-accesskey?
 		const key = keyEl.textContent!.trim().toUpperCase()
-		console.log({key})
 		handleKey(key)
+		// TODO: is this below a good idea?
 		outputEl.focus()
 	})
 })
 
 // Handle key keyboard shorcuts
 outputEl.addEventListener("keyup", (e) => {
-	console.log("event key", e.key)
 	handleKey(e.key)
 })
 
@@ -82,31 +68,36 @@ function handleKey(key: string) {
 	}
 }
 
-function isDigit(str: string): str is `${number}` {
-	return /^[0-9]$/.test(str)
-}
-
-const OPERATORS = ["+", "-", "×", "/"] as const
-
-function isOperator(str: string): str is typeof OPERATORS[number] {
-	// @ts-ignore (I don't get why TS is complaining about str 😕)
-	return OPERATORS.includes(str)
-}
-
 /**
  * Format a numeric string into a comma-separated one.
  */
 function formatNumStr(numStr: string) {
-	let formatted = ""
+	// Expect nums like '123.', but not '.123'
+	// And treat '123', '123.', and '123.0' differently
 
-	// TODO: what if the numstr begins with a sign or is a float?
+	const [intPart, fractionPart] = numStr.split(".")
 
-	const len = numStr.length
-	for (let i = 1; i <= len; i++) {
-		const nextDigit = numStr[len - i]
-		// Add a comma if i is a multiple of 3 and there's more digits in front
-		formatted = (i % 3 === 0 && i < len ? "," : "") + nextDigit + formatted
+	let formatted = formatIntStr(intPart!)
+	if (fractionPart !== undefined) {
+		// TODO: How to format fraction part?
+		formatted += "." + fractionPart
 	}
 
 	return formatted
 }
+
+/**
+ * Format an integral string into a comma-separated one.
+ */
+function formatIntStr(intStr: string) {
+	let formatted = ""
+	const len = intStr.length
+	for (let i = 1; i <= len; i++) {
+		const nextDigit = intStr[len - i]
+		// Add a comma if i is a multiple of 3 and there's more digits in front
+		formatted = (i % 3 === 0 && i < len ? "," : "") + nextDigit + formatted
+	}
+	return formatted
+}
+
+window.fmt = formatNumStr

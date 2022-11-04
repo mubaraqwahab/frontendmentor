@@ -4829,6 +4829,14 @@
         });
     }
 
+    function isDigit(str) {
+        return /^[0-9]$/.test(str);
+    }
+    const OPERATORS = ["+", "-", "×", "/"];
+    function isOperator(str) {
+        // @ts-ignore (I don't get why TS is complaining about str 😕)
+        return OPERATORS.includes(str);
+    }
     const calcMachine = 
     /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZA6AlhdYAxACICSA4qQCqKgAOA9rDgC44MB2tIAHogEwBWAJxYAbPwAswgBwBGYYPli5AZjEAaEAE9Ec-gAZJWGarMB2U+dWK55gL72taTLnxFiAUQDCpALIAggAyAPoACgDypAByNEggjMxsnNx8CEKiEtLyispqmjqISqpY5sLlwuZVqoJiRo7OGNh4BIQRYZ4ASgFUEZ3ciazsXPFpGeJSsgpKcirqWrrpBqLS5eb85pKCqgaWDSAuzRwsJBTUA0xDKaOIkjsmwgYiwmJikmKC-HILevqiZmYZAYZGJHuUZPtDrhjiQfP5guEorELklhqkim8sJNbGJVEI7OYfgh5MYDGSDPxVJJZmSqZCmtCTu0uj0+iiriNQGlasZsYJZnj+VUietzFhyWTJPxpYIlPTXDgYZ1PABlTxxeiXZKc3iIMwGLDCVSbOrvOSCCmyolyc1iEwAmRbc0yQR3eVHE4qiJBABqnnZ2vRCB5WNW-Nx+OFhQQNptWAtZNlG3M+n4EKcBwZipOXiC6v98UGgZuwcxfIFkcJ0f0d3ErxTuLUKf47qwADMAE6oZDa06UDUJLVokubA0VRRSMlCWpE-mkiqWD5iGQr4Stzvd3vM7q9fqFofXLmIEGiR3qGSbfhG5f8IlUmRYVaySlSgw7STrrs94aEZVqgdFsOR4ILigjxlkOxqEoSjCES7zGDsEqOk6difpuP5er6Baaqih66sSoImHcy6XteMi3tGEhihKCgvDapiqGh36cLCeZUNhg64TqaQnkR56keeFGLIIZTiuS-AqG+wJyhmUIMHQYBdiwDAdn25z7lxQZGmKmzlNssxlEaqhEooJQSvq+jrCorbyYpqDKap26snuOEckGcgGGWpjUn8sxSDId4iY+FRAm+K6zMIH6yQytlKSpsK+IEoSRDEAEHtxx6EWeJFSmRQm3DU8Y0dsrrmDJjSuLF9nxX+6oBkB+GRXIWC2rMIh4uYyySESMiiOOZXKEIvVRRV2BVQ5rH5vVeFpPohXLOoEggnYxRwbKYlknIr6qFtlSOBmHAMBAcDcFCLRgNNGUIFK1rmmBDGSBSkiSECfmttml1Bnc-Chmsrp4qovVGta0rNQCj1khIrqCExxauXD+HWHaF7SE6nkmsZlGeeK-Uum+VKMdFlUKXFHafSWHnrKGdwvc8oJvnB0jBeOlLShIhOjVgsAMOgACuCOATNeieT97wgkCjw1C8AXVp5JSzGI1gGGoV7CGmrYABY4LALDk8BahbHxbxXomZWztYG0UnIK5PBs6ajXr+HW9aYr9XUwIKFSW37fYQA */
     createMachine({
@@ -4856,6 +4864,7 @@
                         actions: "appendOperatorToInput",
                         target: "operator",
                     },
+                    // DELETE here has no effect
                 },
             },
             int: {
@@ -4875,6 +4884,22 @@
                     SOLVE: {
                         target: "solving",
                     },
+                    DELETE: [
+                        {
+                            target: "idle",
+                            cond: "inputHasOnlyOneDigit",
+                        },
+                        {
+                            cond: "lastItemHasManyDigits",
+                            actions: "delete",
+                            target: "int",
+                        },
+                        {
+                            cond: "lastItemHasOnlyOneDigit",
+                            actions: "delete",
+                            target: "operator",
+                        },
+                    ],
                 },
             },
             fraction: {
@@ -4890,6 +4915,17 @@
                     SOLVE: {
                         target: "solving",
                     },
+                    DELETE: [
+                        {
+                            actions: "delete",
+                            target: "fraction",
+                            cond: "lastItemEndsWithDigit",
+                        },
+                        {
+                            actions: "delete",
+                            target: "int",
+                        },
+                    ],
                 },
             },
             operator: {
@@ -4906,6 +4942,17 @@
                         actions: "appendDecimalPointToInput",
                         target: "fraction",
                     },
+                    DELETE: [
+                        {
+                            actions: "delete",
+                            target: "fraction",
+                            cond: "prevToLastItemHasDecimalPoint",
+                        },
+                        {
+                            actions: "delete",
+                            target: "int",
+                        },
+                    ],
                 },
             },
             solving: {
@@ -4928,6 +4975,9 @@
                     },
                     ERROR: {
                         target: "solution.error",
+                    },
+                    DELETE: {
+                        target: "idle",
                     },
                 },
                 states: {
@@ -4956,10 +5006,6 @@
             RESET: {
                 target: "idle",
             },
-            DELETE: {
-                actions: "delete",
-                // target: "idle",
-            },
         },
     }, {
         actions: {
@@ -4967,25 +5013,25 @@
             appendDigitToInput: assign({
                 input: (context, event) => {
                     const { input } = context;
-                    const oldTop = input.at(-1);
-                    if (Number.isNaN(+oldTop)) {
+                    const last = input.at(-1);
+                    if (Number.isNaN(+last)) {
                         // Append a new top
                         return [...input, event.data];
                     }
-                    else if (oldTop === "0") {
+                    else if (last === "0") {
                         // Replace the old top
                         return [...exceptLast(input), event.data];
                     }
                     else {
                         // Append to the old top
-                        return [...exceptLast(input), oldTop + event.data];
+                        return [...exceptLast(input), last + event.data];
                     }
                 },
             }),
             appendDecimalPointToInput: assign({
                 input: (context) => {
-                    const oldTop = context.input.at(-1);
-                    return [...exceptLast(context.input), oldTop + "."];
+                    const last = context.input.at(-1);
+                    return [...exceptLast(context.input), last + "."];
                 },
             }),
             appendOperatorToInput: assign({
@@ -5008,7 +5054,16 @@
             }),
             delete: assign({
                 input: (context) => {
-                    return [...exceptLast(context.input)];
+                    // [12, +, 3]
+                    const { input } = context;
+                    const last = input.at(-1);
+                    if (last.length === 1) {
+                        return [...exceptLast(input)];
+                    }
+                    else {
+                        return [...exceptLast(input), exceptLast(last)];
+                    }
+                    // return [...exceptLast(context.input)]
                 },
             }),
         },
@@ -5027,9 +5082,32 @@
                 });
             },
         },
+        guards: {
+            /** Check if the input has a single item which is a single digit */
+            inputHasOnlyOneDigit(context) {
+                return context.input.length === 1 && context.input.at(-1).length === 1;
+            },
+            /** Check if the last input item has many digits */
+            lastItemHasManyDigits(context) {
+                return context.input.at(-1).length > 1;
+            },
+            /** Check if the last input item has only one digit */
+            lastItemHasOnlyOneDigit(context) {
+                return context.input.at(-1).length === 1;
+            },
+            /** Check if the last input item ends with a digit */
+            lastItemEndsWithDigit(context) {
+                const last = context.input.at(-1);
+                return isDigit(last.at(-1));
+            },
+            /** Check if the penultimate item has a decimal point */
+            prevToLastItemHasDecimalPoint(context) {
+                return context.input.at(-2).includes(".");
+            },
+        },
     });
-    function exceptLast(array) {
-        return array.slice(0, array.length - 1);
+    function exceptLast(sliceable) {
+        return sliceable.slice(0, sliceable.length - 1);
     }
 
     const themeSwitch = document.querySelectorAll("input[name='themeSwitch']");
@@ -5038,23 +5116,15 @@
             document.documentElement.dataset.theme = radio.value;
         });
     });
+    // Actual calc stuff starts here
     const calcService = interpret(calcMachine).start();
-    // calcService.onTransition((state, event) => {
-    // 	if (!state.history || state.changed) {
-    // 		if (event.type === "SOLVE") {
-    // 			// Clear the stack
-    // 			stack.length = 0
-    // 		}
-    // 		stack.push({value: state.value, context: state.context})
-    // 		console.log(JSON.stringify(stack, null, 2))
-    // 	}
-    // })
     const outputEl = document.querySelector("output");
     calcService.onTransition((state) => {
         if (state.changed) {
-            console.log(state.context);
-            outputEl.textContent = state.context.input.join("");
-            console.log("State", state.toStrings().join(" "));
+            outputEl.textContent = state.context.input
+                .map((item) => (isDigit(item[0]) ? formatNumStr(item) : item))
+                .join("");
+            console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`);
             const { nextEvents } = state;
             if (nextEvents.every((e) => e !== "SOLVE")) ;
             if (nextEvents.every((e) => e !== "DECIMAL_POINT")) ;
@@ -5067,14 +5137,13 @@
             e.preventDefault();
             // TODO: get from aria-accesskey?
             const key = keyEl.textContent.trim().toUpperCase();
-            console.log({ key });
             handleKey(key);
+            // TODO: is this below a good idea?
             outputEl.focus();
         });
     });
     // Handle key keyboard shorcuts
     outputEl.addEventListener("keyup", (e) => {
-        console.log("event key", e.key);
         handleKey(e.key);
     });
     function handleKey(key) {
@@ -5098,14 +5167,34 @@
             calcService.send({ type: "DELETE" });
         }
     }
-    function isDigit(str) {
-        return /^[0-9]$/.test(str);
+    /**
+     * Format a numeric string into a comma-separated one.
+     */
+    function formatNumStr(numStr) {
+        // Expect nums like '123.', but not '.123'
+        // And treat '123', '123.', and '123.0' differently
+        const [intPart, fractionPart] = numStr.split(".");
+        let formatted = formatIntStr(intPart);
+        if (fractionPart !== undefined) {
+            // TODO: How to format fraction part?
+            formatted += "." + fractionPart;
+        }
+        return formatted;
     }
-    const OPERATORS = ["+", "-", "×", "/"];
-    function isOperator(str) {
-        // @ts-ignore (I don't get why TS is complaining about str 😕)
-        return OPERATORS.includes(str);
+    /**
+     * Format an integral string into a comma-separated one.
+     */
+    function formatIntStr(intStr) {
+        let formatted = "";
+        const len = intStr.length;
+        for (let i = 1; i <= len; i++) {
+            const nextDigit = intStr[len - i];
+            // Add a comma if i is a multiple of 3 and there's more digits in front
+            formatted = (i % 3 === 0 && i < len ? "," : "") + nextDigit + formatted;
+        }
+        return formatted;
     }
+    window.fmt = formatNumStr;
 
 })();
 //# sourceMappingURL=bundle.js.map
