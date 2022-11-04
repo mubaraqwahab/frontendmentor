@@ -17,21 +17,22 @@ type StackElement = {
 	context: typeof calcService.initialState.context
 }
 
-calcService.onTransition((state, event) => {
-	if (!state.history || state.changed) {
-		if (event.type === "SOLVE") {
-			// Clear the stack
-			stack.length = 0
-		}
-		stack.push({value: state.value, context: state.context})
-		console.log(JSON.stringify(stack, null, 2))
-	}
-})
+// calcService.onTransition((state, event) => {
+// 	if (!state.history || state.changed) {
+// 		if (event.type === "SOLVE") {
+// 			// Clear the stack
+// 			stack.length = 0
+// 		}
+// 		stack.push({value: state.value, context: state.context})
+// 		console.log(JSON.stringify(stack, null, 2))
+// 	}
+// })
 
 const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (state.changed) {
-		outputEl.textContent = state.context.input
+		console.log(state.context)
+		outputEl.textContent = state.context.input.join("")
 
 		console.log("State", state.toStrings().join(" "))
 
@@ -51,40 +52,38 @@ keyEls.forEach((keyEl) => {
 	keyEl.addEventListener("click", (e) => {
 		e.preventDefault()
 		// TODO: get from aria-accesskey?
-		const key = keyEl.textContent!.trim()
+		const key = keyEl.textContent!.trim().toUpperCase()
 		console.log({key})
-		if (isDigit(key)) {
-			calcService.send({type: "DIGIT", data: key})
-		} else if (isOperator(key)) {
-			calcService.send({type: "OPERATOR", data: key})
-		} else if (key === ".") {
-			calcService.send({type: "DECIMAL_POINT"})
-		} else if (key === "Reset") {
-			calcService.send({type: "RESET"})
-		} else if (key === "=") {
-			calcService.send({type: "SOLVE"})
-		}
+		handleKey(key)
+		outputEl.focus()
 	})
 })
 
 // Handle key keyboard shorcuts
-document.body.addEventListener("keyup", (e) => {
+outputEl.addEventListener("keyup", (e) => {
 	console.log("event key", e.key)
-	const key = e.key
+	handleKey(e.key)
+})
+
+function handleKey(key: string) {
 	if (isDigit(key)) {
 		calcService.send({type: "DIGIT", data: key})
 	} else if (isOperator(key) || key === "*") {
 		calcService.send({type: "OPERATOR", data: key === "*" ? "×" : key})
 	} else if (key === ".") {
 		calcService.send({type: "DECIMAL_POINT"})
-	} else if (key === "Enter") {
+	} else if (key === "RESET" || key === "Reset") {
+		// TODO: there's no such key as Reset
+		calcService.send({type: "RESET"})
+	} else if (key === "=" || key === "Enter") {
 		calcService.send({type: "SOLVE"})
+	} else if (key === "DEL" || key === "Backspace" || key === "Delete") {
+		calcService.send({type: "DELETE"})
 	}
-})
+}
 
 function isDigit(str: string): str is `${number}` {
-	const converted = +str
-	return !Number.isNaN(converted)
+	return /^[0-9]$/.test(str)
 }
 
 const OPERATORS = ["+", "-", "×", "/"] as const

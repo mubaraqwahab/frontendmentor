@@ -4804,18 +4804,45 @@
 
     var assign = assign$1;
 
+    /******************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
     const calcMachine = 
     /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZA6AlhdYAxACICSA4qQCqKgAOA9rDgC44MB2tIAHogEwBWAJxYAbPwAswgBwBGYYPli5AZjEAaEAE9Ec-gAZJWGarMB2U+dWK55gL72taTLnxFiAUQDCpALIAggAyAPoACgDypAByNEggjMxsnNx8CEKiEtLyispqmjqISqpY5sLlwuZVqoJiRo7OGNh4BIQRYZ4ASgFUEZ3ciazsXPFpGeJSsgpKcirqWrrpBqLS5eb85pKCqgaWDSAuzRwsJBTUA0xDKaOIkjsmwgYiwmJikmKC-HILevqiZmYZAYZGJHuUZPtDrhjiQfP5guEorELklhqkim8sJNbGJVEI7OYfgh5MYDGSDPxVJJZmSqZCmtCTu0uj0+iiriNQGlasZsYJZnj+VUietzFhyWTJPxpYIlPTXDgYZ1PABlTxxeiXZKc3iIMwGLDCVSbOrvOSCCmyolyc1iEwAmRbc0yQR3eVHE4qiJBABqnnZ2vRCB5WNW-Nx+OFhQQNptWAtZNlG3M+n4EKcBwZipOXiC6v98UGgZuwcxfIFkcJ0f0d3ErxTuLUKf47qwADMAE6oZDa06UDUJLVokubA0VRRSMlCWpE-mkiqWD5iGQr4Stzvd3vM7q9fqFofXLmIEGiR3qGSbfhG5f8IlUmRYVaySlSgw7STrrs94aEZVqgdFsOR4ILigjxlkOxqEoSjCES7zGDsEqOk6difpuP5er6Baaqih66sSoImHcy6XteMi3tGEhihKCgvDapiqGh36cLCeZUNhg64TqaQnkR56keeFGLIIZTiuS-AqG+wJyhmUIMHQYBdiwDAdn25z7lxQZGmKmzlNssxlEaqhEooJQSvq+jrCorbyYpqDKap26snuOEckGcgGGWpjUn8sxSDId4iY+FRAm+K6zMIH6yQytlKSpsK+IEoSRDEAEHtxx6EWeJFSmRQm3DU8Y0dsrrmDJjSuLF9nxX+6oBkB+GRXIWC2rMIh4uYyySESMiiOOZXKEIvVRRV2BVQ5rH5vVeFpPohXLOoEggnYxRwbKYlknIr6qFtlSOBmHAMBAcDcFCLRgNNGUIFK1rmmBDGSBSkiSECfmttml1Bnc-Chmsrp4qovVGta0rNQCj1khIrqCExxauXD+HWHaF7SE6nkmsZlGeeK-Uum+VKMdFlUKXFHafSWHnrKGdwvc8oJvnB0jBeOlLShIhOjVgsAMOgACuCOATNeieT97wgkCjw1C8AXVp5JSzGI1gGGoV7CGmrYABY4LALDk8BahbHxbxXomZWztYG0UnIK5PBs6ajXr+HW9aYr9XUwIKFSW37fYQA */
     createMachine({
         schema: {
             events: {},
+            services: {},
         },
         tsTypes: {},
-        context: { input: "0" },
+        context: { input: ["0"] },
         id: "calc",
         initial: "idle",
         states: {
             idle: {
+                entry: "resetInput",
                 on: {
                     DIGIT: {
                         actions: "appendDigitToInput",
@@ -4846,11 +4873,8 @@
                         target: "operator",
                     },
                     SOLVE: {
-                        target: "solution",
+                        target: "solving",
                     },
-                    // DELETE: {
-                    // 	target: "hist",
-                    // },
                 },
             },
             fraction: {
@@ -4864,11 +4888,8 @@
                         target: "operator",
                     },
                     SOLVE: {
-                        target: "solution",
+                        target: "solving",
                     },
-                    // DELETE: {
-                    // 	target: "hist",
-                    // },
                 },
             },
             operator: {
@@ -4885,13 +4906,17 @@
                         actions: "appendDecimalPointToInput",
                         target: "fraction",
                     },
-                    // DELETE: {
-                    // 	target: "hist",
-                    // },
+                },
+            },
+            solving: {
+                invoke: {
+                    src: "solveInput",
+                    onDone: "solution.result",
+                    onError: "solution.error",
                 },
             },
             solution: {
-                entry: "solveInput",
+                type: "compound",
                 on: {
                     DIGIT: {
                         actions: ["resetInput", "appendDigitToInput"],
@@ -4901,56 +4926,111 @@
                         actions: ["resetInput", "appendDecimalPointToInput"],
                         target: "fraction",
                     },
-                    OPERATOR: {
-                        actions: "appendOperatorToInput",
-                        target: "operator",
+                    ERROR: {
+                        target: "solution.error",
+                    },
+                },
+                states: {
+                    result: {
+                        entry: "setResult",
+                        on: {
+                            OPERATOR: {
+                                actions: "appendOperatorToInput",
+                                target: "#calc.operator",
+                            },
+                        },
+                    },
+                    error: {
+                        entry: "setMathError",
+                        on: {
+                            OPERATOR: {
+                                actions: ["resetInput", "appendOperatorToInput"],
+                                target: "#calc.operator",
+                            },
+                        },
                     },
                 },
             },
         },
         on: {
             RESET: {
-                actions: "resetInput",
                 target: "idle",
+            },
+            DELETE: {
+                actions: "delete",
+                // target: "idle",
             },
         },
     }, {
         actions: {
-            resetInput: assign({ input: "0" }),
+            resetInput: assign({ input: ["0"] }),
             appendDigitToInput: assign({
                 input: (context, event) => {
-                    if (context.input === "0") {
-                        return event.data;
+                    const { input } = context;
+                    const oldTop = input.at(-1);
+                    if (Number.isNaN(+oldTop)) {
+                        // Append a new top
+                        return [...input, event.data];
+                    }
+                    else if (oldTop === "0") {
+                        // Replace the old top
+                        return [...exceptLast(input), event.data];
                     }
                     else {
-                        return context.input + event.data;
+                        // Append to the old top
+                        return [...exceptLast(input), oldTop + event.data];
                     }
                 },
             }),
             appendDecimalPointToInput: assign({
                 input: (context) => {
-                    return context.input + ".";
+                    const oldTop = context.input.at(-1);
+                    return [...exceptLast(context.input), oldTop + "."];
                 },
             }),
             appendOperatorToInput: assign({
                 input: (context, event) => {
-                    return context.input + event.data;
+                    return [...context.input, event.data];
                 },
             }),
             replaceLastOperator: assign({
                 input: (context, event) => {
-                    return context.input.slice(0, context.input.length - 1) + event.data;
+                    return [...exceptLast(context.input), event.data];
                 },
             }),
-            solveInput: assign({
+            setResult: assign({
+                input: (context, event) => {
+                    return [event.data];
+                },
+            }),
+            setMathError: assign({
+                input: ["MathError"],
+            }),
+            delete: assign({
                 input: (context) => {
-                    const cleaned = context.input.replace("×", "*");
-                    console.log({ cleaned });
-                    return eval(cleaned);
+                    return [...exceptLast(context.input)];
                 },
             }),
         },
+        services: {
+            solveInput(context) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const cleaned = context.input.join("").replace("×", "*");
+                    const result = eval(cleaned);
+                    console.log({ cleaned, result });
+                    if (Number.isFinite(result)) {
+                        return result.toString();
+                    }
+                    else {
+                        throw new Error("MathError: " + result);
+                    }
+                });
+            },
+        },
     });
+    function exceptLast(array) {
+        return array.slice(0, array.length - 1);
+    }
 
     const themeSwitch = document.querySelectorAll("input[name='themeSwitch']");
     themeSwitch.forEach((radio) => {
@@ -4958,23 +5038,22 @@
             document.documentElement.dataset.theme = radio.value;
         });
     });
-    // Actual calc stuff starts here
-    const stack = [];
     const calcService = interpret(calcMachine).start();
-    calcService.onTransition((state, event) => {
-        if (!state.history || state.changed) {
-            if (event.type === "SOLVE") {
-                // Clear the stack
-                stack.length = 0;
-            }
-            stack.push({ value: state.value, context: state.context });
-            console.log(JSON.stringify(stack, null, 2));
-        }
-    });
+    // calcService.onTransition((state, event) => {
+    // 	if (!state.history || state.changed) {
+    // 		if (event.type === "SOLVE") {
+    // 			// Clear the stack
+    // 			stack.length = 0
+    // 		}
+    // 		stack.push({value: state.value, context: state.context})
+    // 		console.log(JSON.stringify(stack, null, 2))
+    // 	}
+    // })
     const outputEl = document.querySelector("output");
     calcService.onTransition((state) => {
         if (state.changed) {
-            outputEl.textContent = state.context.input;
+            console.log(state.context);
+            outputEl.textContent = state.context.input.join("");
             console.log("State", state.toStrings().join(" "));
             const { nextEvents } = state;
             if (nextEvents.every((e) => e !== "SOLVE")) ;
@@ -4987,29 +5066,18 @@
         keyEl.addEventListener("click", (e) => {
             e.preventDefault();
             // TODO: get from aria-accesskey?
-            const key = keyEl.textContent.trim();
+            const key = keyEl.textContent.trim().toUpperCase();
             console.log({ key });
-            if (isDigit(key)) {
-                calcService.send({ type: "DIGIT", data: key });
-            }
-            else if (isOperator(key)) {
-                calcService.send({ type: "OPERATOR", data: key });
-            }
-            else if (key === ".") {
-                calcService.send({ type: "DECIMAL_POINT" });
-            }
-            else if (key === "Reset") {
-                calcService.send({ type: "RESET" });
-            }
-            else if (key === "=") {
-                calcService.send({ type: "SOLVE" });
-            }
+            handleKey(key);
+            outputEl.focus();
         });
     });
     // Handle key keyboard shorcuts
-    document.body.addEventListener("keyup", (e) => {
+    outputEl.addEventListener("keyup", (e) => {
         console.log("event key", e.key);
-        const key = e.key;
+        handleKey(e.key);
+    });
+    function handleKey(key) {
         if (isDigit(key)) {
             calcService.send({ type: "DIGIT", data: key });
         }
@@ -5019,13 +5087,19 @@
         else if (key === ".") {
             calcService.send({ type: "DECIMAL_POINT" });
         }
-        else if (key === "Enter") {
+        else if (key === "RESET" || key === "Reset") {
+            // TODO: there's no such key as Reset
+            calcService.send({ type: "RESET" });
+        }
+        else if (key === "=" || key === "Enter") {
             calcService.send({ type: "SOLVE" });
         }
-    });
+        else if (key === "DEL" || key === "Backspace" || key === "Delete") {
+            calcService.send({ type: "DELETE" });
+        }
+    }
     function isDigit(str) {
-        const converted = +str;
-        return !Number.isNaN(converted);
+        return /^[0-9]$/.test(str);
     }
     const OPERATORS = ["+", "-", "×", "/"];
     function isOperator(str) {
