@@ -54,21 +54,32 @@
 					<button class="Key Key--primary Key--text" type="button" aria-keyshortcuts="Backspace">
 						Del
 					</button>
+
 					<button class="Key" type="button" aria-keyshortcuts="4">4</button>
 					<button class="Key" type="button" aria-keyshortcuts="5">5</button>
 					<button class="Key" type="button" aria-keyshortcuts="6">6</button>
-					<button class="Key" type="button" aria-keyshortcuts="Plus">+</button>
+					<button class="Key" type="button" aria-keyshortcuts="Plus" data-operator-btn>+</button>
+
 					<button class="Key" type="button" aria-keyshortcuts="1">1</button>
 					<button class="Key" type="button" aria-keyshortcuts="2">2</button>
 					<button class="Key" type="button" aria-keyshortcuts="3">3</button>
-					<button class="Key" type="button" aria-keyshortcuts="Minus">-</button>
-					<button class="Key" type="button" aria-keyshortcuts=".">.</button>
+					<button class="Key" type="button" aria-keyshortcuts="Minus" data-operator-btn>-</button>
+
+					<button class="Key" type="button" aria-keyshortcuts="." data-decimal-point-btn>.</button>
 					<button class="Key" type="button" aria-keyshortcuts="0">0</button>
-					<button class="Key" type="button" aria-keyshortcuts="/">/</button>
-					<button class="Key" type="button" aria-keyshortcuts="*">&times;</button>
+					<button class="Key" type="button" aria-keyshortcuts="/" data-operator-btn>/</button>
+					<button class="Key" type="button" aria-keyshortcuts="*" data-operator-btn>&times;</button>
+
 					<button class="Key Key--primary Key--text col-span-2" type="reset">Reset</button>
-					<!-- Should this really be a submit button? -->
-					<button class="Key Key--accent col-span-2" type="submit" aria-keyshortcuts="=">=</button>
+					<!-- TODO: Should this really be a submit button? -->
+					<button
+						class="Key Key--accent col-span-2"
+						type="submit"
+						aria-keyshortcuts="="
+						data-solve-btn
+					>
+						=
+					</button>
 				</div>
 			</form>
 		</div>

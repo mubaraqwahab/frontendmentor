@@ -27,13 +27,18 @@ calcService.onTransition((state) => {
 		)
 
 		const {nextEvents} = state
-		if (nextEvents.every((e) => e !== "SOLVE")) {
-			// TODO: Disable solve button
-		}
-		if (nextEvents.every((e) => e !== "DECIMAL_POINT")) {
-			// TODO: Disable decimal point button
-		}
-		// TODO: Don't forget to enable too
+		const solveBtn = document.querySelector("[data-solve-btn]") as HTMLButtonElement
+		solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE")
+
+		const decimalPointBtn = document.querySelector("[data-decimal-point-btn]") as HTMLButtonElement
+		decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT")
+
+		const operatorBtns = document.querySelectorAll(
+			"[data-operator-btn]"
+		) as NodeListOf<HTMLButtonElement>
+		operatorBtns.forEach((btn) => {
+			btn.disabled = nextEvents.every((e) => e !== "OPERATOR")
+		})
 	}
 })
 

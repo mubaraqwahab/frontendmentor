@@ -12,6 +12,10 @@
 		See https://stackoverflow.com/a/45050338/12695621 */
 		-webkit-tap-highlight-color: transparent;
 	}
+
+	:disabled {
+		@apply cursor-not-allowed;
+	}
 }
 
 @layer components {
@@ -39,8 +43,8 @@
 		@apply theme-3:text-light-yellow theme-3:bg-very-dark-violet-3 theme-3:border-dark-magenta;
 	}
 
-	.Key:hover,
-	.Key:active {
+	.Key:hover:enabled,
+	.Key:active:enabled {
 		@apply theme-1:bg-grayish-orange;
 		@apply theme-2:bg-dark-grayish-orange;
 		@apply theme-3:bg-dark-magenta;
@@ -53,14 +57,18 @@
 		@apply theme-3:ring-vivid-magenta;
 	}
 
+	.Key:disabled {
+		@apply opacity-40;
+	}
+
 	.Key--primary {
 		@apply theme-1:text-white theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
 		@apply theme-2:text-white theme-2:bg-dark-mod-cyan theme-2:border-very-dark-cyan;
 		@apply theme-3:text-white theme-3:bg-dark-violet theme-3:border-vivid-magenta;
 	}
 
-	.Key--primary:hover,
-	.Key--primary:active {
+	.Key--primary:hover:enabled,
+	.Key--primary:active:enabled {
 		@apply theme-1:bg-desat-dark-blue-2;
 		@apply theme-2:bg-very-dark-cyan;
 		@apply theme-3:bg-vivid-magenta;
@@ -72,8 +80,8 @@
 		@apply theme-3:text-very-dark-blue theme-3:bg-pure-cyan theme-3:border-soft-cyan;
 	}
 
-	.Key--accent:hover,
-	.Key--accent:active {
+	.Key--accent:hover:enabled,
+	.Key--accent:active:enabled {
 		@apply theme-1:bg-dark-red;
 		@apply theme-2:bg-dark-orange;
 		@apply theme-3:bg-soft-cyan;

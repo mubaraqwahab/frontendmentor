@@ -5130,9 +5130,14 @@
                 .join("");
             console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`);
             const { nextEvents } = state;
-            if (nextEvents.every((e) => e !== "SOLVE")) ;
-            if (nextEvents.every((e) => e !== "DECIMAL_POINT")) ;
-            // TODO: Don't forget to enable too
+            const solveBtn = document.querySelector("[data-solve-btn]");
+            solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE");
+            const decimalPointBtn = document.querySelector("[data-decimal-point-btn]");
+            decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT");
+            const operatorBtns = document.querySelectorAll("[data-operator-btn]");
+            operatorBtns.forEach((btn) => {
+                btn.disabled = nextEvents.every((e) => e !== "OPERATOR");
+            });
         }
     });
     // Handle key clicks

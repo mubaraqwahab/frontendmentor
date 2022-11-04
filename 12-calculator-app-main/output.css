@@ -622,6 +622,10 @@ video {
   -webkit-tap-highlight-color: transparent;
 }
 
+:disabled {
+  cursor: not-allowed;
+}
+
 /* See https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
@@ -758,17 +762,17 @@ video {
   color: hsla(52, 100%, 62%, var(--tw-text-opacity));
 }
 
-[data-theme="1"] .Key:hover, [data-theme="1"] .Key:active {
+[data-theme="1"] .Key:hover:enabled, [data-theme="1"] .Key:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(28, 16%, 65%, var(--tw-bg-opacity));
 }
 
-[data-theme="2"] .Key:hover, [data-theme="2"] .Key:active {
+[data-theme="2"] .Key:hover:enabled, [data-theme="2"] .Key:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(35, 11%, 61%, var(--tw-bg-opacity));
 }
 
-[data-theme="3"] .Key:hover, [data-theme="3"] .Key:active {
+[data-theme="3"] .Key:hover:enabled, [data-theme="3"] .Key:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(290, 70%, 36%, var(--tw-bg-opacity));
 }
@@ -794,6 +798,10 @@ video {
 [data-theme="3"] .Key:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: hsla(285, 91%, 52%, var(--tw-ring-opacity));
+}
+
+.Key:disabled {
+  opacity: 0.4;
 }
 
 [data-theme="1"] .Key--primary {
@@ -823,17 +831,17 @@ video {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-[data-theme="1"] .Key--primary:hover, [data-theme="1"] .Key--primary:active {
+[data-theme="1"] .Key--primary:hover:enabled, [data-theme="1"] .Key--primary:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(224, 28%, 35%, var(--tw-bg-opacity));
 }
 
-[data-theme="2"] .Key--primary:hover, [data-theme="2"] .Key--primary:active {
+[data-theme="2"] .Key--primary:hover:enabled, [data-theme="2"] .Key--primary:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(185, 58%, 25%, var(--tw-bg-opacity));
 }
 
-[data-theme="3"] .Key--primary:hover, [data-theme="3"] .Key--primary:active {
+[data-theme="3"] .Key--primary:hover:enabled, [data-theme="3"] .Key--primary:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(285, 91%, 52%, var(--tw-bg-opacity));
 }
@@ -865,17 +873,17 @@ video {
   color: hsla(198, 20%, 13%, var(--tw-text-opacity));
 }
 
-[data-theme="1"] .Key--accent:hover, [data-theme="1"] .Key--accent:active {
+[data-theme="1"] .Key--accent:hover:enabled, [data-theme="1"] .Key--accent:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(6, 70%, 34%, var(--tw-bg-opacity));
 }
 
-[data-theme="2"] .Key--accent:hover, [data-theme="2"] .Key--accent:active {
+[data-theme="2"] .Key--accent:hover:enabled, [data-theme="2"] .Key--accent:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(25, 99%, 27%, var(--tw-bg-opacity));
 }
 
-[data-theme="3"] .Key--accent:hover, [data-theme="3"] .Key--accent:active {
+[data-theme="3"] .Key--accent:hover:enabled, [data-theme="3"] .Key--accent:active:enabled {
   --tw-bg-opacity: 1;
   background-color: hsla(177, 92%, 70%, var(--tw-bg-opacity));
 }
