@@ -4835,7 +4835,7 @@
     function isNumeric(str) {
         return /^\d+(\.\d*)?$/.test(str);
     }
-    const OPERATORS = ["+", "-", "×", "/"];
+    const OPERATORS = ["+", "-", "*", "/"];
     function isOperator(str) {
         // @ts-ignore (I don't get why TS is complaining about str 😕)
         return OPERATORS.includes(str);
@@ -5072,9 +5072,8 @@
         services: {
             solveInput(context) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    const cleaned = context.input.join("").replace("×", "*");
-                    const result = eval(cleaned);
-                    console.log({ cleaned, result });
+                    const concatted = context.input.join("");
+                    const result = eval(concatted);
                     if (Number.isFinite(result)) {
                         return result.toString();
                     }
@@ -5124,12 +5123,16 @@
     calcService.onTransition((state) => {
         if (state.changed) {
             outputEl.textContent = state.context.input
+                // format numbers
                 .map((item) => (isNumeric(item) ? formatNumStr(item) : item))
+                // format multiplication signs
+                .map((item) => (item === "*" ? "×" : item))
                 .join("");
             console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`);
             const { nextEvents } = state;
             if (nextEvents.every((e) => e !== "SOLVE")) ;
             if (nextEvents.every((e) => e !== "DECIMAL_POINT")) ;
+            // TODO: Don't forget to enable too
         }
     });
     // Handle key clicks
@@ -5152,8 +5155,8 @@
         if (isDigit(key)) {
             calcService.send({ type: "DIGIT", data: key });
         }
-        else if (isOperator(key) || key === "*") {
-            calcService.send({ type: "OPERATOR", data: key === "*" ? "×" : key });
+        else if (isOperator(key) || key === "×") {
+            calcService.send({ type: "OPERATOR", data: key === "×" ? "*" : key });
         }
         else if (key === ".") {
             calcService.send({ type: "DECIMAL_POINT" });
@@ -5173,12 +5176,9 @@
      * Format a numeric string into a comma-separated one.
      */
     function formatNumStr(numStr) {
-        // Expect nums like '123.', but not '.123'
-        // And treat '123', '123.', and '123.0' differently
         const [intPart, fractionPart] = numStr.split(".");
         let formatted = formatIntStr(intPart);
         if (fractionPart !== undefined) {
-            // TODO: How to format fraction part?
             formatted += "." + fractionPart;
         }
         return formatted;

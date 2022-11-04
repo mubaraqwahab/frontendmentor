@@ -16,7 +16,10 @@ const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (state.changed) {
 		outputEl.textContent = state.context.input
+			// format numbers
 			.map((item) => (isNumeric(item) ? formatNumStr(item) : item))
+			// format multiplication signs
+			.map((item) => (item === "*" ? "×" : item))
 			.join("")
 
 		console.log(
@@ -30,6 +33,7 @@ calcService.onTransition((state) => {
 		if (nextEvents.every((e) => e !== "DECIMAL_POINT")) {
 			// TODO: Disable decimal point button
 		}
+		// TODO: Don't forget to enable too
 	}
 })
 
@@ -54,8 +58,8 @@ outputEl.addEventListener("keyup", (e) => {
 function handleKey(key: string) {
 	if (isDigit(key)) {
 		calcService.send({type: "DIGIT", data: key})
-	} else if (isOperator(key) || key === "*") {
-		calcService.send({type: "OPERATOR", data: key === "*" ? "×" : key})
+	} else if (isOperator(key) || key === "×") {
+		calcService.send({type: "OPERATOR", data: key === "×" ? "*" : key})
 	} else if (key === ".") {
 		calcService.send({type: "DECIMAL_POINT"})
 	} else if (key === "RESET" || key === "Reset") {
@@ -72,14 +76,10 @@ function handleKey(key: string) {
  * Format a numeric string into a comma-separated one.
  */
 function formatNumStr(numStr: string) {
-	// Expect nums like '123.', but not '.123'
-	// And treat '123', '123.', and '123.0' differently
-
 	const [intPart, fractionPart] = numStr.split(".")
 
 	let formatted = formatIntStr(intPart!)
 	if (fractionPart !== undefined) {
-		// TODO: How to format fraction part?
 		formatted += "." + fractionPart
 	}
 

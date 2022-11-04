@@ -8,7 +8,7 @@ export function isNumeric(str: string): str is `${number}` {
 	return /^\d+(\.\d*)?$/.test(str)
 }
 
-const OPERATORS = ["+", "-", "×", "/"] as const
+const OPERATORS = ["+", "-", "*", "/"] as const
 type Operator = typeof OPERATORS[number]
 
 export function isOperator(str: string): str is Operator {
@@ -254,9 +254,8 @@ export const calcMachine =
 			},
 			services: {
 				async solveInput(context) {
-					const cleaned = context.input.join("").replace("×", "*")
-					const result = eval(cleaned) as number
-					console.log({cleaned, result})
+					const concatted = context.input.join("")
+					const result = eval(concatted) as number
 					if (Number.isFinite(result)) {
 						return result.toString()
 					} else {
