@@ -1,5 +1,6 @@
 import {interpret} from "xstate"
-import {calcMachine, isDigit, isNumeric, isOperator} from "./machine"
+import {calcMachine, isOperator} from "./machine2"
+import {isDigit, isNumeric} from "./machine"
 
 const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
 themeSwitch.forEach((radio) => {
