@@ -15,15 +15,15 @@ const calcService = interpret(calcMachine).start()
 const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (state.changed) {
-		outputEl.textContent = state.context.input
+		outputEl.textContent = state.context.tokens
 			// format numbers
-			.map((item) => (isNumeric(item) ? formatNumStr(item) : item))
+			.map((token) => (isNumeric(token) ? formatNumStr(token) : token))
 			// format multiplication signs
-			.map((item) => (item === "*" ? "×" : item))
+			.map((token) => (token === "*" ? "×" : token))
 			.join("")
 
 		console.log(
-			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.input)}`
+			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`
 		)
 
 		// TODO: is it good/bad UX to disable?

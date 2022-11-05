@@ -31,26 +31,26 @@ export const calcMachine =
 		{
 			schema: {
 				events: {} as Event,
-				services: {} as {solveInput: {data: string}},
+				services: {} as {solveTokens: {data: string}},
 			},
 			tsTypes: {} as import("./machine.typegen").Typegen0,
-			context: {input: ["0"]},
+			context: {tokens: ["0"]},
 			id: "calc",
 			initial: "idle",
 			states: {
 				idle: {
-					entry: "resetInput",
+					entry: "resetTokens",
 					on: {
 						DIGIT: {
-							actions: "appendDigitToInput",
+							actions: "appendDigitToTokens",
 							target: "int",
 						},
 						DECIMAL_POINT: {
-							actions: "appendDecimalPointToInput",
+							actions: "appendDecimalPointToTokens",
 							target: "fraction",
 						},
 						OPERATOR: {
-							actions: "appendOperatorToInput",
+							actions: "appendOperatorToTokens",
 							target: "operator",
 						},
 						// DELETE here has no effect
@@ -59,15 +59,15 @@ export const calcMachine =
 				int: {
 					on: {
 						DIGIT: {
-							actions: "appendDigitToInput",
+							actions: "appendDigitToTokens",
 							target: "int",
 						},
 						DECIMAL_POINT: {
-							actions: "appendDecimalPointToInput",
+							actions: "appendDecimalPointToTokens",
 							target: "fraction",
 						},
 						OPERATOR: {
-							actions: "appendOperatorToInput",
+							actions: "appendOperatorToTokens",
 							target: "operator",
 						},
 						SOLVE: {
@@ -76,7 +76,7 @@ export const calcMachine =
 						DELETE: [
 							{
 								target: "idle",
-								cond: "inputHasOnlyOneDigit",
+								cond: "tokensHasOnlyOneDigit",
 							},
 							{
 								cond: "lastItemHasManyDigits",
@@ -94,11 +94,11 @@ export const calcMachine =
 				fraction: {
 					on: {
 						DIGIT: {
-							actions: "appendDigitToInput",
+							actions: "appendDigitToTokens",
 							target: "fraction",
 						},
 						OPERATOR: {
-							actions: "appendOperatorToInput",
+							actions: "appendOperatorToTokens",
 							target: "operator",
 						},
 						SOLVE: {
@@ -120,7 +120,7 @@ export const calcMachine =
 				operator: {
 					on: {
 						DIGIT: {
-							actions: "appendDigitToInput",
+							actions: "appendDigitToTokens",
 							target: "int",
 						},
 						OPERATOR: {
@@ -128,7 +128,7 @@ export const calcMachine =
 							target: "operator",
 						},
 						DECIMAL_POINT: {
-							actions: "appendDecimalPointToInput",
+							actions: "appendDecimalPointToTokens",
 							target: "fraction",
 						},
 						DELETE: [
@@ -146,7 +146,7 @@ export const calcMachine =
 				},
 				solving: {
 					invoke: {
-						src: "solveInput",
+						src: "solveTokens",
 						onDone: "solution.result",
 						onError: "solution.error",
 					},
@@ -155,11 +155,11 @@ export const calcMachine =
 					type: "compound",
 					on: {
 						DIGIT: {
-							actions: ["resetInput", "appendDigitToInput"],
+							actions: ["resetTokens", "appendDigitToTokens"],
 							target: "int",
 						},
 						DECIMAL_POINT: {
-							actions: ["resetInput", "appendDecimalPointToInput"],
+							actions: ["resetTokens", "appendDecimalPointToTokens"],
 							target: "fraction",
 						},
 						ERROR: {
@@ -174,7 +174,7 @@ export const calcMachine =
 							entry: "setResult",
 							on: {
 								OPERATOR: {
-									actions: "appendOperatorToInput",
+									actions: "appendOperatorToTokens",
 									target: "#calc.operator",
 								},
 							},
@@ -193,68 +193,68 @@ export const calcMachine =
 		},
 		{
 			actions: {
-				resetInput: assign({
-					input: ["0"],
+				resetTokens: assign({
+					tokens: ["0"],
 				}),
-				appendDigitToInput: assign({
-					input: (context, event) => {
-						const {input} = context
-						const lastToken = input.at(-1)!
+				appendDigitToTokens: assign({
+					tokens: (context, event) => {
+						const {tokens} = context
+						const lastToken = tokens.at(-1)!
 						if (!isNumeric(lastToken)) {
 							// Append a new top
-							return [...input, event.data]
+							return [...tokens, event.data]
 						} else if (lastToken === "0") {
 							// Replace the old top
-							return [...exceptLast(input), event.data]
+							return [...exceptLast(tokens), event.data]
 						} else {
 							// Append to the old top
-							return [...exceptLast(input), lastToken + event.data]
+							return [...exceptLast(tokens), lastToken + event.data]
 						}
 					},
 				}),
-				appendDecimalPointToInput: assign({
-					input: (context) => {
-						const lastToken = context.input.at(-1)!
+				appendDecimalPointToTokens: assign({
+					tokens: (context) => {
+						const lastToken = context.tokens.at(-1)!
 						if (isOperator(lastToken)) {
-							return [...context.input, "0."]
+							return [...context.tokens, "0."]
 						} else {
-							return [...exceptLast(context.input), lastToken + "."]
+							return [...exceptLast(context.tokens), lastToken + "."]
 						}
 					},
 				}),
-				appendOperatorToInput: assign({
-					input: (context, event) => {
-						return [...context.input, event.data]
+				appendOperatorToTokens: assign({
+					tokens: (context, event) => {
+						return [...context.tokens, event.data]
 					},
 				}),
 				replaceLastOperator: assign({
-					input: (context, event) => {
-						return [...exceptLast(context.input), event.data]
+					tokens: (context, event) => {
+						return [...exceptLast(context.tokens), event.data]
 					},
 				}),
 				setResult: assign({
-					input: (context, event) => {
+					tokens: (context, event) => {
 						return [event.data]
 					},
 				}),
 				setMathError: assign({
-					input: ["MathError"],
+					tokens: ["MathError"],
 				}),
 				delete: assign({
-					input: (context) => {
-						const {input} = context
-						const lastToken = input.at(-1)!
+					tokens: (context) => {
+						const {tokens: tokens} = context
+						const lastToken = tokens.at(-1)!
 						if (lastToken.length === 1) {
-							return [...exceptLast(input)]
+							return [...exceptLast(tokens)]
 						} else {
-							return [...exceptLast(input), exceptLast(lastToken)]
+							return [...exceptLast(tokens), exceptLast(lastToken)]
 						}
 					},
 				}),
 			},
 			services: {
-				async solveInput(context) {
-					const concatted = context.input.join("")
+				async solveTokens(context) {
+					const concatted = context.tokens.join("")
 					const result = eval(concatted) as number
 					if (Number.isFinite(result)) {
 						return result.toString()
@@ -265,25 +265,25 @@ export const calcMachine =
 			},
 			guards: {
 				/** Check if the input has a single item which is a single digit */
-				inputHasOnlyOneDigit(context) {
-					return context.input.length === 1 && context.input.at(-1)!.length === 1
+				tokensHasOnlyOneDigit(context) {
+					return context.tokens.length === 1 && context.tokens.at(-1)!.length === 1
 				},
 				/** Check if the last input item has many digits */
 				lastItemHasManyDigits(context) {
-					return context.input.at(-1)!.length > 1
+					return context.tokens.at(-1)!.length > 1
 				},
 				/** Check if the last input item has only one digit */
 				lastItemHasOnlyOneDigit(context) {
-					return context.input.at(-1)!.length === 1
+					return context.tokens.at(-1)!.length === 1
 				},
 				/** Check if the last input item ends with a digit */
 				lastItemEndsWithDigit(context) {
-					const last = context.input.at(-1)!
+					const last = context.tokens.at(-1)!
 					return isDigit(last.at(-1)!)
 				},
 				/** Check if the penultimate item has a decimal point */
 				prevToLastItemHasDecimalPoint(context) {
-					return context.input.at(-2)!.includes(".")
+					return context.tokens.at(-2)!.includes(".")
 				},
 			},
 		}

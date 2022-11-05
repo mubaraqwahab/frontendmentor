@@ -15,7 +15,7 @@ export interface Typegen0 {
 		"xstate.init": {type: "xstate.init"}
 	}
 	invokeSrcNameMap: {
-		solveInput: "done.invoke.calc.solving:invocation[0]"
+		solveTokens: "done.invoke.calc.solving:invocation[0]"
 	}
 	missingImplementations: {
 		actions: never
@@ -24,24 +24,24 @@ export interface Typegen0 {
 		delays: never
 	}
 	eventsCausingActions: {
-		appendDecimalPointToInput: "DECIMAL_POINT"
-		appendDigitToInput: "DIGIT"
-		appendOperatorToInput: "OPERATOR"
+		appendDecimalPointToTokens: "DECIMAL_POINT"
+		appendDigitToTokens: "DIGIT"
+		appendOperatorToTokens: "OPERATOR"
 		delete: "DELETE"
 		replaceLastOperator: "OPERATOR"
-		resetInput: "DECIMAL_POINT" | "DELETE" | "DIGIT" | "RESET" | "xstate.init"
+		resetTokens: "DECIMAL_POINT" | "DELETE" | "DIGIT" | "RESET" | "xstate.init"
 		setMathError: "ERROR" | "error.platform.calc.solving:invocation[0]"
 		setResult: "done.invoke.calc.solving:invocation[0]"
 	}
 	eventsCausingServices: {
-		solveInput: "SOLVE"
+		solveTokens: "SOLVE"
 	}
 	eventsCausingGuards: {
-		inputHasOnlyOneDigit: "DELETE"
 		lastItemEndsWithDigit: "DELETE"
 		lastItemHasManyDigits: "DELETE"
 		lastItemHasOnlyOneDigit: "DELETE"
 		prevToLastItemHasDecimalPoint: "DELETE"
+		tokensHasOnlyOneDigit: "DELETE"
 	}
 	eventsCausingDelays: {}
 	matchesStates:
