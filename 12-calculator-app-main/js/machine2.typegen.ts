@@ -27,19 +27,24 @@ export interface Typegen0 {
 		appendNewFractionToken: "DECIMAL_POINT"
 		appendNewToken: "DIGIT" | "OPERATOR"
 		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
+		deleteLastDigit: "DELETE"
+		deleteLastToken: "DELETE"
+		replaceAllWithError: "error.platform.calculator.solving:invocation[0]"
 		replaceAllWithNewFractionToken: "DECIMAL_POINT"
-		replaceAllWithNewToken: "DIGIT"
-		replaceAllWithResult:
-			| "done.invoke.calculator.solving:invocation[0]"
-			| "error.platform.calculator.solving:invocation[0]"
+		replaceAllWithNewToken: "DIGIT" | "done.invoke.calculator.solving:invocation[0]"
 		replaceLastToken: "DIGIT" | "OPERATOR"
-		resetTokens: "RESET"
+		resetTokens: "DELETE" | "RESET"
 	}
 	eventsCausingServices: {
 		solve: "SOLVE"
 	}
 	eventsCausingGuards: {
+		lastTokenEndsWithDecimalPoint: "DELETE"
+		lastTokenHasManyDigits: "DELETE"
+		lastTokenHasOnlyOneDigit: "DELETE"
 		lastTokenIsZero: "DIGIT"
+		onlyOneDigitIsLeftInTokens: "DELETE"
+		prevToLastTokenHasDecimalPoint: "DELETE"
 	}
 	eventsCausingDelays: {}
 	matchesStates:

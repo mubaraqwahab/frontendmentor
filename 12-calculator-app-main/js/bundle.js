@@ -4829,31 +4829,33 @@
         });
     }
 
-    const OPERATORS$1 = ["+", "-", "*", "/"];
-    function isOperator$1(str) {
+    function isDigit(str) {
+        return /^\d$/.test(str);
+    }
+    function isNumeric(str) {
+        return /^\d+(\.\d*)?$/.test(str);
+    }
+    const OPERATORS = ["+", "-", "*", "/"];
+    function isOperator(str) {
         // @ts-ignore (I don't get why TS is complaining about str 😕)
-        return OPERATORS$1.includes(str);
+        return OPERATORS.includes(str);
     }
     const calcMachine = 
-    /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZBXdqAuA9gE4B0AdlgLYBGYpAlmXgMQAiAkgOLsAqA2gAYAuolAAHArHp56BMqJAAPRAFoAjACYAHCQCcAgGwBmbUYAsG3boCsWowBoQAT1VqBakgHYNBgZYFmRloCuoEAvmGOaJg4+MTkVLQMTGxcvHxqIkggElIycgrKCBqeXsZqwcFGulpqugaeji4I5iRa1oGe9WqeBmYWZhFRGNi4hKQUNHQkjCysAKIAwuwAsgCCADIA+gAKAPLsAHL8wgq50rLy2UUqGmYGJKY+oQZu5kaNzojmZiTWbiUPmYBNUAkMQNFRnEJolpgAzIioZD5MipbgnLLiSQXArXRBaUrGAm2KyeQwlaxNRAWHQabTWTxk4kmcGQ2LjBJTIjMPY7eYAJTWPD2-MEmJy2JRhWpBgeagM7RKnnaZlCGgcXxa7RIRnMyp6dLUFWsrJG7PikySzAAynsNgA1eZis6Sy7ShBmLS6NruRU9Bo1DRUhDqQwkMzWf6eYEdIwdEGmmJjeIEMR0aE8vmC4Wi07Zc5SvEIeoaHUCawg4wR6w1AzB9XWPSGBlGASef5maNGRNQjmp9PjNHpPNYvJuot6rzyzxAjoGSyheveEgGBkadwGXQVVUfHvm0j9xGDhbLdbbfZHDEuse40BFYylvq6Z663Xqz7NawaDzfuo+TfAmYah7smpCwAQ6AAG6MFAzAQHIYAzGQkEEAA1ohbKgSQ4FQTBCCMChaAomKzr5q6t5KIgDQ6CCX5uDYvhqIEwa3J6JBqLqRIcR82jqiB0LYRB0FkLBdBEPEYhjHCxCUCQmECThwlQPhyEEERlwkSOEo3lcd7UloOh2DOpieD0RosXSRhtNGpmykYfSRhoJqRBCZpYUQcA4HggnoFgKKZgKQoiqRo44rplEIMEpbtAI7hAfo751pqHhaJ2dLtq8676Foq78RyHmwF5bBLKsmy7AcxwhdpYXuioNYCCQfi6L0v7Pt4WgsUEejyhYtY1P0nF5fEBVFRw6JVQW456S0soriYTm1Po2Uas0RoNT0cY1vUXZxkN3L8vM1rzFeZE6bVGU6n0QHPASrwraodylv8IS6k1hjNhELlkAQEBwAo8kcpa0yzNeNVFuovQrlYdwcZ69ztkGyU9Ox74mM+Jh2HxLkAxasKkAiSKFqFRMRXSfzeBUbYgoEuith1modL89wVNGtipZYe2ckkoMkzcli-E8AGvNTHwsXUDXeL4nrqu42Wc4e0I81NEV2N6gZdOW8r1O4wZGJo7ENEEdTtu0mic4pMFKxR96quxM42O1BKGElzTqMCjzBDOoJAdYxgGJzI3oN5OF+crk3W1RFaNa8q404qqWdYy7GpfOvvVLTcMB55QckGJxBW+FRQVg16MUs1NZqF+ielNuqfGFY5ipVnhVBwX7oRqWpftuXW5V5qdVMcn9zuDLHGmXtbfg8Evz2f0mibrdHEsb4VnbltnsdO0n1hEAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZBXdqAuA9gE4B0AdlgLYBGYpAlmXgMQAiAkgOLsAqA2gAYAuolAAHArHp56BMqJAAPRAFoAjACYAHCQCcAgGwBmbUYAsG3boCsWowBoQAT1VqBakgHYNBgZYFmRloCuoEAvmGOaJg4+MTkVLQMTGxcvHxqIkggElIycgrKCBqeXsZqwcFGulpqugaeji4I5iRa1oGe9WqeBmYWZhFRGNi4hKQUNHQkjCysAKIAwuwAsgCCADIA+gAKAPLsAHL8wgq50rLy2UUqGmYGJKY+oQZu5kaNzojmZiTWbiUPmYBNUAkMQNFRnEJolpgAzIioZD5MipbgnLLiSQXArXRBaUrGAm2KyeQwlaxNRAWHQabTWTxk4kmcGQ2LjBJTIjMPY7eYAJTWPD2-MEmJy2JRhWpBgeagM7RKnnaZlCGgcXxa7RIRnMyp6dLUFWsrJG7PikySzAAynsNgA1eZis6Sy7ShBmLS6NruRU9Bo1DRUhDqQwkMzWf6eYEdIwdEGmmJjeIEMR0aE8vmC4Wi07Zc5SvEIeoaHUCawg4wR6w1AzB9XWPSGBlGASef5maNGRNQjmp9PjNHpPNYvJuot6rzyzxAjoGSyheveEgGBkadwGXQVVUfHvm0j9xGDhbLdbbfZHDEuse40BFYylvq6Z663Xqz7NawaDzfuo+TfAmYah7smpCwAQ6AAG6MFAzAQHIYAzGQkEEAA1ohbKgSQ4FQTBCCMChaAomKzr5q6t5KIgDQ6CCX5uDYvhqIEwa3J6JBqLqRIcR82jqiB0LYRB0FkLBdBEPEYhjHCxCUCQmECThwlQPhyEEERlwkSOEo3lcd7UloOh2DOpieD0RosXSRhtNGpmykYfSRhoJqRBCZpYUQcA4HggnoFgKKZgKQoiqRo44rplEIMEpbtAI7hAfo751pqHhaJ2dLtq8676Foq78RyHmwF5bBLKsmy7AcxwhdpYXuioNYCCQfi6L0v7Pt4WgsUEejyhYtY1P0nF5fEBVFRw6JVQW456S0soriYTm1Po2Uas0RoNT0cY1vUXZxkN3L8vM1rzFeZE6bVGU6n0QHPASrwraodylv8IS6k1hjNhELlkAQEBwAo8kcpa0yzNeNVFuovQrlYdwcZ69ztkGyU9Ox74mM+Jh2HxLkAxasKkAiSKFqFRMRXSfzeBUbYgoEuith1modL89wVNGtipZYe2ckkoMkzcli-E8AGvNTHwsXUDXeIxWjaM+aiRp4nOHtCPNTRFdjeoGXTlvK9TuMGRiaOxDRBHU7btJonOKTBKsUfeqrsTONjtQShhJc06jAo8wQzqCQHWMYBicyN6DeThfmq5NttURWjWvKuNOKqlnWMuxqXzv71S03DQeeSHJBicQNvhUUFYNejFLNTWcuI+7HylNu6fGFY5ipTnhUh0X7oRqW5ftpXW5fixHap-cPjeE5fhaHtnfg8Evz2f0mibrdHEsb4VkN2PffVN2n1AA */
     createMachine({
+        id: "calculator",
+        tsTypes: {},
+        schema: {
+            context: {},
+            events: {},
+            services: {},
+        },
         context: {
             tokens: ["0"],
         },
-        tsTypes: {},
-        schema: {
-            events: {},
-            context: {},
-            services: {},
-        },
-        id: "calculator",
+        predictableActionArguments: true,
+        preserveActionOrder: true,
         initial: "number",
-        on: {
-            RESET: {
-                target: ".number.int",
-                actions: "resetTokens",
-            },
-        },
         states: {
             number: {
                 initial: "int",
@@ -4869,6 +4871,21 @@
                                     actions: "appendToLastToken",
                                 },
                             ],
+                            DELETE: [
+                                {
+                                    cond: "onlyOneDigitIsLeftInTokens",
+                                    actions: "resetTokens",
+                                },
+                                {
+                                    target: "#calculator.operator",
+                                    cond: "lastTokenHasOnlyOneDigit",
+                                    actions: "deleteLastToken",
+                                },
+                                {
+                                    cond: "lastTokenHasManyDigits",
+                                    actions: "deleteLastDigit",
+                                },
+                            ],
                             DECIMAL_POINT: {
                                 target: "fraction",
                                 actions: "appendToLastToken",
@@ -4877,6 +4894,16 @@
                     },
                     fraction: {
                         on: {
+                            DELETE: [
+                                {
+                                    cond: "lastTokenEndsWithDecimalPoint",
+                                    target: "int",
+                                    actions: "deleteLastDigit",
+                                },
+                                {
+                                    actions: "deleteLastDigit",
+                                },
+                            ],
                             DIGIT: {
                                 actions: "appendToLastToken",
                             },
@@ -4895,6 +4922,17 @@
             },
             operator: {
                 on: {
+                    DELETE: [
+                        {
+                            target: "#calculator.number.fraction",
+                            cond: "prevToLastTokenHasDecimalPoint",
+                            actions: "deleteLastToken",
+                        },
+                        {
+                            target: "#calculator.number.int",
+                            actions: "deleteLastToken",
+                        },
+                    ],
                     OPERATOR: {
                         actions: "replaceLastToken",
                     },
@@ -4914,17 +4952,18 @@
                     onDone: [
                         {
                             target: "result",
+                            actions: "replaceAllWithNewToken",
                         },
                     ],
                     onError: [
                         {
                             target: "#calculator.result.error",
+                            actions: "replaceAllWithError",
                         },
                     ],
                 },
             },
             result: {
-                entry: "replaceAllWithResult",
                 initial: "solution",
                 states: {
                     solution: {
@@ -4938,15 +4977,25 @@
                     error: {},
                 },
                 on: {
-                    DECIMAL_POINT: {
-                        target: "#calculator.number.fraction",
-                        actions: "replaceAllWithNewFractionToken",
+                    DELETE: {
+                        target: "#calculator.number.int",
+                        actions: "resetTokens",
                     },
                     DIGIT: {
                         target: "#calculator.number.int",
                         actions: "replaceAllWithNewToken",
                     },
+                    DECIMAL_POINT: {
+                        target: "#calculator.number.fraction",
+                        actions: "replaceAllWithNewFractionToken",
+                    },
                 },
+            },
+        },
+        on: {
+            RESET: {
+                target: ".number.int",
+                actions: "resetTokens",
             },
         },
     }, {
@@ -4955,7 +5004,7 @@
                 tokens: (context, event) => {
                     const lastToken = context.tokens.at(-1);
                     const suffix = event.type === "DECIMAL_POINT" ? "." : event.data;
-                    return [...exceptLast$1(context.tokens), lastToken + suffix];
+                    return [...exceptLast(context.tokens), lastToken + suffix];
                 },
             }),
             appendNewToken: assign({
@@ -4970,7 +5019,7 @@
             }),
             replaceLastToken: assign({
                 tokens: (context, event) => {
-                    return [...exceptLast$1(context.tokens), event.data];
+                    return [...exceptLast(context.tokens), event.data];
                 },
             }),
             replaceAllWithNewToken: assign({
@@ -4981,14 +5030,20 @@
             replaceAllWithNewFractionToken: assign({
                 tokens: ["0."],
             }),
-            replaceAllWithResult: assign({
+            replaceAllWithError: assign({
                 tokens: (context, event) => {
-                    if (typeof event.data === "string") {
-                        return [event.data];
-                    }
-                    else {
-                        return [event.data.message];
-                    }
+                    return [event.data.message];
+                },
+            }),
+            deleteLastDigit: assign({
+                tokens: (context) => {
+                    const lastToken = context.tokens.at(-1);
+                    return [...exceptLast(context.tokens), exceptLast(lastToken)];
+                },
+            }),
+            deleteLastToken: assign({
+                tokens: (context) => {
+                    return [...exceptLast(context.tokens)];
                 },
             }),
             resetTokens: assign({
@@ -5013,285 +5068,20 @@
             lastTokenIsZero: (context) => {
                 return context.tokens.at(-1) === "0";
             },
-        },
-    });
-    function exceptLast$1(sliceable) {
-        return sliceable.slice(0, sliceable.length - 1);
-    }
-
-    function isDigit(str) {
-        return /^\d$/.test(str);
-    }
-    function isNumeric(str) {
-        return /^\d+(\.\d*)?$/.test(str);
-    }
-    const OPERATORS = ["+", "-", "*", "/"];
-    function isOperator(str) {
-        // @ts-ignore (I don't get why TS is complaining about str 😕)
-        return OPERATORS.includes(str);
-    }
-    /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZA6AlhdYAxACICSA4qQCqKgAOA9rDgC44MB2tIAHogEwBWAJxYAbPwAswgBwBGYYPli5AZjEAaEAE9Ec-gAZJWGarMB2U+dWK55gL72taTLnxFiAUQDCpALIAggAyAPoACgDypAByNEggjMxsnNx8CEKiEtLyispqmjqISqpY5sLlwuZVqoJiRo7OGNh4BIQRYZ4ASgFUEZ3ciazsXPFpGeJSsgpKcirqWrrpBqLS5eb85pKCqgaWDSAuzRwsJBTUA0xDKaOIkjsmwgYiwmJikmKC-HILevqiZmYZAYZGJHuUZPtDrhjiQfP5guEorELklhqkim8sJNbGJVEI7OYfgh5MYDGSDPxVJJZmSqZCmtCTu0uj0+iiriNQGlasZsYJZnj+VUietzFhyWTJPxpYIlPTXDgYZ1PABlTxxeiXZKc3iIMwGLDCVSbOrvOSCCmyolyc1iEwAmRbc0yQR3eVHE4qiJBABqnnZ2vRCB5WNW-Nx+OFhQQNptWAtZNlG3M+n4EKcBwZipOXiC6v98UGgZuwcxfIFkcJ0f0d3ErxTuLUKf47qwADMAE6oZDa06UDUJLVokubA0VRRSMlCWpE-mkiqWD5iGQr4Stzvd3vM7q9fqFofXLmIEGiR3qGSbfhG5f8IlUmRYVaySlSgw7STrrs94aEZVqgdFsOR4ILigjxlkOxqEoSjCES7zGDsEqOk6difpuP5er6Baaqih66sSoImHcy6XteMi3tGEhihKCgvDapiqGh36cLCeZUNhg64TqaQnkR56keeFGLIIZTiuS-AqG+wJyhmUIMHQYBdiwDAdn25z7lxQZGmKmzlNssxlEaqhEooJQSvq+jrCorbyYpqDKap26snuOEckGcgGGWpjUn8sxSDId4iY+FRAm+K6zMIH6yQytlKSpsK+IEoSRDEAEHtxx6EWeJFSmRQm3DU8Y0dsrrmDJjSuLF9nxX+6oBkB+GRXIWC2rMIh4uYyySESMiiOOZXKEIvVRRV2BVQ5rH5vVeFpPohXLOoEggnYxRwbKYlknIr6qFtlSOBmHAMBAcDcFCLRgNNGUIFK1rmmBDGSBSkiSECfmttml1Bnc-Chmsrp4qovVGta0rNQCj1khIrqCExxauXD+HWHaF7SE6nkmsZlGeeK-Uum+VKMdFlUKXFHafSWHnrKGdwvc8oJvnB0jBeOlLShIhOjVgsAMOgACuCOATNeieT97wgkCjw1C8AXVp5JSzGI1gGGoV7CGmrYABY4LALDk8BahbHxbxXomZWztYG0UnIK5PBs6ajXr+HW9aYr9XUwIKFSW37fYQA */
-    createMachine({
-        schema: {
-            events: {},
-            services: {},
-        },
-        tsTypes: {},
-        context: { tokens: ["0"] },
-        id: "calc",
-        initial: "idle",
-        states: {
-            idle: {
-                entry: "resetTokens",
-                on: {
-                    DIGIT: {
-                        actions: "appendDigitToTokens",
-                        target: "int",
-                    },
-                    DECIMAL_POINT: {
-                        actions: "appendDecimalPointToTokens",
-                        target: "fraction",
-                    },
-                    OPERATOR: {
-                        actions: "appendOperatorToTokens",
-                        target: "operator",
-                    },
-                    // DELETE here has no effect
-                },
+            onlyOneDigitIsLeftInTokens: (context) => {
+                const { tokens } = context;
+                return tokens.length === 1 && tokens[0].length === 1;
             },
-            int: {
-                on: {
-                    DIGIT: {
-                        actions: "appendDigitToTokens",
-                        target: "int",
-                    },
-                    DECIMAL_POINT: {
-                        actions: "appendDecimalPointToTokens",
-                        target: "fraction",
-                    },
-                    OPERATOR: {
-                        actions: "appendOperatorToTokens",
-                        target: "operator",
-                    },
-                    SOLVE: {
-                        target: "solving",
-                    },
-                    DELETE: [
-                        {
-                            target: "idle",
-                            cond: "tokensHasOnlyOneDigit",
-                        },
-                        {
-                            cond: "lastItemHasManyDigits",
-                            actions: "delete",
-                            target: "int",
-                        },
-                        {
-                            cond: "lastItemHasOnlyOneDigit",
-                            actions: "delete",
-                            target: "operator",
-                        },
-                    ],
-                },
-            },
-            fraction: {
-                on: {
-                    DIGIT: {
-                        actions: "appendDigitToTokens",
-                        target: "fraction",
-                    },
-                    OPERATOR: {
-                        actions: "appendOperatorToTokens",
-                        target: "operator",
-                    },
-                    SOLVE: {
-                        target: "solving",
-                    },
-                    DELETE: [
-                        {
-                            actions: "delete",
-                            target: "fraction",
-                            cond: "lastItemEndsWithDigit",
-                        },
-                        {
-                            actions: "delete",
-                            target: "int",
-                        },
-                    ],
-                },
-            },
-            operator: {
-                on: {
-                    DIGIT: {
-                        actions: "appendDigitToTokens",
-                        target: "int",
-                    },
-                    OPERATOR: {
-                        actions: "replaceLastOperator",
-                        target: "operator",
-                    },
-                    DECIMAL_POINT: {
-                        actions: "appendDecimalPointToTokens",
-                        target: "fraction",
-                    },
-                    DELETE: [
-                        {
-                            actions: "delete",
-                            target: "fraction",
-                            cond: "prevToLastItemHasDecimalPoint",
-                        },
-                        {
-                            actions: "delete",
-                            target: "int",
-                        },
-                    ],
-                },
-            },
-            solving: {
-                invoke: {
-                    src: "solveTokens",
-                    onDone: "solution.result",
-                    onError: "solution.error",
-                },
-            },
-            solution: {
-                type: "compound",
-                on: {
-                    DIGIT: {
-                        actions: ["resetTokens", "appendDigitToTokens"],
-                        target: "int",
-                    },
-                    DECIMAL_POINT: {
-                        actions: ["resetTokens", "appendDecimalPointToTokens"],
-                        target: "fraction",
-                    },
-                    ERROR: {
-                        target: "solution.error",
-                    },
-                    DELETE: {
-                        target: "idle",
-                    },
-                },
-                states: {
-                    result: {
-                        entry: "setResult",
-                        on: {
-                            OPERATOR: {
-                                actions: "appendOperatorToTokens",
-                                target: "#calc.operator",
-                            },
-                        },
-                    },
-                    error: {
-                        entry: "setMathError",
-                    },
-                },
-            },
-        },
-        on: {
-            RESET: {
-                target: "idle",
-            },
-        },
-    }, {
-        actions: {
-            resetTokens: assign({
-                tokens: ["0"],
-            }),
-            appendDigitToTokens: assign({
-                tokens: (context, event) => {
-                    const { tokens } = context;
-                    const lastToken = tokens.at(-1);
-                    if (!isNumeric(lastToken)) {
-                        // Append a new top
-                        return [...tokens, event.data];
-                    }
-                    else if (lastToken === "0") {
-                        // Replace the old top
-                        return [...exceptLast(tokens), event.data];
-                    }
-                    else {
-                        // Append to the old top
-                        return [...exceptLast(tokens), lastToken + event.data];
-                    }
-                },
-            }),
-            appendDecimalPointToTokens: assign({
-                tokens: (context) => {
-                    const lastToken = context.tokens.at(-1);
-                    if (isOperator(lastToken)) {
-                        return [...context.tokens, "0."];
-                    }
-                    else {
-                        return [...exceptLast(context.tokens), lastToken + "."];
-                    }
-                },
-            }),
-            appendOperatorToTokens: assign({
-                tokens: (context, event) => {
-                    return [...context.tokens, event.data];
-                },
-            }),
-            replaceLastOperator: assign({
-                tokens: (context, event) => {
-                    return [...exceptLast(context.tokens), event.data];
-                },
-            }),
-            setResult: assign({
-                tokens: (context, event) => {
-                    return [event.data];
-                },
-            }),
-            setMathError: assign({
-                tokens: ["MathError"],
-            }),
-            delete: assign({
-                tokens: (context) => {
-                    const { tokens: tokens } = context;
-                    const lastToken = tokens.at(-1);
-                    if (lastToken.length === 1) {
-                        return [...exceptLast(tokens)];
-                    }
-                    else {
-                        return [...exceptLast(tokens), exceptLast(lastToken)];
-                    }
-                },
-            }),
-        },
-        services: {
-            solveTokens(context) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    const concatted = context.tokens.join("");
-                    const result = eval(concatted);
-                    if (Number.isFinite(result)) {
-                        return result.toString();
-                    }
-                    else {
-                        throw new Error("MathError: " + result);
-                    }
-                });
-            },
-        },
-        guards: {
-            /** Check if the input has a single item which is a single digit */
-            tokensHasOnlyOneDigit(context) {
-                return context.tokens.length === 1 && context.tokens.at(-1).length === 1;
-            },
-            /** Check if the last input item has many digits */
-            lastItemHasManyDigits(context) {
-                return context.tokens.at(-1).length > 1;
-            },
-            /** Check if the last input item has only one digit */
-            lastItemHasOnlyOneDigit(context) {
+            lastTokenHasOnlyOneDigit: (context) => {
                 return context.tokens.at(-1).length === 1;
             },
-            /** Check if the last input item ends with a digit */
-            lastItemEndsWithDigit(context) {
-                const last = context.tokens.at(-1);
-                return isDigit(last.at(-1));
+            lastTokenHasManyDigits: (context) => {
+                return context.tokens.at(-1).length > 1;
             },
-            /** Check if the penultimate item has a decimal point */
-            prevToLastItemHasDecimalPoint(context) {
+            lastTokenEndsWithDecimalPoint: (context) => {
+                return context.tokens.at(-1).endsWith(".");
+            },
+            prevToLastTokenHasDecimalPoint: (context) => {
                 return context.tokens.at(-2).includes(".");
             },
         },
@@ -5349,7 +5139,7 @@
         if (isDigit(key)) {
             calcService.send({ type: "DIGIT", data: key });
         }
-        else if (isOperator$1(key) || key === "Plus") {
+        else if (isOperator(key) || key === "Plus") {
             calcService.send({ type: "OPERATOR", data: key === "Plus" ? "+" : key });
         }
         else if (key === ".") {

@@ -1,5 +1,13 @@
 import {assign, createMachine} from "xstate"
 
+export function isDigit(str: string): str is `${number}` {
+	return /^\d$/.test(str)
+}
+
+export function isNumeric(str: string): str is `${number}` {
+	return /^\d+(\.\d*)?$/.test(str)
+}
+
 const OPERATORS = ["+", "-", "*", "/"] as const
 type Operator = typeof OPERATORS[number]
 
@@ -8,46 +16,31 @@ export function isOperator(str: string): str is Operator {
 	return OPERATORS.includes(str)
 }
 
-type CalcEvent =
-	| {type: "DIGIT"; data: `${number}`}
-	| {type: "OPERATOR"; data: Operator}
-	| {type: "DECIMAL_POINT"}
-	| {type: "SOLVE"}
-	| {type: "RESET"}
-	| {type: "DELETE"}
-	| {type: "ERROR"}
-
-type CalcContext = {
-	tokens: string[]
-}
-
-type CalcService = {
-	solve: {
-		data: string
-	}
-}
-
 export const calcMachine =
-	/** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZBXdqAuA9gE4B0AdlgLYBGYpAlmXgMQAiAkgOLsAqA2gAYAuolAAHArHp56BMqJAAPRAFoAjACYAHCQCcAgGwBmbUYAsG3boCsWowBoQAT1VqBakgHYNBgZYFmRloCuoEAvmGOaJg4+MTkVLQMTGxcvHxqIkggElIycgrKCBqeXsZqwcFGulpqugaeji4I5iRa1oGe9WqeBmYWZhFRGNi4hKQUNHQkjCysAKIAwuwAsgCCADIA+gAKAPLsAHL8wgq50rLy2UUqGmYGJKY+oQZu5kaNzojmZiTWbiUPmYBNUAkMQNFRnEJolpgAzIioZD5MipbgnLLiSQXArXRBaUrGAm2KyeQwlaxNRAWHQabTWTxk4kmcGQ2LjBJTIjMPY7eYAJTWPD2-MEmJy2JRhWpBgeagM7RKnnaZlCGgcXxa7RIRnMyp6dLUFWsrJG7PikySzAAynsNgA1eZis6Sy7ShBmLS6NruRU9Bo1DRUhDqQwkMzWf6eYEdIwdEGmmJjeIEMR0aE8vmC4Wi07Zc5SvEIeoaHUCawg4wR6w1AzB9XWPSGBlGASef5maNGRNQjmp9PjNHpPNYvJuot6rzyzxAjoGSyheveEgGBkadwGXQVVUfHvm0j9xGDhbLdbbfZHDEuse40BFYylvq6Z663Xqz7NawaDzfuo+TfAmYah7smpCwAQ6AAG6MFAzAQHIYAzGQkEEAA1ohbKgSQ4FQTBCCMChaAomKzr5q6t5KIgDQ6CCX5uDYvhqIEwa3J6JBqLqRIcR82jqiB0LYRB0FkLBdBEPEYhjHCxCUCQmECThwlQPhyEEERlwkSOEo3lcd7UloOh2DOpieD0RosXSRhtNGpmykYfSRhoJqRBCZpYUQcA4HggnoFgKKZgKQoiqRo44rplEIMEpbtAI7hAfo751pqHhaJ2dLtq8676Foq78RyHmwF5bBLKsmy7AcxwhdpYXuioNYCCQfi6L0v7Pt4WgsUEejyhYtY1P0nF5fEBVFRw6JVQW456S0soriYTm1Po2Uas0RoNT0cY1vUXZxkN3L8vM1rzFeZE6bVGU6n0QHPASrwraodylv8IS6k1hjNhELlkAQEBwAo8kcpa0yzNeNVFuovQrlYdwcZ69ztkGyU9Ox74mM+Jh2HxLkAxasKkAiSKFqFRMRXSfzeBUbYgoEuith1modL89wVNGtipZYe2ckkoMkzcli-E8AGvNTHwsXUDXeL4nrqu42Wc4e0I81NEV2N6gZdOW8r1O4wZGJo7ENEEdTtu0mic4pMFKxR96quxM42O1BKGElzTqMCjzBDOoJAdYxgGJzI3oN5OF+crk3W1RFaNa8q404qqWdYy7GpfOvvVLTcMB55QckGJxBW+FRQVg16MUs1NZqF+ielNuqfGFY5ipVnhVBwX7oRqWpftuXW5V5qdVMcn9zuDLHGmXtbfg8Evz2f0mibrdHEsb4VnbltnsdO0n1hEAA */
+	/** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZBXdqAuA9gE4B0AdlgLYBGYpAlmXgMQAiAkgOLsAqA2gAYAuolAAHArHp56BMqJAAPRAFoAjACYAHCQCcAgGwBmbUYAsG3boCsWowBoQAT1VqBakgHYNBgZYFmRloCuoEAvmGOaJg4+MTkVLQMTGxcvHxqIkggElIycgrKCBqeXsZqwcFGulpqugaeji4I5iRa1oGe9WqeBmYWZhFRGNi4hKQUNHQkjCysAKIAwuwAsgCCADIA+gAKAPLsAHL8wgq50rLy2UUqGmYGJKY+oQZu5kaNzojmZiTWbiUPmYBNUAkMQNFRnEJolpgAzIioZD5MipbgnLLiSQXArXRBaUrGAm2KyeQwlaxNRAWHQabTWTxk4kmcGQ2LjBJTIjMPY7eYAJTWPD2-MEmJy2JRhWpBgeagM7RKnnaZlCGgcXxa7RIRnMyp6dLUFWsrJG7PikySzAAynsNgA1eZis6Sy7ShBmLS6NruRU9Bo1DRUhDqQwkMzWf6eYEdIwdEGmmJjeIEMR0aE8vmC4Wi07Zc5SvEIeoaHUCawg4wR6w1AzB9XWPSGBlGASef5maNGRNQjmp9PjNHpPNYvJuot6rzyzxAjoGSyheveEgGBkadwGXQVVUfHvm0j9xGDhbLdbbfZHDEuse40BFYylvq6Z663Xqz7NawaDzfuo+TfAmYah7smpCwAQ6AAG6MFAzAQHIYAzGQkEEAA1ohbKgSQ4FQTBCCMChaAomKzr5q6t5KIgDQ6CCX5uDYvhqIEwa3J6JBqLqRIcR82jqiB0LYRB0FkLBdBEPEYhjHCxCUCQmECThwlQPhyEEERlwkSOEo3lcd7UloOh2DOpieD0RosXSRhtNGpmykYfSRhoJqRBCZpYUQcA4HggnoFgKKZgKQoiqRo44rplEIMEpbtAI7hAfo751pqHhaJ2dLtq8676Foq78RyHmwF5bBLKsmy7AcxwhdpYXuioNYCCQfi6L0v7Pt4WgsUEejyhYtY1P0nF5fEBVFRw6JVQW456S0soriYTm1Po2Uas0RoNT0cY1vUXZxkN3L8vM1rzFeZE6bVGU6n0QHPASrwraodylv8IS6k1hjNhELlkAQEBwAo8kcpa0yzNeNVFuovQrlYdwcZ69ztkGyU9Ox74mM+Jh2HxLkAxasKkAiSKFqFRMRXSfzeBUbYgoEuith1modL89wVNGtipZYe2ckkoMkzcli-E8AGvNTHwsXUDXeIxWjaM+aiRp4nOHtCPNTRFdjeoGXTlvK9TuMGRiaOxDRBHU7btJonOKTBKsUfeqrsTONjtQShhJc06jAo8wQzqCQHWMYBicyN6DeThfmq5NttURWjWvKuNOKqlnWMuxqXzv71S03DQeeSHJBicQNvhUUFYNejFLNTWcuI+7HylNu6fGFY5ipTnhUh0X7oRqW5ftpXW5fixHap-cPjeE5fhaHtnfg8Evz2f0mibrdHEsb4VkN2PffVN2n1AA */
 	createMachine(
 		{
+			id: "calculator",
+			tsTypes: {} as import("./machine2.typegen").Typegen0,
+			schema: {
+				context: {} as {tokens: string[]},
+				events: {} as
+					| {type: "OPERATOR"; data: Operator}
+					| {type: "DIGIT"; data: `${number}`}
+					| {type: "DELETE"}
+					| {type: "RESET"}
+					| {type: "DECIMAL_POINT"}
+					| {type: "SOLVE"},
+				services: {} as {
+					solve: {data: string}
+				},
+			},
 			context: {
 				tokens: ["0"],
 			},
-			tsTypes: {} as import("./machine2.typegen").Typegen0,
-			schema: {
-				events: {} as CalcEvent,
-				context: {} as CalcContext,
-				services: {} as CalcService,
-			},
-			id: "calculator",
+			predictableActionArguments: true,
+			preserveActionOrder: true,
 			initial: "number",
-			on: {
-				RESET: {
-					target: ".number.int",
-					actions: "resetTokens",
-				},
-			},
 			states: {
 				number: {
 					initial: "int",
@@ -63,6 +56,21 @@ export const calcMachine =
 										actions: "appendToLastToken",
 									},
 								],
+								DELETE: [
+									{
+										cond: "onlyOneDigitIsLeftInTokens",
+										actions: "resetTokens",
+									},
+									{
+										target: "#calculator.operator",
+										cond: "lastTokenHasOnlyOneDigit",
+										actions: "deleteLastToken",
+									},
+									{
+										cond: "lastTokenHasManyDigits",
+										actions: "deleteLastDigit",
+									},
+								],
 								DECIMAL_POINT: {
 									target: "fraction",
 									actions: "appendToLastToken",
@@ -71,6 +79,16 @@ export const calcMachine =
 						},
 						fraction: {
 							on: {
+								DELETE: [
+									{
+										cond: "lastTokenEndsWithDecimalPoint",
+										target: "int",
+										actions: "deleteLastDigit",
+									},
+									{
+										actions: "deleteLastDigit",
+									},
+								],
 								DIGIT: {
 									actions: "appendToLastToken",
 								},
@@ -89,6 +107,17 @@ export const calcMachine =
 				},
 				operator: {
 					on: {
+						DELETE: [
+							{
+								target: "#calculator.number.fraction",
+								cond: "prevToLastTokenHasDecimalPoint",
+								actions: "deleteLastToken",
+							},
+							{
+								target: "#calculator.number.int",
+								actions: "deleteLastToken",
+							},
+						],
 						OPERATOR: {
 							actions: "replaceLastToken",
 						},
@@ -108,17 +137,18 @@ export const calcMachine =
 						onDone: [
 							{
 								target: "result",
+								actions: "replaceAllWithNewToken",
 							},
 						],
 						onError: [
 							{
 								target: "#calculator.result.error",
+								actions: "replaceAllWithError",
 							},
 						],
 					},
 				},
 				result: {
-					entry: "replaceAllWithResult",
 					initial: "solution",
 					states: {
 						solution: {
@@ -132,15 +162,25 @@ export const calcMachine =
 						error: {},
 					},
 					on: {
-						DECIMAL_POINT: {
-							target: "#calculator.number.fraction",
-							actions: "replaceAllWithNewFractionToken",
+						DELETE: {
+							target: "#calculator.number.int",
+							actions: "resetTokens",
 						},
 						DIGIT: {
 							target: "#calculator.number.int",
 							actions: "replaceAllWithNewToken",
 						},
+						DECIMAL_POINT: {
+							target: "#calculator.number.fraction",
+							actions: "replaceAllWithNewFractionToken",
+						},
 					},
+				},
+			},
+			on: {
+				RESET: {
+					target: ".number.int",
+					actions: "resetTokens",
 				},
 			},
 		},
@@ -176,13 +216,20 @@ export const calcMachine =
 				replaceAllWithNewFractionToken: assign({
 					tokens: ["0."],
 				}),
-				replaceAllWithResult: assign({
+				replaceAllWithError: assign({
 					tokens: (context, event) => {
-						if (typeof event.data === "string") {
-							return [event.data]
-						} else {
-							return [(event.data as Error).message]
-						}
+						return [(event.data as Error).message]
+					},
+				}),
+				deleteLastDigit: assign({
+					tokens: (context) => {
+						const lastToken = context.tokens.at(-1)!
+						return [...exceptLast(context.tokens), exceptLast(lastToken)]
+					},
+				}),
+				deleteLastToken: assign({
+					tokens: (context) => {
+						return [...exceptLast(context.tokens)]
 					},
 				}),
 				resetTokens: assign({
@@ -203,6 +250,22 @@ export const calcMachine =
 			guards: {
 				lastTokenIsZero: (context) => {
 					return context.tokens.at(-1) === "0"
+				},
+				onlyOneDigitIsLeftInTokens: (context) => {
+					const {tokens} = context
+					return tokens.length === 1 && tokens[0]!.length === 1
+				},
+				lastTokenHasOnlyOneDigit: (context) => {
+					return context.tokens.at(-1)!.length === 1
+				},
+				lastTokenHasManyDigits: (context) => {
+					return context.tokens.at(-1)!.length > 1
+				},
+				lastTokenEndsWithDecimalPoint: (context) => {
+					return context.tokens.at(-1)!.endsWith(".")
+				},
+				prevToLastTokenHasDecimalPoint: (context) => {
+					return context.tokens.at(-2)!.includes(".")
 				},
 			},
 		}
