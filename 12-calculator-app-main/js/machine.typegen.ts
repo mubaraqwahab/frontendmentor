@@ -3,19 +3,19 @@
 export interface Typegen0 {
 	"@@xstate/typegen": true
 	internalEvents: {
-		"done.invoke.calc.solving:invocation[0]": {
-			type: "done.invoke.calc.solving:invocation[0]"
+		"done.invoke.calculator.solving:invocation[0]": {
+			type: "done.invoke.calculator.solving:invocation[0]"
 			data: unknown
 			__tip: "See the XState TS docs to learn how to strongly type this."
 		}
-		"error.platform.calc.solving:invocation[0]": {
-			type: "error.platform.calc.solving:invocation[0]"
+		"error.platform.calculator.solving:invocation[0]": {
+			type: "error.platform.calculator.solving:invocation[0]"
 			data: unknown
 		}
 		"xstate.init": {type: "xstate.init"}
 	}
 	invokeSrcNameMap: {
-		solveTokens: "done.invoke.calc.solving:invocation[0]"
+		solve: "done.invoke.calculator.solving:invocation[0]"
 	}
 	missingImplementations: {
 		actions: never
@@ -24,35 +24,38 @@ export interface Typegen0 {
 		delays: never
 	}
 	eventsCausingActions: {
-		appendDecimalPointToTokens: "DECIMAL_POINT"
-		appendDigitToTokens: "DIGIT"
-		appendOperatorToTokens: "OPERATOR"
-		delete: "DELETE"
-		replaceLastOperator: "OPERATOR"
-		resetTokens: "DECIMAL_POINT" | "DELETE" | "DIGIT" | "RESET" | "xstate.init"
-		setMathError: "ERROR" | "error.platform.calc.solving:invocation[0]"
-		setResult: "done.invoke.calc.solving:invocation[0]"
+		appendNewFractionToken: "DECIMAL_POINT"
+		appendNewToken: "DIGIT" | "OPERATOR"
+		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
+		deleteLastDigit: "DELETE"
+		deleteLastToken: "DELETE"
+		replaceAllWithError: "error.platform.calculator.solving:invocation[0]"
+		replaceAllWithNewFractionToken: "DECIMAL_POINT"
+		replaceAllWithNewToken: "DIGIT" | "done.invoke.calculator.solving:invocation[0]"
+		replaceLastToken: "DIGIT" | "OPERATOR"
+		resetTokens: "DELETE" | "RESET"
 	}
 	eventsCausingServices: {
-		solveTokens: "SOLVE"
+		solve: "SOLVE"
 	}
 	eventsCausingGuards: {
-		lastItemEndsWithDigit: "DELETE"
-		lastItemHasManyDigits: "DELETE"
-		lastItemHasOnlyOneDigit: "DELETE"
-		prevToLastItemHasDecimalPoint: "DELETE"
-		tokensHasOnlyOneDigit: "DELETE"
+		lastTokenEndsWithDecimalPoint: "DELETE"
+		lastTokenHasManyDigits: "DELETE"
+		lastTokenHasOnlyOneDigit: "DELETE"
+		lastTokenIsZero: "DIGIT"
+		onlyOneDigitIsLeftInTokens: "DELETE"
+		prevToLastTokenHasDecimalPoint: "DELETE"
 	}
 	eventsCausingDelays: {}
 	matchesStates:
-		| "fraction"
-		| "idle"
-		| "int"
+		| "number"
+		| "number.fraction"
+		| "number.int"
 		| "operator"
-		| "solution"
-		| "solution.error"
-		| "solution.result"
+		| "result"
+		| "result.error"
+		| "result.solution"
 		| "solving"
-		| {solution?: "error" | "result"}
+		| {number?: "fraction" | "int"; result?: "error" | "solution"}
 	tags: never
 }
