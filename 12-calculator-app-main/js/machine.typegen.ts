@@ -3,20 +3,9 @@
 export interface Typegen0 {
 	"@@xstate/typegen": true
 	internalEvents: {
-		"done.invoke.calculator.solving:invocation[0]": {
-			type: "done.invoke.calculator.solving:invocation[0]"
-			data: unknown
-			__tip: "See the XState TS docs to learn how to strongly type this."
-		}
-		"error.platform.calculator.solving:invocation[0]": {
-			type: "error.platform.calculator.solving:invocation[0]"
-			data: unknown
-		}
 		"xstate.init": {type: "xstate.init"}
 	}
-	invokeSrcNameMap: {
-		solve: "done.invoke.calculator.solving:invocation[0]"
-	}
+	invokeSrcNameMap: {}
 	missingImplementations: {
 		actions: never
 		services: never
@@ -29,15 +18,13 @@ export interface Typegen0 {
 		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
 		deleteLastDigit: "DELETE"
 		deleteLastToken: "DELETE"
-		replaceAllWithError: "error.platform.calculator.solving:invocation[0]"
 		replaceAllWithNewFractionToken: "DECIMAL_POINT"
-		replaceAllWithNewToken: "DIGIT" | "done.invoke.calculator.solving:invocation[0]"
+		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR"
 		replaceLastToken: "DIGIT" | "OPERATOR"
 		resetTokens: "DELETE" | "RESET"
-	}
-	eventsCausingServices: {
 		solve: "SOLVE"
 	}
+	eventsCausingServices: {}
 	eventsCausingGuards: {
 		lastTokenEndsWithDecimalPoint: "DELETE"
 		lastTokenHasManyDigits: "DELETE"

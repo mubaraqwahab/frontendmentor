@@ -113,7 +113,7 @@
     var start$1 = ActionTypes.Start;
     var stop$1 = ActionTypes.Stop;
     var raise$1 = ActionTypes.Raise;
-    var send$1 = ActionTypes.Send;
+    var send$2 = ActionTypes.Send;
     var cancel$1 = ActionTypes.Cancel;
     var nullEvent = ActionTypes.NullEvent;
     var assign$2 = ActionTypes.Assign;
@@ -735,7 +735,7 @@
 
     function raise(event) {
       if (!isString(event)) {
-        return send(event, {
+        return send$1(event, {
           to: SpecialTargets.Internal
         });
       }
@@ -762,10 +762,10 @@
      *  - `to` - The target of this event (by default, the machine the event was sent from).
      */
 
-    function send(event, options) {
+    function send$1(event, options) {
       return {
         to: options ? options.to : undefined,
-        type: send$1,
+        type: send$2,
         event: isFunction(event) ? event : toEventObject(event),
         delay: options ? options.delay : undefined,
         id: options && options.id !== undefined ? options.id : isFunction(event) ? event.name : getEventType(event)
@@ -957,7 +957,7 @@
               return resolveRaise(actionObject);
             }
 
-          case send$1:
+          case send$2:
             var sendAction = resolveSend(actionObject, updatedContext, _event, machine.options.delays); // TODO: fix ActionTypes.Init
 
             if (sendAction.to !== SpecialTargets.Internal) {
@@ -2021,7 +2021,7 @@
           }
 
           switch (action.type) {
-            case send$1:
+            case send$2:
               var sendAction = action;
 
               if (typeof sendAction.delay === 'number') {
@@ -2609,7 +2609,7 @@
               historyValue: undefined,
               history: _this.state,
               actions: resolvedActions.filter(function (action) {
-                return action.type !== raise$1 && (action.type !== send$1 || !!action.to && action.to !== SpecialTargets.Internal);
+                return action.type !== raise$1 && (action.type !== send$2 || !!action.to && action.to !== SpecialTargets.Internal);
               }),
               activities: {},
               events: [],
@@ -3602,7 +3602,7 @@
           var delayRef = isFunction(delay) ? "".concat(_this.id, ":delay[").concat(i, "]") : delay;
           var eventType = after(delayRef, _this.id);
 
-          _this.onEntry.push(send(eventType, {
+          _this.onEntry.push(send$1(eventType, {
             delay: delay
           }));
 
@@ -4019,7 +4019,7 @@
           }).map(function (stateNode) {
             return stateNode.onExit;
           })), this.machine.options.actions).filter(function (action) {
-            return action.type !== raise$1 && (action.type !== send$1 || !!action.to && action.to !== SpecialTargets.Internal);
+            return action.type !== raise$1 && (action.type !== send$2 || !!action.to && action.to !== SpecialTargets.Internal);
           });
           return actions.concat(stopActions);
         }
@@ -4135,7 +4135,7 @@
             updatedContext = _b[1];
 
         var _c = __read(partition(resolvedActions, function (action) {
-          return action.type === raise$1 || action.type === send$1 && action.to === SpecialTargets.Internal;
+          return action.type === raise$1 || action.type === send$2 && action.to === SpecialTargets.Internal;
         }), 2),
             raisedEvents = _c[0],
             nonRaisedActions = _c[1];
@@ -4802,32 +4802,8 @@
       return new StateNode(config, options);
     }
 
-    var assign = assign$1;
-
-    /******************************************************************************
-    Copyright (c) Microsoft Corporation.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose with or without fee is hereby granted.
-
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */
-
-    function __awaiter(thisArg, _arguments, P, generator) {
-        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
+    var assign = assign$1,
+        send = send$1;
 
     function isDigit(str) {
         return /^\d$/.test(str);
@@ -4848,7 +4824,6 @@
         schema: {
             context: {},
             events: {},
-            services: {},
         },
         context: {
             tokens: ["0"],
@@ -4947,24 +4922,18 @@
                 },
             },
             solving: {
-                invoke: {
-                    src: "solve",
-                    onDone: [
-                        {
-                            target: "result",
-                            actions: "replaceAllWithNewToken",
-                        },
-                    ],
-                    onError: [
-                        {
-                            target: "#calculator.result.error",
-                            actions: "replaceAllWithError",
-                        },
-                    ],
+                entry: "solve",
+                on: {
+                    ERROR: {
+                        target: "#calculator.result.error",
+                    },
+                    DONE: {
+                        target: "result",
+                    },
                 },
             },
             result: {
-                initial: "solution",
+                entry: "replaceAllWithNewToken",
                 states: {
                     solution: {
                         on: {
@@ -5030,11 +4999,6 @@
             replaceAllWithNewFractionToken: assign({
                 tokens: ["0."],
             }),
-            replaceAllWithError: assign({
-                tokens: (context, event) => {
-                    return [event.data.message];
-                },
-            }),
             deleteLastDigit: assign({
                 tokens: (context) => {
                     const lastToken = context.tokens.at(-1);
@@ -5049,20 +5013,16 @@
             resetTokens: assign({
                 tokens: ["0"],
             }),
-        },
-        services: {
-            solve(context) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    const concatted = context.tokens.join("");
-                    const result = eval(concatted);
-                    if (Number.isFinite(result)) {
-                        return result.toString();
-                    }
-                    else {
-                        throw new Error("Cannot divide by zero");
-                    }
-                });
-            },
+            solve: send((context) => {
+                const concatted = context.tokens.join("");
+                const result = eval(concatted);
+                if (Number.isFinite(result)) {
+                    return { type: "DONE", data: `${result}` };
+                }
+                else {
+                    return { type: "ERROR", data: "Cannot divide by zero" };
+                }
+            }),
         },
         guards: {
             lastTokenIsZero: (context) => {
