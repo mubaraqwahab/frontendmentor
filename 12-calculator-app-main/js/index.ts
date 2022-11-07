@@ -1,5 +1,8 @@
 import {interpret} from "xstate"
 import {calcMachine, isOperator, isDigit, isNumeric} from "./machine"
+import {initRovingTabIndex} from "./toolbar"
+
+initRovingTabIndex()
 
 const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
 themeSwitch.forEach((radio) => {
@@ -15,7 +18,7 @@ const calcService = interpret(calcMachine).start()
 const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (state.changed) {
-		outputEl.textContent = state.context.tokens
+		outputEl.value = state.context.tokens
 			// format numbers
 			.map((token) => (isNumeric(token) ? formatNumStr(token) : token))
 			// format multiplication signs
@@ -26,18 +29,27 @@ calcService.onTransition((state) => {
 			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`
 		)
 
-		// TODO: is it good/bad UX to disable?
-		// const {nextEvents} = state
-		// const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")
-		// solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE")
+		/**
+		 * Determine if the current state rejects an event of a given type.
+		 * A state 'rejects' an event if the event can't cause a transition from the state.
+		 * @param eventType
+		 */
+		function rejectsEvent(eventType: string) {
+			const {nextEvents} = state
+			return nextEvents.every((e) => e !== eventType)
+		}
 
-		// const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")
-		// decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT")
+		// Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
+		const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
+		solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
 
-		// const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
-		// operatorBtns.forEach((btn) => {
-		// 	btn.disabled = nextEvents.every((e) => e !== "OPERATOR")
-		// })
+		const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
+		decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())
+
+		const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
+		operatorBtns.forEach((btn) => {
+			btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString())
+		})
 	}
 })
 
@@ -46,16 +58,26 @@ const keyEls = document.querySelectorAll<HTMLButtonElement>(".Key")
 keyEls.forEach((keyEl) => {
 	keyEl.addEventListener("click", (e) => {
 		e.preventDefault()
-		const key = keyEl.getAttribute("aria-keyshortcuts")!
+		const key = keyEl.dataset.keyshortcuts!
 		handleKey(key)
-		// TODO: is this below a good idea?
-		outputEl.focus()
 	})
 })
 
-// Handle key keyboard shorcuts
-outputEl.addEventListener("keyup", (e) => {
-	handleKey(e.key)
+// Handle key keyboard shorcuts.
+// Listen for 'keydown' not 'keyup', so that a user can press
+// and hold a key to type it repeatedly.
+document.body.addEventListener("keydown", (e) => {
+	const target = e.target as HTMLElement
+
+	if (target.matches("input[type=radio]")) return
+
+	// Don't handle Enter key when pressed on a button
+	// so that it doesn't interfere with the default behaviour.
+	// (The default behaviour is to activate the button.)
+	// I must admit though that, because of this, the UX feels weird.
+	if (!target.matches("button") || (target.matches("button") && e.key !== "Enter")) {
+		handleKey(e.key)
+	}
 })
 
 function handleKey(key: string) {
@@ -72,7 +94,7 @@ function handleKey(key: string) {
 	} else if (key === "Backspace") {
 		calcService.send({type: "DELETE"})
 	} else {
-		console.error("Unknown key", key)
+		console.error("Unhandled key", key)
 	}
 }
 

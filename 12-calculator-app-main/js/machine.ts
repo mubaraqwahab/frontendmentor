@@ -144,6 +144,7 @@ export const calcMachine =
 					},
 				},
 				result: {
+					initial: "solution",
 					entry: "replaceAllWithNewToken",
 					states: {
 						solution: {
@@ -151,6 +152,9 @@ export const calcMachine =
 								OPERATOR: {
 									target: "#calculator.operator",
 									actions: "appendNewToken",
+								},
+								SOLVE: {
+									target: "#calculator.solving",
 								},
 							},
 						},

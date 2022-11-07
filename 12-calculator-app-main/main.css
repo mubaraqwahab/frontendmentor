@@ -13,7 +13,14 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 
-	:disabled {
+	:focus {
+		@apply outline-none ring;
+		@apply theme-1:ring-light-grayish-orange;
+		@apply theme-2:ring-dark-grayish-orange;
+		@apply theme-3:ring-vivid-magenta;
+	}
+
+	[aria-disabled="true"] {
 		@apply cursor-not-allowed;
 	}
 }
@@ -43,21 +50,14 @@
 		@apply theme-3:text-light-yellow theme-3:bg-very-dark-violet-3 theme-3:border-dark-magenta;
 	}
 
-	.Key:hover:enabled,
-	.Key:active:enabled {
+	.Key:hover:not([aria-disabled="true"]),
+	.Key:active:not([aria-disabled="true"]) {
 		@apply theme-1:bg-grayish-orange;
 		@apply theme-2:bg-dark-grayish-orange;
 		@apply theme-3:bg-dark-magenta;
 	}
 
-	.Key:focus {
-		@apply outline-none ring;
-		@apply theme-1:ring-light-grayish-orange;
-		@apply theme-2:ring-dark-grayish-orange;
-		@apply theme-3:ring-vivid-magenta;
-	}
-
-	.Key:disabled {
+	.Key[aria-disabled="true"] {
 		@apply opacity-40;
 	}
 
@@ -67,8 +67,8 @@
 		@apply theme-3:text-white theme-3:bg-dark-violet theme-3:border-vivid-magenta;
 	}
 
-	.Key--primary:hover:enabled,
-	.Key--primary:active:enabled {
+	.Key--primary:hover:not([aria-disabled="true"]),
+	.Key--primary:active:not([aria-disabled="true"]) {
 		@apply theme-1:bg-desat-dark-blue-2;
 		@apply theme-2:bg-very-dark-cyan;
 		@apply theme-3:bg-vivid-magenta;
@@ -80,8 +80,8 @@
 		@apply theme-3:text-very-dark-blue theme-3:bg-pure-cyan theme-3:border-soft-cyan;
 	}
 
-	.Key--accent:hover:enabled,
-	.Key--accent:active:enabled {
+	.Key--accent:hover:not([aria-disabled="true"]),
+	.Key--accent:active:not([aria-disabled="true"]) {
 		@apply theme-1:bg-dark-red;
 		@apply theme-2:bg-dark-orange;
 		@apply theme-3:bg-soft-cyan;

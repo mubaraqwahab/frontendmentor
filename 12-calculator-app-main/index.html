@@ -16,12 +16,16 @@
 	</head>
 	<body
 		class="font-body font-bold min-h-screen theme-1:bg-very-dark-desat-blue-1 theme-2:bg-light-gray theme-3:bg-very-dark-violet-1 md:flex md:items-center md:justify-center"
+		tabindex="-1"
 	>
 		<div class="p-6 md:w-[500px] md:mx-auto">
 			<header
 				class="flex items-center justify-between py-2 mb-4 theme-1:text-white theme-2:text-very-dark-grayish-blue theme-3:text-light-yellow"
 			>
-				<div class="text-2xl">calc</div>
+				<div class="text-2xl">
+					<a href="">calc</a>
+				</div>
+				<!-- Could use a <fieldset> here, but it has issues with `display: flex` (See https://stackoverflow.com/q/28078681/12695621) -->
 				<div class="flex items-end uppercase text-xs">
 					<p class="mr-4 mb-1">Theme</p>
 					<div>
@@ -36,58 +40,60 @@
 							<input type="radio" name="themeSwitch" value="3" id="theme3" />
 						</div>
 					</div>
-				</div>
+				</fieldset>
 			</header>
-			<form class="text-2xl">
+			<main class="text-2xl">
+				<!-- Default <output> role is "status", but browsers can be funny lol -->
 				<output
+					role="status"
+					aria-label="Output"
 					class="block p-6 mb-6 rounded-xl text-right overflow-x-auto whitespace-nowrap theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray theme-3:text-light-yellow theme-3:bg-very-dark-violet-2"
-					tabindex="-1"
 				>
 					0
 				</output>
 				<div
+					role="toolbar"
 					class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"
 				>
-					<button class="Key" type="button" aria-keyshortcuts="7">7</button>
-					<button class="Key" type="button" aria-keyshortcuts="8">8</button>
-					<button class="Key" type="button" aria-keyshortcuts="9">9</button>
-					<button class="Key Key--primary Key--text" type="button" aria-keyshortcuts="Backspace">
+					<button class="Key" type="button" data-keyshortcuts="7">7</button>
+					<button class="Key" type="button" data-keyshortcuts="8">8</button>
+					<button class="Key" type="button" data-keyshortcuts="9">9</button>
+					<button class="Key Key--primary Key--text" type="button" data-keyshortcuts="Backspace">
 						Del
 					</button>
 
-					<button class="Key" type="button" aria-keyshortcuts="4">4</button>
-					<button class="Key" type="button" aria-keyshortcuts="5">5</button>
-					<button class="Key" type="button" aria-keyshortcuts="6">6</button>
-					<button class="Key" type="button" aria-keyshortcuts="Plus" data-operator-btn>+</button>
+					<button class="Key" type="button" data-keyshortcuts="4">4</button>
+					<button class="Key" type="button" data-keyshortcuts="5">5</button>
+					<button class="Key" type="button" data-keyshortcuts="6">6</button>
+					<button class="Key" type="button" data-keyshortcuts="Plus" data-operator-btn>+</button>
 
-					<button class="Key" type="button" aria-keyshortcuts="1">1</button>
-					<button class="Key" type="button" aria-keyshortcuts="2">2</button>
-					<button class="Key" type="button" aria-keyshortcuts="3">3</button>
-					<button class="Key" type="button" aria-keyshortcuts="-" data-operator-btn>-</button>
+					<button class="Key" type="button" data-keyshortcuts="1">1</button>
+					<button class="Key" type="button" data-keyshortcuts="2">2</button>
+					<button class="Key" type="button" data-keyshortcuts="3">3</button>
+					<button class="Key" type="button" data-keyshortcuts="-" data-operator-btn>-</button>
 
-					<button class="Key" type="button" aria-keyshortcuts="." data-decimal-point-btn>.</button>
-					<button class="Key" type="button" aria-keyshortcuts="0">0</button>
-					<button class="Key" type="button" aria-keyshortcuts="/" data-operator-btn>/</button>
-					<button class="Key" type="button" aria-keyshortcuts="*" data-operator-btn>&times;</button>
+					<button class="Key" type="button" data-keyshortcuts="." data-decimal-point-btn>.</button>
+					<button class="Key" type="button" data-keyshortcuts="0">0</button>
+					<button class="Key" type="button" data-keyshortcuts="/" data-operator-btn>/</button>
+					<button class="Key" type="button" data-keyshortcuts="*" data-operator-btn>&times;</button>
 
 					<button
 						class="Key Key--primary Key--text col-span-2"
-						type="reset"
-						aria-keyshortcuts="Delete"
+						type="button"
+						data-keyshortcuts="Delete"
 					>
 						Reset
 					</button>
-					<!-- TODO: Should this really be a submit button? -->
 					<button
 						class="Key Key--accent col-span-2"
-						type="submit"
-						aria-keyshortcuts="="
+						type="button"
+						data-keyshortcuts="="
 						data-solve-btn
 					>
 						=
 					</button>
 				</div>
-			</form>
+			</main>
 		</div>
 	</body>
 </html>

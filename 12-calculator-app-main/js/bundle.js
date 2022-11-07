@@ -4933,6 +4933,7 @@
                 },
             },
             result: {
+                initial: "solution",
                 entry: "replaceAllWithNewToken",
                 states: {
                     solution: {
@@ -4940,6 +4941,9 @@
                             OPERATOR: {
                                 target: "#calculator.operator",
                                 actions: "appendNewToken",
+                            },
+                            SOLVE: {
+                                target: "#calculator.solving",
                             },
                         },
                     },
@@ -5050,6 +5054,53 @@
         return sliceable.slice(0, sliceable.length - 1);
     }
 
+    const toolbar = document.querySelector("[role=toolbar]");
+    const buttons = toolbar.querySelectorAll("button");
+    /**
+     * Implement a roving tabindex on the calculator toolbar.
+     * See:
+     *  - (TODO: link to aria role toolbar)
+     *  - https://w3c.github.io/aria-practices/#kbd_roving_tabindex
+     */
+    function initRovingTabIndex() {
+        buttons.forEach((button, i) => {
+            // Make only the first button reachable via keyboard initially
+            button.tabIndex = i === 0 ? 0 : -1;
+            button.addEventListener("keydown", (e) => {
+                const destIndex = focusDestInToolbarSequence(i, e.key);
+                button.tabIndex = -1;
+                buttons[destIndex].tabIndex = 0;
+                buttons[destIndex].focus();
+            });
+        });
+    }
+    /**
+     * Determine the index of the toolbar button that should receive focus,
+     * given the index of the currently focused button and a navigation key
+     * (i.e., 'ArrowRight' or 'ArrowLeft'). Note that the returned index is
+     * always wrapped so that it is never out-of-bounds.
+     *
+     * If the given key isn't a navigation key, then return the index of the
+     * currently focused button.
+     *
+     * @param buttonIndex
+     * @param key
+     */
+    function focusDestInToolbarSequence(buttonIndex, key) {
+        if (key === "ArrowRight") {
+            const nextIndex = (buttonIndex + 1) % buttons.length;
+            return nextIndex;
+        }
+        else if (key === "ArrowLeft") {
+            const prevIndex = buttonIndex === 0 ? buttons.length - 1 : buttonIndex - 1;
+            return prevIndex;
+        }
+        else {
+            return buttonIndex;
+        }
+    }
+
+    initRovingTabIndex();
     const themeSwitch = document.querySelectorAll("input[name='themeSwitch']");
     themeSwitch.forEach((radio) => {
         radio.addEventListener("change", () => {
@@ -5061,23 +5112,31 @@
     const outputEl = document.querySelector("output");
     calcService.onTransition((state) => {
         if (state.changed) {
-            outputEl.textContent = state.context.tokens
+            outputEl.value = state.context.tokens
                 // format numbers
                 .map((token) => (isNumeric(token) ? formatNumStr(token) : token))
                 // format multiplication signs
                 .map((token) => (token === "*" ? "×" : token))
                 .join("");
             console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`);
-            // TODO: is it good/bad UX to disable?
-            // const {nextEvents} = state
-            // const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")
-            // solveBtn.disabled = nextEvents.every((e) => e !== "SOLVE")
-            // const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")
-            // decimalPointBtn.disabled = nextEvents.every((e) => e !== "DECIMAL_POINT")
-            // const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
-            // operatorBtns.forEach((btn) => {
-            // 	btn.disabled = nextEvents.every((e) => e !== "OPERATOR")
-            // })
+            /**
+             * Determine if the current state rejects an event of a given type.
+             * A state 'rejects' an event if the event can't cause a transition from the state.
+             * @param eventType
+             */
+            function rejectsEvent(eventType) {
+                const { nextEvents } = state;
+                return nextEvents.every((e) => e !== eventType);
+            }
+            // Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
+            const solveBtn = document.querySelector("[data-solve-btn]");
+            solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString());
+            const decimalPointBtn = document.querySelector("[data-decimal-point-btn]");
+            decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString());
+            const operatorBtns = document.querySelectorAll("[data-operator-btn]");
+            operatorBtns.forEach((btn) => {
+                btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString());
+            });
         }
     });
     // Handle key clicks
@@ -5085,15 +5144,24 @@
     keyEls.forEach((keyEl) => {
         keyEl.addEventListener("click", (e) => {
             e.preventDefault();
-            const key = keyEl.getAttribute("aria-keyshortcuts");
+            const key = keyEl.dataset.keyshortcuts;
             handleKey(key);
-            // TODO: is this below a good idea?
-            outputEl.focus();
         });
     });
-    // Handle key keyboard shorcuts
-    outputEl.addEventListener("keyup", (e) => {
-        handleKey(e.key);
+    // Handle key keyboard shorcuts.
+    // Listen for 'keydown' not 'keyup', so that a user can press
+    // and hold a key to type it repeatedly.
+    document.body.addEventListener("keydown", (e) => {
+        const target = e.target;
+        if (target.matches("input[type=radio]"))
+            return;
+        // Don't handle Enter key when pressed on a button
+        // so that it doesn't interfere with the default behaviour.
+        // (The default behaviour is to activate the button.)
+        // I must admit though that, because of this, the UX feels weird.
+        if (!target.matches("button") || (target.matches("button") && e.key !== "Enter")) {
+            handleKey(e.key);
+        }
     });
     function handleKey(key) {
         if (isDigit(key)) {
@@ -5115,7 +5183,7 @@
             calcService.send({ type: "DELETE" });
         }
         else {
-            console.error("Unknown key", key);
+            console.error("Unhandled key", key);
         }
     }
     /**
