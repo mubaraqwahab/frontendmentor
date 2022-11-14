@@ -17,13 +17,13 @@ const calcService = interpret(calcMachine).start()
 
 const outputEl = document.querySelector("output")!
 calcService.onTransition((state) => {
-	if (state.changed) {
+	if (!state.history || state.changed) {
 		outputEl.value = state.context.tokens
 			// format numbers
 			.map((token) => (isNumeric(token) ? formatNumStr(token) : token))
 			// format multiplication signs
 			.map((token) => (token === "*" ? "×" : token))
-			.join("")
+			.join(" ")
 
 		console.log(
 			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`
@@ -42,6 +42,9 @@ calcService.onTransition((state) => {
 		// Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
 		const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
 		solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
+
+		const deleteBtn = document.querySelector<HTMLButtonElement>("[data-delete-btn]")!
+		deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString())
 
 		const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
 		decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())

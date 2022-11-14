@@ -47,10 +47,14 @@
 				<output
 					role="status"
 					aria-label="Output"
-					class="block p-6 mb-6 rounded-xl text-right overflow-x-auto whitespace-nowrap theme-1:text-white theme-1:bg-very-dark-desat-blue-3 theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray theme-3:text-light-yellow theme-3:bg-very-dark-violet-2"
-				>
-					0
-				</output>
+					class="
+						p-6 mb-6 min-h-[calc(2rem+3rem)]
+						block rounded-xl text-right overflow-x-auto whitespace-nowrap
+						theme-1:text-white theme-1:bg-very-dark-desat-blue-3
+						theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray
+						theme-3:text-light-yellow theme-3:bg-very-dark-violet-2
+					"
+				></output>
 				<div
 					role="toolbar"
 					class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"
@@ -58,7 +62,7 @@
 					<button class="Key" type="button" data-keyshortcuts="7">7</button>
 					<button class="Key" type="button" data-keyshortcuts="8">8</button>
 					<button class="Key" type="button" data-keyshortcuts="9">9</button>
-					<button class="Key Key--primary Key--text" type="button" data-keyshortcuts="Backspace">
+					<button class="Key Key--primary Key--text" type="button" data-keyshortcuts="Backspace" data-delete-btn>
 						Del
 					</button>
 
@@ -70,7 +74,7 @@
 					<button class="Key" type="button" data-keyshortcuts="1">1</button>
 					<button class="Key" type="button" data-keyshortcuts="2">2</button>
 					<button class="Key" type="button" data-keyshortcuts="3">3</button>
-					<button class="Key" type="button" data-keyshortcuts="-" data-operator-btn>-</button>
+					<button class="Key" type="button" data-keyshortcuts="-" data-operator-btn="minus">-</button>
 
 					<button class="Key" type="button" data-keyshortcuts="." data-decimal-point-btn>.</button>
 					<button class="Key" type="button" data-keyshortcuts="0">0</button>

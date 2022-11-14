@@ -13,28 +13,32 @@ export interface Typegen0 {
 		delays: never
 	}
 	eventsCausingActions: {
+		appendNewFractionToLastToken: "DECIMAL_POINT"
 		appendNewFractionToken: "DECIMAL_POINT"
 		appendNewToken: "DIGIT" | "OPERATOR"
 		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
-		deleteLastDigit: "DELETE"
+		deleteLastChar: "DELETE"
 		deleteLastToken: "DELETE"
 		replaceAllWithNewFractionToken: "DECIMAL_POINT"
 		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR"
 		replaceLastToken: "DIGIT" | "OPERATOR"
-		resetTokens: "DELETE" | "RESET"
+		resetTokens: "RESET"
 		solve: "SOLVE"
 	}
 	eventsCausingServices: {}
 	eventsCausingGuards: {
 		lastTokenEndsWithDecimalPoint: "DELETE"
-		lastTokenHasManyDigits: "DELETE"
-		lastTokenHasOnlyOneDigit: "DELETE"
+		lastTokenIsSignedDigit: "DELETE"
+		lastTokenIsUnsignedDigit: "DELETE"
 		lastTokenIsZero: "DIGIT"
-		onlyOneDigitIsLeftInTokens: "DELETE"
+		onlyOneCharIsLeftInTokens: "DELETE"
+		operatorIsMinusSign: "OPERATOR"
+		operatorIsMinusSignAndLastTokenIsMultiplicative: "OPERATOR"
 		prevToLastTokenHasDecimalPoint: "DELETE"
 	}
 	eventsCausingDelays: {}
 	matchesStates:
+		| "idle"
 		| "number"
 		| "number.fraction"
 		| "number.int"
@@ -42,6 +46,7 @@ export interface Typegen0 {
 		| "result"
 		| "result.error"
 		| "result.solution"
+		| "sign"
 		| "solving"
 		| {number?: "fraction" | "int"; result?: "error" | "solution"}
 	tags: never
