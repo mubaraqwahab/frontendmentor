@@ -18,6 +18,13 @@ export function initRovingTabIndex() {
 			buttons[destIndex]!.tabIndex = 0
 			buttons[destIndex]!.focus()
 		})
+
+		// Focus may come through mouseclick, for example
+		button.addEventListener("focus", () => {
+			buttons.forEach((btn, j) => {
+				btn.tabIndex = i === j ? 0 : -1
+			})
+		})
 	})
 }
 
