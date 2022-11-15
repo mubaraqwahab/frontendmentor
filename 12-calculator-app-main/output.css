@@ -961,18 +961,6 @@ video {
   min-height: 100vh;
 }
 
-.min-h-\[calc\(1em\+3rem\)\] {
-  min-height: calc(1em + 3rem);
-}
-
-.min-h-\[calc\(2rem\*1em\+3rem\)\] {
-  min-height: calc(2rem * 1em + 3rem);
-}
-
-.min-h-\[calc\(\(2rem\*1em\)\+3rem\)\] {
-  min-height: calc((2rem * 1em) + 3rem);
-}
-
 .min-h-\[calc\(2rem\+3rem\)\] {
   min-height: calc(2rem + 3rem);
 }

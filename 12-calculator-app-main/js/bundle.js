@@ -5000,7 +5000,7 @@
                 },
                 on: {
                     DELETE: {
-                        target: "#calculator.number.int",
+                        target: "idle",
                         actions: "deleteLastToken",
                     },
                     DIGIT: {
