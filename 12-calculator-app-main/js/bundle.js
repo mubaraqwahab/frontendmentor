@@ -5191,26 +5191,17 @@
                 .map((token) => (token === "*" ? "×" : token))
                 .join(" ");
             console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`);
-            /**
-             * Determine if the current state rejects an event of a given type.
-             * A state 'rejects' an event if the event can't cause a transition from the state.
-             * @param eventType
-             */
-            function rejectsEvent(eventType) {
-                const { nextEvents } = state;
-                return nextEvents.every((e) => e !== eventType);
-            }
             // Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
-            const solveBtn = document.querySelector("[data-solve-btn]");
-            solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString());
-            const deleteBtn = document.querySelector("[data-delete-btn]");
-            deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString());
-            const decimalPointBtn = document.querySelector("[data-decimal-point-btn]");
-            decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString());
-            const operatorBtns = document.querySelectorAll("[data-operator-btn]");
-            operatorBtns.forEach((btn) => {
-                btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString());
-            });
+            // const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
+            // solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
+            // const deleteBtn = document.querySelector<HTMLButtonElement>("[data-delete-btn]")!
+            // deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString())
+            // const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
+            // decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())
+            // const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
+            // operatorBtns.forEach((btn) => {
+            // 	btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString())
+            // })
         }
     });
     // Handle key clicks

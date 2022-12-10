@@ -40,19 +40,19 @@ calcService.onTransition((state) => {
 		}
 
 		// Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
-		const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
-		solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
+		// const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
+		// solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
 
-		const deleteBtn = document.querySelector<HTMLButtonElement>("[data-delete-btn]")!
-		deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString())
+		// const deleteBtn = document.querySelector<HTMLButtonElement>("[data-delete-btn]")!
+		// deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString())
 
-		const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
-		decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())
+		// const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
+		// decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())
 
-		const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
-		operatorBtns.forEach((btn) => {
-			btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString())
-		})
+		// const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
+		// operatorBtns.forEach((btn) => {
+		// 	btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString())
+		// })
 	}
 })
 
