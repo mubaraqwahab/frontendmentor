@@ -5,20 +5,32 @@ import {initRovingTabIndex} from "./toolbar"
 initRovingTabIndex()
 
 const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
+
+const THEME_STORAGE_KEY = "calculator-app-theme"
+
 themeSwitch.forEach((radio) => {
 	radio.addEventListener("change", () => {
 		document.documentElement.dataset.theme = radio.value
+		localStorage.setItem(THEME_STORAGE_KEY, radio.value)
 	})
+
+	// Get theme from localstorage
+	const savedTheme = localStorage.getItem(THEME_STORAGE_KEY)
+	if (savedTheme === radio.value) {
+		radio.checked = true
+		// Remember: setting the above programmatically doesn't trigger a change event.
+		document.documentElement.dataset.theme = radio.value
+	}
 })
 
 // Actual calc stuff starts here
 
 const calcService = interpret(calcMachine).start()
 
-const outputEl = document.querySelector("output")!
+const display = document.querySelector("output")!
 calcService.onTransition((state) => {
 	if (!state.history || state.changed) {
-		outputEl.value = state.context.tokens
+		display.value = state.context.tokens
 			// format numbers
 			.map((token) => (isNumeric(token) ? formatNumStr(token) : token))
 			// format multiplication signs
@@ -26,7 +38,7 @@ calcService.onTransition((state) => {
 			.join(" ")
 
 		console.log(
-			`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`
+			`State '${state.toStrings().join(" ")}'. Tokens ${JSON.stringify(state.context.tokens)}`
 		)
 
 		/**

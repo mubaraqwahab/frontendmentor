@@ -5177,23 +5177,32 @@
 
     initRovingTabIndex();
     const themeSwitch = document.querySelectorAll("input[name='themeSwitch']");
+    const THEME_STORAGE_KEY = "calculator-app-theme";
     themeSwitch.forEach((radio) => {
         radio.addEventListener("change", () => {
             document.documentElement.dataset.theme = radio.value;
+            localStorage.setItem(THEME_STORAGE_KEY, radio.value);
         });
+        // Get theme from localstorage
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        if (savedTheme === radio.value) {
+            radio.checked = true;
+            // Remember: setting the above programmatically doesn't trigger a change event.
+            document.documentElement.dataset.theme = radio.value;
+        }
     });
     // Actual calc stuff starts here
     const calcService = interpret(calcMachine).start();
-    const outputEl = document.querySelector("output");
+    const display = document.querySelector("output");
     calcService.onTransition((state) => {
         if (!state.history || state.changed) {
-            outputEl.value = state.context.tokens
+            display.value = state.context.tokens
                 // format numbers
                 .map((token) => (isNumeric(token) ? formatNumStr(token) : token))
                 // format multiplication signs
                 .map((token) => (token === "*" ? "×" : token))
                 .join(" ");
-            console.log(`State '${state.toStrings().join(" ")}'. Input ${JSON.stringify(state.context.tokens)}`);
+            console.log(`State '${state.toStrings().join(" ")}'. Tokens ${JSON.stringify(state.context.tokens)}`);
             // Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
             // const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
             // solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
