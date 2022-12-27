@@ -167,7 +167,7 @@ export const calcMachine =
 						OPERATOR: [
 							{
 								target: "sign",
-								cond: "operatorIsMinusSignAndLastTokenIsMultiplicative",
+								cond: "operatorIsMinusSignAndLastTokenIsNotAdditive",
 								actions: "appendNewToken",
 							},
 							{
@@ -324,9 +324,9 @@ export const calcMachine =
 				operatorIsMinusSign: (context, event) => {
 					return event.data === "-"
 				},
-				operatorIsMinusSignAndLastTokenIsMultiplicative: (context, event) => {
+				operatorIsMinusSignAndLastTokenIsNotAdditive: (context, event) => {
 					const lastToken = context.tokens.at(-1)!
-					return event.data === "-" && "*/".includes(lastToken)
+					return event.data === "-" && !"+-".includes(lastToken)
 				},
 			},
 		}
