@@ -4,7 +4,7 @@ const buttons = toolbar.querySelectorAll("button")
 /**
  * Implement a roving tabindex on the calculator toolbar.
  * See:
- *  - (TODO: link to aria role toolbar)
+ *  - https://w3c.github.io/aria-practices/#toolbar
  *  - https://w3c.github.io/aria-practices/#kbd_roving_tabindex
  */
 export function initRovingTabIndex() {
@@ -19,7 +19,7 @@ export function initRovingTabIndex() {
 			buttons[destIndex]!.focus()
 		})
 
-		// Focus may come through mouseclick, for example
+		// Focus may also come through a mouseclick, for example
 		button.addEventListener("focus", () => {
 			buttons.forEach((btn, j) => {
 				btn.tabIndex = i === j ? 0 : -1

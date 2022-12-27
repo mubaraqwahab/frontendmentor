@@ -90,8 +90,8 @@ export const calcMachine =
 							on: {
 								DIGIT: [
 									{
-										cond: "lastTokenIsZero",
-										actions: "replaceLastToken",
+										cond: "lastTokenIsZeroOrMinusZero",
+										actions: "replaceLastChar",
 									},
 									{
 										actions: "appendToLastToken",
@@ -171,7 +171,7 @@ export const calcMachine =
 								actions: "appendNewToken",
 							},
 							{
-								actions: "replaceLastToken",
+								actions: "replaceLastChar",
 							},
 						],
 						DIGIT: {
@@ -257,9 +257,11 @@ export const calcMachine =
 						return [...context.tokens, "0."]
 					},
 				}),
-				replaceLastToken: assign({
+				replaceLastChar: assign({
 					tokens: (context, event) => {
-						return [...exceptLast(context.tokens), event.data]
+						const lastToken = context.tokens.at(-1)!
+						const newLastToken = exceptLast(lastToken) + event.data
+						return [...exceptLast(context.tokens), newLastToken]
 					},
 				}),
 				replaceAllWithNewToken: assign({
@@ -299,8 +301,9 @@ export const calcMachine =
 					const {tokens} = context
 					return tokens.length === 1 && tokens[0]!.length === 1
 				},
-				lastTokenIsZero: (context) => {
-					return context.tokens.at(-1) === "0"
+				lastTokenIsZeroOrMinusZero: (context) => {
+					const lastToken = context.tokens.at(-1)!
+					return lastToken === "0" || lastToken === "-0"
 				},
 				lastTokenIsSignedDigit: (context) => {
 					const lastToken = context.tokens.at(-1)!

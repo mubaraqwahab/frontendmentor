@@ -4879,8 +4879,8 @@
                         on: {
                             DIGIT: [
                                 {
-                                    cond: "lastTokenIsZero",
-                                    actions: "replaceLastToken",
+                                    cond: "lastTokenIsZeroOrMinusZero",
+                                    actions: "replaceLastChar",
                                 },
                                 {
                                     actions: "appendToLastToken",
@@ -4960,7 +4960,7 @@
                             actions: "appendNewToken",
                         },
                         {
-                            actions: "replaceLastToken",
+                            actions: "replaceLastChar",
                         },
                     ],
                     DIGIT: {
@@ -5045,9 +5045,11 @@
                     return [...context.tokens, "0."];
                 },
             }),
-            replaceLastToken: assign({
+            replaceLastChar: assign({
                 tokens: (context, event) => {
-                    return [...exceptLast(context.tokens), event.data];
+                    const lastToken = context.tokens.at(-1);
+                    const newLastToken = exceptLast(lastToken) + event.data;
+                    return [...exceptLast(context.tokens), newLastToken];
                 },
             }),
             replaceAllWithNewToken: assign({
@@ -5088,8 +5090,9 @@
                 const { tokens } = context;
                 return tokens.length === 1 && tokens[0].length === 1;
             },
-            lastTokenIsZero: (context) => {
-                return context.tokens.at(-1) === "0";
+            lastTokenIsZeroOrMinusZero: (context) => {
+                const lastToken = context.tokens.at(-1);
+                return lastToken === "0" || lastToken === "-0";
             },
             lastTokenIsSignedDigit: (context) => {
                 const lastToken = context.tokens.at(-1);
@@ -5125,7 +5128,7 @@
     /**
      * Implement a roving tabindex on the calculator toolbar.
      * See:
-     *  - (TODO: link to aria role toolbar)
+     *  - https://w3c.github.io/aria-practices/#toolbar
      *  - https://w3c.github.io/aria-practices/#kbd_roving_tabindex
      */
     function initRovingTabIndex() {
@@ -5138,7 +5141,7 @@
                 buttons[destIndex].tabIndex = 0;
                 buttons[destIndex].focus();
             });
-            // Focus may come through mouseclick, for example
+            // Focus may also come through a mouseclick, for example
             button.addEventListener("focus", () => {
                 buttons.forEach((btn, j) => {
                     btn.tabIndex = i === j ? 0 : -1;

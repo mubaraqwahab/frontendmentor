@@ -37,6 +37,10 @@ calcService.onTransition((state) => {
 		function rejectsEvent(eventType: string) {
 			const {nextEvents} = state
 			return nextEvents.every((e) => e !== eventType)
+
+			// I later learnt that XState has state.can(), so I don't really need this function.
+			// However, I'm keeping it because for events that have data, I would have to do something
+			// like state.can({ type: "OPERATOR", data: "+" }), which is a little bit tedious.
 		}
 
 		// Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
