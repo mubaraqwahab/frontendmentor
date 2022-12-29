@@ -16,9 +16,9 @@
 			crossorigin
 		/>
 	</head>
-	<body class="bg-[url(images/pattern-bg.png)] bg-repeat-y text-center text-lg text-gray-very-dark min-h-screen">
+	<body class="bg-repeat-y text-center text-lg text-gray-very-dark min-h-screen flex flex-col">
 		<!-- The z-index is only needed here because Leaflet automatically adds `position: relative;` to the map below -->
-		<div class="pt-7 pb-[8.5rem]">
+		<div class="pt-7 pb-[8.5rem] bg-[url(images/pattern-bg.png)]">
 			<div class="container">
 				<h1 class="text-2xl text-white font-medium mb-7 tracking-wide leading-tight">IP Address Tracker</h1>
 				<form class="flex text-left mb-6">
@@ -47,9 +47,11 @@
 			</div>
 		</div>
 
-		<output class="flex flex-col">
-			<div class="container -mt-[8.5rem]">
-				<dl class="bg-white rounded-2xl p-6 font-bold text-xl shadow-xl">
+		<!-- Use a very very high z-index because Leaflet uses z-1000 for its controls. -->
+		<output class="relative z-[2000] pointer-events-none">
+			<!-- 310px is the height of the <div> below. Ideally it should be 100% instead, but margin percentages are relative to width not height. -->
+			<div class="container -mt-[8.5rem] -mb-[calc(310px-8.5rem)]">
+				<dl class="bg-white rounded-2xl p-6 font-bold text-xl shadow-xl pointer-events-auto">
 					<div class="mb-6">
 						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">IP Address</dt>
 						<dd class="leading-snug h-[calc(1.375*1em)]" id="ipAddress"></dd>
@@ -68,9 +70,9 @@
 					</div>
 				</dl>
 			</div>
-
-			<div id="map" class="bg-gray-700 flex-grow"></div>
 		</output>
+
+		<div id="map" class="bg-gray-700 flex-grow"></div>
 
 		<script
 			src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
@@ -88,18 +90,27 @@
 				const response = await fetch(`https://geo.ipify.org/api/v2/country,city?${searchParams}`);
 				const data = await response.json();
 				const { ip, location, isp } = data;
+				const { city, region, country, postalCode, timezone, lat, lng } = location;
 				console.log({ data });
 
 				document.getElementById("ipAddress").textContent = ip;
-				document.getElementById("location").textContent = `${location.city}, ${location.region} ${location.postalCode}`;
-				document.getElementById("timeZone").textContent = "UTC" + data.location.timezone;
-				document.getElementById("isp").textContent = data.isp;
+				document.getElementById("location").textContent = `${city}, ${region} ${postalCode}`;
+				document.getElementById("timeZone").textContent = "UTC" + timezone;
+				document.getElementById("isp").textContent = isp;
 
-				var map = L.map("map").setView([51.505, -0.09], 13);
-				L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				const map = L.map("map", { zoomControl: false }).setView([lat, lng], 18);
+				const tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 					maxZoom: 19,
 					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 				}).addTo(map);
+
+				// TODO: customize marker icon (don't forget alt text)
+				// TODO: also consider using an image instead of HTML/CSS hacks
+				const markerIcon = L.divIcon({ html: "" });
+
+				const marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
+
+				window.map = map;
 			}
 
 			getIPInfoAndMap();
