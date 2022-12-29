@@ -682,6 +682,10 @@ video {
   margin-bottom: calc(calc(310px - 8.5rem) * -1);
 }
 
+.-mb-\[calc\(var\(--dl-container-height\)-8\.5rem\)\] {
+  margin-bottom: calc(calc(var(--dl-container-height) - 8.5rem) * -1);
+}
+
 .block {
   display: block;
 }
@@ -716,6 +720,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-\[calc\(1\.375\*1em\)\] {
+  min-height: calc(1.375 * 1em);
 }
 
 .w-full {
@@ -880,7 +888,31 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.\[\&\:focus\+label\]\:pointer-events-none:focus+label {
+  pointer-events: none;
+}
+
 .\[\&\:focus\+label\]\:text-\[\#f00\]:focus+label {
   --tw-text-opacity: 1;
   color: rgb(255 0 0 / var(--tw-text-opacity));
+}
+
+.\[\&\:focus\+label\]\:opacity-0:focus+label {
+  opacity: 0;
+}
+
+.\[\&\:-moz-placeholder-shown\+label\]\:opacity-0:-moz-placeholder-shown+label {
+  opacity: 0;
+}
+
+.\[\&\:placeholder-shown\+label\]\:opacity-0:placeholder-shown+label {
+  opacity: 0;
+}
+
+.\[\&\:not\(\:-moz-placeholder-shown\)\+label\]\:opacity-0:not(:-moz-placeholder-shown)+label {
+  opacity: 0;
+}
+
+.\[\&\:not\(\:placeholder-shown\)\+label\]\:opacity-0:not(:placeholder-shown)+label {
+  opacity: 0;
 }

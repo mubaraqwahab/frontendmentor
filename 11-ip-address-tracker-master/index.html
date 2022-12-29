@@ -32,9 +32,10 @@
 							type="text"
 							name="query"
 							id="query"
-							class="w-full rounded-l-2xl py-4 px-6 [&:focus+label]:text-[#f00]"
+							class="w-full rounded-l-2xl py-4 px-6 [&:not(:placeholder-shown)+label]:opacity-0"
 							pattern="(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
 							required
+							placeholder=" "
 						/>
 						<label for="query" class="absolute block left-6 right-6 top-1/2 -translate-y-1/2 truncate pointer-events-none">
 							Search for any IP address or domain
@@ -50,23 +51,23 @@
 		<!-- Use a very very high z-index because Leaflet uses z-1000 for its controls. -->
 		<output class="relative z-[2000] pointer-events-none">
 			<!-- 310px is the height of the <div> below. Ideally it should be 100% instead, but margin percentages are relative to width not height. -->
-			<div class="container -mt-[8.5rem] -mb-[calc(310px-8.5rem)]">
+			<div id="dl-container" class="container -mt-[8.5rem] -mb-[calc(var(--dl-container-height)-8.5rem)]" style="--dl-container-height: 310px;">
 				<dl class="bg-white rounded-2xl p-6 font-bold text-xl shadow-xl pointer-events-auto">
 					<div class="mb-6">
 						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">IP Address</dt>
-						<dd class="leading-snug h-[calc(1.375*1em)]" id="ipAddress"></dd>
+						<dd class="leading-snug min-h-[calc(1.375*1em)]" id="ipAddress"></dd>
 					</div>
 					<div class="mb-6">
 						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">Location</dt>
-						<dd class="leading-snug h-[calc(1.375*1em)]" id="location"></dd>
+						<dd class="leading-snug min-h-[calc(1.375*1em)]" id="location"></dd>
 					</div>
 					<div class="mb-6">
 						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">Timezone</dt>
-						<dd class="leading-snug h-[calc(1.375*1em)]" id="timeZone"></dd>
+						<dd class="leading-snug min-h-[calc(1.375*1em)]" id="timeZone"></dd>
 					</div>
 					<div>
 						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">ISP</dt>
-						<dd class="leading-snug h-[calc(1.375*1em)]" id="isp"></dd>
+						<dd class="leading-snug min-h-[calc(1.375*1em)]" id="isp"></dd>
 					</div>
 				</dl>
 			</div>
@@ -81,6 +82,12 @@
 		></script>
 		<script>
 			// @ts-check
+
+			const map = L.map("map", { zoomControl: false });
+			const tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				maxZoom: 19,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+			}).addTo(map);
 
 			async function getIPInfoAndMap(ipAddress = "") {
 				const searchParams = new URLSearchParams({
@@ -98,23 +105,28 @@
 				document.getElementById("timeZone").textContent = "UTC" + timezone;
 				document.getElementById("isp").textContent = isp;
 
-				const map = L.map("map", { zoomControl: false }).setView([lat, lng], 18);
-				const tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-					maxZoom: 19,
-					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-				}).addTo(map);
+				const dlContainer = document.getElementById("dl-container");
+				dlContainer.style.setProperty("--dl-container-height", dlContainer.clientHeight + "px");
+
+				map.setView([lat, lng], 18);
 
 				// TODO: customize marker icon (don't forget alt text)
 				// TODO: also consider using an image instead of HTML/CSS hacks
 				const markerIcon = L.divIcon({ html: "" });
 
 				const marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
-
-				window.map = map;
 			}
 
 			getIPInfoAndMap();
 			// getIPInfoAndMap("24.38.249.217");
+
+			const form = document.querySelector("form");
+
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+				const ipAddress = /** @type {string} */ (new FormData(form).get("query"));
+				getIPInfoAndMap(ipAddress);
+			});
 		</script>
 	</body>
 </html>
