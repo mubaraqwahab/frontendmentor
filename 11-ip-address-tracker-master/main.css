@@ -5,6 +5,7 @@
 @layer base {
 	/* TODO */
 	:focus {
+		@apply outline-none ring-4 ring-gray-very-dark ring-opacity-90 z-50;
 	}
 }
 

@@ -16,13 +16,13 @@
 			crossorigin
 		/>
 	</head>
-	<body class="text-center text-lg text-gray-very-dark h-screen flex flex-col">
+	<body class="bg-[url(images/pattern-bg.png)] bg-repeat-y text-center text-lg text-gray-very-dark min-h-screen">
 		<!-- The z-index is only needed here because Leaflet automatically adds `position: relative;` to the map below -->
-		<div class="py-8 h-1/3 bg-[url(images/pattern-bg.png)] bg-cover relative z-[1000]">
+		<div class="pt-7 pb-[8.5rem]">
 			<div class="container">
-				<h1 class="text-2xl text-white font-medium mb-8 tracking-wide">IP Address Tracker</h1>
+				<h1 class="text-2xl text-white font-medium mb-7 tracking-wide leading-tight">IP Address Tracker</h1>
 				<form class="flex text-left mb-6">
-					<div class="relative truncate flex-grow">
+					<div class="relative flex-grow">
 						<!--
 						`[&:focus+label]` in the classes below is equivalent to the selector: `input:focus + label`
 						It essentially hides (that's what the `hidden` is for) the label when the input has focus.
@@ -32,11 +32,11 @@
 							type="text"
 							name="query"
 							id="query"
-							class="w-full rounded-l-2xl py-4 px-6 [&:focus+label]:hidden"
+							class="w-full rounded-l-2xl py-4 px-6 [&:focus+label]:text-[#f00]"
 							pattern="(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
 							required
 						/>
-						<label for="query" class="absolute block left-6 top-1/2 -translate-y-1/2 truncate w-[calc(100%-1.5rem*2)] cursor-text">
+						<label for="query" class="absolute block left-6 right-6 top-1/2 -translate-y-1/2 truncate pointer-events-none">
 							Search for any IP address or domain
 						</label>
 					</div>
@@ -44,29 +44,34 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6" /></svg>
 					</button>
 				</form>
+			</div>
+		</div>
 
-				<!-- wrap in an output? -->
+		<output class="flex flex-col">
+			<div class="container -mt-[8.5rem]">
 				<dl class="bg-white rounded-2xl p-6 font-bold text-xl shadow-xl">
 					<div class="mb-6">
-						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">IP Address</dt>
-						<dd id="ipAddress"></dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">IP Address</dt>
+						<dd class="leading-snug h-[calc(1.375*1em)]" id="ipAddress"></dd>
 					</div>
 					<div class="mb-6">
-						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">Location</dt>
-						<dd id="location"></dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">Location</dt>
+						<dd class="leading-snug h-[calc(1.375*1em)]" id="location"></dd>
 					</div>
 					<div class="mb-6">
-						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">Timezone</dt>
-						<dd id="timeZone"></dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">Timezone</dt>
+						<dd class="leading-snug h-[calc(1.375*1em)]" id="timeZone"></dd>
 					</div>
 					<div>
-						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">ISP</dt>
-						<dd id="isp"></dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-widest">ISP</dt>
+						<dd class="leading-snug h-[calc(1.375*1em)]" id="isp"></dd>
 					</div>
 				</dl>
 			</div>
-		</div>
-		<div id="map" class="bg-gray-700 flex-grow"></div>
+
+			<div id="map" class="bg-gray-700 flex-grow"></div>
+		</output>
+
 		<script
 			src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
 			integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
@@ -75,28 +80,30 @@
 		<script>
 			// @ts-check
 
-			async function getIPInfo() {
+			async function getIPInfoAndMap(ipAddress = "") {
 				const searchParams = new URLSearchParams({
 					apiKey: "at_Vw9ZnJQNNSWxqpIRMINnQXZg4IHWj",
+					ipAddress,
 				});
-				console.log(searchParams.toString());
 				const response = await fetch(`https://geo.ipify.org/api/v2/country,city?${searchParams}`);
 				const data = await response.json();
+				const { ip, location, isp } = data;
 				console.log({ data });
 
-				document.getElementById("ipAddress").textContent = data.ip;
-				document.getElementById("location").textContent = data.location.city;
+				document.getElementById("ipAddress").textContent = ip;
+				document.getElementById("location").textContent = `${location.city}, ${location.region} ${location.postalCode}`;
 				document.getElementById("timeZone").textContent = "UTC" + data.location.timezone;
 				document.getElementById("isp").textContent = data.isp;
+
+				var map = L.map("map").setView([51.505, -0.09], 13);
+				L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+					maxZoom: 19,
+					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+				}).addTo(map);
 			}
 
-			getIPInfo();
-
-			var map = L.map("map").setView([51.505, -0.09], 13);
-			L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-				maxZoom: 19,
-				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-			}).addTo(map);
+			getIPInfoAndMap();
+			// getIPInfoAndMap("24.38.249.217");
 		</script>
 	</body>
 </html>
