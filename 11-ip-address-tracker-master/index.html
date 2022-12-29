@@ -44,22 +44,24 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6" /></svg>
 					</button>
 				</form>
+
+				<!-- wrap in an output? -->
 				<dl class="bg-white rounded-2xl p-6 font-bold text-xl shadow-xl">
 					<div class="mb-6">
-						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">IP Address</dt>
-						<dd id="ipAddress">192.212.174.101</dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">IP Address</dt>
+						<dd id="ipAddress"></dd>
 					</div>
 					<div class="mb-6">
-						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">Location</dt>
-						<dd id="location">Brooklyn, NY 10001</dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">Location</dt>
+						<dd id="location"></dd>
 					</div>
 					<div class="mb-6">
-						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">Timezone</dt>
-						<dd id="timeZone">UTC-05:00</dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">Timezone</dt>
+						<dd id="timeZone"></dd>
 					</div>
 					<div>
-						<dt class="text-gray-dark uppercase text-xs mb-1.5 tracking-wider">ISP</dt>
-						<dd id="isp">SpaceX Starlink</dd>
+						<dt class="text-gray-dark uppercase text-xs mb-1 tracking-wider">ISP</dt>
+						<dd id="isp"></dd>
 					</div>
 				</dl>
 			</div>
@@ -72,12 +74,10 @@
 		></script>
 		<script>
 			// @ts-check
-			// On load, determine IP address
 
-			async function main() {
+			async function getIPInfo() {
 				const searchParams = new URLSearchParams({
 					apiKey: "at_Vw9ZnJQNNSWxqpIRMINnQXZg4IHWj",
-					ipAddress: "",
 				});
 				console.log(searchParams.toString());
 				const response = await fetch(`https://geo.ipify.org/api/v2/country,city?${searchParams}`);
@@ -90,7 +90,7 @@
 				document.getElementById("isp").textContent = data.isp;
 			}
 
-			main();
+			getIPInfo();
 
 			var map = L.map("map").setView([51.505, -0.09], 13);
 			L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
