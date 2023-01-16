@@ -20,7 +20,7 @@ export interface Typegen0 {
 		deleteLastChar: "DELETE"
 		deleteLastToken: "DELETE"
 		replaceAllWithNewFractionToken: "DECIMAL_POINT"
-		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR"
+		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR" | "OPERATOR"
 		replaceLastChar: "DIGIT" | "OPERATOR"
 		resetTokens: "RESET"
 		solve: "SOLVE"
@@ -74,7 +74,7 @@ export interface Typegen0 {
 		deleteLastChar: "DELETE"
 		deleteLastToken: "DELETE"
 		replaceAllWithNewFractionToken: "DECIMAL_POINT"
-		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR"
+		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR" | "OPERATOR"
 		replaceLastChar: "DIGIT" | "OPERATOR"
 		resetTokens: "RESET"
 		solve: "SOLVE"
@@ -105,6 +105,7 @@ export interface Typegen0 {
 		| {number?: "fraction" | "int"; result?: "error" | "solution"}
 	tags: never
 }
+
 // This file was automatically generated. Edits will be overwritten
 
 export interface Typegen0 {
@@ -114,9 +115,9 @@ export interface Typegen0 {
 	}
 	invokeSrcNameMap: {}
 	missingImplementations: {
-		actions: never
+		actions: "replaceAllWithNewToke"
 		delays: never
-		guards: "operatorIsMinusSignAndLastTokenIsNotAdditi"
+		guards: never
 		services: never
 	}
 	eventsCausingActions: {
@@ -127,6 +128,7 @@ export interface Typegen0 {
 		deleteLastChar: "DELETE"
 		deleteLastToken: "DELETE"
 		replaceAllWithNewFractionToken: "DECIMAL_POINT"
+		replaceAllWithNewToke: "OPERATOR"
 		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR"
 		replaceLastChar: "DIGIT" | "OPERATOR"
 		resetTokens: "RESET"
@@ -140,7 +142,7 @@ export interface Typegen0 {
 		lastTokenIsZeroOrMinusZero: "DIGIT"
 		onlyOneCharIsLeftInTokens: "DELETE"
 		operatorIsMinusSign: "OPERATOR"
-		operatorIsMinusSignAndLastTokenIsNotAdditi: "OPERATOR"
+		operatorIsMinusSignAndLastTokenIsNotAdditive: "OPERATOR"
 		prevToLastTokenHasDecimalPoint: "DELETE"
 	}
 	eventsCausingServices: {}

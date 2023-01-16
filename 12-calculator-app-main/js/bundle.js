@@ -4996,7 +4996,15 @@
                             },
                         },
                     },
-                    error: {},
+                    error: {
+                        on: {
+                            OPERATOR: {
+                                target: "#calculator.sign",
+                                cond: "operatorIsMinusSign",
+                                actions: "replaceAllWithNewToken",
+                            },
+                        },
+                    },
                 },
                 on: {
                     DELETE: {
@@ -5260,7 +5268,7 @@
             calcService.send({ type: "DELETE" });
         }
         else {
-            console.error("Unhandled key", key);
+            console.warn("Unhandled key", key);
         }
     }
     /**

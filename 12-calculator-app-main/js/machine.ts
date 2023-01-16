@@ -207,7 +207,15 @@ export const calcMachine =
 								},
 							},
 						},
-						error: {},
+						error: {
+							on: {
+								OPERATOR: {
+									target: "#calculator.sign",
+									cond: "operatorIsMinusSign",
+									actions: "replaceAllWithNewToken",
+								},
+							},
+						},
 					},
 					on: {
 						DELETE: {

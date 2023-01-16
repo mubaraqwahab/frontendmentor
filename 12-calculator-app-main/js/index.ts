@@ -113,7 +113,7 @@ function handleKey(key: string) {
 	} else if (key === "Backspace") {
 		calcService.send({type: "DELETE"})
 	} else {
-		console.error("Unhandled key", key)
+		console.warn("Unhandled key", key)
 	}
 }
 
