@@ -1,11 +1,21 @@
 import {assign, createMachine, send} from "xstate"
 
-export function isDigit(str: string): str is `${number}` {
+type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+export function isUnsignedDigit(str: string): str is `${Digit}` {
 	return /^\d$/.test(str)
 }
 
+export function isSignedDigit(str: string): str is `-${Digit}` {
+	return /^-\d$/.test(str)
+}
+
 export function isNumeric(str: string): str is `${number}` {
-	return /^\d+(\.\d*)?$/.test(str)
+	return /^-?\d+(\.\d*)?$/.test(str)
+}
+
+export function isInteger(str: string): str is `${number}` {
+	return /^-?\d+$/.test(str)
 }
 
 const OPERATORS = ["+", "-", "*", "/"] as const
@@ -44,199 +54,190 @@ export const calcMachine =
 			initial: "idle",
 			states: {
 				idle: {
+					entry: "clearTokens",
 					on: {
 						DIGIT: {
-							target: "number",
+							target: "int",
 							actions: "appendNewToken",
 						},
 						DECIMAL_POINT: {
-							target: "#calculator.number.fraction",
-							actions: "appendNewFractionToken",
+							target: "decimal",
+							actions: "appendNewDecimalToken",
 						},
 						OPERATOR: {
 							target: "sign",
-							cond: "operatorIsMinusSign",
+							cond: "operatorIsMinus",
 							actions: "appendNewToken",
 						},
 					},
 				},
-				sign: {
+				int: {
 					on: {
-						DIGIT: {
-							target: "number",
-							actions: "appendToLastToken",
-						},
-						DELETE: [
+						DIGIT: [
 							{
-								target: "idle",
-								cond: "onlyOneCharIsLeftInTokens",
-								actions: "deleteLastToken",
+								cond: "lastTokenIsZeroOrMinusZero",
+								actions: "replaceLastChar",
 							},
 							{
-								target: "operator",
-								actions: "deleteLastToken",
+								actions: "appendToLastToken",
 							},
 						],
 						DECIMAL_POINT: {
-							target: "#calculator.number.fraction",
-							actions: "appendNewFractionToLastToken",
+							target: "decimal",
+							actions: "appendToLastToken",
 						},
-					},
-				},
-				number: {
-					initial: "int",
-					states: {
-						int: {
-							on: {
-								DIGIT: [
-									{
-										cond: "lastTokenIsZeroOrMinusZero",
-										actions: "replaceLastChar",
-									},
-									{
-										actions: "appendToLastToken",
-									},
-								],
-								DELETE: [
-									{
-										target: "#calculator.idle",
-										cond: "onlyOneCharIsLeftInTokens",
-										actions: "deleteLastToken",
-									},
-									{
-										target: "#calculator.sign",
-										cond: "lastTokenIsSignedDigit",
-										actions: "deleteLastChar",
-									},
-									{
-										target: "#calculator.operator",
-										cond: "lastTokenIsUnsignedDigit",
-										actions: "deleteLastToken",
-									},
-									{
-										actions: "deleteLastChar",
-									},
-								],
-								DECIMAL_POINT: {
-									target: "fraction",
-									actions: "appendToLastToken",
-								},
-							},
-						},
-						fraction: {
-							on: {
-								DELETE: [
-									{
-										target: "int",
-										cond: "lastTokenEndsWithDecimalPoint",
-										actions: "deleteLastChar",
-									},
-									{
-										actions: "deleteLastChar",
-									},
-								],
-								DIGIT: {
-									actions: "appendToLastToken",
-								},
-							},
-						},
-					},
-					on: {
 						OPERATOR: {
 							target: "operator",
 							actions: "appendNewToken",
 						},
-						SOLVE: {
-							target: "solving",
+						RESET: "idle",
+						SOLVE: "solving",
+						DELETE: [
+							{
+								target: "idle",
+								cond: "lastTokenIsUnsignedDigitAndOnlyToken",
+							},
+							{
+								target: "sign",
+								cond: "lastTokenIsSignedDigit",
+								actions: "deleteLastChar",
+							},
+							{
+								target: "operator",
+								cond: "lastTokenIsUnsignedDigitAfterOperator",
+								actions: "deleteLastToken",
+							},
+							{
+								actions: "deleteLastChar",
+							},
+						],
+					},
+				},
+				decimal: {
+					on: {
+						DIGIT: {
+							actions: "appendToLastToken",
 						},
+						OPERATOR: {
+							target: "operator",
+							actions: "appendNewToken",
+						},
+						RESET: "idle",
+						SOLVE: "solving",
+						DELETE: [
+							{
+								target: "int",
+								cond: "lastTokenEndsWithDecimalPoint",
+								actions: "deleteLastChar",
+							},
+							{
+								actions: "deleteLastChar",
+							},
+						],
 					},
 				},
 				operator: {
 					on: {
-						DELETE: [
-							{
-								target: "#calculator.number.fraction",
-								cond: "prevToLastTokenHasDecimalPoint",
-								actions: "deleteLastToken",
-							},
-							{
-								target: "number",
-								actions: "deleteLastToken",
-							},
-						],
+						DIGIT: {
+							target: "int",
+							actions: "appendNewToken",
+						},
+						DECIMAL_POINT: {
+							target: "decimal",
+							actions: "appendNewDecimalToken",
+						},
 						OPERATOR: [
 							{
 								target: "sign",
-								cond: "operatorIsMinusSignAndLastTokenIsNotAdditive",
+								cond: "operatorIsMinusAndLastTokenIsTimesOrSlash",
 								actions: "appendNewToken",
 							},
 							{
 								actions: "replaceLastChar",
 							},
 						],
+						RESET: "idle",
+						DELETE: [
+							{
+								target: "int",
+								cond: "secondToLastTokenIsInteger",
+								actions: "deleteLastToken",
+							},
+							{
+								target: "decimal",
+								actions: "deleteLastToken",
+							},
+						],
+					},
+				},
+				sign: {
+					on: {
 						DIGIT: {
-							target: "number",
-							actions: "appendNewToken",
+							target: "int",
+							actions: "appendToLastToken",
 						},
 						DECIMAL_POINT: {
-							target: "#calculator.number.fraction",
-							actions: "appendNewFractionToken",
+							target: "decimal",
+							actions: "appendNewDecimalToLastToken",
 						},
+						RESET: "idle",
+						DELETE: [
+							{
+								target: "idle",
+								cond: "lastTokenIsOnlyToken",
+							},
+							{
+								target: "operator",
+								actions: "deleteLastToken",
+							},
+						],
 					},
 				},
 				solving: {
 					entry: "solve",
 					on: {
-						ERROR: {
-							target: "#calculator.result.error",
-						},
-						DONE: {
-							target: "result",
-						},
+						DONE: "solution",
+						ERROR: "error",
 					},
 				},
-				result: {
+				solution: {
 					entry: "replaceAllWithNewToken",
-					initial: "solution",
-					states: {
-						solution: {
-							on: {
-								OPERATOR: {
-									target: "#calculator.operator",
-									actions: "appendNewToken",
-								},
-							},
-						},
-						error: {
-							on: {
-								OPERATOR: {
-									target: "#calculator.sign",
-									cond: "operatorIsMinusSign",
-									actions: "replaceAllWithNewToken",
-								},
-							},
-						},
-					},
 					on: {
-						DELETE: {
-							target: "idle",
-							actions: "deleteLastToken",
-						},
 						DIGIT: {
-							target: "number",
+							target: "int",
 							actions: "replaceAllWithNewToken",
 						},
 						DECIMAL_POINT: {
-							target: "#calculator.number.fraction",
-							actions: "replaceAllWithNewFractionToken",
+							target: "decimal",
+							actions: "replaceAllWithNewDecimalToken",
 						},
+						OPERATOR: {
+							target: "operator",
+							actions: "appendNewToken",
+						},
+						RESET: "idle",
+						DELETE: "idle",
 					},
 				},
-			},
-			on: {
-				RESET: {
-					target: ".idle",
-					actions: "resetTokens",
+				error: {
+					entry: "replaceAllWithNewToken",
+					on: {
+						DIGIT: {
+							target: "int",
+							actions: "replaceAllWithNewToken",
+						},
+						DECIMAL_POINT: {
+							target: "decimal",
+							actions: "replaceAllWithNewDecimalToken",
+						},
+						OPERATOR: {
+							target: "sign",
+							cond: "operatorIsMinus",
+							actions: "replaceAllWithNewToken",
+						},
+						RESET: "idle",
+						DELETE: "idle",
+					},
 				},
 			},
 		},
@@ -249,7 +250,7 @@ export const calcMachine =
 						return [...exceptLast(context.tokens), lastToken + suffix]
 					},
 				}),
-				appendNewFractionToLastToken: assign({
+				appendNewDecimalToLastToken: assign({
 					tokens: (context) => {
 						const lastToken = context.tokens.at(-1)
 						return [...exceptLast(context.tokens), lastToken + "0."]
@@ -260,7 +261,7 @@ export const calcMachine =
 						return [...context.tokens, event.data]
 					},
 				}),
-				appendNewFractionToken: assign({
+				appendNewDecimalToken: assign({
 					tokens: (context) => {
 						return [...context.tokens, "0."]
 					},
@@ -277,7 +278,7 @@ export const calcMachine =
 						return [event.data]
 					},
 				}),
-				replaceAllWithNewFractionToken: assign({
+				replaceAllWithNewDecimalToken: assign({
 					tokens: ["0."],
 				}),
 				deleteLastChar: assign({
@@ -291,7 +292,7 @@ export const calcMachine =
 						return [...exceptLast(context.tokens)]
 					},
 				}),
-				resetTokens: assign({
+				clearTokens: assign({
 					tokens: [] as string[],
 				}),
 				solve: send((context): CalcEvent => {
@@ -305,36 +306,41 @@ export const calcMachine =
 				}),
 			},
 			guards: {
-				onlyOneCharIsLeftInTokens: (context) => {
-					const {tokens} = context
-					return tokens.length === 1 && tokens[0]!.length === 1
+				operatorIsMinus: (context, event) => {
+					return event.data === "-"
+				},
+				operatorIsMinusAndLastTokenIsTimesOrSlash: (context, event) => {
+					const lastToken = context.tokens.at(-1)!
+					return event.data === "-" && !"+-".includes(lastToken)
 				},
 				lastTokenIsZeroOrMinusZero: (context) => {
 					const lastToken = context.tokens.at(-1)!
 					return lastToken === "0" || lastToken === "-0"
 				},
+				lastTokenIsUnsignedDigitAndOnlyToken: (context) => {
+					const lastToken = context.tokens.at(-1)!
+					return isUnsignedDigit(lastToken) && context.tokens.length === 1
+				},
 				lastTokenIsSignedDigit: (context) => {
 					const lastToken = context.tokens.at(-1)!
-					// no need for isDigit check; the finite states handle that
-					return lastToken.length === 2 && lastToken.startsWith("-")
+					return isSignedDigit(lastToken)
 				},
-				lastTokenIsUnsignedDigit: (context) => {
+				lastTokenIsUnsignedDigitAfterOperator: (context) => {
 					const lastToken = context.tokens.at(-1)!
-					// no need for isDigit check; the finite states handle that
-					return lastToken.length === 1 && !lastToken.startsWith("-")
+					const secondToLastToken = context.tokens.at(-2)!
+					// There's actually no need to check if second-to-last token is an op;
+					// you could just check if the token exists (as in tokens.length > 1)
+					// because the finite states already enforce the type of the token.
+					return isUnsignedDigit(lastToken) && isOperator(secondToLastToken)
 				},
 				lastTokenEndsWithDecimalPoint: (context) => {
 					return context.tokens.at(-1)!.endsWith(".")
 				},
-				prevToLastTokenHasDecimalPoint: (context) => {
-					return context.tokens.at(-2)!.includes(".")
+				lastTokenIsOnlyToken: (context) => {
+					return context.tokens.length === 1
 				},
-				operatorIsMinusSign: (context, event) => {
-					return event.data === "-"
-				},
-				operatorIsMinusSignAndLastTokenIsNotAdditive: (context, event) => {
-					const lastToken = context.tokens.at(-1)!
-					return event.data === "-" && !"+-".includes(lastToken)
+				secondToLastTokenIsInteger: (context) => {
+					return isInteger(context.tokens.at(-2)!)
 				},
 			},
 		}

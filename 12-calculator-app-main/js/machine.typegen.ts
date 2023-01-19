@@ -13,150 +13,31 @@ export interface Typegen0 {
 		services: never
 	}
 	eventsCausingActions: {
-		appendNewFractionToLastToken: "DECIMAL_POINT"
-		appendNewFractionToken: "DECIMAL_POINT"
+		appendNewDecimalToLastToken: "DECIMAL_POINT"
+		appendNewDecimalToken: "DECIMAL_POINT"
 		appendNewToken: "DIGIT" | "OPERATOR"
 		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
+		clearTokens: "DELETE" | "RESET" | "xstate.init"
 		deleteLastChar: "DELETE"
 		deleteLastToken: "DELETE"
-		replaceAllWithNewFractionToken: "DECIMAL_POINT"
+		replaceAllWithNewDecimalToken: "DECIMAL_POINT"
 		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR" | "OPERATOR"
 		replaceLastChar: "DIGIT" | "OPERATOR"
-		resetTokens: "RESET"
 		solve: "SOLVE"
 	}
 	eventsCausingDelays: {}
 	eventsCausingGuards: {
 		lastTokenEndsWithDecimalPoint: "DELETE"
+		lastTokenIsOnlyToken: "DELETE"
 		lastTokenIsSignedDigit: "DELETE"
-		lastTokenIsUnsignedDigit: "DELETE"
+		lastTokenIsUnsignedDigitAfterOperator: "DELETE"
+		lastTokenIsUnsignedDigitAndOnlyToken: "DELETE"
 		lastTokenIsZeroOrMinusZero: "DIGIT"
-		onlyOneCharIsLeftInTokens: "DELETE"
-		operatorIsMinusSign: "OPERATOR"
-		operatorIsMinusSignAndLastTokenIsNotAdditive: "OPERATOR"
-		prevToLastTokenHasDecimalPoint: "DELETE"
+		operatorIsMinus: "OPERATOR"
+		operatorIsMinusAndLastTokenIsTimesOrSlash: "OPERATOR"
+		secondToLastTokenIsInteger: "DELETE"
 	}
 	eventsCausingServices: {}
-	matchesStates:
-		| "idle"
-		| "number"
-		| "number.fraction"
-		| "number.int"
-		| "operator"
-		| "result"
-		| "result.error"
-		| "result.solution"
-		| "sign"
-		| "solving"
-		| {number?: "fraction" | "int"; result?: "error" | "solution"}
-	tags: never
-}
-
-// This file was automatically generated. Edits will be overwritten
-
-export interface Typegen0 {
-	"@@xstate/typegen": true
-	internalEvents: {
-		"xstate.init": {type: "xstate.init"}
-	}
-	invokeSrcNameMap: {}
-	missingImplementations: {
-		actions: never
-		delays: never
-		guards: never
-		services: never
-	}
-	eventsCausingActions: {
-		appendNewFractionToLastToken: "DECIMAL_POINT"
-		appendNewFractionToken: "DECIMAL_POINT"
-		appendNewToken: "DIGIT" | "OPERATOR"
-		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
-		deleteLastChar: "DELETE"
-		deleteLastToken: "DELETE"
-		replaceAllWithNewFractionToken: "DECIMAL_POINT"
-		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR" | "OPERATOR"
-		replaceLastChar: "DIGIT" | "OPERATOR"
-		resetTokens: "RESET"
-		solve: "SOLVE"
-	}
-	eventsCausingDelays: {}
-	eventsCausingGuards: {
-		lastTokenEndsWithDecimalPoint: "DELETE"
-		lastTokenIsSignedDigit: "DELETE"
-		lastTokenIsUnsignedDigit: "DELETE"
-		lastTokenIsZeroOrMinusZero: "DIGIT"
-		onlyOneCharIsLeftInTokens: "DELETE"
-		operatorIsMinusSign: "OPERATOR"
-		operatorIsMinusSignAndLastTokenIsNotAdditive: "OPERATOR"
-		prevToLastTokenHasDecimalPoint: "DELETE"
-	}
-	eventsCausingServices: {}
-	matchesStates:
-		| "idle"
-		| "number"
-		| "number.fraction"
-		| "number.int"
-		| "operator"
-		| "result"
-		| "result.error"
-		| "result.solution"
-		| "sign"
-		| "solving"
-		| {number?: "fraction" | "int"; result?: "error" | "solution"}
-	tags: never
-}
-
-// This file was automatically generated. Edits will be overwritten
-
-export interface Typegen0 {
-	"@@xstate/typegen": true
-	internalEvents: {
-		"xstate.init": {type: "xstate.init"}
-	}
-	invokeSrcNameMap: {}
-	missingImplementations: {
-		actions: "replaceAllWithNewToke"
-		delays: never
-		guards: never
-		services: never
-	}
-	eventsCausingActions: {
-		appendNewFractionToLastToken: "DECIMAL_POINT"
-		appendNewFractionToken: "DECIMAL_POINT"
-		appendNewToken: "DIGIT" | "OPERATOR"
-		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
-		deleteLastChar: "DELETE"
-		deleteLastToken: "DELETE"
-		replaceAllWithNewFractionToken: "DECIMAL_POINT"
-		replaceAllWithNewToke: "OPERATOR"
-		replaceAllWithNewToken: "DIGIT" | "DONE" | "ERROR"
-		replaceLastChar: "DIGIT" | "OPERATOR"
-		resetTokens: "RESET"
-		solve: "SOLVE"
-	}
-	eventsCausingDelays: {}
-	eventsCausingGuards: {
-		lastTokenEndsWithDecimalPoint: "DELETE"
-		lastTokenIsSignedDigit: "DELETE"
-		lastTokenIsUnsignedDigit: "DELETE"
-		lastTokenIsZeroOrMinusZero: "DIGIT"
-		onlyOneCharIsLeftInTokens: "DELETE"
-		operatorIsMinusSign: "OPERATOR"
-		operatorIsMinusSignAndLastTokenIsNotAdditive: "OPERATOR"
-		prevToLastTokenHasDecimalPoint: "DELETE"
-	}
-	eventsCausingServices: {}
-	matchesStates:
-		| "idle"
-		| "number"
-		| "number.fraction"
-		| "number.int"
-		| "operator"
-		| "result"
-		| "result.error"
-		| "result.solution"
-		| "sign"
-		| "solving"
-		| {number?: "fraction" | "int"; result?: "error" | "solution"}
+	matchesStates: "decimal" | "error" | "idle" | "int" | "operator" | "sign" | "solution" | "solving"
 	tags: never
 }

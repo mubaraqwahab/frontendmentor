@@ -1,5 +1,5 @@
 import {interpret} from "xstate"
-import {calcMachine, isOperator, isDigit, isNumeric} from "./machine"
+import {calcMachine, isOperator, isUnsignedDigit as isDigit, isNumeric} from "./machine"
 import {initRovingTabIndex} from "./toolbar"
 
 initRovingTabIndex()
@@ -121,18 +121,21 @@ function handleKey(key: string) {
  * Format a numeric string into a comma-separated one.
  */
 function formatNumStr(numStr: string) {
-	const [intPart, fractionPart] = numStr.split(".")
+	const sign = numStr.startsWith("-") ? "-" : ""
+	const numericPart = sign ? numStr.slice(1) : numStr
+	const [intPart, fractionPart] = numericPart.split(".")
 
 	let formatted = formatIntStr(intPart!)
 	if (fractionPart !== undefined) {
 		formatted += "." + fractionPart
 	}
+	formatted = sign + formatted
 
 	return formatted
 }
 
 /**
- * Format an integral string into a comma-separated one.
+ * Format an (unsigned) integral string into a comma-separated one.
  */
 function formatIntStr(intStr: string) {
 	let formatted = ""
