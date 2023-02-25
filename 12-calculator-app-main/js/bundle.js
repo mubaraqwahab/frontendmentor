@@ -4805,6 +4805,7 @@
     var assign = assign$1,
         send = send$1;
 
+    // The return type assertion could be stricter, but there's no need.
     function isUnsignedDigit(str) {
         return /^\d$/.test(str);
     }
@@ -4818,35 +4819,114 @@
         return /^-?\d+$/.test(str);
     }
     const OPERATORS = ["+", "-", "*", "/"];
-    function isOperator(str) {
+    function isOperator$1(str) {
         // @ts-ignore (I don't get why TS is complaining about str 😕)
         return OPERATORS.includes(str);
     }
-    const calcMachine = 
-    /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAbZBXdqAuA9gE4B0AdlgLYBGYpAlmXgMQAiAkgOLsAqA2gAYAuolAAHArHp56BMqJAAPRAFoAjACYAHCQCcAgGwBmbUYAsG3boCsWowBoQAT1VqBakgHYNBgZYFmRloCuoEAvmGOaJg4+MTkVLQMTGxcvHxqIkggElIycgrKCBqeXsZqwcFGulpqugaeji4I5iRa1oGe9WqeBmYWZhFRGNi4hKQUNHQkjCysAKIAwuwAsgCCADIA+gAKAPLsAHL8wgq50rLy2UUqGmYGJKY+oQZu5kaNzojmZiTWbiUPmYBNUAkMQNFRnEJolpgAzIioZD5MipbgnLLiSQXArXRBaUrGAm2KyeQwlaxNRAWHQabTWTxk4kmcGQ2LjBJTIjMPY7eYAJTWPD2-MEmJy2JRhWpBgeagM7RKnnaZlCGgcXxa7RIRnMyp6dLUFWsrJG7PikySzAAynsNgA1eZis6Sy7ShBmLS6NruRU9Bo1DRUhDqQwkMzWf6eYEdIwdEGmmJjeIEMR0aE8vmC4Wi07Zc5SvEIeoaHUCawg4wR6w1AzB9XWPSGBlGASef5maNGRNQjmp9PjNHpPNYvJuot6rzyzxAjoGSyheveEgGBkadwGXQVVUfHvm0j9xGDhbLdbbfZHDEuse40BFYylvq6Z663Xqz7NawaDzfuo+TfAmYah7smpCwAQ6AAG6MFAzAQHIYAzGQkEEAA1ohbKgSQ4FQTBCCMChaAomKzr5q6t5KIgDQ6CCX5uDYvhqIEwa3J6JBqLqRIcR82jqiB0LYRB0FkLBdBEPEYhjHCxCUCQmECThwlQPhyEEERlwkSOEo3lcd7UloOh2DOpieD0RosXSRhtNGpmykYfSRhoJqRBCZpYUQcA4HggnoFgKKZgKQoiqRo44rplEIMEpbtAI7hAfo751pqHhaJ2dLtq8676Foq78RyHmwF5bBLKsmy7AcxwhdpYXuioNYCCQfi6L0v7Pt4WgsUEejyhYtY1P0nF5fEBVFRw6JVQW456S0soriYTm1Po2Uas0RoNT0cY1vUXZxkN3L8vM1rzFeZE6bVGU6n0QHPASrwraodylv8IS6k1hjNhELlkAQEBwAo8kcpa0yzNeNVFuovQrlYdwcZ69ztkGyU9Ox74mM+Jh2HxLkAxasKkAiSKFqFRMRXSfzeBUbYgoEuith1modL89wVNGtipZYe2ckkoMkzcli-E8AGvNTHwsXUDXeIxWjaM+aiRp4nOHtCPNTRFdjeoGXTlvK9TuMGRiaOxDRBHU7btJonOKTBKsUfeqrsTONjtQShhJc06jAo8wQzqCQHWMYBicyN6DeThfmq5NttURWjWvKuNOKqlnWMuxqXzv71S03DQeeSHJBicQNvhUUFYNejFLNTWcuI+7HylNu6fGFY5ipTnhUh0X7oRqW5ftpXW5fixHap-cPjeE5fhaHtnfg8Evz2f0mibrdHEsb4VkN2PffVN2n1AA */
-    createMachine({
+    const calcMachine = createMachine({
         id: "calculator",
-        tsTypes: {},
-        schema: {
-            context: {},
-            events: {},
-        },
-        predictableActionArguments: true,
-        preserveActionOrder: true,
-        context: {
-            tokens: [],
-        },
-        initial: "idle",
+        initial: "expectsNewNumber",
         states: {
-            idle: {
-                entry: "clearTokens",
+            number: {
+                initial: "int",
+                states: {
+                    int: {
+                        on: {
+                            DECIMAL_POINT: {
+                                target: "decimal",
+                                actions: "appendToLastToken",
+                            },
+                            DIGIT: [
+                                {
+                                    cond: "lastTokenIsZeroOrMinusZero",
+                                    actions: "replaceLastChar",
+                                },
+                                {
+                                    actions: "appendToLastToken",
+                                },
+                            ],
+                            DELETE: [
+                                {
+                                    target: "#calculator.expectsNewNumber.operator",
+                                    cond: "lastTokenIsUnsignedDigitAfterOperator",
+                                    actions: "deleteLastToken",
+                                },
+                                {
+                                    target: "#calculator.expectsNewNumber",
+                                    cond: "lastTokenIsUnsignedDigitAndOnlyToken",
+                                },
+                                {
+                                    target: "#calculator.sign",
+                                    cond: "lastTokenIsSignedDigit",
+                                    actions: "deleteLastChar",
+                                },
+                                {
+                                    actions: "deleteLastChar",
+                                },
+                            ],
+                        },
+                    },
+                    decimal: {
+                        on: {
+                            DELETE: [
+                                {
+                                    target: "int",
+                                    cond: "lastTokenEndsWithDecimalPoint",
+                                    actions: "deleteLastChar",
+                                },
+                                {
+                                    actions: "deleteLastChar",
+                                },
+                            ],
+                            DIGIT: {
+                                actions: "appendToLastToken",
+                            },
+                        },
+                    },
+                },
+                on: {
+                    SOLVE: {
+                        target: "solving",
+                    },
+                    OPERATOR: {
+                        target: "#calculator.expectsNewNumber.operator",
+                        actions: "appendNewToken",
+                    },
+                },
+            },
+            expectsNewNumber: {
+                initial: "idle",
+                states: {
+                    idle: {
+                        entry: "clearTokens",
+                    },
+                    operator: {
+                        on: {
+                            DELETE: [
+                                {
+                                    target: "#calculator.number",
+                                    cond: "secondToLastTokenIsInteger",
+                                    actions: "deleteLastToken",
+                                },
+                                {
+                                    target: "#calculator.number.decimal",
+                                    actions: "deleteLastToken",
+                                },
+                            ],
+                            OPERATOR: {
+                                cond: "operatorIsNotMinusOrLastTokenIsPlusOrMinus",
+                                actions: "replaceLastChar",
+                            },
+                        },
+                    },
+                },
                 on: {
                     DIGIT: {
-                        target: "int",
+                        target: "number",
                         actions: "appendNewToken",
                     },
                     DECIMAL_POINT: {
-                        target: "decimal",
+                        target: "#calculator.number.decimal",
                         actions: "appendNewDecimalToken",
                     },
                     OPERATOR: {
@@ -4856,186 +4936,98 @@
                     },
                 },
             },
-            int: {
-                on: {
-                    DIGIT: [
-                        {
-                            cond: "lastTokenIsZeroOrMinusZero",
-                            actions: "replaceLastChar",
-                        },
-                        {
-                            actions: "appendToLastToken",
-                        },
-                    ],
-                    DECIMAL_POINT: {
-                        target: "decimal",
-                        actions: "appendToLastToken",
-                    },
-                    OPERATOR: {
-                        target: "operator",
-                        actions: "appendNewToken",
-                    },
-                    RESET: "idle",
-                    SOLVE: "solving",
-                    DELETE: [
-                        {
-                            target: "idle",
-                            cond: "lastTokenIsUnsignedDigitAndOnlyToken",
-                        },
-                        {
-                            target: "sign",
-                            cond: "lastTokenIsSignedDigit",
-                            actions: "deleteLastChar",
-                        },
-                        {
-                            target: "operator",
-                            cond: "lastTokenIsUnsignedDigitAfterOperator",
-                            actions: "deleteLastToken",
-                        },
-                        {
-                            actions: "deleteLastChar",
-                        },
-                    ],
-                },
-            },
-            decimal: {
-                on: {
-                    DIGIT: {
-                        actions: "appendToLastToken",
-                    },
-                    OPERATOR: {
-                        target: "operator",
-                        actions: "appendNewToken",
-                    },
-                    RESET: "idle",
-                    SOLVE: "solving",
-                    DELETE: [
-                        {
-                            target: "int",
-                            cond: "lastTokenEndsWithDecimalPoint",
-                            actions: "deleteLastChar",
-                        },
-                        {
-                            actions: "deleteLastChar",
-                        },
-                    ],
-                },
-            },
-            operator: {
-                on: {
-                    DIGIT: {
-                        target: "int",
-                        actions: "appendNewToken",
-                    },
-                    DECIMAL_POINT: {
-                        target: "decimal",
-                        actions: "appendNewDecimalToken",
-                    },
-                    OPERATOR: [
-                        {
-                            target: "sign",
-                            cond: "operatorIsMinusAndLastTokenIsTimesOrSlash",
-                            actions: "appendNewToken",
-                        },
-                        {
-                            actions: "replaceLastChar",
-                        },
-                    ],
-                    RESET: "idle",
-                    DELETE: [
-                        {
-                            target: "int",
-                            cond: "secondToLastTokenIsInteger",
-                            actions: "deleteLastToken",
-                        },
-                        {
-                            target: "decimal",
-                            actions: "deleteLastToken",
-                        },
-                    ],
-                },
-            },
             sign: {
                 on: {
-                    DIGIT: {
-                        target: "int",
-                        actions: "appendToLastToken",
-                    },
-                    DECIMAL_POINT: {
-                        target: "decimal",
-                        actions: "appendNewDecimalToLastToken",
-                    },
-                    RESET: "idle",
                     DELETE: [
                         {
-                            target: "idle",
+                            target: "expectsNewNumber",
                             cond: "lastTokenIsOnlyToken",
                         },
                         {
-                            target: "operator",
+                            target: "#calculator.expectsNewNumber.operator",
                             actions: "deleteLastToken",
                         },
                     ],
+                    DECIMAL_POINT: {
+                        target: "#calculator.number.decimal",
+                        actions: "appendNewDecimalToLastToken",
+                    },
+                    DIGIT: {
+                        target: "number",
+                        actions: "appendToLastToken",
+                    },
                 },
             },
             solving: {
                 entry: "solve",
                 on: {
-                    DONE: "solution",
-                    ERROR: "error",
+                    DONE: {
+                        target: "result",
+                    },
+                    ERROR: {
+                        target: "#calculator.result.error",
+                    },
                 },
             },
-            solution: {
+            result: {
                 entry: "replaceAllWithNewToken",
+                initial: "solution",
+                states: {
+                    solution: {
+                        on: {
+                            OPERATOR: {
+                                target: "#calculator.expectsNewNumber.operator",
+                                actions: "appendNewToken",
+                            },
+                        },
+                    },
+                    error: {
+                        on: {
+                            OPERATOR: {
+                                target: "#calculator.sign",
+                                cond: "operatorIsMinus",
+                                actions: "replaceAllWithNewToken",
+                            },
+                        },
+                    },
+                },
                 on: {
                     DIGIT: {
-                        target: "int",
+                        target: "number",
                         actions: "replaceAllWithNewToken",
                     },
                     DECIMAL_POINT: {
-                        target: "decimal",
+                        target: "#calculator.number.decimal",
                         actions: "replaceAllWithNewDecimalToken",
                     },
-                    OPERATOR: {
-                        target: "operator",
-                        actions: "appendNewToken",
+                    DELETE: {
+                        target: "expectsNewNumber",
                     },
-                    RESET: "idle",
-                    DELETE: "idle",
-                },
-            },
-            error: {
-                entry: "replaceAllWithNewToken",
-                on: {
-                    DIGIT: {
-                        target: "int",
-                        actions: "replaceAllWithNewToken",
-                    },
-                    DECIMAL_POINT: {
-                        target: "decimal",
-                        actions: "replaceAllWithNewDecimalToken",
-                    },
-                    OPERATOR: {
-                        target: "sign",
-                        cond: "operatorIsMinus",
-                        actions: "replaceAllWithNewToken",
-                    },
-                    RESET: "idle",
-                    DELETE: "idle",
                 },
             },
         },
+        on: {
+            RESET: {
+                target: ".expectsNewNumber",
+            },
+        },
+        schema: {
+            context: {},
+            events: {},
+        },
+        context: { tokens: [] },
+        predictableActionArguments: true,
+        preserveActionOrder: true,
+        tsTypes: {},
     }, {
         actions: {
-            appendToLastToken: assign({
+            appendNewDecimalToken: assign({
                 tokens: (context, event) => {
-                    const lastToken = context.tokens.at(-1);
-                    const suffix = event.type === "DECIMAL_POINT" ? "." : event.data;
-                    return [...exceptLast(context.tokens), lastToken + suffix];
+                    return [...context.tokens, "0."];
                 },
             }),
             appendNewDecimalToLastToken: assign({
-                tokens: (context) => {
+                tokens: (context, event) => {
                     const lastToken = context.tokens.at(-1);
                     return [...exceptLast(context.tokens), lastToken + "0."];
                 },
@@ -5045,9 +5037,37 @@
                     return [...context.tokens, event.data];
                 },
             }),
-            appendNewDecimalToken: assign({
-                tokens: (context) => {
-                    return [...context.tokens, "0."];
+            appendToLastToken: assign({
+                tokens: (context, event) => {
+                    const lastToken = context.tokens.at(-1);
+                    const suffix = event.type === "DECIMAL_POINT" ? "." : event.data;
+                    return [...exceptLast(context.tokens), lastToken + suffix];
+                },
+            }),
+            clearTokens: assign({
+                tokens: (context, event) => {
+                    return [];
+                },
+            }),
+            deleteLastChar: assign({
+                tokens: (context, event) => {
+                    const lastToken = context.tokens.at(-1);
+                    return [...exceptLast(context.tokens), exceptLast(lastToken)];
+                },
+            }),
+            deleteLastToken: assign({
+                tokens: (context, event) => {
+                    return [...exceptLast(context.tokens)];
+                },
+            }),
+            replaceAllWithNewDecimalToken: assign({
+                tokens: (context, event) => {
+                    return ["0."];
+                },
+            }),
+            replaceAllWithNewToken: assign({
+                tokens: (context, event) => {
+                    return [event.data];
                 },
             }),
             replaceLastChar: assign({
@@ -5057,31 +5077,9 @@
                     return [...exceptLast(context.tokens), newLastToken];
                 },
             }),
-            replaceAllWithNewToken: assign({
-                tokens: (context, event) => {
-                    return [event.data];
-                },
-            }),
-            replaceAllWithNewDecimalToken: assign({
-                tokens: ["0."],
-            }),
-            deleteLastChar: assign({
-                tokens: (context) => {
-                    const lastToken = context.tokens.at(-1);
-                    return [...exceptLast(context.tokens), exceptLast(lastToken)];
-                },
-            }),
-            deleteLastToken: assign({
-                tokens: (context) => {
-                    return [...exceptLast(context.tokens)];
-                },
-            }),
-            clearTokens: assign({
-                tokens: [],
-            }),
-            solve: send((context) => {
-                const concatted = context.tokens.join("");
-                const result = eval(concatted);
+            solve: send((context, event) => {
+                const expression = context.tokens.join("");
+                const result = eval(expression);
                 if (Number.isFinite(result)) {
                     return { type: "DONE", data: `${result}` };
                 }
@@ -5091,50 +5089,66 @@
             }),
         },
         guards: {
-            operatorIsMinus: (context, event) => {
-                return event.data === "-";
+            lastTokenEndsWithDecimalPoint: (context, event) => {
+                return context.tokens.at(-1).endsWith(".");
             },
-            operatorIsMinusAndLastTokenIsTimesOrSlash: (context, event) => {
+            lastTokenIsOnlyToken: (context, event) => {
+                return context.tokens.length === 1;
+            },
+            lastTokenIsSignedDigit: (context, event) => {
+                return isSignedDigit(context.tokens.at(-1));
+            },
+            lastTokenIsUnsignedDigitAfterOperator: (context, event) => {
                 const lastToken = context.tokens.at(-1);
-                return event.data === "-" && !"+-".includes(lastToken);
+                // This could be undefined actually, but just for convenience, pretend otherwise.
+                const secondToLastToken = context.tokens.at(-2);
+                return isUnsignedDigit(lastToken) && isOperator$1(secondToLastToken);
             },
-            lastTokenIsZeroOrMinusZero: (context) => {
-                const lastToken = context.tokens.at(-1);
-                return lastToken === "0" || lastToken === "-0";
-            },
-            lastTokenIsUnsignedDigitAndOnlyToken: (context) => {
+            lastTokenIsUnsignedDigitAndOnlyToken: (context, event) => {
                 const lastToken = context.tokens.at(-1);
                 return isUnsignedDigit(lastToken) && context.tokens.length === 1;
             },
-            lastTokenIsSignedDigit: (context) => {
+            lastTokenIsZeroOrMinusZero: (context, event) => {
                 const lastToken = context.tokens.at(-1);
-                return isSignedDigit(lastToken);
+                return lastToken === "0" || lastToken === "-0";
             },
-            lastTokenIsUnsignedDigitAfterOperator: (context) => {
+            operatorIsMinus: (context, event) => {
+                return event.data === "-";
+            },
+            operatorIsNotMinusOrLastTokenIsPlusOrMinus: (context, event) => {
                 const lastToken = context.tokens.at(-1);
-                const secondToLastToken = context.tokens.at(-2);
-                // There's actually no need to check if second-to-last token is an op;
-                // you could just check if the token exists (as in tokens.length > 1)
-                // because the finite states already enforce the type of the token.
-                return isUnsignedDigit(lastToken) && isOperator(secondToLastToken);
+                return event.data !== "-" || lastToken === "+" || lastToken === "-";
             },
-            lastTokenEndsWithDecimalPoint: (context) => {
-                return context.tokens.at(-1).endsWith(".");
-            },
-            lastTokenIsOnlyToken: (context) => {
-                return context.tokens.length === 1;
-            },
-            secondToLastTokenIsInteger: (context) => {
+            secondToLastTokenIsInteger: (context, event) => {
                 return isInteger(context.tokens.at(-2));
             },
         },
     });
-    function exceptLast(sliceable) {
-        return sliceable.slice(0, sliceable.length - 1);
+    function exceptLast(arrOrStr) {
+        return arrOrStr.slice(0, arrOrStr.length - 1);
+    }
+
+    const THEME_STORAGE_KEY = "calculator-app-theme";
+    function initThemeSwitch() {
+        const themeSwitch = document.querySelectorAll("input[name='themeSwitch']");
+        themeSwitch.forEach((radio) => {
+            radio.addEventListener("change", () => {
+                document.documentElement.dataset.theme = radio.value;
+                localStorage.setItem(THEME_STORAGE_KEY, radio.value);
+            });
+            // Get theme from localstorage
+            const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+            if (savedTheme === radio.value) {
+                radio.checked = true;
+                // Programmatically setting `checked` doesn't trigger a change event,
+                // so update the theme manually.
+                document.documentElement.dataset.theme = radio.value;
+            }
+        });
     }
 
     const toolbar = document.querySelector("[role=toolbar]");
-    const buttons = toolbar.querySelectorAll("button");
+    const buttons$1 = toolbar.querySelectorAll("button");
     /**
      * Implement a roving tabindex on the calculator toolbar.
      * See:
@@ -5142,18 +5156,18 @@
      *  - https://w3c.github.io/aria-practices/#kbd_roving_tabindex
      */
     function initRovingTabIndex() {
-        buttons.forEach((button, i) => {
+        buttons$1.forEach((button, i) => {
             // Make only the first button reachable via keyboard initially
             button.tabIndex = i === 0 ? 0 : -1;
             button.addEventListener("keydown", (e) => {
                 const destIndex = focusDestInToolbarSequence(i, e.key);
                 button.tabIndex = -1;
-                buttons[destIndex].tabIndex = 0;
-                buttons[destIndex].focus();
+                buttons$1[destIndex].tabIndex = 0;
+                buttons$1[destIndex].focus();
             });
             // Focus may also come through a mouseclick, for example
             button.addEventListener("focus", () => {
-                buttons.forEach((btn, j) => {
+                buttons$1.forEach((btn, j) => {
                     btn.tabIndex = i === j ? 0 : -1;
                 });
             });
@@ -5173,11 +5187,11 @@
      */
     function focusDestInToolbarSequence(buttonIndex, key) {
         if (key === "ArrowRight") {
-            const nextIndex = (buttonIndex + 1) % buttons.length;
+            const nextIndex = (buttonIndex + 1) % buttons$1.length;
             return nextIndex;
         }
         else if (key === "ArrowLeft") {
-            const prevIndex = buttonIndex === 0 ? buttons.length - 1 : buttonIndex - 1;
+            const prevIndex = buttonIndex === 0 ? buttons$1.length - 1 : buttonIndex - 1;
             return prevIndex;
         }
         else {
@@ -5185,102 +5199,110 @@
         }
     }
 
+    initThemeSwitch();
     initRovingTabIndex();
-    const themeSwitch = document.querySelectorAll("input[name='themeSwitch']");
-    const THEME_STORAGE_KEY = "calculator-app-theme";
-    themeSwitch.forEach((radio) => {
-        radio.addEventListener("change", () => {
-            document.documentElement.dataset.theme = radio.value;
-            localStorage.setItem(THEME_STORAGE_KEY, radio.value);
-        });
-        // Get theme from localstorage
-        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-        if (savedTheme === radio.value) {
-            radio.checked = true;
-            // Remember: setting the above programmatically doesn't trigger a change event.
-            document.documentElement.dataset.theme = radio.value;
-        }
-    });
-    // Actual calc stuff starts here
     const calcService = interpret(calcMachine).start();
-    const display = document.querySelector("output");
-    calcService.onTransition((state) => {
-        if (!state.history || state.changed) {
-            display.value = state.context.tokens
-                // format numbers
-                .map((token) => (isNumeric(token) ? formatNumStr(token) : token))
-                // format multiplication signs
-                .map((token) => (token === "*" ? "×" : token))
-                .join(" ");
-            console.log(`State '${state.toStrings().join(" ")}'. Tokens ${JSON.stringify(state.context.tokens)}`);
-            // Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
-            // const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
-            // solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
-            // const deleteBtn = document.querySelector<HTMLButtonElement>("[data-delete-btn]")!
-            // deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString())
-            // const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
-            // decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())
-            // const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
-            // operatorBtns.forEach((btn) => {
-            // 	btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString())
-            // })
-        }
-    });
-    // Handle key clicks
-    const keyEls = document.querySelectorAll(".Key");
-    keyEls.forEach((keyEl) => {
-        keyEl.addEventListener("click", (e) => {
-            e.preventDefault();
-            const key = keyEl.dataset.keyshortcuts;
-            handleKey(key);
+    // Handle button clicks.
+    const buttons = document.querySelectorAll(".Button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const text = button.textContent.trim().toUpperCase();
+            handleCalcInput(text);
         });
     });
-    // Handle key keyboard shorcuts.
+    // Handle keyboard presses (including shortcuts).
     // Listen for 'keydown' not 'keyup', so that a user can press
     // and hold a key to type it repeatedly.
     document.body.addEventListener("keydown", (e) => {
         const target = e.target;
         if (target.matches("input[type=radio]"))
             return;
-        // Don't handle Enter key when pressed on a button
-        // so that it doesn't interfere with the default behaviour.
-        // (The default behaviour is to activate the button.)
-        // I must admit though that, because of this, the UX feels weird.
+        // Don't handle the Enter key when it's pressed on a button,
+        // to avoid interfering with the default button-Enter behaviour,
+        // which is to activate the button. I must admit that, because
+        // of this, the UX feels a little weird.
         if (!target.matches("button") || (target.matches("button") && e.key !== "Enter")) {
-            handleKey(e.key);
+            handleCalcInput(e.key);
         }
     });
-    function handleKey(key) {
-        if (isUnsignedDigit(key)) {
-            calcService.send({ type: "DIGIT", data: key });
+    // Sync the display with the machine.
+    const display = document.querySelector(".Display");
+    calcService.onTransition((state) => {
+        if (!state.changed)
+            return;
+        display.textContent = state.context.tokens
+            // format numbers and operators
+            .map((token) => {
+            if (isNumeric(token))
+                return formatNumStr(token);
+            if (isOperator(token))
+                return formatOperator(token);
+            return token;
+        })
+            .join(" ");
+        console.log(`State '${state.toStrings().at(-1)}'. Tokens ${JSON.stringify(state.context.tokens)}`);
+    });
+    /* HELPERS */
+    /** Handle a (button or keyboard) calculator input */
+    function handleCalcInput(input) {
+        if (isUnsignedDigit(input)) {
+            calcService.send({ type: "DIGIT", data: input });
         }
-        else if (isOperator(key) || key === "Plus") {
-            calcService.send({ type: "OPERATOR", data: key === "Plus" ? "+" : key });
+        else if (isOperator(input)) {
+            calcService.send({ type: "OPERATOR", data: normalizeOperator(input) });
         }
-        else if (key === ".") {
+        else if (input === ".") {
             calcService.send({ type: "DECIMAL_POINT" });
         }
-        else if (key === "Delete") {
-            calcService.send({ type: "RESET" });
-        }
-        else if (key === "=" || key === "Enter") {
+        else if (input === "=" || input === "Enter") {
             calcService.send({ type: "SOLVE" });
         }
-        else if (key === "Backspace") {
+        else if (input === "DEL" || input === "Backspace") {
             calcService.send({ type: "DELETE" });
         }
-        else {
-            console.warn("Unhandled key", key);
+        else if (input === "RESET" || input === "Delete") {
+            calcService.send({ type: "RESET" });
         }
+        else {
+            console.warn("Unhandled input", input);
+        }
+    }
+    const FANCY_OPERATORS = ["×", "−"];
+    function isOperator(str) {
+        // @ts-ignore
+        return isOperator$1(str) || FANCY_OPERATORS.includes(str);
+    }
+    /**
+     * Convert a fancy operator to a normal one.
+     * But return a normal one as is.
+     */
+    function normalizeOperator(op) {
+        if (op === "×")
+            return "*";
+        if (op === "−")
+            return "-";
+        return op;
+    }
+    /**
+     * Format a normal operator into a fancy one.
+     * But return a fancy one as is.
+     */
+    function formatOperator(op) {
+        if (op === "*")
+            return "×";
+        if (op === "-")
+            return "−";
+        return op;
     }
     /**
      * Format a numeric string into a comma-separated one.
+     * (This doesn't comma-separate the fraction part, if any)
      */
     function formatNumStr(numStr) {
         const sign = numStr.startsWith("-") ? "-" : "";
         const numericPart = sign ? numStr.slice(1) : numStr;
         const [intPart, fractionPart] = numericPart.split(".");
-        let formatted = formatIntStr(intPart);
+        let formatted = formatUnsignedIntStr(intPart);
         if (fractionPart !== undefined) {
             formatted += "." + fractionPart;
         }
@@ -5288,9 +5310,9 @@
         return formatted;
     }
     /**
-     * Format an (unsigned) integral string into a comma-separated one.
+     * Format an unsigned integral string into a comma-separated one.
      */
-    function formatIntStr(intStr) {
+    function formatUnsignedIntStr(intStr) {
         let formatted = "";
         const len = intStr.length;
         for (let i = 1; i <= len; i++) {

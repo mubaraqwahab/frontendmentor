@@ -1,88 +1,29 @@
 import {interpret} from "xstate"
-import {calcMachine, isOperator, isUnsignedDigit as isDigit, isNumeric} from "./machine"
+import {
+	calcMachine,
+	type Operator as NormalOperator,
+	isOperator as isNormalOperator,
+	isUnsignedDigit as isDigit,
+	isNumeric,
+} from "./machine"
+import {initThemeSwitch} from "./theme-switch"
 import {initRovingTabIndex} from "./toolbar"
 
+initThemeSwitch()
 initRovingTabIndex()
-
-const themeSwitch = document.querySelectorAll<HTMLInputElement>("input[name='themeSwitch']")
-
-const THEME_STORAGE_KEY = "calculator-app-theme"
-
-themeSwitch.forEach((radio) => {
-	radio.addEventListener("change", () => {
-		document.documentElement.dataset.theme = radio.value
-		localStorage.setItem(THEME_STORAGE_KEY, radio.value)
-	})
-
-	// Get theme from localstorage
-	const savedTheme = localStorage.getItem(THEME_STORAGE_KEY)
-	if (savedTheme === radio.value) {
-		radio.checked = true
-		// Remember: setting the above programmatically doesn't trigger a change event.
-		document.documentElement.dataset.theme = radio.value
-	}
-})
-
-// Actual calc stuff starts here
 
 const calcService = interpret(calcMachine).start()
 
-const display = document.querySelector("output")!
-calcService.onTransition((state) => {
-	if (!state.history || state.changed) {
-		display.value = state.context.tokens
-			// format numbers
-			.map((token) => (isNumeric(token) ? formatNumStr(token) : token))
-			// format multiplication signs
-			.map((token) => (token === "*" ? "×" : token))
-			.join(" ")
-
-		console.log(
-			`State '${state.toStrings().join(" ")}'. Tokens ${JSON.stringify(state.context.tokens)}`
-		)
-
-		/**
-		 * Determine if the current state rejects an event of a given type.
-		 * A state 'rejects' an event if the event can't cause a transition from the state.
-		 * @param eventType
-		 */
-		function rejectsEvent(eventType: string) {
-			const {nextEvents} = state
-			return nextEvents.every((e) => e !== eventType)
-
-			// I later learnt that XState has state.can(), so I don't really need this function.
-			// However, I'm keeping it because for events that have data, I would have to do something
-			// like state.can({ type: "OPERATOR", data: "+" }), which is a little bit tedious.
-		}
-
-		// Disable buttons with aria-disabled so they remain perceivable (i.e. focusable)
-		// const solveBtn = document.querySelector<HTMLButtonElement>("[data-solve-btn]")!
-		// solveBtn.setAttribute("aria-disabled", rejectsEvent("SOLVE").toString())
-
-		// const deleteBtn = document.querySelector<HTMLButtonElement>("[data-delete-btn]")!
-		// deleteBtn.setAttribute("aria-disabled", rejectsEvent("DELETE").toString())
-
-		// const decimalPointBtn = document.querySelector<HTMLButtonElement>("[data-decimal-point-btn]")!
-		// decimalPointBtn.setAttribute("aria-disabled", rejectsEvent("DECIMAL_POINT").toString())
-
-		// const operatorBtns = document.querySelectorAll<HTMLButtonElement>("[data-operator-btn]")
-		// operatorBtns.forEach((btn) => {
-		// 	btn.setAttribute("aria-disabled", rejectsEvent("OPERATOR").toString())
-		// })
-	}
-})
-
-// Handle key clicks
-const keyEls = document.querySelectorAll<HTMLButtonElement>(".Key")
-keyEls.forEach((keyEl) => {
-	keyEl.addEventListener("click", (e) => {
-		e.preventDefault()
-		const key = keyEl.dataset.keyshortcuts!
-		handleKey(key)
+// Handle button clicks.
+const buttons = document.querySelectorAll<HTMLButtonElement>(".Button")
+buttons.forEach((button) => {
+	button.addEventListener("click", () => {
+		const text = button.textContent!.trim().toUpperCase()
+		handleCalcInput(text)
 	})
 })
 
-// Handle key keyboard shorcuts.
+// Handle keyboard presses (including shortcuts).
 // Listen for 'keydown' not 'keyup', so that a user can press
 // and hold a key to type it repeatedly.
 document.body.addEventListener("keydown", (e) => {
@@ -90,42 +31,95 @@ document.body.addEventListener("keydown", (e) => {
 
 	if (target.matches("input[type=radio]")) return
 
-	// Don't handle Enter key when pressed on a button
-	// so that it doesn't interfere with the default behaviour.
-	// (The default behaviour is to activate the button.)
-	// I must admit though that, because of this, the UX feels weird.
+	// Don't handle the Enter key when it's pressed on a button,
+	// to avoid interfering with the default button-Enter behaviour,
+	// which is to activate the button. I must admit that, because
+	// of this, the UX feels a little weird.
 	if (!target.matches("button") || (target.matches("button") && e.key !== "Enter")) {
-		handleKey(e.key)
+		handleCalcInput(e.key)
 	}
 })
 
-function handleKey(key: string) {
-	if (isDigit(key)) {
-		calcService.send({type: "DIGIT", data: key})
-	} else if (isOperator(key) || key === "Plus") {
-		calcService.send({type: "OPERATOR", data: key === "Plus" ? "+" : key})
-	} else if (key === ".") {
+// Sync the display with the machine.
+const display = document.querySelector(".Display")!
+calcService.onTransition((state) => {
+	if (!state.changed) return
+
+	display.textContent = state.context.tokens
+		// format numbers and operators
+		.map((token) => {
+			if (isNumeric(token)) return formatNumStr(token)
+			if (isOperator(token)) return formatOperator(token)
+			return token
+		})
+		.join(" ")
+
+	console.log(`State '${state.toStrings().at(-1)}'. Tokens ${JSON.stringify(state.context.tokens)}`)
+})
+
+/* HELPERS */
+
+/** Handle a (button or keyboard) calculator input */
+function handleCalcInput(input: string) {
+	if (isDigit(input)) {
+		calcService.send({type: "DIGIT", data: input})
+	} else if (isOperator(input)) {
+		calcService.send({type: "OPERATOR", data: normalizeOperator(input)})
+	} else if (input === ".") {
 		calcService.send({type: "DECIMAL_POINT"})
-	} else if (key === "Delete") {
-		calcService.send({type: "RESET"})
-	} else if (key === "=" || key === "Enter") {
+	} else if (input === "=" || input === "Enter") {
 		calcService.send({type: "SOLVE"})
-	} else if (key === "Backspace") {
+	} else if (input === "DEL" || input === "Backspace") {
 		calcService.send({type: "DELETE"})
+	} else if (input === "RESET" || input === "Delete") {
+		calcService.send({type: "RESET"})
 	} else {
-		console.warn("Unhandled key", key)
+		console.warn("Unhandled input", input)
 	}
+}
+
+// The 'fancy' operators are displayed on the UI,
+// while the 'normal' ones are used by the machine.
+type Operator = NormalOperator | FancyOperator
+
+const FANCY_OPERATORS = ["×", "−"] as const
+type FancyOperator = typeof FANCY_OPERATORS[number]
+
+function isOperator(str: string): str is Operator {
+	// @ts-ignore
+	return isNormalOperator(str) || FANCY_OPERATORS.includes(str)
+}
+
+/**
+ * Convert a fancy operator to a normal one.
+ * But return a normal one as is.
+ */
+function normalizeOperator(op: Operator) {
+	if (op === "×") return "*"
+	if (op === "−") return "-"
+	return op
+}
+
+/**
+ * Format a normal operator into a fancy one.
+ * But return a fancy one as is.
+ */
+function formatOperator(op: Operator) {
+	if (op === "*") return "×"
+	if (op === "-") return "−"
+	return op
 }
 
 /**
  * Format a numeric string into a comma-separated one.
+ * (This doesn't comma-separate the fraction part, if any)
  */
-function formatNumStr(numStr: string) {
+function formatNumStr(numStr: `${number}`) {
 	const sign = numStr.startsWith("-") ? "-" : ""
 	const numericPart = sign ? numStr.slice(1) : numStr
 	const [intPart, fractionPart] = numericPart.split(".")
 
-	let formatted = formatIntStr(intPart!)
+	let formatted = formatUnsignedIntStr(intPart!)
 	if (fractionPart !== undefined) {
 		formatted += "." + fractionPart
 	}
@@ -135,9 +129,9 @@ function formatNumStr(numStr: string) {
 }
 
 /**
- * Format an (unsigned) integral string into a comma-separated one.
+ * Format an unsigned integral string into a comma-separated one.
  */
-function formatIntStr(intStr: string) {
+function formatUnsignedIntStr(intStr: string) {
 	let formatted = ""
 	const len = intStr.length
 	for (let i = 1; i <= len; i++) {

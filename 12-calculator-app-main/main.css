@@ -43,52 +43,55 @@
 		}
 	}
 
-	.Key {
+	.Button {
 		@apply inline-block p-2 pt-4 rounded-md uppercase border-b-[5px] select-none;
 		@apply theme-1:text-very-dark-grayish-blue theme-1:bg-light-grayish-orange theme-1:border-grayish-orange;
 		@apply theme-2:text-very-dark-grayish-blue theme-2:bg-light-grayish-yellow theme-2:border-dark-grayish-orange;
 		@apply theme-3:text-light-yellow theme-3:bg-very-dark-violet-3 theme-3:border-dark-magenta;
 	}
 
-	.Key:hover:not([aria-disabled="true"]),
-	.Key:active:not([aria-disabled="true"]) {
+	.Button:hover,
+	.Button:active {
 		@apply theme-1:bg-grayish-orange;
 		@apply theme-2:bg-dark-grayish-orange;
 		@apply theme-3:bg-dark-magenta;
 	}
 
-	.Key[aria-disabled="true"] {
-		@apply opacity-40;
-	}
-
-	.Key--primary {
+	.Button--primary {
 		@apply theme-1:text-white theme-1:bg-desat-dark-blue-1 theme-1:border-desat-dark-blue-2;
 		@apply theme-2:text-white theme-2:bg-dark-mod-cyan theme-2:border-very-dark-cyan;
 		@apply theme-3:text-white theme-3:bg-dark-violet theme-3:border-vivid-magenta;
 	}
 
-	.Key--primary:hover:not([aria-disabled="true"]),
-	.Key--primary:active:not([aria-disabled="true"]) {
+	.Button--primary:hover,
+	.Button--primary:active {
 		@apply theme-1:bg-desat-dark-blue-2;
 		@apply theme-2:bg-very-dark-cyan;
 		@apply theme-3:bg-vivid-magenta;
 	}
 
-	.Key--accent {
+	.Button--accent {
 		@apply theme-1:text-white theme-1:bg-red theme-1:border-dark-red;
 		@apply theme-2:text-white theme-2:bg-orange theme-2:border-dark-orange;
 		@apply theme-3:text-very-dark-blue theme-3:bg-pure-cyan theme-3:border-soft-cyan;
 	}
 
-	.Key--accent:hover:not([aria-disabled="true"]),
-	.Key--accent:active:not([aria-disabled="true"]) {
+	.Button--accent:hover,
+	.Button--accent:active {
 		@apply theme-1:bg-dark-red;
 		@apply theme-2:bg-dark-orange;
 		@apply theme-3:bg-soft-cyan;
 	}
 
-	.Key--text {
+	.Button--text {
 		@apply text-base;
+	}
+
+	.Display {
+		@apply p-6 mb-6 min-h-[calc(2rem+3rem)] block rounded-xl text-right overflow-x-auto whitespace-nowrap;
+		@apply theme-1:text-white  theme-1:bg-very-dark-desat-blue-3;
+		@apply theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray;
+		@apply theme-3:text-light-yellow theme-3:bg-very-dark-violet-2;
 	}
 }
 

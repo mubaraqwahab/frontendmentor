@@ -17,7 +17,7 @@ export interface Typegen0 {
 		appendNewDecimalToken: "DECIMAL_POINT"
 		appendNewToken: "DIGIT" | "OPERATOR"
 		appendToLastToken: "DECIMAL_POINT" | "DIGIT"
-		clearTokens: "DELETE" | "RESET" | "xstate.init"
+		clearTokens: "DELETE" | "OPERATOR" | "RESET" | "xstate.init"
 		deleteLastChar: "DELETE"
 		deleteLastToken: "DELETE"
 		replaceAllWithNewDecimalToken: "DECIMAL_POINT"
@@ -34,10 +34,26 @@ export interface Typegen0 {
 		lastTokenIsUnsignedDigitAndOnlyToken: "DELETE"
 		lastTokenIsZeroOrMinusZero: "DIGIT"
 		operatorIsMinus: "OPERATOR"
-		operatorIsMinusAndLastTokenIsTimesOrSlash: "OPERATOR"
+		operatorIsNotMinusOrLastTokenIsPlusOrMinus: "OPERATOR"
 		secondToLastTokenIsInteger: "DELETE"
 	}
 	eventsCausingServices: {}
-	matchesStates: "decimal" | "error" | "idle" | "int" | "operator" | "sign" | "solution" | "solving"
+	matchesStates:
+		| "expectsNewNumber"
+		| "expectsNewNumber.idle"
+		| "expectsNewNumber.operator"
+		| "number"
+		| "number.decimal"
+		| "number.int"
+		| "result"
+		| "result.error"
+		| "result.solution"
+		| "sign"
+		| "solving"
+		| {
+				expectsNewNumber?: "idle" | "operator"
+				number?: "decimal" | "int"
+				result?: "error" | "solution"
+		  }
 	tags: never
 }
