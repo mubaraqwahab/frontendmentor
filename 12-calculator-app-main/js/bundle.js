@@ -5240,6 +5240,10 @@
             return token;
         })
             .join(" ");
+        // Scroll the display as far right as possible, so that
+        // the newly added/removed characters are obvious.
+        // See https://stackoverflow.com/q/1962168/12695621
+        display.scrollLeft = display.scrollWidth;
         console.log(`State '${state.toStrings().at(-1)}'. Tokens ${JSON.stringify(state.context.tokens)}`);
     });
     /* HELPERS */

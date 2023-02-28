@@ -88,7 +88,7 @@
 	}
 
 	.Display {
-		@apply p-6 mb-6 min-h-[calc(2rem+3rem)] block rounded-xl text-right overflow-x-auto whitespace-nowrap;
+		@apply p-6 min-h-[calc(2rem+3rem)] block text-right overflow-x-auto whitespace-nowrap;
 		@apply theme-1:text-white  theme-1:bg-very-dark-desat-blue-3;
 		@apply theme-2:text-very-dark-grayish-blue theme-2:bg-very-light-gray;
 		@apply theme-3:text-light-yellow theme-3:bg-very-dark-violet-2;

@@ -35,6 +35,8 @@ TODO: Talk about
 TODO: Write about these:
 
 * accesskey and data-keyshortcuts
+* scrolling display right
+* `Number.isFinite` and overflow errors
 
 ### Continued development
 
@@ -43,6 +45,7 @@ TODO: Issues
 * Whenever the display changes, NVDA announces all the display content. Is this a problem?
 * When the display ends with a number like `2.`, NVDA reads "two" and ignores the point.
 * Exposing keyboard shortcuts to screen readers. NVDA reads aria-keyshortcuts after the accessible name without specifying it's a shortcut.
+* Decimal arithmetic (instead of floating point)
 
 Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
 

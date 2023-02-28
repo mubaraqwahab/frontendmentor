@@ -43,8 +43,11 @@
 				</div>
 			</header>
 			<main class="text-2xl">
-				<!-- Default <output> role is "status", but browsers can be funny lol -->
-				<output role="status" aria-label="Display" class="Display"></output>
+				<!-- This div is just so the display scrollbar respects border radius. See https://stackoverflow.com/q/16676166/12695621 -->
+				<div class="overflow-hidden rounded-xl mb-6">
+					<!-- Default <output> role is "status", but browsers can be funny lol -->
+					<output role="status" aria-label="Display" class="Display"></output>
+				</div>
 				<div
 					role="toolbar"
 					class="p-6 rounded-xl grid grid-cols-4 gap-3 theme-1:bg-very-dark-desat-blue-2 theme-2:bg-grayish-red theme-3:bg-very-dark-violet-2"

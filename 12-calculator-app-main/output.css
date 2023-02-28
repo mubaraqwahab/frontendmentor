@@ -890,12 +890,10 @@ video {
 }
 
 .Display {
-  margin-bottom: 1.5rem;
   display: block;
   min-height: calc(2rem + 3rem);
   overflow-x: auto;
   white-space: nowrap;
-  border-radius: 0.75rem;
   padding: 1.5rem;
   text-align: right;
 }
@@ -965,6 +963,10 @@ video {
   margin-bottom: 0.25rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1013,6 +1015,10 @@ video {
   gap: 0.75rem;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1021,6 +1027,10 @@ video {
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .p-6 {
