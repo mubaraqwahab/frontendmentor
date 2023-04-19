@@ -1,94 +1,49 @@
 # Frontend Mentor - Calculator app
 
-![Design preview for the Calculator app coding challenge](./design/desktop-preview.jpg)
+My solution to the [Calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29).
 
-## Welcome! 👋
+![A screenshot of my solution.](./screenshot.jpeg)
 
-Thanks for checking out this front-end coding challenge.
-
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
-
-**To do this challenge, you need a good understanding of HTML, CSS and JavaScript.**
+[Live site.](https://mubaraqwahab.github.io/frontendmentor/12-calculator-app-main/)
 
 ## The challenge
 
-Your challenge is to build out this calculator app and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to:
+Users should be able to:
 
 - See the size of the elements adjust based on their device's screen size
-- Perform mathematical operations like addition, subtraction, multiplication, and division
+- Perform mathmatical operations like addition, subtraction, multiplication, and division
 - Adjust the color theme based on their preference
 - **Bonus**: Have their initial theme preference checked using `prefers-color-scheme` and have any additional changes saved in the browser
 
-Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
 
-## Where to find everything
+## My process
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+### Built with
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+- HTML
+- Tailwind CSS
+- TypeScript
+- XState and [Stately Studio](http://stately.ai/)
 
-If you would like the design files (we provide Sketch & Figma versions) to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+The calculator turned out to be a bit complex, due to the many (sometimes erroneous) input sequences it could receive (like when a user presses <kbd>2</kbd> <kbd>+</kbd> <kbd>/</kbd> <kbd>3</kbd> <kbd>.</kbd> <kbd>4</kbd> <kbd>.</kbd> <kbd>5</kbd>). I modelled the calculator as a state machine to handle these sequences conveniently and confidently. And I described this calculator machine in detail in an article on my blog: ["Modelling a calculator as a state machine"](https://mubaraqwahab.github.io/blog/calculator/).
 
-You will find all the required assets in the `/images` folder. The assets are already optimized.
+I also made the calculator operable by keyboard and (somewhat) screen-reader friendly. To achieve these, I
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+* marked up the calculator display with [the `<output>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output), so that new items on the display are announced by screen readers
+* used the Unicode characters `×` (`&times;`) and `−` (`&minus;`) on the UI, instead of their ASCII alternatives (`*` and `-`), so that screen readers (NVDA at least) read them correctly as "times" and "minus".
+* implemented the button grid as an [ARIA toolbar](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/), so a user can navigate between the buttons with the left and right arrow keys on their keyboard.
+* added keyboard shortcuts for the buttons, so a user can type on their keyboard <kbd>1</kbd> <kbd>+</kbd> <kbd>2</kbd> <kbd>.</kbd> <kbd>3</kbd> <kbd>=</kbd>, for example, to evaluate the expression `1 + 2.3`, instead of clicking the buttons on the UI.
 
-## Building your project
+### What I learned
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+* HTML has a global [`accesskey` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey) that's supposed to be used on an element to specify the keyboard shortcut that activates that element. However, due to issues with it (browser support, accessibility, and ergonomics), I didn't use it to specify the keyboard shortcuts I mentioned above.
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+* HTML (via ARIA) also has an an [`aria-keyshortcuts` attribute](https://w3c.github.io/aria/#aria-keyshortcuts) for exposing keyboard shortcuts to assistive technologies (like screen readers). I also didn't use this, because the NVDA output was repetitive: NVDA would read a `<button aria-keyshortcuts="2">2</button>`, for example, as "two two" (one "two" for the button text and another for the `aria-keyshortcuts`). In the end, I didn't use any special mark up to indicate the presence of keyboard shortcuts (and admittedly that may be suboptimal).
 
-## Deploying your project
+* JavaScript doesn't have a native way (or at least an intuitive way) to distinguish between an overflow error and a division-by-zero error in a calculation. That is `x / 0 === Number.MAX_VALUE * y === Infinity`, for any `x > 0` and `y > 1`. (An interesting tangent is that `0 / 0 === NaN`.)
 
-As mentioned above, there are many ways to host your project for free. Our recommend hosts are:
+### Continued development
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
-
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
-
-## Create a custom `README.md`
-
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
-
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
-
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
-
-## Submitting your solution
-
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
-
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
-
-## Sharing your solution
-
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of the [Slack community](https://www.frontendmentor.io/slack). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+* Whenever the display changes, NVDA announces the entire display content and not just the newly added/removed item. Is this a problem? On on hand, the announced output is (very) verbose; on the other, announcing just the changes would give little context to the changes.
+* When the display ends with a number like `2.`, NVDA reads "two" and ignores the point.
+* The calculator currently uses floating point arithmetic and, as a result, can't correctly solve some expressions (like `0.1 + 0.2`). Using a decimal number library (there are several on npm) should fix this.
