@@ -1,6 +1,6 @@
-# Frontend Mentor - Calculator app solution
+# Frontend Mentor - Calculator app
 
-This is a solution to the [Calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+My solution to the [Calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29).
 
 ![A screenshot of my solution.](./screenshot.jpeg)
 
@@ -23,10 +23,14 @@ Users should be able to:
 - HTML
 - Tailwind CSS
 - TypeScript
-- XState and the Stately Studio
+- XState and [Stately Studio](http://stately.ai/)
 
-TODO: Talk about
+The calculator turned out to be not so simple, due to the many (sometimes erroneous) input sequences it could receive (like when a user presses <kbd>2</kbd> <kbd>+</kbd> <kbd>/</kbd> <kbd>3</kbd> <kbd>.</kbd> <kbd>4</kbd> <kbd>.</kbd> <kbd>5</kbd>). I modelled the calculator as a state machine to handle these sequences conveniently and confidently. And I described this calculator machine in an article on my blog: ["Modelling a calculator as a state machine"](https://mubaraqwahab.github.io/blog/calculator/).
 
+I also made the calculator operable by keyboard and (somewhat) screen-reader friendly. To do these, I
+
+* marked up the calculator display with [the `<output>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output), so that new items on the display are announced by screen readers
+* marked
 * using state machines
 * making the calc accessible with `<output>`, aria `toolbar`, the roving tab index, `&minus;` and keyboard input
 
@@ -47,10 +51,6 @@ TODO: Issues
 * Exposing keyboard shortcuts to screen readers. NVDA reads aria-keyshortcuts after the accessible name without specifying it's a shortcut.
 * Decimal arithmetic (instead of floating point)
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
-
 ### Resources
 
 - [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
@@ -60,8 +60,3 @@ Use this section to outline areas that you want to continue focusing on in futur
 * Roving tab index
 * Aria keyshortcuts
 * Accesskey
-
-## Author
-
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@mubaraqwahab](https://www.frontendmentor.io/profile/mubaraqwahab)
