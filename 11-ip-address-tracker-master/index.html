@@ -21,7 +21,7 @@
 		<div class="pt-7 pb-[8.5rem] bg-[url(images/pattern-bg.png)]">
 			<div class="container">
 				<h1 class="text-2xl text-white font-medium mb-7 tracking-wide leading-tight">IP Address Tracker</h1>
-				<form class="flex text-left mb-6">
+				<form class="flex text-left mb-6" novalidate>
 					<div class="relative flex-grow">
 						<!--
 						`[&:focus+label]` in the classes below is equivalent to the selector: `input:focus + label`
@@ -45,6 +45,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6" /></svg>
 					</button>
 				</form>
+				<output id="form-error"></output>
 			</div>
 		</div>
 
@@ -118,14 +119,27 @@
 			}
 
 			getIPInfoAndMap();
-			// getIPInfoAndMap("24.38.249.217");
 
 			const form = document.querySelector("form");
+			const formError = document.getElementById("form-error");
+			let formState = "idle";
 
 			form.addEventListener("submit", (e) => {
 				e.preventDefault();
-				const ipAddress = /** @type {string} */ (new FormData(form).get("query"));
-				getIPInfoAndMap(ipAddress);
+
+				if (formState === "idle") {
+					formState = "submitting";
+					console.log(formState);
+					const ipAddress = /** @type {string} */ (new FormData(form).get("query"));
+					getIPInfoAndMap(ipAddress)
+						.then(() => {
+							formState = "idle";
+						})
+						.catch((err) => {
+							console.error(err);
+							formError.textContent = "Failed to track IP address. Please try again.";
+						});
+				}
 			});
 		</script>
 	</body>
